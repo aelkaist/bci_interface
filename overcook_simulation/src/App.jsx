@@ -455,7 +455,7 @@ export default function App() {
     let onNextClick = () => setInstructionStep(st => st + 1);
 
     if (instructionStep === 2) {
-      const q1Correct = quiz1Answer === 4;
+      const q1Correct = quiz1Answer === 2;
       const q2Correct = Object.keys(quiz2Matches).length === 5 && 
                         quiz2Matches.onion === "Onion" && 
                         quiz2Matches.pot === "Pot" && 
@@ -582,7 +582,7 @@ export default function App() {
                         <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
                            {/* Video Frame */}
                            <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                              <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                              <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
                               
                               {/* Pause Button Overlay */}
                               <div style={{ position: "absolute", width: "52px", height: "52px", borderRadius: "50%", background: "#22c55e", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 16px rgba(0,0,0,0.6)" }}>
@@ -705,18 +705,14 @@ export default function App() {
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                   {[
-                    { video: "/main.gif", title: "1. Pick up Onions", desc: "Grab onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
-                    { video: "/main.gif", title: "2. Put Onions in Pot", desc: "Place 3 onions in the pot to cook", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
-                    { video: "/main.gif", title: "3. Grab a dish", desc: "Pick up a dish for serving", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
-                    { video: "/main.gif", title: "4. Serve the soup", desc: "Deliver finished soup to counter", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
+                    { video: "/1.gif", title: "1. Pick up Onions", desc: "Grab onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
+                    { video: "/2.gif", title: "2. Put Onions in Pot", desc: "Place 3 onions in the pot to cook", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
+                    { video: "/3.gif", title: "3. Grab a dish", desc: "Pick up a dish for serving", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
+                    { video: "/4.gif", title: "4. Serve the soup", desc: "Deliver finished soup to counter", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
-                       <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative" }}>
-                         <img src={item.video} alt="Gameplay sequence preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
-                         {/* Centered Decorative Asset overlay in the middle of video */}
-                         <div style={{ position: "absolute", width: "40px", height: "40px", background: "rgba(0,0,0,0.6)", borderRadius: "50%", border: "1px solid #444", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)"}}>
-                            <div style={{ width: "15px", height: "15px", background: item.sprite, backgroundPosition: item.pos, transform: "scale(1.5)", imageRendering: "pixelated" }} />
-                         </div>
+                       <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                         <img src={item.video} alt="Gameplay sequence preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
                        </div>
                        <div style={{ padding: "16px 20px" }}>
                          <strong style={{ fontSize: "15px", display: "block", marginBottom: item.desc ? "8px" : 0 }}>{item.title}</strong>
@@ -741,20 +737,20 @@ export default function App() {
                 
                 {/* Reference Video Area (Responsive GIF) */}
                 <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative", aspectRatio: "2.5/1", boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
-                   <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
+                   <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                    
                    {/* Quiz 1 */}
-                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz1Answer === 4 ? "1px solid #22c55e" : "1px solid #333" }}>
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz1Answer === 2 ? "1px solid #22c55e" : "1px solid #333" }}>
                       <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>1. How many AI chefs do you see in the game?</p>
                       <div style={{ display: "flex", gap: "12px" }}>
                          {[1, 2, 3, 4].map(num => (
                             <button 
                                key={num}
                                onClick={() => setQuiz1Answer(num)}
-                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 4 ? "#22c55e" : "#eab308") : "#2a2a2a", color: quiz1Answer === num ? "#000" : "#fff", cursor: "pointer", transition: "all 0.2s" }}
+                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 2 ? "#22c55e" : "#eab308") : "#2a2a2a", color: quiz1Answer === num ? "#000" : "#fff", cursor: "pointer", transition: "all 0.2s" }}
                             >
                                {num}
                             </button>
