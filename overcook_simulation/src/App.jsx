@@ -1085,6 +1085,26 @@ export default function App() {
           boxSizing: "border-box"
         }}
       >
+        {/* Top Right Controls */}
+        <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
+           {hasEpisode && (
+             <button onClick={handleExport} style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center" }} onMouseOver={e=>{e.target.style.background="#222";}} onMouseOut={e=>{e.target.style.background="#111";}}>
+               Export JSON
+             </button>
+           )}
+           <label 
+              style={{ background: hasEpisode ? "#111" : "#4ade80", color: "#fff", border: hasEpisode ? "1px solid #333" : "none", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px" }} 
+              onMouseOver={e => {
+                e.currentTarget.style.background = hasEpisode ? "#222" : "#22c55e"; 
+              }} 
+              onMouseOut={e => {
+                e.currentTarget.style.background = hasEpisode ? "#111" : "#4ade80";
+              }}
+           >
+             {hasEpisode ? "Next episode ▶" : "Upload JSON"}
+             <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
+           </label>
+        </div>
 
         {/* 에이전트 화면 */}
         <div
@@ -1144,7 +1164,32 @@ export default function App() {
           }}
         >
           {/* 하단 전체 Slider */}
-          <div style={{ width: "100%" }}>
+          <div style={{ width: "100%", position: "relative" }}>
+            {/* Feedback markers overlay */}
+            {hasEpisode && intervals.map((intv, i) => {
+              const base = intv.baseFrame;
+              let s = base + intv.startOffset;
+              let e = base + intv.endOffset;
+              s = Math.max(s, 0);
+              e = Math.min(e, totalFrames - 1);
+              if (s > e) [s, e] = [e, s];
+
+              const tFrames = totalFrames > 0 ? totalFrames - 1 : 1;
+              const leftPerc = (s / tFrames) * 100;
+              const widthPerc = ((e - s) / tFrames) * 100;
+              const basePerc = (base / tFrames) * 100;
+              const isSelected = selectedInterval?.index === i;
+
+              return (
+                <div key={i} style={{ position: "absolute", top: "-14px", left: "6px", right: "6px", height: "14px", pointerEvents: "none", zIndex: 10 }}>
+                  {/* Range Highlight */}
+                  <div style={{ position: "absolute", left: `${leftPerc}%`, width: `${widthPerc}%`, top: "4px", height: "6px", background: isSelected ? "rgba(252, 211, 77, 0.55)" : "rgba(252, 211, 77, 0.25)", borderRadius: "3px", transition: "all 0.2s" }} />
+                  {/* Base Frame Tick */}
+                  <div style={{ position: "absolute", left: `${basePerc}%`, top: "0px", width: "3px", height: "14px", background: isSelected ? "#fcd34d" : "rgba(252, 211, 77, 0.8)", transform: "translateX(-50%)", borderRadius: "2px", transition: "all 0.2s" }} />
+                </div>
+              );
+            })}
+            
             <input
               type="range"
               min={0}
@@ -1320,28 +1365,7 @@ export default function App() {
         }}
       >
         <div style={{ marginBottom: "20px" }}>
-            {/* 상단 버튼들 (Export, Next Episode) */}
-            <div style={{ display: "grid", gridTemplateColumns: hasEpisode ? "1fr 1fr" : "1fr", gap: "10px", marginBottom: "32px", width: "100%" }}>
-                {hasEpisode && (
-                  <button onClick={handleExport} style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center" }} onMouseOver={e=>{e.target.style.background="#222";}} onMouseOut={e=>{e.target.style.background="#111";}}>
-                    Export JSON
-                  </button>
-                )}
-                <label 
-                   style={{ background: hasEpisode ? "#111" : "#4ade80", color: "#fff", border: hasEpisode ? "1px solid #333" : "none", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px" }} 
-                   onMouseOver={e => {
-                     e.currentTarget.style.background = hasEpisode ? "#22c55e" : "#22c55e"; 
-                     if (hasEpisode) e.currentTarget.style.borderColor = "#22c55e";
-                   }} 
-                   onMouseOut={e => {
-                     e.currentTarget.style.background = hasEpisode ? "#111" : "#4ade80";
-                     if (hasEpisode) e.currentTarget.style.borderColor = "#333";
-                   }}
-                >
-                  {hasEpisode ? "Next episode ▶" : "Upload JSON"}
-                  <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
-                </label>
-            </div>
+
 
             {/* 타이틀 및 리셋(Reset) 버튼 */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "16px" }}>
