@@ -461,7 +461,7 @@ export default function App() {
                         quiz2Matches.pot === "Pot" && 
                         quiz2Matches.dish === "Dish" && 
                         quiz2Matches.chef === "AI Chef" && 
-                        quiz2Matches.serve === "Counter";
+                        quiz2Matches.serve === "Serve";
       const q3Correct = quiz3Order.join("") === "1234";
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
@@ -669,35 +669,35 @@ export default function App() {
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
                       
                       {/* Onions */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
-                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/objects.png')", backgroundPosition: "-18px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
-                        <span>Onions</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-52px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
+                        <span>Onions x 3</span>
                       </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
                       
                       {/* Pot */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
-                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-86px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-69px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
                         <span>Pot</span>
                       </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
                       
                       {/* Wait */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333", color: "#eab308" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333", color: "#fff" }}>
                         <span>⏳ Wait</span>
                       </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
                       
                       {/* Dish */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
-                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/objects.png')", backgroundPosition: "-1px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-18px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
                         <span>Bring Dish</span>
                       </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
                       
                       {/* Serve */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
-                         <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-1px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
+                         <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-86px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
                          <span>Serve!</span>
                       </div>
                     </div>
@@ -705,10 +705,10 @@ export default function App() {
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                   {[
-                    { video: "/main.gif", title: "1. Pick up Onions", desc: "Grab onions from the supply", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
-                    { video: "/main.gif", title: "2. Put Onions in Pot", desc: "Place 3 onions in the pot to cook", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
-                    { video: "/main.gif", title: "3. Grab a dish", desc: "Pick up a dish for serving", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
-                    { video: "/main.gif", title: "4. Serve the soup", desc: "Deliver finished soup to counter", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                    { video: "/main.gif", title: "1. Pick up Onions", desc: "Grab onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
+                    { video: "/main.gif", title: "2. Put Onions in Pot", desc: "Place 3 onions in the pot to cook", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
+                    { video: "/main.gif", title: "3. Grab a dish", desc: "Pick up a dish for serving", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
+                    { video: "/main.gif", title: "4. Serve the soup", desc: "Deliver finished soup to counter", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
                        <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative" }}>
@@ -763,7 +763,7 @@ export default function App() {
                    </div>
 
                    {/* Quiz 2 */}
-                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Counter") ? "1px solid #22c55e" : "1px solid #333" }}>
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Serve") ? "1px solid #22c55e" : "1px solid #333" }}>
                       <div style={{ marginBottom: "20px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
                          <div>
                             <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 6px 0", color: "#fff" }}>2. Identify the names of the items</p>
@@ -782,7 +782,7 @@ export default function App() {
                       </div>
                       
                       <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", minHeight: "40px" }}>
-                         {["Onion", "Pot", "Dish", "AI Chef", "Counter"].filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
+                         {["Onion", "Pot", "Dish", "AI Chef", "Serve"].filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
                             <div 
                                key={word} draggable 
                                onDragStart={(e) => { e.dataTransfer.setData("text/plain", word); setTimeout(() => e.target.style.opacity = "0.5", 0); }}
@@ -796,18 +796,18 @@ export default function App() {
 
                       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                          {[
-                            { id: "onion", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
-                            { id: "pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
-                            { id: "dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
-                            { id: "chef", sprite: "url('/graphics/chefs.png')", pos: "-1px -1px" },
-                            { id: "serve", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                            { id: "onion", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
+                            { id: "pot", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
+                            { id: "dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
+                            { id: "chef", sprite: "url('/graphics/chefs.png')", pos: "-69px -52px" },
+                            { id: "serve", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
                          ].map(item => {
                             const match = quiz2Matches[item.id];
                             const isCorrect = (item.id === "onion" && match === "Onion") || 
                                               (item.id === "pot" && match === "Pot") ||
                                               (item.id === "dish" && match === "Dish") ||
                                               (item.id === "chef" && match === "AI Chef") ||
-                                              (item.id === "serve" && match === "Counter");
+                                              (item.id === "serve" && match === "Serve");
 
                             return (
                                <div key={item.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
@@ -839,10 +839,10 @@ export default function App() {
                       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                          {quiz3Order.map((stepId, index) => {
                             const stepsMap = {
-                               1: { text: "Pick up Onions", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
-                               2: { text: "Put Onions into the pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
-                               3: { text: "Grab a dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
-                               4: { text: "Serve the soup", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                               1: { text: "Pick up Onions", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
+                               2: { text: "Put Onions into the pot", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
+                               3: { text: "Grab a dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
+                               4: { text: "Serve the soup", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
                             };
                             return (
                                <div 
@@ -904,7 +904,7 @@ export default function App() {
 
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
-                    While watching the video, simply pause and follow these 3 steps to share your thoughts on the AI's behavior.
+                    While watching the video, simply <strong style={{color: "#fff"}}>pause</strong> and follow these 3 steps to share your thoughts on the AI's chefs behavior.
                 </p>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
@@ -914,7 +914,7 @@ export default function App() {
                       <div>
                          <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
                          <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
-                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on? Press pause to stop the playback.</p>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on. Press pause to stop the playback.</p>
                       </div>
                       <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
                          <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
@@ -937,48 +937,77 @@ export default function App() {
                          <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Click "+ Add Feedback"</strong>
                          <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Click the yellow button on the right panel to create a new feedback entry.</p>
                       </div>
-                      <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "flex-end", padding: "16px", justifyContent: "center", marginTop: "30px" }}>
-                          <div style={{ background: "#fcd34d", color: "#000", fontWeight: "700", border: "none", borderRadius: "8px", padding: "10px 24px", fontSize: "14px", display: "flex", alignItems: "center", gap: "6px" }}>
-                              <span>+</span> Add Feedback
-                          </div>
-                      </div>
+                      <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px", overflow: "hidden" }}>
+                           <div style={{
+                              background: "#fcd34d",
+                              color: "#18181b",
+                              padding: "10px 24px",
+                              borderRadius: "8px",
+                              fontSize: "13px",
+                              fontWeight: "700",
+                              position: "relative",
+                              animation: "buttonClickMock 3s ease-in-out infinite"
+                           }}>
+                              + Add Feedback
+                              {/* Fake Mouse Cursor Overlay */}
+                              <div style={{ 
+                                  position: "absolute", 
+                                  bottom: "-12px", right: "-8px", 
+                                  width: "20px", height: "20px", 
+                                  pointerEvents: "none", zIndex: 10,
+                                  animation: "mouseMoveClick 3s ease-in-out infinite" 
+                              }}>
+                                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
+                                    <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                  </svg>
+                              </div>
+                           </div>
+                       </div>
                    </div>
 
                    {/* Card 3 */}
                    <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
                       <div>
                          <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>3</div>
-                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Set Range & Feedback</strong>
-                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to highlight the exact frames and write your thoughts.</p>
+                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Set Feedback Range & Comment</strong>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to highlight the exact frames and write your feedback.</p>
                       </div>
                       <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", flexDirection: "column", padding: "20px", justifyContent: "center", marginTop: "30px", gap: "16px" }}>
                           {/* Range Slider Track */}
                           <div style={{ width: "100%", height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
                                <div style={{ position: "absolute", height: "100%", background: "#fcd34d", borderRadius: "2px", animation: "sliderRange 3s ease-in-out infinite" }} />
                                <div style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderLeft 3s ease-in-out infinite" }} />
-                               <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 3s ease-in-out infinite" }} />
+                               <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 3s ease-in-out infinite" }}>
+                                    {/* Fake Mouse Cursor Dragging */}
+                                    <div style={{ 
+                                        position: "absolute", 
+                                        top: "4px", left: "2px", 
+                                        width: "20px", height: "20px", 
+                                        pointerEvents: "none", zIndex: 10,
+                                        transform: "rotate(-15deg)"
+                                    }}>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
+                                          <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </div>
                           </div>
-                          {/* Input field mocks */}
-                          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                              <div style={{ boxSizing: "border-box", width: "100%", padding: "12px", background: "#111", borderRadius: "6px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "6px" }}>
-                                <div style={{ width: "70%", height: "6px", background: "#444", borderRadius: "3px" }} />
-                                <div style={{ width: "40%", height: "6px", background: "#444", borderRadius: "3px" }} />
-                              </div>
-                          </div>
+                          {/* Text instead of input field mocks */}
+                          <p style={{ margin: "8px 0 0 0", color: "#ddd", fontSize: "15px", fontWeight: "600", letterSpacing: "0.5px", textAlign: "center" }}>Feedback Range</p>
                       </div>
                    </div>
 
                 </div>
 
-                <div style={{ padding: "20px 24px", background: "#251a02", borderRadius: "12px", border: "1px solid #745103" }}>
-                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
-                    <span style={{ fontSize: "20px" }}>⚠️</span>
-                    <strong style={{ color: "#fcd34d", fontSize: "16px" }}>Important Notes</strong>
+                <div style={{ padding: "20px 24px", gap: "12px", display: "flex", flexDirection: "column", background: "#251a02", borderRadius: "12px", border: "1px solid #745103" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6 }}>
+                    <span style={{ fontSize: "16px", marginTop: "1px" }}>⚠️</span>
+                    <div><strong style={{ color: "#fcd34d" }}>Take your time:</strong> Pause and go back as needed.</div>
                   </div>
-                  <ul style={{ margin: 0, paddingLeft: "24px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6, display: "flex", flexDirection: "column", gap: "12px" }}>
-                    <li><strong style={{ color: "#fcd34d" }}>Take your time:</strong> Pause and go back as needed.</li>
-                    <li><strong style={{ color: "#fcd34d" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</li>
-                  </ul>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6 }}>
+                    <span style={{ fontSize: "16px", marginTop: "1px" }}>⚠️</span>
+                    <div><strong style={{ color: "#fcd34d" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</div>
+                  </div>
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1a1a1a", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
