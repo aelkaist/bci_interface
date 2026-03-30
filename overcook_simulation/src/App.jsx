@@ -60,6 +60,33 @@ export default function App() {
 
   const [episodeCount, setEpisodeCount] = useState(1); // 1/4 에피소드 진행 상황
 
+  const [panelWidth, setPanelWidth] = useState(400); // 우측 패널 너비 조절용
+  const isResizingRef = useRef(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isResizingRef.current) return;
+      // 오른쪽 가장자리부터 마우스 위치까지의 거리를 패널 너비로 설정
+      const newWidth = document.body.clientWidth - e.clientX;
+      if (newWidth >= 300 && newWidth <= 800) {
+        setPanelWidth(newWidth);
+      }
+    };
+    const handleMouseUp = () => {
+      if (isResizingRef.current) {
+        isResizingRef.current = false;
+        document.body.style.cursor = "default";
+        document.body.style.userSelect = "auto";
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
   const rafRef = useRef(null);
   const segmentEndFrameRef = useRef(null); // 구간 재생 끝 프레임
 
@@ -750,7 +777,7 @@ export default function App() {
                             <button 
                                key={num}
                                onClick={() => setQuiz1Answer(num)}
-                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 2 ? "#22c55e" : "#eab308") : "#2a2a2a", color: quiz1Answer === num ? "#000" : "#fff", cursor: "pointer", transition: "all 0.2s" }}
+                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 2 ? "#22c55e" : "#ef4444") : "#2a2a2a", color: quiz1Answer === num ? (num === 2 ? "#000" : "#fff") : "#fff", cursor: "pointer", transition: "all 0.2s" }}
                             >
                                {num}
                             </button>
@@ -1146,9 +1173,6 @@ export default function App() {
               <span>
                 Frame {frameIndex} / {hasEpisode ? totalFrames - 1 : 0}
               </span>
-              <span>
-                {Math.floor(elapsed / 60)}:{(elapsed % 60).toFixed(2).padStart(5, '0')} / {hasEpisode ? `${Math.floor(totalTime / 60)}:${(totalTime % 60).toFixed(2).padStart(5, '0')}` : "0:00"}
-              </span>
             </div>
 
             {/* Center Controls */}
@@ -1221,22 +1245,25 @@ export default function App() {
             </div>
 
             {/* Right Controls */}
-            <div style={{ minWidth: "150px", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+            <div style={{ minWidth: "150px", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "14px", color: "#888", fontWeight: "600", display: hasEpisode ? "block" : "none" }}>Speed</span>
               <select
                 value={playbackRate}
                 onChange={(e) => setPlaybackRate(Number(e.target.value))}
                 disabled={!hasEpisode}
                 style={{
-                  background: "transparent",
-                  color: hasEpisode ? "#666" : "#444",
-                  border: "1px solid #2a2a2a",
-                  padding: "6px 12px",
+                  background: hasEpisode ? "#2c2c2c" : "transparent",
+                  color: hasEpisode ? "#fff" : "#444",
+                  border: hasEpisode ? "1px solid #555" : "1px solid #2a2a2a",
+                  padding: "6px 8px 6px 12px",
                   borderRadius: "6px",
-                  fontSize: "12px",
+                  fontSize: "14px",
+                  fontWeight: "600",
                   cursor: hasEpisode ? "pointer" : "default",
                   outline: "none",
-                  appearance: "none",
-                  textAlign: "center"
+                  textAlign: "center",
+                  boxShadow: hasEpisode ? "0 2px 6px rgba(0,0,0,0.4)" : "none",
+                  transition: "all 0.2s"
                 }}
               >
                 <option value={0.5}>0.5x</option>
@@ -1251,12 +1278,34 @@ export default function App() {
 
       </div>
 
+      {/* 패널 크기 조절 (Resizer) */}
+      {hasEpisode && (
+        <div
+          onMouseDown={() => {
+            isResizingRef.current = true;
+            document.body.style.cursor = "col-resize";
+            document.body.style.userSelect = "none";
+          }}
+          style={{
+            width: "6px",
+            height: "100%",
+            cursor: "col-resize",
+            background: "transparent",
+            zIndex: 50,
+            transition: "background 0.2s",
+            borderLeft: "1px solid #1a1a1a",
+          }}
+          onMouseOver={e => e.currentTarget.style.background = "#333"}
+          onMouseOut={e => { if(!isResizingRef.current) e.currentTarget.style.background = "transparent"; }}
+        />
+      )}
+
       {/* Right Panel */}
       <div
         style={{
-          width: "400px",
+          width: `${panelWidth}px`,
           flexShrink: 0,
-          borderLeft: "1px solid #1a1a1a",
+          borderLeft: hasEpisode ? "none" : "1px solid #1a1a1a",
           padding: "24px",
           textAlign: "left",
           opacity: !hasEpisode ? 0.4 : 1,
@@ -1274,11 +1323,21 @@ export default function App() {
             {/* 상단 버튼들 (Export, Next Episode) */}
             <div style={{ display: "grid", gridTemplateColumns: hasEpisode ? "1fr 1fr" : "1fr", gap: "10px", marginBottom: "32px", width: "100%" }}>
                 {hasEpisode && (
-                  <button onClick={handleExport} style={{ background: "#111", color: "#ccc", border: "1px solid #333", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "600", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px" }} onMouseOver={e=>e.target.style.background="#222"} onMouseOut={e=>e.target.style.background="#111"}>
-                    <span style={{ fontSize: "14px" }}>📥</span> Export JSON
+                  <button onClick={handleExport} style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center" }} onMouseOver={e=>{e.target.style.background="#222";}} onMouseOut={e=>{e.target.style.background="#111";}}>
+                    Export JSON
                   </button>
                 )}
-                <label style={{ background: hasEpisode ? "#3b82f6" : "#4ade80", color: "#fff", border: "none", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "opacity 0.2s", display: "flex", justifyContent: "center", alignItems: "center", gap: "4px" }} onMouseOver={e=>e.target.style.opacity="0.8"} onMouseOut={e=>e.target.style.opacity="1"}>
+                <label 
+                   style={{ background: hasEpisode ? "#111" : "#4ade80", color: "#fff", border: hasEpisode ? "1px solid #333" : "none", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px" }} 
+                   onMouseOver={e => {
+                     e.currentTarget.style.background = hasEpisode ? "#22c55e" : "#22c55e"; 
+                     if (hasEpisode) e.currentTarget.style.borderColor = "#22c55e";
+                   }} 
+                   onMouseOut={e => {
+                     e.currentTarget.style.background = hasEpisode ? "#111" : "#4ade80";
+                     if (hasEpisode) e.currentTarget.style.borderColor = "#333";
+                   }}
+                >
                   {hasEpisode ? "Next episode ▶" : "Upload JSON"}
                   <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
                 </label>
@@ -1297,11 +1356,11 @@ export default function App() {
                       setSelectedInterval(null);
                     }
                   }} 
-                  style={{ background: "transparent", color: "#666", border: "none", fontSize: "12px", cursor: "pointer", padding: "2px 4px", transition: "color 0.2s" }}
-                  onMouseOver={e=>e.target.style.color="#f87171"} 
-                  onMouseOut={e=>e.target.style.color="#666"}
+                  style={{ background: "#111", border: "1px solid #333", color: "#ccc", borderRadius: "6px", fontSize: "12px", fontWeight: "600", cursor: "pointer", padding: "6px 10px", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "6px" }}
+                  onMouseOver={e => { e.currentTarget.style.background = "#ef4444"; e.currentTarget.style.borderColor = "#ef4444"; e.currentTarget.style.color = "#fff"; }} 
+                  onMouseOut={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#ccc"; }}
                 >
-                  Reset feedback 🔁
+                  <span style={{ fontSize: "14px" }}>🔁</span> Reset Feedback
                 </button>
               )}
             </div>
@@ -1388,19 +1447,16 @@ export default function App() {
                 endFrame = tmp;
               }
 
-              const widthPercent =
-                totalFrames > 0
-                  ? ((endFrame - startFrame + 1) / totalFrames) * 100
-                  : 0;
-              const leftPercent =
-                totalFrames > 0 ? (startFrame / totalFrames) * 100 : 0;
+
 
               return (
                 <div
                   key={i}
                   onClick={() => {
-                    setSelectedInterval({ index: i, ...intv });
-                    handleReplayFromBase(intv);
+                    if (!isSelected) {
+                      setSelectedInterval({ index: i, ...intv });
+                      handleReplayFromBase(intv);
+                    }
                   }}
                   style={{
                     border: isSelected ? "1px solid #fcd34d" : "1px solid #2a2a2a",
@@ -1408,30 +1464,48 @@ export default function App() {
                     padding: "20px",
                     marginBottom: "16px",
                     background: "#151515",
-                    cursor: "pointer",
+                    cursor: isSelected ? "default" : "pointer",
                     transition: "all 0.2s ease",
                     position: "relative",
                   }}
                 >
                   {/* Header */}
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-                    <div style={{ background: "#2a2a2a", padding: "4px 10px", borderRadius: "4px", fontSize: "12px", fontWeight: "700", color: "#ddd" }}>
-                      Feedback #{i + 1}
-                    </div>
-                    <button
-                      onClick={(e) => {
+                  <div 
+                    style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: isSelected ? "16px" : 0, cursor: isSelected ? "pointer" : "inherit" }}
+                    onClick={(e) => {
+                      if (isSelected) {
                         e.stopPropagation();
-                        deleteInterval(i);
-                      }}
-                      style={{ background: "transparent", border: "none", color: "#666", fontSize: "16px", fontWeight: "bold", cursor: "pointer", outline: "none", padding: "4px" }}
-                      onMouseOver={e=>e.target.style.color="#f87171"}
-                      onMouseOut={e=>e.target.style.color="#666"}
-                    >
-                      ×
-                    </button>
+                        setSelectedInterval(null);
+                      }
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: 1, overflow: "hidden" }}>
+                       <div style={{ background: "#2a2a2a", padding: "4px 10px", borderRadius: "4px", fontSize: "12px", fontWeight: "700", color: "#ddd", flexShrink: 0 }}>
+                         Feedback #{i + 1}
+                       </div>
+
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                       <span style={{ fontSize: "14px", color: "#666" }}>{isSelected ? "▲" : "▼"}</span>
+                       <button
+                         onClick={(e) => {
+                           e.stopPropagation();
+                           if (window.confirm(`Feedback #${i + 1} 항목을 삭제하시겠습니까? (이 작업은 되돌릴 수 없습니다.)`)) {
+                             deleteInterval(i);
+                           }
+                         }}
+                         style={{ background: "transparent", border: "none", color: "#666", fontSize: "16px", fontWeight: "bold", cursor: "pointer", outline: "none", padding: "0 4px" }}
+                         onMouseOver={e=>e.target.style.color="#f87171"}
+                         onMouseOut={e=>e.target.style.color="#666"}
+                       >
+                         ×
+                       </button>
+                    </div>
                   </div>
                   
-                  <div style={{ borderBottom: "1px solid #2a2a2a", margin: "0 -20px 16px -20px" }} />
+                  {isSelected && (
+                    <>
+                      <div style={{ borderBottom: "1px solid #2a2a2a", margin: "0 -20px 16px -20px" }} />
 
                   {/* FEEDBACK RANGE */}
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
@@ -1441,62 +1515,82 @@ export default function App() {
 
                   {/* Range Component */}
                   <div style={{ marginBottom: "16px", padding: "0 8px" }} onClick={(e) => { e.stopPropagation(); if(!isSelected) { setSelectedInterval({ index: i, ...intv }); handleReplayFromBase(intv); } }}>
-                    <Range
-                      values={[startFrame, endFrame]}
-                      step={1}
-                      min={0}
-                      max={totalFrames > 0 ? totalFrames - 1 : 100}
-                      onChange={(values) => {
-                         handleOffsetEdit("startOffset", values[0] - baseFrame);
-                         handleOffsetEdit("endOffset", values[1] - baseFrame);
-                      }}
-                      renderTrack={({ props, children }) => (
-                        <div
-                          {...props}
-                          style={{
-                            ...props.style,
-                            height: "6px",
-                            width: "100%",
-                            borderRadius: "3px",
-                            background: "#2a2a2a",
-                            position: "relative",
-                          }}
-                        >
-                          <div
-                            style={{
-                              position: "absolute",
-                              left: `${
-                                ((startFrame) / (totalFrames > 0 ? totalFrames - 1 : 1)) * 100
-                              }%`,
-                              width: `${
-                                ((endFrame - startFrame) / (totalFrames > 0 ? totalFrames - 1 : 1)) * 100
-                              }%`,
-                              height: "100%",
-                              background: "#d9b758",
-                              borderRadius: "3px",
-                            }}
-                          />
-                          {children}
-                        </div>
-                      )}
-                      renderThumb={({ props }) => (
-                        <div
-                          {...props}
-                          style={{
-                            ...props.style,
-                            height: "16px",
-                            width: "16px",
-                            borderRadius: "50%",
-                            background: "#ffffff",
-                            boxShadow: "0 0 4px rgba(0,0,0,0.5)",
-                            outline: "none",
-                            cursor: "grab"
-                          }}
-                        />
-                      )}
-                    />
-                  </div>
+                    {(() => {
+                      const baseMin = Math.max(0, baseFrame - 10);
+                      const baseMax = Math.min(totalFrames > 0 ? totalFrames - 1 : 100, baseFrame + 10);
+                      const rangeSpan = Math.max(baseMax - baseMin, 1);
+                      // Clamp start/end for slider values to prevent react-range errors
+                      const boundedStart = Math.max(baseMin, Math.min(baseMax, startFrame));
+                      const boundedEnd = Math.max(baseMin, Math.min(baseMax, endFrame));
 
+                      return (
+                        <Range
+                          values={[boundedStart, boundedEnd]}
+                          step={1}
+                          min={baseMin}
+                          max={baseMax}
+                          onChange={(values) => {
+                            handleOffsetEdit("startOffset", values[0] - baseFrame);
+                            handleOffsetEdit("endOffset", values[1] - baseFrame);
+                          }}
+                          renderTrack={({ props, children }) => (
+                            <div
+                              {...props}
+                              style={{
+                                ...props.style,
+                                height: "6px",
+                                width: "100%",
+                                borderRadius: "3px",
+                                background: "#2a2a2a",
+                                position: "relative",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  left: `${((boundedStart - baseMin) / rangeSpan) * 100}%`,
+                                  width: `${((boundedEnd - boundedStart) / rangeSpan) * 100}%`,
+                                  height: "100%",
+                                  background: "#d9b758",
+                                  borderRadius: "3px",
+                                }}
+                              />
+                              {/* Base frame marker */}
+                              <div 
+                                style={{
+                                  position: "absolute",
+                                  left: `${((baseFrame - baseMin) / rangeSpan) * 100}%`,
+                                  top: "-3px",
+                                  bottom: "-3px",
+                                  width: "2px",
+                                  background: "#fff",
+                                  zIndex: 1,
+                                  boxShadow: "0 0 2px rgba(0,0,0,0.5)"
+                                }}
+                                title={`Base Frame: ${baseFrame}`}
+                              />
+                              {children}
+                            </div>
+                          )}
+                          renderThumb={({ props }) => (
+                            <div
+                              {...props}
+                              style={{
+                                ...props.style,
+                                height: "16px",
+                                width: "16px",
+                                borderRadius: "50%",
+                                background: "#ffffff",
+                                boxShadow: "0 0 4px rgba(0,0,0,0.5)",
+                                outline: "none",
+                                cursor: "grab"
+                              }}
+                            />
+                          )}
+                        />
+                      );
+                    })()}
+                  </div>
                   {/* Replay Button */}
                   <button
                     onClick={(e) => {
@@ -1526,10 +1620,10 @@ export default function App() {
                     <span>▶</span> Replay
                   </button>
 
-                  {/* WHAT BEHAVIOR NEEDS FEEDBACK? */}
+                  {/* Spot something? Let us know */}
                   <div style={{ marginBottom: "20px" }}>
-                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#888", letterSpacing: "0.5px", marginBottom: "8px" }}>
-                      WHAT BEHAVIOR NEEDS FEEDBACK?
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#888", letterSpacing: "0.5px", marginBottom: "8px", textTransform: "uppercase" }}>
+                      Spot something? Let us know
                     </div>
                     <textarea
                       value={intv.reason || ""}
@@ -1560,10 +1654,10 @@ export default function App() {
                     />
                   </div>
 
-                  {/* WHAT SHOULD THE AGENT DO INSTEAD? */}
+                  {/* How would you change this? */}
                   <div>
-                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#888", letterSpacing: "0.5px", marginBottom: "8px" }}>
-                      WHAT SHOULD THE AGENT DO INSTEAD?
+                    <div style={{ fontSize: "11px", fontWeight: "700", color: "#888", letterSpacing: "0.5px", marginBottom: "8px", textTransform: "uppercase" }}>
+                      How would you change this?
                     </div>
                     <textarea
                       value={intv.correction || ""}
@@ -1593,7 +1687,8 @@ export default function App() {
                       onClick={e => e.stopPropagation()}
                     />
                   </div>
-
+                    </>
+                  )}
                 </div>
               );
             })}

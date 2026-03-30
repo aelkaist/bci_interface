@@ -18,9 +18,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   // 가짜 오브젝트 onion / soup 내려놓기 연출용
   const fakeObjectsRef = useRef([]);
 
-  // 배달 누적 카운트
-  const [deliveredCount, setDeliveredCount] = useState(0);
-  const prevScoreRef = useRef(frame.score ?? 0);
+  const [deliveryEffects, setDeliveryEffects] = useState([]);
 
   // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
   useEffect(() => {
@@ -202,29 +200,33 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     return remainingByKey;
   }, [frames, frame, staticInfo.cookTime]);
 
-  // 배달 카운트 계산
+  // 배달 카운트 파생 (스크러빙 시 버그 방지 - 각 프레임의 보상을 누적 합산)
+  const deliveredCount = useMemo(() => {
+     let sum = 0;
+     if (frames) {
+       for (let i = 0; i <= frame.timestep && i < frames.length; i++) {
+          sum += (frames[i].score ?? 0);
+       }
+     }
+     return Math.floor(sum / (staticInfo.deliveryReward ?? 20));
+  }, [frame.timestep, frames, staticInfo.deliveryReward]);
+
+  const prevDeliveredCountRef = useRef(deliveredCount);
+
   useEffect(() => {
-    const reward = staticInfo.deliveryReward ?? 20;
-    const prevScore = prevScoreRef.current ?? 0;
-    const curScore = frame.score ?? 0;
-
-    if (frame.timestep === 0) {
-      setDeliveredCount(0);
-      prevScoreRef.current = curScore;
-      return;
+    // 플레이어가 실제로 전진하는 중이면서 배달 수가 증가했을 때만 효과 발생
+    if (deliveredCount > prevDeliveredCountRef.current && frame.timestep !== 0) {
+      const diff = deliveredCount - prevDeliveredCountRef.current;
+      const effectId = Date.now() + Math.random();
+      setDeliveryEffects(prev => [...prev, { id: effectId, count: diff }]);
+      
+      // 애니메이션 재생 후 클린업
+      setTimeout(() => {
+        setDeliveryEffects(prev => prev.filter(e => e.id !== effectId));
+      }, 1200);
     }
-
-    const diff = curScore - prevScore;
-
-    if (diff >= reward && reward > 0) {
-      const deliveredNow = Math.floor(diff / reward);
-      if (deliveredNow > 0) {
-        setDeliveredCount((c) => c + deliveredNow);
-      }
-    }
-
-    prevScoreRef.current = curScore;
-  }, [frame, staticInfo.deliveryReward]);
+    prevDeliveredCountRef.current = deliveredCount;
+  }, [deliveredCount, frame.timestep]);
 
   // 바닥 타일 맵핑
   const tileMap = useMemo(() => ({
@@ -243,6 +245,16 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     terrain: { w: 119, h: 17 },
     soups: { w: 405, h: 15 },
   };
+
+  const serveTiles = useMemo(() => {
+    const tiles = [];
+    grid.forEach((row, y) => {
+      [...row].forEach((cell, x) => {
+         if (cell === 'S') tiles.push({ x, y });
+      });
+    });
+    return tiles;
+  }, [grid]);
 
   const renderSprite = (category, frameName, x, y, size, opacity = 1) => {
     if (!spritesData || !spritesData[category]) return null;
@@ -505,38 +517,59 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
         background: "#d6c7a1",
         borderRadius: "8px",
         imageRendering: "pixelated",
-        overflow: "hidden"
+        overflow: "visible"
       }}
     >
       {backgroundTiles}
       {combinedObjects.map((o, i) => renderObject(o, i))}
       {frame.players.map((p, i) => renderPlayer(p, i))}
 
+      {/* 배달 팝업 이펙트 */}
+      {deliveryEffects.map((eff, index) => {
+         // Determine map size dynamically to prevent NaN default translations
+         const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
+         const mapH = staticInfo.height || (grid ? grid.length : 5);
+         
+         // 서빙타일 중 하나를 선택, 없으면 정중앙으로 (약간 번갈아가면서 나오도록 처리)
+         let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
+         
+         // If no serving tile 'S' is explicitly found, fallback to the physical center of the map
+         if (!sTile) {
+            sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
+         }
+         
+         const tx = sTile.x * gridSize + gridSize / 2;
+         const ty = sTile.y * gridSize - 15;
+
+         return (
+            <g key={eff.id} style={{ animation: "popSlideUp 1.2s ease-out forwards" }} transform={`translate(${tx}, ${ty})`}>
+               <text textAnchor="middle" fill="#22c55e" fontSize="32" fontWeight="800" stroke="#052e16" strokeWidth="6" style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}>
+                  +{eff.count}
+               </text>
+               <text textAnchor="middle" fill="#4ade80" fontSize="32" fontWeight="800">
+                  +{eff.count}
+               </text>
+            </g>
+         );
+      })}
+
       {!isReplaying && (
         <g transform="translate(10, 10)">
-          <rect
-            x={0}
-            y={0}
-            width={90}
-            height={26}
-            rx={8}
-            ry={8}
-            fill="rgba(0,0,0,0.6)"
-            stroke="#ffffff"
-            strokeWidth={1.5}
-          />
-          <text
-            x={45}
-            y={17}
-            textAnchor="middle"
-            fontSize="10"
-            fontFamily="monospace"
-            fill="#ffffff"
-          >
-            Delivered {deliveredCount}
-          </text>
+          <rect x={0} y={0} width={90} height={26} rx={8} ry={8} fill="rgba(0,0,0,0.6)" stroke="#ffffff" strokeWidth={1.5} />
+          <text x={45} y={17} textAnchor="middle" fontSize="10" fontFamily="monospace" fill="#ffffff">Served {deliveredCount}</text>
         </g>
       )}
+
+      {/* 팝업 이펙트용 스타일 정의 */}
+      <style>{`
+        @keyframes popSlideUp {
+          0% { transform: translateY(0px) scale(0.5); opacity: 0; }
+          15% { transform: translateY(-30px) scale(1.4); opacity: 1; }
+          30% { transform: translateY(-25px) scale(1); opacity: 1; }
+          80% { transform: translateY(-40px) scale(1); opacity: 1; }
+          100% { transform: translateY(-50px) scale(0.9); opacity: 0; }
+        }
+      `}</style>
     </svg>
   );
 }
