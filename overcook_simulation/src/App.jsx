@@ -15,8 +15,26 @@ function baseTimeLabel(frame) {
 }
 
 export default function App() {
+  const [instructionStep, setInstructionStep] = useState(0);
+  const [hasReadInstructions, setHasReadInstructions] = useState(false);
+  const [testSliderValue, setTestSliderValue] = useState([0]);
+  const [quizAnswers, setQuizAnswers] = useState({ q1: null, q2: null, q3: null });
+  
   const [episode, setEpisode] = useState(null); // 업로드된 에피소드
   const [fileName, setFileName] = useState(""); // 업로드된 파일 이름
+
+  // 전체화면 토글 함수
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   const [frameIndex, setFrameIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -347,7 +365,244 @@ export default function App() {
     outline: "none",
   };
 
-  // 메인 화면
+  // 메인 화면 (플레이스홀더 온보딩)
+  if (instructionStep < 4) {
+    let btnText = "Next";
+    let isDisabled = false;
+    let onNextClick = () => setInstructionStep(st => st + 1);
+
+    if (instructionStep === 2) {
+      isDisabled = !quizAnswers.q1;
+    } else if (instructionStep === 3) {
+      btnText = "Start Experiment";
+      isDisabled = !hasReadInstructions;
+    }
+
+    return (
+      <div style={{ minHeight: "100vh", width: "100vw", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden" }}>
+        
+        {/* 상단 헤더 컨테이너: Next 버튼 우측 고정 */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "40px" }}>
+          {/* 우상단 NEXT 버튼 */}
+          <button 
+            disabled={isDisabled}
+            onClick={onNextClick}
+            style={{ 
+              padding: "14px 40px", fontSize: "16px", fontWeight: "700", 
+              background: isDisabled ? "#333" : "#fcd34d", 
+              color: isDisabled ? "#888" : "#000", 
+              border: "none", borderRadius: "8px", 
+              cursor: isDisabled ? "not-allowed" : "pointer", 
+              boxShadow: "none",
+              flexShrink: 0, transition: "all 0.2s"
+            }}
+          >
+            {btnText} {instructionStep < 3 && "→"}
+          </button>
+        </div>
+
+        {/* 메인 콘텐츠 영역 (maxWidth 제한 해제) */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
+          {instructionStep === 0 && (
+             <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+               <div>
+                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome to Our Experiment 👋</h1>
+                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
+                   In this study, your task is to <strong style={{ color: "#fff" }}>watch AI chefs work together</strong> and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration and mistakes.
+                 </p>
+                 <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
+                    <p style={{ fontSize: "18px", fontWeight: "700", color: "#fff", margin: 0 }}>Here is what you will do:</p>
+                    <div style={{ display: "flex", gap: "24px" }}>
+                       {/* Card 1 */}
+                       <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                          
+                          {/* Video GIF Mockup Container */}
+                          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+                             {/* Video Frame */}
+                             <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.2/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                                
+                                {/* Pause Button Overlay */}
+                                <div style={{ position: "absolute", width: "52px", height: "52px", borderRadius: "50%", background: "#22c55e", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 16px rgba(0,0,0,0.6)" }}>
+                                   {/* Pause bars */}
+                                   <div style={{ display: "flex", gap: "4px" }}>
+                                      <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
+                                      <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
+                                   </div>
+                                </div>
+                             </div>
+                             
+                             {/* Fake Progress Bar */}
+                             <div style={{ display: "flex", alignItems: "center", width: "100%", height: "16px" }}>
+                                <div style={{ flex: 1, height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
+                                   <div style={{ position: "absolute", left: 0, top: 0, width: "35%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
+                                   <div style={{ position: "absolute", left: "35%", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", background: "#fff", boxShadow: "0 0 6px rgba(0,0,0,0.6)" }} />
+                                </div>
+                             </div>
+                          </div>
+                          <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Watch AI Chefs work together</h2>
+                          <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You will observe <strong style={{color: "#ddd"}}>many chef agents collaborating</strong> in a fast-paced environment inspired by the Nintendo cooperative game, Overcooked.</p>
+                       </div>
+
+                       {/* Card 2 */}
+                       <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                          
+                          {/* Feedback UI Mockup Container */}
+                          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+                             {/* Sleek Dark Card */}
+                             <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.2/1", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", flexShrink: 0 }}>
+                                
+                                <div style={{ background: "#18181b", padding: "30px", borderRadius: "16px", border: "1px solid #27272a", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", width: "80%", maxWidth: "280px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+                                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", opacity: 0.6 }}>
+                                      <div style={{ width: "70%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+                                      <div style={{ width: "45%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+                                   </div>
+                                   <div style={{
+                                      background: "#fcd34d",
+                                      color: "#18181b",
+                                      padding: "10px 24px",
+                                      borderRadius: "8px",
+                                      fontSize: "15px",
+                                      fontWeight: "700",
+                                      boxShadow: "0 0 28px rgba(252, 211, 77, 0.4)",
+                                      position: "relative"
+                                   }}>
+                                      + Add Feedback
+                                      {/* Fake Mouse Cursor Overlay */}
+                                      <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "20px", height: "20px", background: "url('/assets/cursor.png') no-repeat center/contain", transform: "rotate(-15deg)", pointerEvents: "none", zIndex: 10 }}>
+                                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
+                                            <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                          </svg>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                             
+                             {/* Spacer to match Card 1's progress bar height */}
+                             <div style={{ height: "16px", width: "100%" }} />
+                          </div>
+
+                          <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Give Feedback</h2>
+                          <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Whenever you notice them making <strong style={{color: "#ddd"}}>silly mistakes</strong>—or showing <strong style={{color: "#ddd"}}>great teamwork</strong>—just pause the video and write a quick comment!</p>
+                       </div>
+                    </div>
+                 </div>
+               </div>
+             </div>
+          )}
+
+          {instructionStep === 1 && (
+             <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How the Kitchen Works</h1>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI chefs' main goal is to work together to cook and serve onion soup.</p>
+                
+                {/* To cook onion soup timeline */}
+                <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{color: "#fff"}}>To cook onion soup,</strong> you need:</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Onions</span></div>
+                      <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Pot</span></div>
+                      <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>&#x23F3; Wait</span></div>
+                      <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Bring Dish</span></div>
+                      <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Serve!</span></div>
+                    </div>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
+                  {[
+                    { video: "/1.mp4", title: "1. Pick up Onions", desc: "Grab onions from the supply" },
+                    { video: "/2.mp4", title: "2. Put Onions into the pot", desc: "Place 3 onions in the pot to begin cooking (Wait until it's fully cooked!)" },
+                    { video: "/3.mp4", title: "3. Grab a dish", desc: "Pick up a dish — you need it to serve!" },
+                    { video: "/4.mp4", title: "4. Serve the soup", desc: "Deliver the finished soup to the serving area!" }
+                  ].map((item, i) => (
+                    <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
+                       <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555" }}>
+                         <video src={item.video} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }} />
+                       </div>
+                       <div style={{ padding: "16px 20px" }}>
+                         <strong style={{ fontSize: "16px", display: "block", marginBottom: item.desc ? "8px" : 0 }}>{item.title}</strong>
+                         {item.desc && <p style={{ fontSize: "14px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>}
+                       </div>
+                    </div>
+                  ))}
+                </div>
+             </div>
+          )}
+
+          {instructionStep === 2 && (
+             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Let's Check Your Understanding</h1>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Watch the gameplay video below and answer all questions correctly to proceed.</p>
+                
+                {/* Reference Video Area */}
+                <div style={{ width: "100%", height: "320px", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative" }}>
+                   <video src="/5.mp4" autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+
+                <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
+                   <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>1. Verification Check</p>
+                   <div>
+                      <label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", color: "#aaa" }}>
+                         <input type="checkbox" checked={quizAnswers.q1} onChange={(e) => setQuizAnswers({...quizAnswers, q1: e.target.checked})} style={{ width: "20px", height: "20px" }} />
+                         <span style={{ fontSize: "16px" }}>I have verified the video context and fully understand the process!</span>
+                      </label>
+                   </div>
+                </div>
+             </div>
+          )}
+
+          {instructionStep === 3 && (
+             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Provide Feedback</h1>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>For each video clip, please score the agents' collaboration using the slider.</p>
+                
+                <div style={{ padding: "40px 20px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
+                   <Range
+                      step={1} min={-2} max={2}
+                      values={testSliderValue}
+                      onChange={(vals) => setTestSliderValue(vals)}
+                      renderTrack={({ props, children }) => (
+                         <div {...props} style={{ ...props.style, height: "8px", width: "100%", backgroundColor: "#333", borderRadius: "4px" }}>
+                            {children}
+                         </div>
+                      )}
+                      renderThumb={({ props }) => (
+                         <div {...props} style={{ ...props.style, height: "24px", width: "24px", borderRadius: "50%", backgroundColor: "#22c55e", outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.5)" }} />
+                      )}
+                   />
+                   <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", color: "#888", fontSize: "14px" }}>
+                      <span>Strongly Hindered</span>
+                      <span>Neutral</span>
+                      <span>Strongly Supported</span>
+                   </div>
+                </div>
+
+                <div style={{ padding: "16px 20px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
+                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "12px" }}>
+                    <span style={{ fontSize: "18px" }}>&#x26A0;&#xFE0F;</span>
+                    <strong style={{ color: "#ffd54f", fontSize: "15px" }}>Important Notes</strong>
+                  </div>
+                  <ul style={{ margin: 0, paddingLeft: "20px", color: "#fff", fontSize: "14px", lineHeight: 1.6, display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <li><strong style={{ color: "#ffd54f" }}>Take your time:</strong> Pause and go back as needed.</li>
+                    <li><strong style={{ color: "#ffd54f" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</li>
+                  </ul>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1c1c1c", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
+                   <input type="checkbox" checked={hasReadInstructions} onChange={e => setHasReadInstructions(e.target.checked)} id="terms" style={{ width: "20px", height: "20px" }} />
+                   <label htmlFor="terms" style={{ fontSize: "16px", cursor: "pointer", color: hasReadInstructions ? "#22c55e" : "#fff" }}>I have carefully read and understand the instructions.</label>
+                </div>
+             </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -681,9 +936,53 @@ export default function App() {
             </p>
           </div>
         ) : intervals.length === 0 ? (
-          <p style={{ color: "#888", marginTop: "40px" }}>
-            아직 마커가 없습니다. 재생 중에 Space 키를 눌러 마커를 추가해 보세요.
-          </p>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "40px" }}>
+             <div style={{ background: "#18181b", padding: "40px 30px", borderRadius: "16px", border: "1px solid #27272a", display: "flex", flexDirection: "column", alignItems: "center", gap: "28px", width: "100%", maxWidth: "340px", boxShadow: "0 10px 40px rgba(0,0,0,0.6)" }}>
+               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", opacity: 0.7 }}>
+                  <div style={{ width: "70%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+                  <div style={{ width: "45%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+               </div>
+               <button
+                 onClick={() => {
+                   if (!episode || totalFrames === 0) return;
+                   const targetFrame = frameIndex;
+                   setRawMarkers((prev) => [...prev, targetFrame]);
+                   setIntervals((prev) => [
+                     ...prev,
+                     {
+                       baseFrame: targetFrame,
+                       startOffset: -2,
+                       endOffset: 2,
+                       reason: "",
+                       data: [],
+                     },
+                   ]);
+                 }}
+                 style={{
+                   background: "#eab308",
+                   color: "#18181b",
+                   border: "none",
+                   padding: "12px 28px",
+                   borderRadius: "8px",
+                   fontSize: "16px",
+                   fontWeight: "700",
+                   cursor: "pointer",
+                   boxShadow: "0 0 24px rgba(234, 179, 8, 0.3)",
+                   transition: "all 0.2s ease"
+                 }}
+                 onMouseOver={(e) => {
+                   e.currentTarget.style.boxShadow = "0 0 36px rgba(234, 179, 8, 0.6)";
+                   e.currentTarget.style.transform = "scale(1.02)";
+                 }}
+                 onMouseOut={(e) => {
+                   e.currentTarget.style.boxShadow = "0 0 24px rgba(234, 179, 8, 0.3)";
+                   e.currentTarget.style.transform = "scale(1)";
+                 }}
+               >
+                 + Add Feedback
+               </button>
+             </div>
+          </div>
         ) : (
           <div
             style={{
