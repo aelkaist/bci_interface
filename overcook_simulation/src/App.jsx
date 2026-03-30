@@ -445,6 +445,23 @@ export default function App() {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
           {instructionStep === 0 && (
              <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+               <style>{`
+                 @keyframes mouseMoveClick {
+                   0% { transform: translate(60px, 60px) rotate(-15deg); opacity: 0; }
+                   15% { opacity: 1; }
+                   30% { transform: translate(0px, 0px) rotate(-15deg); }
+                   40% { transform: translate(0px, 0px) rotate(-15deg) scale(0.8); }
+                   50% { transform: translate(0px, 0px) rotate(-15deg) scale(1); }
+                   70% { transform: translate(0px, 0px) rotate(-15deg); opacity: 1; }
+                   85% { opacity: 0; }
+                   100% { transform: translate(60px, 60px) rotate(-15deg); opacity: 0; }
+                 }
+                 @keyframes buttonClickMock {
+                   0%, 35% { transform: scale(1); boxShadow: 0 0 28px rgba(252, 211, 77, 0.4); }
+                   40% { transform: scale(0.94); boxShadow: 0 0 12px rgba(252, 211, 77, 0.8); background: #fde68a; }
+                   45%, 100% { transform: scale(1); boxShadow: 0 0 28px rgba(252, 211, 77, 0.4); background: #fcd34d; }
+                 }
+               `}</style>
                <div>
                  <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome to Our Experiment 👋</h1>
                  <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
@@ -505,12 +522,18 @@ export default function App() {
                                     borderRadius: "8px",
                                     fontSize: "15px",
                                     fontWeight: "700",
-                                    boxShadow: "0 0 28px rgba(252, 211, 77, 0.4)",
-                                    position: "relative"
+                                    position: "relative",
+                                    animation: "buttonClickMock 3s ease-in-out infinite"
                                  }}>
                                     + Add Feedback
                                     {/* Fake Mouse Cursor Overlay */}
-                                    <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "20px", height: "20px", background: "url('/assets/cursor.png') no-repeat center/contain", transform: "rotate(-15deg)", pointerEvents: "none", zIndex: 10 }}>
+                                    <div style={{ 
+                                        position: "absolute", 
+                                        bottom: "-12px", right: "-8px", 
+                                        width: "20px", height: "20px", 
+                                        pointerEvents: "none", zIndex: 10,
+                                        animation: "mouseMoveClick 3s ease-in-out infinite" 
+                                    }}>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
                                           <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
                                         </svg>
@@ -739,44 +762,106 @@ export default function App() {
 
           {instructionStep === 3 && (
              <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Provide Feedback</h1>
-                <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>For each video clip, please score the agents' collaboration using the slider.</p>
-                
-                <div style={{ padding: "40px 20px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
-                   <Range
-                      step={1} min={-2} max={2}
-                      values={testSliderValue}
-                      onChange={(vals) => setTestSliderValue(vals)}
-                      renderTrack={({ props, children }) => (
-                         <div {...props} style={{ ...props.style, height: "8px", width: "100%", backgroundColor: "#333", borderRadius: "4px" }}>
-                            {children}
+                <style>{`
+                  @keyframes sliderRange {
+                    0% { left: 35%; right: 35%; }
+                    50% { left: 15%; right: 15%; }
+                    100% { left: 35%; right: 35%; }
+                  }
+                  @keyframes sliderLeft {
+                    0% { left: 35%; }
+                    50% { left: 15%; }
+                    100% { left: 35%; }
+                  }
+                  @keyframes sliderRight {
+                    0% { right: 35%; }
+                    50% { right: 15%; }
+                    100% { right: 35%; }
+                  }
+                `}</style>
+
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
+                    While watching the video, simply pause and follow these 3 steps to share your thoughts on the AI's behavior.
+                </p>
+
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
+                   
+                   {/* Card 1 */}
+                   <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                      <div>
+                         <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
+                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on? Press pause to stop the playback.</p>
+                      </div>
+                      <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
+                         <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
+                         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <div style={{ width: "48px", height: "48px", background: "#22c55e", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)" }}>
+                               <span style={{ color: "#000", fontSize: "18px", fontWeight: "900", letterSpacing: "1px" }}>II</span>
+                            </div>
                          </div>
-                      )}
-                      renderThumb={({ props }) => (
-                         <div {...props} style={{ ...props.style, height: "24px", width: "24px", borderRadius: "50%", backgroundColor: "#22c55e", outline: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.5)" }} />
-                      )}
-                   />
-                   <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", color: "#888", fontSize: "14px" }}>
-                      <span>Strongly Hindered</span>
-                      <span>Neutral</span>
-                      <span>Strongly Supported</span>
+                         <div style={{ position: "absolute", bottom: "12px", left: "12px", right: "12px", height: "4px", background: "#333", borderRadius: "2px" }}>
+                             <div style={{ width: "25%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
+                             <div style={{ position: "absolute", left: "25%", top: "50%", transform: "translate(-50%, -50%)", width: "10px", height: "10px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
+                         </div>
+                      </div>
                    </div>
+
+                    {/* Card 2 */}
+                   <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                      <div>
+                         <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>2</div>
+                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Click "+ Add Feedback"</strong>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Click the yellow button on the right panel to create a new feedback entry.</p>
+                      </div>
+                      <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "flex-end", padding: "16px", justifyContent: "center", marginTop: "30px" }}>
+                          <div style={{ background: "#fcd34d", color: "#000", fontWeight: "700", border: "none", borderRadius: "8px", padding: "10px 24px", fontSize: "14px", display: "flex", alignItems: "center", gap: "6px" }}>
+                              <span>+</span> Add Feedback
+                          </div>
+                      </div>
+                   </div>
+
+                   {/* Card 3 */}
+                   <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                      <div>
+                         <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>3</div>
+                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Set Range & Feedback</strong>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to highlight the exact frames and write your thoughts.</p>
+                      </div>
+                      <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", flexDirection: "column", padding: "20px", justifyContent: "center", marginTop: "30px", gap: "16px" }}>
+                          {/* Range Slider Track */}
+                          <div style={{ width: "100%", height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
+                               <div style={{ position: "absolute", height: "100%", background: "#fcd34d", borderRadius: "2px", animation: "sliderRange 3s ease-in-out infinite" }} />
+                               <div style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderLeft 3s ease-in-out infinite" }} />
+                               <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 3s ease-in-out infinite" }} />
+                          </div>
+                          {/* Input field mocks */}
+                          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                              <div style={{ boxSizing: "border-box", width: "100%", padding: "12px", background: "#111", borderRadius: "6px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "6px" }}>
+                                <div style={{ width: "70%", height: "6px", background: "#444", borderRadius: "3px" }} />
+                                <div style={{ width: "40%", height: "6px", background: "#444", borderRadius: "3px" }} />
+                              </div>
+                          </div>
+                      </div>
+                   </div>
+
                 </div>
 
-                <div style={{ padding: "16px 20px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
-                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "12px" }}>
-                    <span style={{ fontSize: "18px" }}>&#x26A0;&#xFE0F;</span>
-                    <strong style={{ color: "#ffd54f", fontSize: "15px" }}>Important Notes</strong>
+                <div style={{ padding: "20px 24px", background: "#251a02", borderRadius: "12px", border: "1px solid #745103" }}>
+                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
+                    <span style={{ fontSize: "20px" }}>⚠️</span>
+                    <strong style={{ color: "#fcd34d", fontSize: "16px" }}>Important Notes</strong>
                   </div>
-                  <ul style={{ margin: 0, paddingLeft: "20px", color: "#fff", fontSize: "14px", lineHeight: 1.6, display: "flex", flexDirection: "column", gap: "8px" }}>
-                    <li><strong style={{ color: "#ffd54f" }}>Take your time:</strong> Pause and go back as needed.</li>
-                    <li><strong style={{ color: "#ffd54f" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</li>
+                  <ul style={{ margin: 0, paddingLeft: "24px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6, display: "flex", flexDirection: "column", gap: "12px" }}>
+                    <li><strong style={{ color: "#fcd34d" }}>Take your time:</strong> Pause and go back as needed.</li>
+                    <li><strong style={{ color: "#fcd34d" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</li>
                   </ul>
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1c1c1c", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
-                   <input type="checkbox" checked={hasReadInstructions} onChange={e => setHasReadInstructions(e.target.checked)} id="terms" style={{ width: "20px", height: "20px" }} />
-                   <label htmlFor="terms" style={{ fontSize: "16px", cursor: "pointer", color: hasReadInstructions ? "#22c55e" : "#fff" }}>I have carefully read and understand the instructions.</label>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1a1a1a", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
+                   <input type="checkbox" checked={hasReadInstructions} onChange={e => setHasReadInstructions(e.target.checked)} id="terms" style={{ width: "20px", height: "20px", accentColor: "#22c55e" }} />
+                   <label htmlFor="terms" style={{ fontSize: "16px", cursor: "pointer", color: hasReadInstructions ? "#22c55e" : "#fff", fontWeight: "500" }}>I have carefully read and understand the instructions.</label>
                 </div>
              </div>
           )}
