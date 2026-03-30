@@ -18,7 +18,19 @@ export default function App() {
   const [instructionStep, setInstructionStep] = useState(0);
   const [hasReadInstructions, setHasReadInstructions] = useState(false);
   const [testSliderValue, setTestSliderValue] = useState([0]);
-  const [quizAnswers, setQuizAnswers] = useState({ q1: null, q2: null, q3: null });
+  
+  // Quiz states
+  const [quiz1Answer, setQuiz1Answer] = useState(null);
+  const [quiz2Matches, setQuiz2Matches] = useState({});
+  const [quiz3Order, setQuiz3Order] = useState(() => {
+    // Initial shuffle
+    let order = [1, 2, 3, 4];
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    return order;
+  });
   
   const [episode, setEpisode] = useState(null); // 업로드된 에피소드
   const [fileName, setFileName] = useState(""); // 업로드된 파일 이름
@@ -372,17 +384,45 @@ export default function App() {
     let onNextClick = () => setInstructionStep(st => st + 1);
 
     if (instructionStep === 2) {
-      isDisabled = !quizAnswers.q1;
+      const q1Correct = quiz1Answer === 4;
+      const q2Correct = Object.keys(quiz2Matches).length === 5 && 
+                        quiz2Matches.onion === "Onion" && 
+                        quiz2Matches.pot === "Pot" && 
+                        quiz2Matches.dish === "Dish" && 
+                        quiz2Matches.chef === "AI Chef" && 
+                        quiz2Matches.serve === "Counter";
+      const q3Correct = quiz3Order.join("") === "1234";
+      isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
       btnText = "Start Experiment";
       isDisabled = !hasReadInstructions;
     }
 
     return (
-      <div style={{ minHeight: "100vh", width: "100vw", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden" }}>
+      <div style={{ height: instructionStep === 0 ? "100vh" : "auto", minHeight: "100vh", width: "100vw", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: instructionStep === 0 ? "30px 60px" : "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: instructionStep === 0 ? "hidden" : "auto" }}>
         
-        {/* 상단 헤더 컨테이너: Next 버튼 우측 고정 */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "40px" }}>
+        {/* 상단 헤더 컨테이너: Back/Next 네비게이션 */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: instructionStep === 0 ? "20px" : "40px" }}>
+          
+          {/* 좌상단 BACK 버튼 */}
+          <div style={{ visibility: instructionStep > 0 ? "visible" : "hidden" }}>
+             <button
+               onClick={() => setInstructionStep(st => Math.max(0, st - 1))}
+               style={{
+                 padding: "14px 40px", fontSize: "16px", fontWeight: "700", 
+                 background: "transparent", 
+                 color: "#aaa", 
+                 border: "1px solid #444", borderRadius: "8px", 
+                 cursor: "pointer", 
+                 transition: "all 0.2s"
+               }}
+               onMouseOver={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#888"; }}
+               onMouseOut={(e) => { e.currentTarget.style.color = "#aaa"; e.currentTarget.style.borderColor = "#444"; }}
+             >
+               ← Back
+             </button>
+          </div>
+
           {/* 우상단 NEXT 버튼 */}
           <button 
             disabled={isDisabled}
@@ -410,83 +450,83 @@ export default function App() {
                  <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
                    In this study, your task is to <strong style={{ color: "#fff" }}>watch AI chefs work together</strong> and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration and mistakes.
                  </p>
-                 <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
-                    <p style={{ fontSize: "18px", fontWeight: "700", color: "#fff", margin: 0 }}>Here is what you will do:</p>
-                    <div style={{ display: "flex", gap: "24px" }}>
-                       {/* Card 1 */}
-                       <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                          
-                          {/* Video GIF Mockup Container */}
-                          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                             {/* Video Frame */}
-                             <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.2/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
-                                
-                                {/* Pause Button Overlay */}
-                                <div style={{ position: "absolute", width: "52px", height: "52px", borderRadius: "50%", background: "#22c55e", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 16px rgba(0,0,0,0.6)" }}>
-                                   {/* Pause bars */}
-                                   <div style={{ display: "flex", gap: "4px" }}>
-                                      <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
-                                      <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
-                                   </div>
-                                </div>
-                             </div>
-                             
-                             {/* Fake Progress Bar */}
-                             <div style={{ display: "flex", alignItems: "center", width: "100%", height: "16px" }}>
-                                <div style={{ flex: 1, height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
-                                   <div style={{ position: "absolute", left: 0, top: 0, width: "35%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
-                                   <div style={{ position: "absolute", left: "35%", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", background: "#fff", boxShadow: "0 0 6px rgba(0,0,0,0.6)" }} />
-                                </div>
-                             </div>
-                          </div>
-                          <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Watch AI Chefs work together</h2>
-                          <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You will observe <strong style={{color: "#ddd"}}>many chef agents collaborating</strong> in a fast-paced environment inspired by the Nintendo cooperative game, Overcooked.</p>
-                       </div>
+               </div>
+               <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
+                  <p style={{ fontSize: "18px", fontWeight: "700", color: "#fff", margin: 0 }}>Here is what you will do:</p>
+                  <div style={{ display: "flex", gap: "24px", alignItems: "stretch" }}>
+                     {/* Card 1 */}
+                     <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "center" }}>
+                        
+                        {/* Video GIF Mockup Container */}
+                        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+                           {/* Video Frame */}
+                           <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                              
+                              {/* Pause Button Overlay */}
+                              <div style={{ position: "absolute", width: "52px", height: "52px", borderRadius: "50%", background: "#22c55e", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 16px rgba(0,0,0,0.6)" }}>
+                                 {/* Pause bars */}
+                                 <div style={{ display: "flex", gap: "4px" }}>
+                                    <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
+                                    <div style={{ width: "4px", height: "14px", background: "#000", borderRadius: "2px" }} />
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           {/* Fake Progress Bar */}
+                           <div style={{ display: "flex", alignItems: "center", width: "100%", height: "16px" }}>
+                              <div style={{ flex: 1, height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
+                                 <div style={{ position: "absolute", left: 0, top: 0, width: "35%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
+                                 <div style={{ position: "absolute", left: "35%", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", background: "#fff", boxShadow: "0 0 6px rgba(0,0,0,0.6)" }} />
+                              </div>
+                           </div>
+                        </div>
+                        <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Watch AI Chefs work together</h2>
+                        <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You will observe <strong style={{color: "#ddd"}}>many chef agents collaborating</strong> in an Overcooked environment inspired by the Nintendo cooperative game.</p>
+                     </div>
 
-                       {/* Card 2 */}
-                       <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                          
-                          {/* Feedback UI Mockup Container */}
-                          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                             {/* Sleek Dark Card */}
-                             <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.2/1", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", flexShrink: 0 }}>
-                                
-                                <div style={{ background: "#18181b", padding: "30px", borderRadius: "16px", border: "1px solid #27272a", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", width: "80%", maxWidth: "280px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-                                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", opacity: 0.6 }}>
-                                      <div style={{ width: "70%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
-                                      <div style={{ width: "45%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
-                                   </div>
-                                   <div style={{
-                                      background: "#fcd34d",
-                                      color: "#18181b",
-                                      padding: "10px 24px",
-                                      borderRadius: "8px",
-                                      fontSize: "15px",
-                                      fontWeight: "700",
-                                      boxShadow: "0 0 28px rgba(252, 211, 77, 0.4)",
-                                      position: "relative"
-                                   }}>
-                                      + Add Feedback
-                                      {/* Fake Mouse Cursor Overlay */}
-                                      <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "20px", height: "20px", background: "url('/assets/cursor.png') no-repeat center/contain", transform: "rotate(-15deg)", pointerEvents: "none", zIndex: 10 }}>
-                                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
-                                            <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
-                                          </svg>
-                                      </div>
-                                   </div>
-                                </div>
-                             </div>
-                             
-                             {/* Spacer to match Card 1's progress bar height */}
-                             <div style={{ height: "16px", width: "100%" }} />
-                          </div>
+                     {/* Card 2 */}
+                     <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "center" }}>
+                        
+                        {/* Feedback UI Mockup Container */}
+                        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+                           {/* Sleek Dark Card */}
+                           <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", flexShrink: 0 }}>
+                              
+                              <div style={{ background: "#18181b", padding: "30px", borderRadius: "16px", border: "1px solid #27272a", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", width: "80%", maxWidth: "280px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+                                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", opacity: 0.6 }}>
+                                    <div style={{ width: "70%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+                                    <div style={{ width: "45%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
+                                 </div>
+                                 <div style={{
+                                    background: "#fcd34d",
+                                    color: "#18181b",
+                                    padding: "10px 24px",
+                                    borderRadius: "8px",
+                                    fontSize: "15px",
+                                    fontWeight: "700",
+                                    boxShadow: "0 0 28px rgba(252, 211, 77, 0.4)",
+                                    position: "relative"
+                                 }}>
+                                    + Add Feedback
+                                    {/* Fake Mouse Cursor Overlay */}
+                                    <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "20px", height: "20px", background: "url('/assets/cursor.png') no-repeat center/contain", transform: "rotate(-15deg)", pointerEvents: "none", zIndex: 10 }}>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
+                                          <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                        </svg>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           {/* Spacer to match Card 1's progress bar height */}
+                           <div style={{ height: "16px", width: "100%" }} />
+                        </div>
 
-                          <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Give Feedback</h2>
-                          <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Whenever you notice them making <strong style={{color: "#ddd"}}>silly mistakes</strong>—or showing <strong style={{color: "#ddd"}}>great teamwork</strong>—just pause the video and write a quick comment!</p>
-                       </div>
-                    </div>
-                 </div>
+                        <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Give Feedback</h2>
+                        <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Whenever you notice them making <strong style={{color: "#ddd"}}>silly mistakes</strong>—or showing <strong style={{color: "#ddd"}}>great teamwork</strong>—just pause the video and write a quick comment!</p>
+                     </div>
+                  </div>
                </div>
              </div>
           )}
@@ -500,35 +540,69 @@ export default function App() {
                 <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
                     <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{color: "#fff"}}>To cook onion soup,</strong> you need:</p>
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Onions</span></div>
+                      
+                      {/* Onions */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/objects.png')", backgroundPosition: "-18px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                        <span>Onions</span>
+                      </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Pot</span></div>
+                      
+                      {/* Pot */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-86px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                        <span>Pot</span>
+                      </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>&#x23F3; Wait</span></div>
+                      
+                      {/* Wait */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333", color: "#eab308" }}>
+                        <span>⏳ Wait</span>
+                      </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Bring Dish</span></div>
+                      
+                      {/* Dish */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
+                        <div style={{ width: "15px", height: "15px", background: "url('/graphics/objects.png')", backgroundPosition: "-1px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                        <span>Bring Dish</span>
+                      </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#000", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}><span>Serve!</span></div>
+                      
+                      {/* Serve */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333" }}>
+                         <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-1px -1px", transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                         <span>Serve!</span>
+                      </div>
                     </div>
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                   {[
-                    { video: "/1.mp4", title: "1. Pick up Onions", desc: "Grab onions from the supply" },
-                    { video: "/2.mp4", title: "2. Put Onions into the pot", desc: "Place 3 onions in the pot to begin cooking (Wait until it's fully cooked!)" },
-                    { video: "/3.mp4", title: "3. Grab a dish", desc: "Pick up a dish — you need it to serve!" },
-                    { video: "/4.mp4", title: "4. Serve the soup", desc: "Deliver the finished soup to the serving area!" }
+                    { video: "/main.gif", title: "1. Pick up Onions", desc: "Grab onions from the supply", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
+                    { video: "/main.gif", title: "2. Put Onions in Pot", desc: "Place 3 onions in the pot to cook", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
+                    { video: "/main.gif", title: "3. Grab a dish", desc: "Pick up a dish for serving", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
+                    { video: "/main.gif", title: "4. Serve the soup", desc: "Deliver finished soup to counter", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
-                       <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555" }}>
-                         <video src={item.video} autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }} />
+                       <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative" }}>
+                         <img src={item.video} alt="Gameplay sequence preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                         {/* Centered Decorative Asset overlay in the middle of video */}
+                         <div style={{ position: "absolute", width: "40px", height: "40px", background: "rgba(0,0,0,0.6)", borderRadius: "50%", border: "1px solid #444", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)"}}>
+                            <div style={{ width: "15px", height: "15px", background: item.sprite, backgroundPosition: item.pos, transform: "scale(1.5)", imageRendering: "pixelated" }} />
+                         </div>
                        </div>
                        <div style={{ padding: "16px 20px" }}>
-                         <strong style={{ fontSize: "16px", display: "block", marginBottom: item.desc ? "8px" : 0 }}>{item.title}</strong>
+                         <strong style={{ fontSize: "15px", display: "block", marginBottom: item.desc ? "8px" : 0 }}>{item.title}</strong>
                          {item.desc && <p style={{ fontSize: "14px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>}
                        </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Warning Message */}
+                <div style={{ padding: "16px 20px", background: "#251a02", borderRadius: "8px", border: "1px solid #745103", display: "flex", alignItems: "center", gap: "12px", marginTop: "8px" }}>
+                   <span style={{ fontSize: "20px", alignSelf: "flex-start", transform: "translateY(-1px)" }}>⚠️</span>
+                   <p style={{ margin: 0, fontSize: "16px", color: "#fbbf24", lineHeight: 1.5 }}>It is really important that you know the rules of this game before you start. Please read <strong style={{ color: "#fcd34d" }}>"How the Kitchen Works"</strong> carefully.</p>
                 </div>
              </div>
           )}
@@ -538,18 +612,126 @@ export default function App() {
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Let's Check Your Understanding</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Watch the gameplay video below and answer all questions correctly to proceed.</p>
                 
-                {/* Reference Video Area */}
-                <div style={{ width: "100%", height: "320px", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative" }}>
-                   <video src="/5.mp4" autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                {/* Reference Video Area (Responsive GIF) */}
+                <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative", aspectRatio: "2.5/1", boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
+                   <img src="/main.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }} />
                 </div>
 
-                <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
-                   <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>1. Verification Check</p>
-                   <div>
-                      <label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", color: "#aaa" }}>
-                         <input type="checkbox" checked={quizAnswers.q1} onChange={(e) => setQuizAnswers({...quizAnswers, q1: e.target.checked})} style={{ width: "20px", height: "20px" }} />
-                         <span style={{ fontSize: "16px" }}>I have verified the video context and fully understand the process!</span>
-                      </label>
+                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                   
+                   {/* Quiz 1 */}
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz1Answer === 4 ? "1px solid #22c55e" : "1px solid #333" }}>
+                      <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>1. How many AI chefs do you see in the game?</p>
+                      <div style={{ display: "flex", gap: "12px" }}>
+                         {[1, 2, 3, 4].map(num => (
+                            <button 
+                               key={num}
+                               onClick={() => setQuiz1Answer(num)}
+                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 4 ? "#22c55e" : "#eab308") : "#2a2a2a", color: quiz1Answer === num ? "#000" : "#fff", cursor: "pointer", transition: "all 0.2s" }}
+                            >
+                               {num}
+                            </button>
+                         ))}
+                      </div>
+                   </div>
+
+                   {/* Quiz 2 */}
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Counter") ? "1px solid #22c55e" : "1px solid #333" }}>
+                      <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>2. Identify the names of the items (Drag the words to the matching icons)</p>
+                      
+                      <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", minHeight: "40px" }}>
+                         {["Onion", "Pot", "Dish", "AI Chef", "Counter"].filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
+                            <div 
+                               key={word} draggable 
+                               onDragStart={(e) => { e.dataTransfer.setData("text/plain", word); setTimeout(() => e.target.style.opacity = "0.5", 0); }}
+                               onDragEnd={(e) => { e.target.style.opacity = "1"; }}
+                               style={{ padding: "8px 16px", background: "#3f3f46", color: "#fff", borderRadius: "20px", fontWeight: "600", cursor: "grab", boxShadow: "0 2px 8px rgba(0,0,0,0.4)" }}
+                            >
+                               {word}
+                            </div>
+                         ))}
+                      </div>
+
+                      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                         {[
+                            { id: "onion", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
+                            { id: "pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
+                            { id: "dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
+                            { id: "chef", sprite: "url('/graphics/chefs.png')", pos: "-1px -1px" },
+                            { id: "serve", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                         ].map(item => {
+                            const match = quiz2Matches[item.id];
+                            const isCorrect = (item.id === "onion" && match === "Onion") || 
+                                              (item.id === "pot" && match === "Pot") ||
+                                              (item.id === "dish" && match === "Dish") ||
+                                              (item.id === "chef" && match === "AI Chef") ||
+                                              (item.id === "serve" && match === "Counter");
+
+                            return (
+                               <div key={item.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                                  <div style={{ width: "60px", height: "60px", background: "#2a2a2a", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444", boxShadow: "inset 0 4px 10px rgba(0,0,0,0.5)" }}>
+                                     <div style={{ width: "15px", height: "15px", background: item.sprite, backgroundPosition: item.pos, transform: "scale(2.5)", imageRendering: "pixelated" }} />
+                                  </div>
+                                  <div 
+                                     onDragOver={(e) => e.preventDefault()}
+                                     onDrop={(e) => { e.preventDefault(); const data = e.dataTransfer.getData("text/plain"); if (data) setQuiz2Matches(prev => ({...prev, [item.id]: data})); }}
+                                     onClick={() => { if (match) setQuiz2Matches(prev => { const newMatches = {...prev}; delete newMatches[item.id]; return newMatches; })}}
+                                     title="매칭된 단어를 클릭하면 취소됩니다"
+                                     style={{ width: "100px", height: "36px", border: match ? (isCorrect ? "2px solid #22c55e" : "2px solid #ef4444") : "2px dashed #555", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", background: match ? (isCorrect ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)") : "transparent", cursor: match ? "pointer" : "default", fontSize: "14px", fontWeight: "600", transition: "all 0.2s" }}
+                                  >
+                                     {match ? <span style={{ color: isCorrect ? "#22c55e" : "#ef4444" }}>{match}</span> : <span style={{ color: "#666" }}>Drop here</span>}
+                                  </div>
+                               </div>
+                            )
+                         })}
+                      </div>
+                   </div>
+
+                   {/* Quiz 3 */}
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz3Order.join("") === "1234" ? "1px solid #22c55e" : "1px solid #333" }}>
+                      <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>3. Arrange the cooking steps (Drag up or down to reorder)</p>
+                      
+                      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                         {quiz3Order.map((stepId, index) => {
+                            const stepsMap = {
+                               1: { text: "1. Pick up Onions", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
+                               2: { text: "2. Put Onions into the pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
+                               3: { text: "3. Grab a dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
+                               4: { text: "4. Serve the soup", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                            };
+                            return (
+                               <div 
+                                  key={stepId}
+                                  draggable
+                                  onDragStart={(e) => { e.dataTransfer.setData("text/plain", index.toString()); setTimeout(() => e.target.style.opacity = "0.4", 0); }}
+                                  onDragEnd={(e) => { e.target.style.opacity = "1"; }}
+                                  onDragOver={(e) => e.preventDefault()}
+                                  onDrop={(e) => {
+                                     e.preventDefault();
+                                     const draggedIdxStr = e.dataTransfer.getData("text/plain");
+                                     if (draggedIdxStr === "") return;
+                                     const draggedIdx = Number(draggedIdxStr);
+                                     const targetIdx = index;
+                                     if (draggedIdx === targetIdx) return;
+                                     
+                                     setQuiz3Order(prev => {
+                                        const newOrder = [...prev];
+                                        const [removed] = newOrder.splice(draggedIdx, 1);
+                                        newOrder.splice(targetIdx, 0, removed);
+                                        return newOrder;
+                                     });
+                                  }}
+                                  style={{ padding: "12px 16px", background: "#2a2a2a", borderRadius: "8px", border: "1px solid #444", color: "#fff", display: "flex", alignItems: "center", gap: "16px", cursor: "grab", fontWeight: "500", fontSize: "15px", boxShadow: "0 2px 6px rgba(0,0,0,0.4)", transition: "transform 0.2s" }}
+                               >
+                                  <span style={{ fontSize: "18px", color: "#666", display: "flex", alignItems: "center", letterSpacing: "2px" }}>⋮⋮</span>
+                                  <div style={{ width: "24px", height: "24px", background: "#1c1c1c", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444" }}>
+                                     <div style={{ width: "15px", height: "15px", background: stepsMap[stepId].sprite, backgroundPosition: stepsMap[stepId].pos, transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                                  </div>
+                                  {stepsMap[stepId].text}
+                               </div>
+                            );
+                         })}
+                      </div>
                    </div>
                 </div>
              </div>
