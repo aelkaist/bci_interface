@@ -12,6 +12,9 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
   const [interpProgress, setInterpProgress] = useState(1);
 
+  // 스프라이트 데이터 로딩
+  const [spritesData, setSpritesData] = useState(null);
+
   // 가짜 오브젝트 onion / soup 내려놓기 연출용
   const fakeObjectsRef = useRef([]);
 
@@ -19,12 +22,37 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   const [deliveredCount, setDeliveredCount] = useState(0);
   const prevScoreRef = useRef(frame.score ?? 0);
 
-  // 디버그용 로그  필요할 때만 켜기
+  // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
   useEffect(() => {
-    // if (frame.timestep % 10 === 0) {
-    //   console.log("timestep", frame.timestep, "score", frame.score);
-    // }
-  }, [frame]);
+    Promise.all([
+      fetch('/graphics/chefs.json').then(r=>r.json()),
+      fetch('/graphics/objects.json').then(r=>r.json()),
+      fetch('/graphics/terrain.json').then(r=>r.json()),
+      fetch('/graphics/soups.json').then(r=>r.json())
+    ]).then(([chefs, objects, terrain, soups]) => {
+      const parsedSprites = { chefs: {}, objects: {}, terrain: {}, soups: {} };
+      
+      const processFrames = (json, category) => {
+        if (!json) return;
+        if (json.frames && !Array.isArray(json.frames)) {
+           Object.keys(json.frames).forEach(k => {
+             parsedSprites[category][k] = json.frames[k];
+           });
+        }
+      };
+
+      processFrames(chefs, 'chefs');
+      processFrames(objects, 'objects');
+      processFrames(terrain, 'terrain');
+      
+      if (soups.textures && soups.textures[0] && soups.textures[0].frames) {
+         soups.textures[0].frames.forEach(f => {
+           parsedSprites.soups[f.filename] = f;
+         });
+      }
+      setSpritesData(parsedSprites);
+    }).catch(e => console.error("Sprite load error", e));
+  }, []);
 
   // 플레이어 앞 방향 오프셋
   const dirOffset = {
@@ -44,10 +72,8 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
   // fake object 업데이트
   useEffect(() => {
-    // 리플레이 중에는 fake object 로직 자체를 멈춤
     if (isReplaying) return;
 
-    // 에피소드 첫 프레임이면 리셋
     if (frame.timestep === 0) {
       fakeObjectsRef.current = [];
       prevLogicFrameRef.current = frame;
@@ -69,10 +95,10 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
       const prevHeld = prevPlayer.heldObject;
       const curHeld = player.heldObject;
 
-      // 1 내려놓기  이전에는 들고 있었는데 지금은 안 들고 있음
+      // 1 내려놓기
       if (prevHeld && !curHeld) {
         const name = prevHeld.name;
-        if (name === "onion" || name === "soup") {
+        if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
           const ori = prevPlayer.orientation || "south";
           const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
 
@@ -82,7 +108,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
           if (tx >= 0 && tx < width && ty >= 0 && ty < height) {
             const cell = grid[ty][tx];
 
-            // 오븐 P 배달대 S 위에는 fake object 만들지 않음
+            // 오븐 배달대 위에는 안 만듦
             if (cell !== "P" && cell !== "S") {
               currentFake.push({
                 id: `fake-${Date.now()}-${idx}-${name}`,
@@ -94,218 +120,89 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
         }
       }
 
-      // 2 집기  이전에는 없었는데 지금은 들고 있음
+      // 2 집기
       if (!prevHeld && curHeld) {
         const name = curHeld.name;
-        if (name === "onion" || name === "soup") {
-          const ori = prevPlayer.orientation || player.orientation || "south";
+        if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
+          const ori = prevPlayer.orientation || "south";
           const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
 
           const tx = prevPlayer.position.x + dx;
           const ty = prevPlayer.position.y + dy;
 
-          const idxFake = currentFake.findIndex(
-            (fo) =>
-              fo.name === name &&
-              fo.position.x === tx &&
-              fo.position.y === ty
-          );
-          if (idxFake !== -1) {
-            currentFake.splice(idxFake, 1);
-          }
+          currentFake = currentFake.filter((obj) => {
+            return !(obj.position.x === tx && obj.position.y === ty);
+          });
         }
       }
     });
 
-    // 3 실제 object가 생긴 위치의 fake object 제거
-    const realObjects = frame.objects || [];
-    currentFake = currentFake.filter(
-      (fo) =>
-        !realObjects.some(
-          (ro) =>
-            ro.name === fo.name &&
-            ro.position.x === fo.position.x &&
-            ro.position.y === fo.position.y
-        )
-    );
-
     fakeObjectsRef.current = currentFake;
     prevLogicFrameRef.current = frame;
-  }, [frame, grid, width, height, isReplaying]);
+  }, [frame, isReplaying, grid, width, height, dirOffset]);
 
-  // 리플레이용 fake object 재계산
-  const replayFakeObjects = useMemo(() => {
-    if (!isReplaying || !frames || !Array.isArray(frames) || !frame) return [];
-
-    const currentTimestep = frame.timestep ?? 0;
-    let currentFake = [];
-
-    for (let i = 0; i < frames.length; i++) {
-      const f = frames[i];
-      const t = f.timestep ?? 0;
-
-      // 현재 프레임 이후는 볼 필요 없음
-      if (t > currentTimestep) break;
-
-      // 에피소드 리셋 지점
-      if (t === 0) {
-        currentFake = [];
-      }
-
-      const prevFrame = i > 0 ? frames[i - 1] : null;
-      if (!prevFrame) continue;
-
-      f.players.forEach((player, idx) => {
-        const prevPlayer = prevFrame.players?.[idx];
-        if (!prevPlayer) return;
-
-        const prevHeld = prevPlayer.heldObject;
-        const curHeld = player.heldObject;
-
-        // 1 내려놓기
-        if (prevHeld && !curHeld) {
-          const name = prevHeld.name;
-          if (name === "onion" || name === "soup") {
-            const ori = prevPlayer.orientation || "south";
-            const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
-
-            const tx = prevPlayer.position.x + dx;
-            const ty = prevPlayer.position.y + dy;
-
-            if (tx >= 0 && tx < width && ty >= 0 && ty < height) {
-              const cell = grid[ty][tx];
-
-              if (cell !== "P" && cell !== "S") {
-                currentFake.push({
-                  id: `replay-fake-${t}-${idx}-${name}`,
-                  name,
-                  position: { x: tx, y: ty },
-                });
-              }
-            }
-          }
-        }
-
-        // 2 집기
-        if (!prevHeld && curHeld) {
-          const name = curHeld.name;
-          if (name === "onion" || name === "soup") {
-            const ori = prevPlayer.orientation || player.orientation || "south";
-            const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
-
-            const tx = prevPlayer.position.x + dx;
-            const ty = prevPlayer.position.y + dy;
-
-            const idxFake = currentFake.findIndex(
-              (fo) =>
-                fo.name === name &&
-                fo.position.x === tx &&
-                fo.position.y === ty
-            );
-            if (idxFake !== -1) {
-              currentFake.splice(idxFake, 1);
-            }
-          }
-        }
-      });
-
-      // 3 실제 object가 생긴 위치의 fake object 제거
-      const realObjects = f.objects || [];
-      currentFake = currentFake.filter(
-        (fo) =>
-          !realObjects.some(
-            (ro) =>
-              ro.name === fo.name &&
-              ro.position.x === fo.position.x &&
-              ro.position.y === fo.position.y
-          )
-      );
-    }
-
-    return currentFake;
-  }, [isReplaying, frames, frame, grid, width, height]);
-
-  // 포지션 보간 애니메이션
+  // 플레이어 이동 보간용
   useEffect(() => {
-    const start = performance.now();
     setInterpProgress(0);
+    let raf;
+    let start;
 
-    const animate = (now) => {
-      const t = Math.min((now - start) / 150, 1);
-      setInterpProgress(t);
-
-      if (t < 1) {
-        requestAnimationFrame(animate);
+    const animate = (time) => {
+      if (!start) start = time;
+      const elapsed = time - start;
+      // 150ms 동안 부드럽게 이동하게 합니다.
+      const progress = Math.min(elapsed / 150, 1);
+      setInterpProgress(progress);
+      if (progress < 1) {
+        raf = requestAnimationFrame(animate);
       } else {
         prevFrameRef.current = frame;
       }
     };
+    raf = requestAnimationFrame(animate);
 
-    requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(raf);
+    };
   }, [frame]);
 
-  const lerp = (a, b, t) => a + (b - a) * t;
-
-  // 🔥 핵심: 현재 frame 기준 각 오븐 위치의 soup 남은 시간 계산
+  // 양파 요리 타이머 계산용
   const cookingRemainingByKey = useMemo(() => {
-    if (!frames || !Array.isArray(frames) || !frame) return {};
-
-    const cookTimeDefault = staticInfo.cookTime ?? 20;
-    const currentTimestep = frame.timestep ?? 0;
-
-    const state = {};
     const remainingByKey = {};
+    if (!frames || frames.length === 0) return remainingByKey;
 
-    for (const f of frames) {
-      const t = f.timestep ?? 0;
-      if (t > currentTimestep) continue;
+    frames.forEach((f) => {
+      if (f.timestep > frame.timestep) return;
 
-      const objs = f.objects || [];
-      objs.forEach((obj) => {
-        if (obj.name !== "soup") return;
+      const objectsFound = f.objects ? f.objects : [];
+      let mappedObjects = objectsFound;
+      
+      const realObjects = Array.isArray(mappedObjects) ? mappedObjects : Object.values(mappedObjects || {});
 
-        const isFakeSoup =
-          obj.isCooking === undefined &&
-          obj.isReady === undefined &&
-          obj.numIngredients === undefined &&
-          !Array.isArray(obj.ingredients);
+      realObjects.forEach((obj) => {
+        if (obj.name === "soup") {
+          const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
+          const isCooking = !obj.isReady && count >= 3;
+          const key = `${obj.position.x} ${obj.position.y}`;
+          const cookTotal = obj.cookTime ?? staticInfo.cookTime ?? 20;
 
-        if (isFakeSoup) {
-          return;
-        }
-
-        const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
-        const onionCount = Math.max(0, Math.min(3, count));
-        const key = `${obj.position.x} ${obj.position.y}`;
-
-        const totalCookTime = obj.cookTime ?? cookTimeDefault;
-
-        const logicalCooking = !obj.isReady && onionCount >= 3;
-        const logicalReady = obj.isReady && onionCount >= 3;
-
-        if (logicalCooking) {
-          if (!state[key]) {
-            state[key] = { startedAt: t };
-          }
-          const elapsed = t - state[key].startedAt;
-          const clampedElapsed = Math.max(0, Math.min(totalCookTime, elapsed));
-          const left = totalCookTime - clampedElapsed;
-
-          remainingByKey[key] = left;
-        } else {
-          delete state[key];
-
-          if (logicalReady) {
-            remainingByKey[key] = 0;
+          if (isCooking) {
+            if (remainingByKey[key] === undefined) {
+              remainingByKey[key] = cookTotal;
+            } else if (remainingByKey[key] > 0) {
+              remainingByKey[key] -= 1;
+            }
+          } else {
+            remainingByKey[key] = obj.isReady ? 0 : cookTotal;
           }
         }
       });
-    }
+    });
 
     return remainingByKey;
   }, [frames, frame, staticInfo.cookTime]);
 
-  // 배달 카운트 업데이트
+  // 배달 카운트 계산
   useEffect(() => {
     const reward = staticInfo.deliveryReward ?? 20;
     const prevScore = prevScoreRef.current ?? 0;
@@ -329,64 +226,91 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     prevScoreRef.current = curScore;
   }, [frame, staticInfo.deliveryReward]);
 
-  // 바닥 타일
-  const tileMap = {
-    X: "/assets/tiles/tile_a.png",
-    " ": "/assets/tiles/tile_b.png",
-    P: "/assets/tiles/Group 13.png",
-    S: "/assets/tiles/deliver.png",
-    O: "/assets/tiles/onionn.png",
-    D: "/assets/tiles/dishh.png",
+  // 바닥 타일 맵핑
+  const tileMap = useMemo(() => ({
+    "X": "counter.png",
+    " ": "floor.png",
+    "P": "pot.png",
+    "S": "serve.png",
+    "O": "onions.png",
+    "D": "dishes.png",
+    "T": "tomatoes.png"
+  }), []);
+
+  const SOURCE_SIZES = {
+    chefs: { w: 119, h: 119 },
+    objects: { w: 255, h: 17 },
+    terrain: { w: 119, h: 17 },
+    soups: { w: 405, h: 15 },
   };
 
-  const objectMap = {
-    onion: "/assets/tiles/tile_onion.png",
-    tomato: "/assets/tiles/tile_oven.png",
-    soup: "/assets/tiles/tile_soup.png",
-    dish: "/assets/tiles/tile_dish.png",
+  const renderSprite = (category, frameName, x, y, size, opacity = 1) => {
+    if (!spritesData || !spritesData[category]) return null;
+    let data = spritesData[category][frameName];
+
+    if (!data) {
+      if (category === "chefs") {
+        const fallbackHat = frameName.includes("greenhat") ? "SOUTH-greenhat.png" : "SOUTH-bluehat.png";
+        data = spritesData[category][fallbackHat] || spritesData[category]["SOUTH.png"];
+        if (!data) return null;
+      } else {
+        return null; // missing object sprite
+      }
+    }
+
+    const f = data.frame;
+    const ss = data.spriteSourceSize || { x: 0, y: 0, w: f.w, h: f.h };
+    const srcSize = data.sourceSize || { w: f.w, h: f.h };
+
+    const scale = size / 15; 
+    const drawW = f.w * scale;
+    const drawH = f.h * scale;
+
+    // spriteSourceSize의 비정상적인 offset 값을 무시합니다 (모자가 허공에 뜨는 문제 해결).
+    const finalX = x;
+    const finalY = y;
+
+    const source = SOURCE_SIZES[category];
+    return (
+      <svg x={finalX} y={finalY} width={drawW} height={drawH} viewBox={`${f.x} ${f.y} ${f.w} ${f.h}`} opacity={opacity} style={{ overflow: "hidden" }}>
+        <image href={`/graphics/${category}.png`} x="0" y="0" width={source.w} height={source.h} />
+      </svg>
+    );
   };
 
-  const ovenSprites = {
-    0: "/assets/tiles/tile_oven.png",
-    1: "/assets/tiles/Group 9.png",
-    2: "/assets/tiles/Group 10.png",
-    3: "/assets/tiles/Group 11.png",
+  const normalizeDir = (dir) => {
+    if (!dir) return "SOUTH";
+    const s = String(dir).toUpperCase().trim();
+    if (["NORTH", "SOUTH", "EAST", "WEST"].includes(s)) return s;
+    if (s === "UP" || s.includes("-1")) return "NORTH";     
+    if (s === "DOWN" || s.includes("1")) return "SOUTH";    
+    if (s === "RIGHT" || s.includes("1")) return "EAST";    
+    if (s === "LEFT" || s.includes("-1")) return "WEST";    
+    return "SOUTH";
   };
 
-  const playerSpriteMap = {
-    0: {
-      north: "/assets/tiles/tile_agent0_north.png",
-      south: "/assets/tiles/tile_agent0_south.png",
-      west: "/assets/tiles/tile_agent0_west.png",
-      east: "/assets/tiles/tile_agent0_east.png",
-    },
-    1: {
-      north: "/assets/tiles/tile_agent1_north.png",
-      south: "/assets/tiles/tile_agent1_south.png",
-      west: "/assets/tiles/tile_agent1_west.png",
-      east: "/assets/tiles/tile_agent1_east.png",
-    },
-  };
-
-  // grid는 static이라 메모이제이션
   const backgroundTiles = useMemo(
-    () =>
-      grid.map((row, y) =>
+    () => {
+      if (!spritesData) return null;
+      return grid.map((row, y) =>
         row.map((cell, x) => {
-          const tile = tileMap[cell] || tileMap[" "];
+          let frameName = tileMap[cell];
+          if (!frameName) {
+            frameName = "floor.png";
+          }
+          const isDispenser = ["P", "S", "O", "D"].includes(cell);
+
           return (
-            <image
-              key={`${x}-${y}`}
-              href={tile}
-              x={x * gridSize}
-              y={y * gridSize}
-              width={gridSize}
-              height={gridSize}
-            />
+            <g key={`${x}-${y}`}>
+              {/* 디스펜서 렌더링 전 카운터 바닥 깔아주기 */}
+              {isDispenser && renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
+              {renderSprite('terrain', frameName, x * gridSize, y * gridSize, gridSize)}
+            </g>
           );
         })
-      ),
-    [grid]
+      );
+    },
+    [grid, spritesData, tileMap]
   );
 
   const isHeldByPlayer = (obj) => {
@@ -412,9 +336,13 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
       return null;
     }
 
-    let sprite = objectMap[obj.name] || "/assets/tiles/tile_15.png";
+    let category = "objects";
+    let frameName = `${obj.name}.png`; 
+    
+    if (obj.name === "tomato") {
+       frameName = "tomato.png";
+    }
 
-    // 타이머 관련 변수
     let remainingTime = null;
     let cooking = false;
     let cookTotalForBar = staticInfo.cookTime ?? 20;
@@ -427,7 +355,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
         !Array.isArray(obj.ingredients);
 
       if (isFakeSoup) {
-        sprite = "/assets/tiles/tile_soup.png";
+        frameName = "soup-onion-cooked.png";
       } else {
         const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
         const onionCount = Math.max(0, Math.min(3, count));
@@ -439,9 +367,14 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
         const logicalReady = obj.isReady && onionCount >= 3;
 
         if (logicalReady) {
-          sprite = "/assets/tiles/tile_soup.png";
+          frameName = obj.ingredients?.includes("tomato") ? "soup-tomato-cooked.png" : "soup-onion-cooked.png";
         } else {
-          sprite = ovenSprites[onionCount];
+          if (onionCount === 0) {
+            return null; // empty pot
+          } else {
+            const isTomato = obj.ingredients?.includes("tomato");
+            frameName = `soup-${isTomato ? 'tomato' : 'onion'}-${onionCount}-cooking.png`;
+          }
         }
 
         const key = `${x} ${y}`;
@@ -459,14 +392,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
     return (
       <g key={`obj-${i}`}>
-        <image
-          href={sprite}
-          x={x * gridSize + 10}
-          y={y * gridSize + 10}
-          width={gridSize * 0.8}
-          height={gridSize * 0.8}
-          opacity={ready ? 1 : 0.85}
-        />
+        {renderSprite(category, frameName, x * gridSize, y * gridSize, gridSize, ready ? 1 : 0.85)}
 
         {cooking && remainingTime !== null && (
           <>
@@ -519,43 +445,56 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
     const isInitialFrame = frame.timestep === 0;
     const rawOrientation = player.orientation || "south";
-    const orientation = isInitialFrame ? "south" : rawOrientation;
-
-    const spriteSet =
-      playerSpriteMap[player.id] ||
-      playerSpriteMap[index] ||
-      playerSpriteMap[0];
-
-    const sprite = spriteSet[orientation] || spriteSet.south;
+    const orientation = isInitialFrame ? "SOUTH" : normalizeDir(rawOrientation);
 
     const held = player.heldObject?.name;
-    const heldSprite = held ? objectMap[held] : null;
+    const heldLower = (held || "").toLowerCase();
+    
+    let frameName = null;
+    let hatName = index === 0 ? `${orientation}-bluehat.png` : `${orientation}-greenhat.png`;
+    
+    if (heldLower === "onion") {
+       frameName = `${orientation}-onion.png`;
+    } else if (heldLower === "dish") {
+       frameName = `${orientation}-dish.png`;
+    } else if (heldLower.includes("soup")) {
+       frameName = heldLower.includes("tomato") ? `${orientation}-soup-tomato.png` : `${orientation}-soup-onion.png`;
+    } else if (heldLower === "tomato") {
+       frameName = `${orientation}-tomato.png`;
+    }
 
     return (
       <g
-        key={player.id}
+        key={player.id || index}
         transform={`translate(${interpX * gridSize - offset}, ${
           interpY * gridSize - offset
         }) scale(${scale})`}
       >
-        <image href={sprite} width={gridSize} height={gridSize} />
-        {heldSprite && (
-          <image
-            href={heldSprite}
-            width={gridSize * 0.45}
-            height={gridSize * 0.45}
-            x={gridSize * 0.28}
-            y={gridSize * 0.35}
-          />
-        )}
+        {/* 기본 셰프 몸체 */}
+        {renderSprite('chefs', `${orientation}.png`, 0, 0, gridSize)}
+        {/* 들고 있는 물건 (몸체 앞/뒤/양손) */}
+        {frameName && renderSprite('chefs', frameName, 0, 0, gridSize)}
+        {/* 셰프 모자 (반드시 마지막에 그려야 함) */}
+        {renderSprite('chefs', hatName, 0, 0, gridSize)}
       </g>
     );
   };
 
-  // 리플레이일 때도 재계산된 fake object 포함
-  const combinedObjects = isReplaying
-    ? [...frame.objects, ...replayFakeObjects]
+  const combinedObjects = isReplaying && fakeObjectsRef.current
+    ? [...frame.objects, ...fakeObjectsRef.current]
     : [...frame.objects, ...fakeObjectsRef.current];
+
+  if (!spritesData) {
+    return (
+      <div style={{ color: "#888", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", fontSize: "18px" }}>
+         Loading graphics assets...
+      </div>
+    );
+  }
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
 
   return (
     <svg
@@ -566,18 +505,13 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
         background: "#d6c7a1",
         borderRadius: "8px",
         imageRendering: "pixelated",
+        overflow: "hidden"
       }}
     >
-      {/* 바닥 타일 */}
       {backgroundTiles}
-
-      {/* 오브젝트 */}
       {combinedObjects.map((o, i) => renderObject(o, i))}
-
-      {/* 플레이어 */}
       {frame.players.map((p, i) => renderPlayer(p, i))}
 
-      {/* 배달 카운트  리플레이 아닐 때만 표시 */}
       {!isReplaying && (
         <g transform="translate(10, 10)">
           <rect
