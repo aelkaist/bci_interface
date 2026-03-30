@@ -390,7 +390,7 @@ export default function App() {
                         quiz2Matches.pot === "Pot" && 
                         quiz2Matches.dish === "Dish" && 
                         quiz2Matches.chef === "AI Chef" && 
-                        quiz2Matches.serve === "Counter";
+                        quiz2Matches.serve === "Serve";
       const q3Correct = quiz3Order.join("") === "1234";
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
@@ -579,7 +579,7 @@ export default function App() {
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
                       
                       {/* Wait */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333", color: "#eab308" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#0a0a0c", padding: "8px 14px", borderRadius: "8px", border: "1px solid #333", color: "#fff" }}>
                         <span>⏳ Wait</span>
                       </div>
                       <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
@@ -643,14 +643,14 @@ export default function App() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                    
                    {/* Quiz 1 */}
-                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz1Answer === 4 ? "1px solid #22c55e" : "1px solid #333" }}>
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz1Answer === null ? "1px solid #333" : (quiz1Answer === 4 ? "1px solid #22c55e" : "1px solid #ef4444") }}>
                       <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>1. How many AI chefs do you see in the game?</p>
                       <div style={{ display: "flex", gap: "12px" }}>
                          {[1, 2, 3, 4].map(num => (
                             <button 
                                key={num}
                                onClick={() => setQuiz1Answer(num)}
-                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 4 ? "#22c55e" : "#eab308") : "#2a2a2a", color: quiz1Answer === num ? "#000" : "#fff", cursor: "pointer", transition: "all 0.2s" }}
+                               style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: quiz1Answer === num ? (num === 4 ? "1px solid #22c55e" : "1px solid #dc2626") : "1px solid #444", background: quiz1Answer === num ? (num === 4 ? "#22c55e" : "#ef4444") : "#2a2a2a", color: quiz1Answer === num ? (num === 4 ? "#000" : "#fff") : "#fff", cursor: "pointer", transition: "all 0.2s" }}
                             >
                                {num}
                             </button>
@@ -659,11 +659,26 @@ export default function App() {
                    </div>
 
                    {/* Quiz 2 */}
-                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Counter") ? "1px solid #22c55e" : "1px solid #333" }}>
-                      <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>2. Identify the names of the items (Drag the words to the matching icons)</p>
+                   <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Serve") ? "1px solid #22c55e" : "1px solid #333" }}>
+                      <div style={{ marginBottom: "20px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
+                         <div>
+                            <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 6px 0", color: "#fff" }}>2. Identify the names of the items</p>
+                            <p style={{ fontSize: "14px", color: "#999", margin: 0 }}>Drag the property blocks below and drop them into the matching dashed boxes.</p>
+                         </div>
+                         <button 
+                             onClick={() => setQuiz2Matches({})}
+                             style={{ background: "transparent", border: "1px solid #444", color: "#aaa", padding: "6px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px", transition: "all 0.2s" }}
+                             onMouseOver={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#888"; }}
+                             onMouseOut={(e) => { e.currentTarget.style.color = "#aaa"; e.currentTarget.style.borderColor = "#444"; }}
+                             title="Reset matching answers"
+                         >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                            Reset
+                         </button>
+                      </div>
                       
                       <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", minHeight: "40px" }}>
-                         {["Onion", "Pot", "Dish", "AI Chef", "Counter"].filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
+                         {["Onion", "Pot", "Dish", "AI Chef", "Serve"].filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
                             <div 
                                key={word} draggable 
                                onDragStart={(e) => { e.dataTransfer.setData("text/plain", word); setTimeout(() => e.target.style.opacity = "0.5", 0); }}
@@ -688,7 +703,7 @@ export default function App() {
                                               (item.id === "pot" && match === "Pot") ||
                                               (item.id === "dish" && match === "Dish") ||
                                               (item.id === "chef" && match === "AI Chef") ||
-                                              (item.id === "serve" && match === "Counter");
+                                              (item.id === "serve" && match === "Serve");
 
                             return (
                                <div key={item.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
@@ -712,15 +727,18 @@ export default function App() {
 
                    {/* Quiz 3 */}
                    <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: quiz3Order.join("") === "1234" ? "1px solid #22c55e" : "1px solid #333" }}>
-                      <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff" }}>3. Arrange the cooking steps (Drag up or down to reorder)</p>
+                      <div style={{ marginBottom: "20px" }}>
+                         <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 6px 0", color: "#fff" }}>3. Arrange the cooking steps</p>
+                         <p style={{ fontSize: "14px", color: "#999", margin: 0 }}>Drag the items up or down to place them in the correct sequential order.</p>
+                      </div>
                       
                       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                          {quiz3Order.map((stepId, index) => {
                             const stepsMap = {
-                               1: { text: "1. Pick up Onions", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
-                               2: { text: "2. Put Onions into the pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
-                               3: { text: "3. Grab a dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
-                               4: { text: "4. Serve the soup", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
+                               1: { text: "Pick up Onions", sprite: "url('/graphics/objects.png')", pos: "-18px -1px" },
+                               2: { text: "Put Onions into the pot", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" },
+                               3: { text: "Grab a dish", sprite: "url('/graphics/objects.png')", pos: "-1px -1px" },
+                               4: { text: "Serve the soup", sprite: "url('/graphics/terrain.png')", pos: "-1px -1px" }
                             };
                             return (
                                <div 
@@ -764,25 +782,51 @@ export default function App() {
              <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                 <style>{`
                   @keyframes sliderRange {
-                    0% { left: 35%; right: 35%; }
-                    50% { left: 15%; right: 15%; }
-                    100% { left: 35%; right: 35%; }
+                    0%, 20% { left: 45%; right: 45%; }
+                    40%, 60% { left: 15%; right: 45%; }
+                    80%, 95% { left: 15%; right: 15%; }
+                    100% { left: 45%; right: 45%; }
                   }
                   @keyframes sliderLeft {
-                    0% { left: 35%; }
-                    50% { left: 15%; }
-                    100% { left: 35%; }
+                    0%, 20% { left: 45%; }
+                    40%, 95% { left: 15%; }
+                    100% { left: 45%; }
                   }
                   @keyframes sliderRight {
-                    0% { right: 35%; }
-                    50% { right: 15%; }
-                    100% { right: 35%; }
+                    0%, 60% { right: 45%; }
+                    80%, 95% { right: 15%; }
+                    100% { right: 45%; }
+                  }
+                  @keyframes mouseLeftDrag {
+                    0%, 10% { opacity: 0; transform: translate(15px, 15px) rotate(-15deg); }
+                    15%, 45% { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(0.9); }
+                    50%, 100% { opacity: 0; transform: translate(15px, 15px) rotate(-15deg); }
+                  }
+                  @keyframes mouseRightDrag {
+                    0%, 50% { opacity: 0; transform: translate(15px, 15px) rotate(-15deg); }
+                    55%, 85% { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(0.9); }
+                    90%, 100% { opacity: 0; transform: translate(15px, 15px) rotate(-15deg); }
+                  }
+                  @keyframes mouseClick2 {
+                    0% { transform: translate(60px, 60px) rotate(-15deg); opacity: 0; }
+                    15% { opacity: 1; }
+                    30%, 35% { transform: translate(0px, 0px) rotate(-15deg); }
+                    40% { transform: translate(0px, 0px) rotate(-15deg) scale(0.8); }
+                    50% { transform: translate(0px, 0px) rotate(-15deg) scale(1); }
+                    70% { transform: translate(0px, 0px) rotate(-15deg); opacity: 1; }
+                    85% { opacity: 0; }
+                    100% { transform: translate(60px, 60px) rotate(-15deg); opacity: 0; }
+                  }
+                  @keyframes buttonClickMock2 {
+                    0%, 35% { transform: scale(1); }
+                    40% { transform: scale(0.94); background: #fde68a; }
+                    45%, 100% { transform: scale(1); background: #fcd34d; }
                   }
                 `}</style>
 
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
-                    While watching the video, simply pause and follow these 3 steps to share your thoughts on the AI's behavior.
+                    While watching the video, <strong style={{ color: "#fff" }}>simply pause</strong> and follow these 3 steps to share your feedback on the AI chef's behavior.
                 </p>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
@@ -792,7 +836,7 @@ export default function App() {
                       <div>
                          <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
                          <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
-                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on? Press pause to stop the playback.</p>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on. Press pause to stop the playback.</p>
                       </div>
                       <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
                          <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
@@ -816,8 +860,23 @@ export default function App() {
                          <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Click the yellow button on the right panel to create a new feedback entry.</p>
                       </div>
                       <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "flex-end", padding: "16px", justifyContent: "center", marginTop: "30px" }}>
-                          <div style={{ background: "#fcd34d", color: "#000", fontWeight: "700", border: "none", borderRadius: "8px", padding: "10px 24px", fontSize: "14px", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <div style={{ 
+                              background: "#fcd34d", color: "#000", fontWeight: "700", border: "none", borderRadius: "8px", padding: "10px 24px", fontSize: "14px", display: "flex", alignItems: "center", gap: "6px", position: "relative",
+                              animation: "buttonClickMock2 3s ease-in-out infinite"
+                          }}>
                               <span>+</span> Add Feedback
+                              {/* Fake Mouse Cursor Overlay */}
+                              <div style={{ 
+                                  position: "absolute", 
+                                  bottom: "-12px", right: "-8px", 
+                                  width: "20px", height: "20px", 
+                                  pointerEvents: "none", zIndex: 10,
+                                  animation: "mouseClick2 3s ease-in-out infinite" 
+                              }}>
+                                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
+                                    <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                  </svg>
+                              </div>
                           </div>
                       </div>
                    </div>
@@ -826,15 +885,27 @@ export default function App() {
                    <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
                       <div>
                          <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>3</div>
-                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Set Range & Feedback</strong>
-                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to highlight the exact frames and write your thoughts.</p>
+                         <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Set Feedback Range & Comment</strong>
+                         <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to highlight the exact frames and share your feedback</p>
                       </div>
                       <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", flexDirection: "column", padding: "20px", justifyContent: "center", marginTop: "30px", gap: "16px" }}>
                           {/* Range Slider Track */}
                           <div style={{ width: "100%", height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
-                               <div style={{ position: "absolute", height: "100%", background: "#fcd34d", borderRadius: "2px", animation: "sliderRange 3s ease-in-out infinite" }} />
-                               <div style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderLeft 3s ease-in-out infinite" }} />
-                               <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 3s ease-in-out infinite" }} />
+                               <div style={{ position: "absolute", height: "100%", background: "#fcd34d", borderRadius: "2px", animation: "sliderRange 4s ease-in-out infinite" }} />
+                               <div style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderLeft 4s ease-in-out infinite" }}>
+                                  <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "18px", height: "18px", pointerEvents: "none", zIndex: 10, animation: "mouseLeftDrag 4s ease-in-out infinite" }}>
+                                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))", width: "100%", height: "100%" }}>
+                                        <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                      </svg>
+                                  </div>
+                               </div>
+                               <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 4s ease-in-out infinite" }}>
+                                  <div style={{ position: "absolute", bottom: "-12px", right: "-8px", width: "18px", height: "18px", pointerEvents: "none", zIndex: 10, animation: "mouseRightDrag 4s ease-in-out infinite" }}>
+                                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))", width: "100%", height: "100%" }}>
+                                        <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                                      </svg>
+                                  </div>
+                               </div>
                           </div>
                           {/* Input field mocks */}
                           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
