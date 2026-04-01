@@ -984,20 +984,26 @@ export default function App() {
           {instructionStep === 3 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
               <style>{`
-                  @keyframes sliderRange {
-                    0% { left: 35%; right: 35%; }
-                    50% { left: 15%; right: 15%; }
-                    100% { left: 35%; right: 35%; }
+                  @keyframes feedbackRangeAdjust {
+                    0%, 15% { left: 80px; right: 80px; }
+                    25%, 45% { left: 20px; right: 80px; }
+                    60%, 80% { left: 20px; right: 20px; }
+                    90%, 100% { left: 80px; right: 80px; }
                   }
-                  @keyframes sliderLeft {
-                    0% { left: 35%; }
-                    50% { left: 15%; }
-                    100% { left: 35%; }
-                  }
-                  @keyframes sliderRight {
-                    0% { right: 35%; }
-                    50% { right: 15%; }
-                    100% { right: 35%; }
+                  @keyframes mouseDragTimeline {
+                    0% { transform: translate(150px, 60px); opacity: 0; }
+                    5% { transform: translate(75px, 22px); opacity: 1; }
+                    8% { transform: translate(75px, 22px) scale(0.85); }
+                    12% { transform: translate(75px, 22px) scale(0.9); }
+                    25% { transform: translate(15px, 22px) scale(0.9); }
+                    30% { transform: translate(15px, 22px) scale(1); }
+                    40% { transform: translate(115px, 22px); }
+                    43% { transform: translate(115px, 22px) scale(0.85); }
+                    47% { transform: translate(115px, 22px) scale(0.9); }
+                    60% { transform: translate(175px, 22px) scale(0.9); }
+                    65% { transform: translate(175px, 22px) scale(1); }
+                    80% { transform: translate(150px, 60px); opacity: 1; }
+                    90%, 100% { transform: translate(150px, 60px); opacity: 0; }
                   }
                   @keyframes buttonClickMock {
                     0%, 20% { transform: scale(1); filter: brightness(1) }
@@ -1041,7 +1047,7 @@ export default function App() {
                   <div>
                     <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
                     <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
-                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you'd like to comment on. Press pause to stop the playback.</p>
+                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you want to comment on, then pause the video. Rewatch as needed..</p>
                   </div>
                   <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
                     <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
@@ -1141,43 +1147,39 @@ export default function App() {
                     <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Drag the part you want to give feedback on.</strong>
                     <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to select the part and write your feedback..</p>
                   </div>
-                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", flexDirection: "column", padding: "20px", justifyContent: "center", marginTop: "30px", gap: "16px" }}>
-                    {/* Range Slider Track */}
-                    <div style={{ width: "100%", height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
-                      <div style={{ position: "absolute", height: "100%", background: "#fcd34d", borderRadius: "2px", animation: "sliderRange 3s ease-in-out infinite" }} />
-                      <div style={{ position: "absolute", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderLeft 3s ease-in-out infinite" }} />
-                      <div style={{ position: "absolute", top: "50%", transform: "translate(50%, -50%)", width: "12px", height: "12px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 6px rgba(0,0,0,0.6)", animation: "sliderRight 3s ease-in-out infinite" }}>
-                        {/* Fake Mouse Cursor Dragging */}
-                        <div style={{
-                          position: "absolute",
-                          top: "4px", left: "2px",
-                          width: "20px", height: "20px",
-                          pointerEvents: "none", zIndex: 10,
-                          transform: "rotate(-15deg)"
-                        }}>
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.4))" }}>
-                            <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
-                          </svg>
-                        </div>
+                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px", flexDirection: "column" }}>
+                    <div style={{ width: "200px", height: "80px", position: "relative" }}>
+                      {/* Timeline Track */}
+                      <div style={{ position: "absolute", top: "15px", left: "0", right: "0", height: "20px", background: "#000", border: "1px solid #333", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "flex-end", padding: "0 2px" }}>
+                        {[...Array(20)].map((_, i) => (
+                          <div key={i} style={{ flex: 1, borderRight: "1px solid #222", height: i % 5 === 0 ? "10px" : "4px" }} />
+                        ))}
+                      </div>
+
+                      {/* Yellow Block */}
+                      <div style={{ position: "absolute", top: "13px", height: "24px", background: "rgba(252, 211, 77, 0.35)", borderRadius: "2px", animation: "feedbackRangeAdjust 7s infinite ease-in-out" }}>
+                        {/* Left Handle */}
+                        <div style={{ position: "absolute", left: "-2px", top: "4px", width: "4px", height: "16px", background: "#fff", borderRadius: "2px", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
+                        {/* Right Handle */}
+                        <div style={{ position: "absolute", right: "-2px", top: "4px", width: "4px", height: "16px", background: "#fff", borderRadius: "2px", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
+                      </div>
+
+                      {/* Text */}
+                      <p style={{ position: "absolute", top: "45px", width: "100%", margin: 0, color: "#ddd", fontSize: "14px", fontWeight: "600", textAlign: "center", letterSpacing: "0.5px", zIndex: 1 }}>Feedback Range</p>
+
+                      {/* Mouse Cursor */}
+                      <div style={{ position: "absolute", pointerEvents: "none", zIndex: 10, animation: "mouseDragTimeline 7s infinite ease-in-out", left: 0, top: 0 }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
+                          <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
+                        </svg>
                       </div>
                     </div>
-                    {/* Text instead of input field mocks */}
-                    <p style={{ margin: "8px 0 0 0", color: "#ddd", fontSize: "15px", fontWeight: "600", letterSpacing: "0.5px", textAlign: "center" }}>Feedback Range</p>
                   </div>
                 </div>
 
               </div>
 
-              <div style={{ padding: "20px 24px", gap: "12px", display: "flex", flexDirection: "column", background: "#251a02", borderRadius: "12px", border: "1px solid #745103" }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6 }}>
-                  <span style={{ fontSize: "16px", marginTop: "1px" }}>⚠️</span>
-                  <div><strong style={{ color: "#fcd34d" }}>Take your time:</strong> Pause and go back as needed.</div>
-                </div>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", color: "#fbbf24", fontSize: "15px", lineHeight: 1.6 }}>
-                  <span style={{ fontSize: "16px", marginTop: "1px" }}>⚠️</span>
-                  <div><strong style={{ color: "#fcd34d" }}>Finish what you start:</strong> Try to review the episode to the end in a single sitting.</div>
-                </div>
-              </div>
+
 
               <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1a1a1a", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
                 <input type="checkbox" checked={hasReadInstructions} onChange={e => setHasReadInstructions(e.target.checked)} id="terms" style={{ width: "20px", height: "20px", accentColor: "#22c55e" }} />
