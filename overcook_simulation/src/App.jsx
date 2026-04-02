@@ -1128,7 +1128,7 @@ export default function App() {
                       {/* Timeline Track */}
                       <div style={{ position: "absolute", top: "15px", left: "0", right: "0", height: "20px", background: "#000", border: "1px solid #333", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "flex-end", padding: "0 2px" }}>
                         {[...Array(20)].map((_, i) => (
-                          <div key={i} style={{ flex: 1, borderRight: "1px solid #222", height: i % 5 === 0 ? "10px" : "4px" }} />
+                          <div key={i} style={{ flex: 1, borderRight: "1px solid #222", height: (i + 1) % 5 === 0 ? "10px" : "4px" }} />
                         ))}
                       </div>
 
@@ -1204,7 +1204,7 @@ export default function App() {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          height: "100vh",
+          height: "100%",
           paddingBottom: "100px",
           boxSizing: "border-box"
         }}
@@ -1463,7 +1463,7 @@ export default function App() {
           opacity: !hasEpisode ? 0.4 : 1,
           pointerEvents: !hasEpisode ? "none" : "auto",
           transition: "opacity 0.3s ease",
-          height: "100vh",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
@@ -1695,7 +1695,7 @@ export default function App() {
 
                       {/* Range Component */}
                       {!intv.isFullRange && (
-                        <div style={{ marginBottom: "28px", padding: "0 8px" }} onClick={(e) => { e.stopPropagation(); if (!isSelected) { setSelectedInterval({ index: i, ...intv }); handleReplayFromBase(intv); } }}>
+                        <div style={{ marginBottom: "28px" }} onClick={(e) => { e.stopPropagation(); if (!isSelected) { setSelectedInterval({ index: i, ...intv }); handleReplayFromBase(intv); } }}>
                           {(() => {
                             const baseMin = 0;
                             const baseMax = totalFrames > 0 ? totalFrames - 1 : 100;
@@ -1727,14 +1727,13 @@ export default function App() {
                                       position: "relative",
                                       display: "flex",
                                       alignItems: "flex-end",
-                                      padding: "0 2px",
                                       boxSizing: "border-box"
                                     }}
                                   >
                                     {/* Ticks */}
-                                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "flex-end", padding: "0 2px", overflow: "hidden", borderRadius: "3px" }}>
+                                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "flex-end", overflow: "hidden", borderRadius: "3px" }}>
                                       {[...Array(20)].map((_, idx) => (
-                                        <div key={idx} style={{ flex: 1, borderRight: "1px solid #222", height: idx % 5 === 0 ? "10px" : "4px" }} />
+                                        <div key={idx} style={{ flex: 1, borderRight: "1px solid #222", height: (idx + 1) % 5 === 0 ? "10px" : "4px" }} />
                                       ))}
                                     </div>
 
@@ -1778,7 +1777,7 @@ export default function App() {
                                       key={key}
                                       style={{
                                         ...restProps.style,
-                                        height: "16px",
+                                        height: "24px",
                                         width: "4px",
                                         borderRadius: "2px",
                                         background: "#ffffff",
@@ -1836,7 +1835,7 @@ export default function App() {
                         <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
                           3. How would you describe this feedback?
                         </div>
-                        <div style={{ padding: "0 10px", marginBottom: "16px", marginTop: "16px" }}>
+                        <div style={{ marginBottom: "16px", marginTop: "16px" }}>
                           <Range
                             values={[intv.sentiment || 3]}
                             step={1}
@@ -1891,6 +1890,7 @@ export default function App() {
                                     background: "#fcd34d",
                                     border: "3px solid #111",
                                     boxShadow: "0 0 6px rgba(0,0,0,0.8)",
+                                    boxSizing: "border-box",
                                     outline: "none",
                                     cursor: "grab",
                                     zIndex: 2,
@@ -1900,10 +1900,10 @@ export default function App() {
                             }}
                           />
                         </div>
-                        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px", fontSize: "11px", fontWeight: "600", color: "#666" }}>
-                          <span>Negative</span>
-                          <span>Neutral</span>
-                          <span>Positive</span>
+                        <div style={{ position: "relative", height: "14px", marginTop: "6px", fontSize: "11px", fontWeight: "600", color: "#666" }}>
+                          <span style={{ position: "absolute", left: "0%" }}>Negative</span>
+                          <span style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>Neutral</span>
+                          <span style={{ position: "absolute", right: "0%" }}>Positive</span>
                         </div>
                       </div>
 
