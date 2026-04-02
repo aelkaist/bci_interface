@@ -1487,7 +1487,7 @@ export default function App() {
                     setSelectedInterval(null);
                   }
                 }}
-                style={{ background: "#111", border: "1px solid #333", color: "#ccc", borderRadius: "6px", fontSize: "12px", fontWeight: "600", cursor: "pointer", padding: "6px 10px", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "6px" }}
+                style={{ background: "#111", border: "1px solid #333", color: "#ccc", borderRadius: "6px", fontSize: "12px", fontWeight: "600", cursor: "pointer", outline: "none", padding: "6px 10px", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "6px" }}
                 onMouseOver={e => { e.currentTarget.style.background = "#ef4444"; e.currentTarget.style.borderColor = "#ef4444"; e.currentTarget.style.color = "#fff"; }}
                 onMouseOut={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#ccc"; }}
               >
@@ -1501,18 +1501,18 @@ export default function App() {
               if (!episode || totalFrames === 0) return;
               const targetFrame = frameIndex;
               setRawMarkers((prev) => [...prev, targetFrame]);
-              setIntervals((prev) => [
-                ...prev,
-                {
-                  baseFrame: targetFrame,
-                  startOffset: -2,
-                  endOffset: 2,
-                  reason: "",
-                  correction: "",
-                  data: [],
-                  isFullRange: false,
-                },
-              ]);
+              
+              const newInterval = {
+                baseFrame: targetFrame,
+                startOffset: -2,
+                endOffset: 2,
+                reason: "",
+                correction: "",
+                data: [],
+                isFullRange: false,
+              };
+              setIntervals((prev) => [...prev, newInterval]);
+              setSelectedInterval({ index: intervals.length, ...newInterval });
             }}
             style={{
               width: "100%",
@@ -1524,6 +1524,7 @@ export default function App() {
               fontSize: "13px",
               fontWeight: "700",
               cursor: "pointer",
+              outline: "none",
               transition: "opacity 0.2s"
             }}
             onMouseOver={e => e.target.style.opacity = 0.8}
@@ -1591,7 +1592,7 @@ export default function App() {
                     }
                   }}
                   style={{
-                    border: isSelected ? "1px solid #fcd34d" : "1px solid #2a2a2a",
+                    border: isSelected ? "1px solid rgba(255, 255, 255, 0.3)" : "1px solid #2a2a2a",
                     borderRadius: "10px",
                     padding: "20px",
                     marginBottom: "16px",
@@ -1657,7 +1658,7 @@ export default function App() {
                             }}
                             style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
                           >
-                            <div style={{ position: "relative", width: "28px", height: "16px", background: intv.isFullRange ? "#333" : "#fcd34d", borderRadius: "8px", transition: "background 0.2s" }}>
+                            <div style={{ position: "relative", width: "28px", height: "16px", background: intv.isFullRange ? "#333" : "#ddd", borderRadius: "8px", transition: "background 0.2s" }}>
                               <div style={{ position: "absolute", top: "2px", left: intv.isFullRange ? "2px" : "14px", width: "12px", height: "12px", background: intv.isFullRange ? "#888" : "#000", borderRadius: "50%", transition: "left 0.2s" }} />
                             </div>
                             <span style={{ fontSize: "11px", fontWeight: "600", color: intv.isFullRange ? "#666" : "#ddd" }}>{intv.isFullRange ? "OFF" : "ON"}</span>
@@ -1672,7 +1673,7 @@ export default function App() {
                               }}
                               style={{
                                 background: "#111",
-                                color: "#fcd34d",
+                                color: "#ddd",
                                 border: "1px solid #333",
                                 borderRadius: "4px",
                                 padding: "4px 8px",
@@ -1684,8 +1685,8 @@ export default function App() {
                                 gap: "4px",
                                 transition: "all 0.2s"
                               }}
-                              onMouseOver={e => { e.currentTarget.style.background = "#222"; e.currentTarget.style.borderColor = "#fcd34d"; }}
-                              onMouseOut={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#333"; }}
+                              onMouseOver={e => { e.currentTarget.style.background = "#222"; e.currentTarget.style.borderColor = "#888"; e.currentTarget.style.color = "#fff"; }}
+                              onMouseOut={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#ddd"; }}
                             >
                               <span>▶</span> Replay segment
                             </button>
