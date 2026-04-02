@@ -1640,7 +1640,7 @@ export default function App() {
                       <div style={{ borderBottom: "1px solid #2a2a2a", margin: "0 -20px 16px -20px" }} />
 
                       {/* FEEDBACK RANGE */}
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: intv.isFullRange ? "28px" : "12px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                           <span style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px" }}>1. Select a range to give feedback on</span>
                           <div
@@ -1694,8 +1694,23 @@ export default function App() {
                       </div>
 
                       {/* Range Component */}
-                      {!intv.isFullRange && (
-                        <div style={{ marginBottom: "28px" }} onClick={(e) => { e.stopPropagation(); if (!isSelected) { setSelectedInterval({ index: i, ...intv }); handleReplayFromBase(intv); } }}>
+                      <div
+                        style={{
+                          marginBottom: "28px",
+                          opacity: intv.isFullRange ? 0.3 : 1,
+                          pointerEvents: intv.isFullRange ? "none" : "auto",
+                          filter: intv.isFullRange ? "grayscale(100%)" : "none",
+                          transition: "all 0.2s ease"
+                        }}
+                        onClick={(e) => {
+                          if (intv.isFullRange) return;
+                          e.stopPropagation();
+                          if (!isSelected) {
+                            setSelectedInterval({ index: i, ...intv });
+                            handleReplayFromBase(intv);
+                          }
+                        }}
+                      >
                           {(() => {
                             const baseMin = 0;
                             const baseMax = totalFrames > 0 ? totalFrames - 1 : 100;
@@ -1793,7 +1808,6 @@ export default function App() {
                             );
                           })()}
                         </div>
-                      )}
 
 
                       {/* What feedback would you like to give?*/}
@@ -1910,7 +1924,7 @@ export default function App() {
                       {/* Why are you giving this feedback? */}
                       <div>
                         <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
-                          4. Why are you giving this feedback?
+                          4. What is the reason for this feedback?
                         </div>
                         <textarea
                           value={intv.correction || ""}
@@ -1922,7 +1936,7 @@ export default function App() {
                             }
                             handleCorrectionChange(e.target.value);
                           }}
-                          placeholder="e.g. Pick up the dish first and move to the serving area."
+                          placeholder="What made you think this…"
                           style={{
                             width: "100%",
                             background: "transparent",
