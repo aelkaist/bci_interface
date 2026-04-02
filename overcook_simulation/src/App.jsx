@@ -60,32 +60,7 @@ export default function App() {
 
   const [episodeCount, setEpisodeCount] = useState(1); // 1/4 에피소드 진행 상황
 
-  const [panelWidth, setPanelWidth] = useState(400); // 우측 패널 너비 조절용
-  const isResizingRef = useRef(false);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!isResizingRef.current) return;
-      // 오른쪽 가장자리부터 마우스 위치까지의 거리를 패널 너비로 설정
-      const newWidth = document.body.clientWidth - e.clientX;
-      if (newWidth >= 300 && newWidth <= 800) {
-        setPanelWidth(newWidth);
-      }
-    };
-    const handleMouseUp = () => {
-      if (isResizingRef.current) {
-        isResizingRef.current = false;
-        document.body.style.cursor = "default";
-        document.body.style.userSelect = "auto";
-      }
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
+  const panelWidth = 720; // 우측 패널 너비 고정
 
   const rafRef = useRef(null);
   const segmentEndFrameRef = useRef(null); // 구간 재생 끝 프레임
@@ -498,7 +473,7 @@ export default function App() {
     }
 
     return (
-      <div style={{ height: instructionStep === 0 ? "100vh" : "auto", minHeight: "100vh", width: "100vw", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: instructionStep === 0 ? "30px 60px" : "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: instructionStep === 0 ? "hidden" : "auto" }}>
+      <div style={{ zoom: 1.1, height: instructionStep === 0 ? "100vh" : "auto", minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: instructionStep === 0 ? "30px 60px" : "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: instructionStep === 0 ? "hidden" : "auto" }}>
 
         {/* 상단 헤더 컨테이너: Back/Next 네비게이션 */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: instructionStep === 0 ? "20px" : "40px" }}>
@@ -805,7 +780,7 @@ export default function App() {
           )}
 
           {instructionStep === 2 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
               <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Let's Check Your Understanding</h1>
               <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Watch the gameplay video below and answer all questions correctly to proceed.</p>
 
@@ -983,7 +958,7 @@ export default function App() {
           )}
 
           {instructionStep === 3 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
               <style>{`
                   @keyframes feedbackRangeAdjust {
                     0%, 15% { left: 80px; right: 80px; }
@@ -1472,26 +1447,9 @@ export default function App() {
 
       </div>
 
-      {/* 패널 크기 조절 (Resizer) */}
+      {/* Border separator */}
       {hasEpisode && (
-        <div
-          onMouseDown={() => {
-            isResizingRef.current = true;
-            document.body.style.cursor = "col-resize";
-            document.body.style.userSelect = "none";
-          }}
-          style={{
-            width: "6px",
-            height: "100%",
-            cursor: "col-resize",
-            background: "transparent",
-            zIndex: 50,
-            transition: "background 0.2s",
-            borderLeft: "1px solid #1a1a1a",
-          }}
-          onMouseOver={e => e.currentTarget.style.background = "#333"}
-          onMouseOut={e => { if (!isResizingRef.current) e.currentTarget.style.background = "transparent"; }}
-        />
+        <div style={{ width: "1px", height: "100%", background: "#1a1a1a" }} />
       )}
 
       {/* Right Panel */}
