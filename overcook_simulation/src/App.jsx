@@ -64,6 +64,23 @@ export default function App() {
 
   const rafRef = useRef(null);
   const segmentEndFrameRef = useRef(null); // 구간 재생 끝 프레임
+  
+  const scrollContainerRef = useRef(null);
+  const prevIntervalsLen = useRef(0);
+
+  useEffect(() => {
+    if (intervals.length > prevIntervalsLen.current) {
+      setTimeout(() => {
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.scrollTo({
+            top: scrollContainerRef.current.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }, 100);
+    }
+    prevIntervalsLen.current = intervals.length;
+  }, [intervals.length]);
 
   const frameDuration = FRAME_DURATION;
   const totalFrames = episode?.frames?.length ?? 0;
@@ -1353,7 +1370,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
               >
                 ⏮
               </button>
@@ -1365,7 +1382,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
               >
                 ◀
               </button>
@@ -1382,7 +1399,8 @@ export default function App() {
                   cursor: hasEpisode ? "pointer" : "default",
                   fontSize: "20px",
                   width: "40px",
-                  height: "40px"
+                  height: "40px",
+                  outline: "none"
                 }}
               >
                 {isPlaying ? "⏸" : "▶"}
@@ -1395,7 +1413,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
               >
                 ▶
               </button>
@@ -1407,7 +1425,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
               >
                 ⏭
               </button>
@@ -1555,6 +1573,7 @@ export default function App() {
           </div>
         ) : (
           <div
+            ref={scrollContainerRef}
             style={{
               flex: 1,
               overflowY: "auto",
@@ -1658,8 +1677,8 @@ export default function App() {
                             }}
                             style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
                           >
-                            <div style={{ position: "relative", width: "28px", height: "16px", background: intv.isFullRange ? "#333" : "#ddd", borderRadius: "8px", transition: "background 0.2s" }}>
-                              <div style={{ position: "absolute", top: "2px", left: intv.isFullRange ? "2px" : "14px", width: "12px", height: "12px", background: intv.isFullRange ? "#888" : "#000", borderRadius: "50%", transition: "left 0.2s" }} />
+                            <div style={{ position: "relative", width: "36px", height: "20px", background: intv.isFullRange ? "#333" : "#fcd34d", borderRadius: "10px", transition: "background 0.2s" }}>
+                              <div style={{ position: "absolute", top: "2px", left: intv.isFullRange ? "2px" : "18px", width: "16px", height: "16px", background: intv.isFullRange ? "#888" : "#fff", borderRadius: "50%", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.3)" }} />
                             </div>
                             <span style={{ fontSize: "11px", fontWeight: "600", color: intv.isFullRange ? "#666" : "#ddd" }}>{intv.isFullRange ? "OFF" : "ON"}</span>
                           </div>
