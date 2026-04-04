@@ -64,7 +64,7 @@ export default function App() {
 
   const rafRef = useRef(null);
   const segmentEndFrameRef = useRef(null); // 구간 재생 끝 프레임
-  
+
   const scrollContainerRef = useRef(null);
   const prevIntervalsLen = useRef(0);
 
@@ -604,7 +604,7 @@ export default function App() {
               <div>
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome to Our Experiment 👋</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
-                  In this study, your task is to <strong style={{ color: "#fff" }}>watch AI chef characters work together</strong> and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration and mistakes.
+                  In this study, your task is to <strong style={{ color: "#fff" }}>watch AI chef characters work together</strong> and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration.
                 </p>
               </div>
               <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -629,7 +629,7 @@ export default function App() {
                       </div>
                     </div>
                     <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Watch AI Chefs work together</h2>
-                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch four short videos of AI chef characters collaborating to make onion soup—picking up ingredients, cooking, and delivering the dish.</p>
+                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch short videos of AI chef characters making onion soup.</p>
                   </div>
 
                   {/* Card 2 */}
@@ -731,7 +731,7 @@ export default function App() {
 
               {/* To cook onion soup timeline */}
               <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
-                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To cook onion soup,</strong> you need:</p>
+                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To cook onion soup,</strong> AI chefs need:</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
 
                   {/* Onions */}
@@ -771,27 +771,21 @@ export default function App() {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                 {[
-                  { video: "/1.gif", title: "1. Pick up onions", desc: "Collect onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
-                  { video: "/2.gif", title: "2. Add onions to the pot", desc: "Place 3 onions in the pot to start cooking", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
-                  { video: "/3.gif", title: "3. Bring a dish to the pot", desc: "As the soup cooks, pick up a dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
-                  { video: "/4.gif", title: "4. Serve the onion soup", desc: "Deliver the finished soup to the serving area (grey)", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
+                  { video: "/1.gif", title: "1. Pick up onions", desc: "Collect onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px", objPos: "center bottom" },
+                  { video: "/2.gif", title: "2. Add onions to the pot", desc: "Place 3 onions in the pot to start cooking", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px", objPos: "center top" },
+                  { video: "/3.gif", title: "3. Bring a dish to the pot", desc: "As the soup cooks, pick up a dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px", objPos: "center 25%" },
+                  { video: "/4.gif", title: "4. Serve the onion soup", desc: "Deliver the finished soup to the serving area (grey)", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px", objPos: "center" }
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
-                    <div style={{ width: "100%", height: "160px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                    <div style={{ width: "100%", height: "200px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
                       <img src={item.video} alt="Gameplay sequence preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
                     </div>
-                    <div style={{ padding: "16px 20px" }}>
-                      <strong style={{ fontSize: "15px", display: "block", marginBottom: item.desc ? "8px" : 0 }}>{item.title}</strong>
-                      {item.desc && <p style={{ fontSize: "14px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>}
+                    <div style={{ padding: "20px 24px" }}>
+                      <strong style={{ fontSize: "16px", display: "block", marginBottom: item.desc ? "10px" : 0 }}>{item.title}</strong>
+                      {item.desc && <p style={{ fontSize: "15px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>}
                     </div>
                   </div>
                 ))}
-              </div>
-
-              {/* Warning Message */}
-              <div style={{ padding: "16px 20px", background: "#251a02", borderRadius: "8px", border: "1px solid #745103", display: "flex", alignItems: "center", gap: "12px", marginTop: "8px" }}>
-                <span style={{ fontSize: "20px", alignSelf: "flex-start", transform: "translateY(-1px)" }}>⚠️</span>
-                <p style={{ margin: 0, fontSize: "16px", color: "#fbbf24", lineHeight: 1.5 }}>It is really important that you know the rules of this game before you start. Please read <strong style={{ color: "#fcd34d" }}>"How the Kitchen Works"</strong> carefully.</p>
               </div>
             </div>
           )}
@@ -1040,7 +1034,7 @@ export default function App() {
                   <div>
                     <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
                     <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
-                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you want to comment on, then pause the video. Rewatch as needed..</p>
+                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you want to comment on, then pause the video. Rewatch as needed.</p>
                   </div>
                   <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
                     <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
@@ -1137,8 +1131,8 @@ export default function App() {
                 <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
                   <div>
                     <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>3</div>
-                    <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Drag the part you want to give feedback on.</strong>
-                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Adjust the slider to select the part and write your feedback..</p>
+                    <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Choose the start and end frames to give feedback.</strong>
+                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Pick a range by dragging the start and end points, then write your feedback.</p>
                   </div>
                   <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px", flexDirection: "column" }}>
                     <div style={{ width: "200px", height: "80px", position: "relative" }}>
@@ -1260,9 +1254,11 @@ export default function App() {
         >
           {hasEpisode && frame ? (
             <div
+              onClick={() => setIsPlaying(!isPlaying)}
               style={{
                 transform: "scale(1.2)",
                 transformOrigin: "top center",
+                cursor: "pointer",
               }}
             >
               <OvercookScene
@@ -1519,7 +1515,7 @@ export default function App() {
               if (!episode || totalFrames === 0) return;
               const targetFrame = frameIndex;
               setRawMarkers((prev) => [...prev, targetFrame]);
-              
+
               const newInterval = {
                 baseFrame: targetFrame,
                 startOffset: -2,
@@ -1663,25 +1659,6 @@ export default function App() {
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                           <span style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px" }}>1. Select a range to give feedback on</span>
-                          <div
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setIntervals(prev => {
-                                const next = [...prev];
-                                next[i] = { ...next[i], isFullRange: !next[i].isFullRange };
-                                return next;
-                              });
-                              if (isSelected) {
-                                setSelectedInterval(prev => ({ ...prev, isFullRange: !intv.isFullRange }));
-                              }
-                            }}
-                            style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
-                          >
-                            <div style={{ position: "relative", width: "36px", height: "20px", background: intv.isFullRange ? "#333" : "#fcd34d", borderRadius: "10px", transition: "background 0.2s" }}>
-                              <div style={{ position: "absolute", top: "2px", left: intv.isFullRange ? "2px" : "18px", width: "16px", height: "16px", background: intv.isFullRange ? "#888" : "#fff", borderRadius: "50%", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.3)" }} />
-                            </div>
-                            <span style={{ fontSize: "11px", fontWeight: "600", color: intv.isFullRange ? "#666" : "#ddd" }}>{intv.isFullRange ? "OFF" : "ON"}</span>
-                          </div>
                         </div>
                         <div>
                           {!intv.isFullRange && (
@@ -1716,7 +1693,7 @@ export default function App() {
                       {/* Range Component */}
                       <div
                         style={{
-                          marginBottom: "28px",
+                          marginBottom: "12px",
                           opacity: intv.isFullRange ? 0.3 : 1,
                           pointerEvents: intv.isFullRange ? "none" : "auto",
                           filter: intv.isFullRange ? "grayscale(100%)" : "none",
@@ -1731,104 +1708,126 @@ export default function App() {
                           }
                         }}
                       >
-                          {(() => {
-                            const baseMin = 0;
-                            const baseMax = totalFrames > 0 ? totalFrames - 1 : 100;
-                            const rangeSpan = Math.max(baseMax - baseMin, 1);
-                            // Clamp start/end for slider values to prevent react-range errors
-                            const boundedStart = Math.max(baseMin, Math.min(baseMax, startFrame));
-                            const boundedEnd = Math.max(baseMin, Math.min(baseMax, endFrame));
+                        {(() => {
+                          const baseMin = 0;
+                          const baseMax = totalFrames > 0 ? totalFrames - 1 : 100;
+                          const rangeSpan = Math.max(baseMax - baseMin, 1);
+                          // Clamp start/end for slider values to prevent react-range errors
+                          const boundedStart = Math.max(baseMin, Math.min(baseMax, startFrame));
+                          const boundedEnd = Math.max(baseMin, Math.min(baseMax, endFrame));
 
-                            return (
-                              <Range
-                                values={[boundedStart, boundedEnd]}
-                                step={1}
-                                min={baseMin}
-                                max={baseMax}
-                                onChange={(values) => {
-                                  handleOffsetEdit("startOffset", values[0] - baseFrame);
-                                  handleOffsetEdit("endOffset", values[1] - baseFrame);
-                                }}
-                                renderTrack={({ props, children }) => (
-                                  <div
-                                    {...props}
-                                    style={{
-                                      ...props.style,
-                                      height: "24px",
-                                      width: "100%",
-                                      borderRadius: "4px",
-                                      background: "#000",
-                                      border: "1px solid #333",
-                                      position: "relative",
-                                      display: "flex",
-                                      alignItems: "flex-end",
-                                      boxSizing: "border-box"
-                                    }}
-                                  >
-                                    {/* Ticks */}
-                                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "flex-end", overflow: "hidden", borderRadius: "3px" }}>
-                                      {[...Array(20)].map((_, idx) => (
-                                        <div key={idx} style={{ flex: 1, borderRight: "1px solid #222", height: (idx + 1) % 5 === 0 ? "10px" : "4px" }} />
-                                      ))}
-                                    </div>
-
-                                    {/* Highlight Block */}
-                                    <div
-                                      style={{
-                                        position: "absolute",
-                                        left: `${((boundedStart - baseMin) / rangeSpan) * 100}%`,
-                                        width: `${((boundedEnd - boundedStart) / rangeSpan) * 100}%`,
-                                        height: "100%",
-                                        background: "rgba(252, 211, 77, 0.35)",
-                                        borderRadius: "3px",
-                                        zIndex: 1,
-                                      }}
-                                    />
-                                    {/* Base frame marker (Caret Above) */}
-                                    <div
-                                      style={{
-                                        position: "absolute",
-                                        left: `${((baseFrame - baseMin) / rangeSpan) * 100}%`,
-                                        top: "-12px",
-                                        transform: "translateX(-50%)",
-                                        zIndex: 10,
-                                        color: "#fff",
-                                        fontSize: "10px",
-                                        textShadow: "0 1px 2px rgba(0,0,0,0.8)",
-                                        pointerEvents: "none"
-                                      }}
-                                      title={`Base Frame: ${baseFrame}`}
-                                    >
-                                      ▼
-                                    </div>
-                                    {children}
+                          return (
+                            <Range
+                              values={[boundedStart, boundedEnd]}
+                              step={1}
+                              min={baseMin}
+                              max={baseMax}
+                              onChange={(values) => {
+                                handleOffsetEdit("startOffset", values[0] - baseFrame);
+                                handleOffsetEdit("endOffset", values[1] - baseFrame);
+                              }}
+                              renderTrack={({ props, children }) => (
+                                <div
+                                  {...props}
+                                  style={{
+                                    ...props.style,
+                                    height: "24px",
+                                    width: "100%",
+                                    borderRadius: "4px",
+                                    background: "#000",
+                                    border: "1px solid #333",
+                                    position: "relative",
+                                    display: "flex",
+                                    alignItems: "flex-end",
+                                    boxSizing: "border-box"
+                                  }}
+                                >
+                                  {/* Ticks */}
+                                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "flex-end", overflow: "hidden", borderRadius: "3px" }}>
+                                    {[...Array(20)].map((_, idx) => (
+                                      <div key={idx} style={{ flex: 1, borderRight: "1px solid #222", height: (idx + 1) % 5 === 0 ? "10px" : "4px" }} />
+                                    ))}
                                   </div>
-                                )}
-                                renderThumb={({ props }) => {
-                                  const { key, ...restProps } = props;
-                                  return (
-                                    <div
-                                      {...restProps}
-                                      key={key}
-                                      style={{
-                                        ...restProps.style,
-                                        height: "24px",
-                                        width: "4px",
-                                        borderRadius: "2px",
-                                        background: "#ffffff",
-                                        boxShadow: "0 0 4px rgba(0,0,0,0.5)",
-                                        outline: "none",
-                                        cursor: "grab",
-                                        zIndex: 3
-                                      }}
-                                    />
-                                  );
-                                }}
-                              />
-                            );
-                          })()}
-                        </div>
 
+                                  {/* Highlight Block */}
+                                  <div
+                                    style={{
+                                      position: "absolute",
+                                      left: `${((boundedStart - baseMin) / rangeSpan) * 100}%`,
+                                      width: `${((boundedEnd - boundedStart) / rangeSpan) * 100}%`,
+                                      height: "100%",
+                                      background: "rgba(252, 211, 77, 0.35)",
+                                      borderRadius: "3px",
+                                      zIndex: 1,
+                                    }}
+                                  />
+                                  {/* Base frame marker (Caret Above) */}
+                                  <div
+                                    style={{
+                                      position: "absolute",
+                                      left: `${((baseFrame - baseMin) / rangeSpan) * 100}%`,
+                                      top: "-12px",
+                                      transform: "translateX(-50%)",
+                                      zIndex: 10,
+                                      color: "#fff",
+                                      fontSize: "10px",
+                                      textShadow: "0 1px 2px rgba(0,0,0,0.8)",
+                                      pointerEvents: "none"
+                                    }}
+                                    title={`Base Frame: ${baseFrame}`}
+                                  >
+                                    ▼
+                                  </div>
+                                  {children}
+                                </div>
+                              )}
+                              renderThumb={({ props }) => {
+                                const { key, ...restProps } = props;
+                                return (
+                                  <div
+                                    {...restProps}
+                                    key={key}
+                                    style={{
+                                      ...restProps.style,
+                                      height: "24px",
+                                      width: "4px",
+                                      borderRadius: "2px",
+                                      background: "#ffffff",
+                                      boxShadow: "0 0 4px rgba(0,0,0,0.5)",
+                                      outline: "none",
+                                      cursor: "grab",
+                                      zIndex: 3
+                                    }}
+                                  />
+                                );
+                              }}
+                            />
+                          );
+                        })()}
+                      </div>
+
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "28px" }} onClick={(e) => e.stopPropagation()}>
+                        <input
+                          type="checkbox"
+                          checked={intv.isFullRange}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            setIntervals(prev => {
+                              const next = [...prev];
+                              next[i] = { ...next[i], isFullRange: !next[i].isFullRange };
+                              return next;
+                            });
+                            if (isSelected) {
+                              setSelectedInterval(prev => ({ ...prev, isFullRange: !intv.isFullRange }));
+                            }
+                          }}
+                          id={`fullRangeCheckbox-${i}`}
+                          style={{ width: "16px", height: "16px", accentColor: "#fcd34d", cursor: "pointer" }}
+                        />
+                        <label htmlFor={`fullRangeCheckbox-${i}`} style={{ fontSize: "12px", color: "#888", cursor: "pointer", userSelect: "none" }}>
+                          I can't specify a range for this feedback
+                        </label>
+                      </div>
 
                       {/* What feedback would you like to give?*/}
                       <div style={{ marginBottom: "28px" }}>
@@ -1864,10 +1863,44 @@ export default function App() {
                         />
                       </div>
 
-                      {/* Sentiment Rating */}
+                      {/* Why are you giving this feedback? */}
                       <div style={{ marginBottom: "28px" }}>
                         <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
-                          3. How would you describe this feedback?
+                          3. What is the reason for this feedback?
+                        </div>
+                        <textarea
+                          value={intv.correction || ""}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            if (!isSelected) {
+                              setSelectedInterval({ index: i, ...intv });
+                              handleReplayFromBase(intv);
+                            }
+                            handleCorrectionChange(e.target.value);
+                          }}
+                          placeholder="What made you think this…"
+                          style={{
+                            width: "100%",
+                            background: "transparent",
+                            border: "1px solid #2a2a2a",
+                            borderRadius: "8px",
+                            padding: "12px",
+                            color: "#ccc",
+                            fontSize: "13px",
+                            fontFamily: "inherit",
+                            resize: "vertical",
+                            minHeight: "80px",
+                            boxSizing: "border-box",
+                            outline: "none"
+                          }}
+                          onClick={e => e.stopPropagation()}
+                        />
+                      </div>
+
+                      {/* Sentiment Rating */}
+                      <div>
+                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
+                          4. How would you rate the tone of your feedback?
                         </div>
                         <div style={{ marginBottom: "16px", marginTop: "16px" }}>
                           <Range
@@ -1939,40 +1972,6 @@ export default function App() {
                           <span style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>Neutral</span>
                           <span style={{ position: "absolute", right: "0%" }}>Positive</span>
                         </div>
-                      </div>
-
-                      {/* Why are you giving this feedback? */}
-                      <div>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
-                          4. What is the reason for this feedback?
-                        </div>
-                        <textarea
-                          value={intv.correction || ""}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            if (!isSelected) {
-                              setSelectedInterval({ index: i, ...intv });
-                              handleReplayFromBase(intv);
-                            }
-                            handleCorrectionChange(e.target.value);
-                          }}
-                          placeholder="What made you think this…"
-                          style={{
-                            width: "100%",
-                            background: "transparent",
-                            border: "1px solid #2a2a2a",
-                            borderRadius: "8px",
-                            padding: "12px",
-                            color: "#ccc",
-                            fontSize: "13px",
-                            fontFamily: "inherit",
-                            resize: "vertical",
-                            minHeight: "80px",
-                            boxSizing: "border-box",
-                            outline: "none"
-                          }}
-                          onClick={e => e.stopPropagation()}
-                        />
                       </div>
                     </>
                   )}
