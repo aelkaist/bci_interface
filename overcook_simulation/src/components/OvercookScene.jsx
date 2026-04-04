@@ -12,12 +12,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
   const [interpProgress, setInterpProgress] = useState(1);
 
-  // 스프라이트 데이터 로딩
   const [spritesData, setSpritesData] = useState(null);
-
-  // 가짜 오브젝트 onion / soup 내려놓기 연출용
-  const fakeObjectsRef = useRef([]);
-
   const [deliveryEffects, setDeliveryEffects] = useState([]);
 
   // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
@@ -53,91 +48,74 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   }, []);
 
   // 플레이어 앞 방향 오프셋
-  const dirOffset = {
+  const dirOffset = useMemo(() => ({
     north: { dx: 0, dy: -1 },
     south: { dx: 0, dy: 1 },
     west: { dx: -1, dy: 0 },
     east: { dx: 1, dy: 0 },
-  };
+  }), []);
 
-  // 리플레이로 들어갈 때 fake object만 초기화 (타이머는 순수 계산으로 처리)
-  useEffect(() => {
-    if (isReplaying) {
-      fakeObjectsRef.current = [];
-      prevLogicFrameRef.current = frame;
-    }
-  }, [isReplaying, frame]);
+  // 가짜 오브젝트 (Scrubbing 등 시차 이동 시 버그 방지를 위해 매번 완전 동기화)
+  const fakeObjects = useMemo(() => {
+    if (!frames || frame.timestep === 0) return [];
 
-  // fake object 업데이트
-  useEffect(() => {
-    if (isReplaying) return;
+    let currentFake = [];
 
-    if (frame.timestep === 0) {
-      fakeObjectsRef.current = [];
-      prevLogicFrameRef.current = frame;
-      return;
-    }
+    // 0프레임부터 현재 프레임 전까지의 변경사항을 순차적으로 안전하게 재연
+    for (let i = 1; i <= frame.timestep; i++) {
+      const prevF = frames[i - 1];
+      const curF = frames[i];
+      if (!prevF || !curF) continue;
 
-    const prevFrame = prevLogicFrameRef.current;
-    if (!prevFrame) {
-      prevLogicFrameRef.current = frame;
-      return;
-    }
+      curF.players.forEach((player, idx) => {
+        const prevPlayer = prevF.players?.[idx];
+        if (!prevPlayer) return;
 
-    let currentFake = [...fakeObjectsRef.current];
+        const prevHeld = prevPlayer.heldObject;
+        const curHeld = player.heldObject;
 
-    frame.players.forEach((player, idx) => {
-      const prevPlayer = prevFrame.players?.[idx];
-      if (!prevPlayer) return;
+        // 내려놓기
+        if (prevHeld && !curHeld) {
+          const name = prevHeld.name;
+          if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
+            const ori = prevPlayer.orientation || "south";
+            const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
+            const tx = prevPlayer.position.x + dx;
+            const ty = prevPlayer.position.y + dy;
 
-      const prevHeld = prevPlayer.heldObject;
-      const curHeld = player.heldObject;
-
-      // 1 내려놓기
-      if (prevHeld && !curHeld) {
-        const name = prevHeld.name;
-        if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
-          const ori = prevPlayer.orientation || "south";
-          const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
-
-          const tx = prevPlayer.position.x + dx;
-          const ty = prevPlayer.position.y + dy;
-
-          if (tx >= 0 && tx < width && ty >= 0 && ty < height) {
-            const cell = grid[ty][tx];
-
-            // 오븐 배달대 위에는 안 만듦
-            if (cell !== "P" && cell !== "S") {
-              currentFake.push({
-                id: `fake-${Date.now()}-${idx}-${name}`,
-                name,
-                position: { x: tx, y: ty },
-              });
+            if (tx >= 0 && tx < width && ty >= 0 && ty < height) {
+              const cell = grid[ty][tx];
+              if (cell !== "P" && cell !== "S") {
+                currentFake.push({
+                  id: `fake-${i}-${idx}-${name}`,
+                  name,
+                  position: { x: tx, y: ty },
+                });
+              }
             }
           }
         }
-      }
 
-      // 2 집기
-      if (!prevHeld && curHeld) {
-        const name = curHeld.name;
-        if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
-          const ori = prevPlayer.orientation || "south";
-          const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
+        // 집기
+        if (!prevHeld && curHeld) {
+          const name = curHeld.name;
+          if (name === "onion" || name === "soup" || name === "tomato" || name === "dish") {
+            const ori = prevPlayer.orientation || "south";
+            const { dx, dy } = dirOffset[ori] || { dx: 0, dy: 0 };
+            const tx = prevPlayer.position.x + dx;
+            const ty = prevPlayer.position.y + dy;
 
-          const tx = prevPlayer.position.x + dx;
-          const ty = prevPlayer.position.y + dy;
-
-          currentFake = currentFake.filter((obj) => {
-            return !(obj.position.x === tx && obj.position.y === ty);
-          });
+            currentFake = currentFake.filter(
+              (obj) => !(obj.position.x === tx && obj.position.y === ty)
+            );
+          }
         }
-      }
-    });
+      });
+    }
 
-    fakeObjectsRef.current = currentFake;
-    prevLogicFrameRef.current = frame;
-  }, [frame, isReplaying, grid, width, height, dirOffset]);
+    return currentFake;
+  }, [frame.timestep, frames, grid, width, height, dirOffset]);
+
 
   // 플레이어 이동 보간용
   useEffect(() => {
@@ -502,9 +480,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     );
   };
 
-  const combinedObjects = isReplaying && fakeObjectsRef.current
-    ? [...frame.objects, ...fakeObjectsRef.current]
-    : [...frame.objects, ...fakeObjectsRef.current];
+  const combinedObjects = [...frame.objects, ...fakeObjects];
 
   if (!spritesData) {
     return (
