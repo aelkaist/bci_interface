@@ -1737,6 +1737,20 @@ export default function App() {
                               onChange={(values) => {
                                 handleOffsetEdit("startOffset", values[0] - baseFrame);
                                 handleOffsetEdit("endOffset", values[1] - baseFrame);
+                                // Preview frame during drag
+                                if (values[0] !== boundedStart) {
+                                  setFrameIndex(values[0]);
+                                  setElapsed(values[0] * frameDuration);
+                                  setIsPlaying(false);
+                                } else if (values[1] !== boundedEnd) {
+                                  setFrameIndex(values[1]);
+                                  setElapsed(values[1] * frameDuration);
+                                  setIsPlaying(false);
+                                }
+                              }}
+                              onFinalChange={(values) => {
+                                const newIntv = { ...intv, startOffset: values[0] - baseFrame, endOffset: values[1] - baseFrame };
+                                handleReplayFromBase(newIntv);
                               }}
                               renderTrack={({ props, children }) => (
                                 <div
