@@ -348,42 +348,38 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     let cookTotalForBar = staticInfo.cookTime ?? 20;
 
     if (obj.name === "soup") {
-      const isFakeSoup =
-        obj.isCooking === undefined &&
-        obj.isReady === undefined &&
-        obj.numIngredients === undefined &&
-        !Array.isArray(obj.ingredients);
+      category = "soups";
+      const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
+      const ingredients = Array.isArray(obj.ingredients) ? obj.ingredients : Array(count).fill("onion");
+      const onionCount = Math.max(0, Math.min(3, ingredients.filter(i => i === "onion").length));
+      const tomatoCount = Math.max(0, Math.min(3, ingredients.filter(i => i === "tomato").length));
 
-      if (isFakeSoup) {
-        frameName = "soup-onion-cooked.png";
-      } else {
-        const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
-        const onionCount = Math.max(0, Math.min(3, count));
+      const isReady = obj.isReady;
+      const logicalCooking = !isReady && (onionCount + tomatoCount) >= 3;
+      const isCooking = obj.isCooking !== undefined ? obj.isCooking : logicalCooking;
 
-        const totalCookTime = obj.cookTime ?? staticInfo.cookTime ?? 20;
-        cookTotalForBar = totalCookTime;
+      const totalCookTime = obj.cookTime ?? staticInfo.cookTime ?? 20;
+      cookTotalForBar = totalCookTime;
 
-        const logicalCooking = !obj.isReady && onionCount >= 3;
-        const logicalReady = obj.isReady && onionCount >= 3;
+      let state = "idle";
+      if (isReady) {
+        state = "done";
+      } else if (isCooking) {
+        state = "cooked"; // The sprite files use 'cooked' when it is cooking, and 'done' when it's ready
+      }
 
-        if (logicalReady) {
-          frameName = obj.ingredients?.includes("tomato") ? "soup-tomato-cooked.png" : "soup-onion-cooked.png";
-        } else {
-          if (onionCount === 0) {
-            return null; // empty pot
-          } else {
-            const isTomato = obj.ingredients?.includes("tomato");
-            frameName = `soup-${isTomato ? 'tomato' : 'onion'}-${onionCount}-cooking.png`;
-          }
-        }
+      if (onionCount === 0 && tomatoCount === 0) {
+        return null; // Empty pot 
+      }
 
-        const key = `${x} ${y}`;
-        const rem = cookingRemainingByKey[key];
+      frameName = `soup_${state}_tomato_${tomatoCount}_onion_${onionCount}.png`;
 
-        if (logicalCooking && typeof rem === "number") {
-          remainingTime = rem;
-          cooking = rem > 0;
-        }
+      const key = `${x} ${y}`;
+      const rem = cookingRemainingByKey[key];
+
+      if (isCooking && typeof rem === "number") {
+        remainingTime = rem;
+        cooking = rem > 0;
       }
     }
 
