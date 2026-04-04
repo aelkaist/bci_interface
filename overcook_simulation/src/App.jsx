@@ -1196,7 +1196,7 @@ export default function App() {
       {/* Absolute Top Level Controls */}
       <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100 }}>
         {hasEpisode && (
-          <div style={{ background: "#000", color: "#777", padding: "6px 12px", borderRadius: "6px", fontFamily: "monospace", fontSize: "13px", fontWeight: "600", border: "1px solid #1f1f1f" }}>
+          <div style={{ background: "#000", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontFamily: "monospace", fontSize: "13px", fontWeight: "600", border: "1px solid #1f1f1f" }}>
             Episode {episodeCount} / 4
           </div>
         )}
@@ -1242,56 +1242,62 @@ export default function App() {
           justifyContent: "center",
           position: "relative",
           height: "100%",
-          paddingBottom: "100px",
-          boxSizing: "border-box"
+          paddingBottom: "120px",
+          boxSizing: "border-box",
+          overflow: "hidden"
         }}
       >
 
+        <div style={{ width: "100%", maxWidth: "800px", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
-        {/* 에이전트 화면 */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "800px",
-            height: "50vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start",
-          }}
-        >
-          {hasEpisode && frame ? (
-            <div
-              onClick={() => setIsPlaying(!isPlaying)}
-              style={{
-                transform: "scale(1.2)",
-                transformOrigin: "top center",
-                cursor: "pointer",
-              }}
-            >
-              <OvercookScene
-                staticInfo={episode.staticInfo}
-                frame={frame}
-                frames={episode.frames}
-                isReplaying={isReplaying}
-              />
-            </div>
-          ) : (
-            <div
-              style={{
-                border: "1px dashed #444",
-                borderRadius: "10px",
-                padding: "20px 40px",
-                color: "#777",
-                fontSize: "0.95em",
-              }}
-            >
-              JSON trajectory 파일을 업로드하면 여기에서 플레이 화면을 볼 수
-              있습니다.
-            </div>
-          )}
+          {/* 에이전트 화면 */}
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {hasEpisode && frame ? (
+              <div
+                onClick={() => setIsPlaying(!isPlaying)}
+                style={{
+                  width: "100%",
+                  maxWidth: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <OvercookScene
+                  staticInfo={episode.staticInfo}
+                  frame={frame}
+                  frames={episode.frames}
+                  isReplaying={isReplaying}
+                />
+              </div>
+            ) : (
+              <div
+                style={{
+                  border: "1px dashed #444",
+                  borderRadius: "10px",
+                  padding: "60px 40px",
+                  color: "#777",
+                  fontSize: "0.95em",
+                  width: "100%",
+                  background: "#0c0c0c"
+                }}
+              >
+                JSON trajectory 파일을 업로드하면 여기에서 플레이 화면을 볼 수
+                있습니다.
+              </div>
+            )}
+          </div>
+
         </div>
 
-        {/* Bottom Control Bar (Video Player) - Redesigned to be less compact */}
+        {/* Bottom Control Bar (Embedded Dock) */}
         <div
           style={{
             position: "absolute",
@@ -1305,6 +1311,7 @@ export default function App() {
             flexDirection: "column",
             gap: "24px",
             boxSizing: "border-box",
+            zIndex: 50
           }}
         >
           {/* 하단 전체 Slider */}
@@ -1356,16 +1363,16 @@ export default function App() {
           </div>
 
           {/* 컨트롤 Row */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
             {/* Left Info */}
-            <div style={{ display: "flex", alignItems: "center", gap: "24px", color: "#888", fontSize: "13px", minWidth: "150px" }}>
-              <span>
+            <div style={{ display: "flex", alignItems: "center", color: "#888", fontSize: "13px", minWidth: "100px", flex: 1 }}>
+              <span style={{ whiteSpace: "nowrap" }}>
                 Frame {frameIndex} / {hasEpisode ? totalFrames - 1 : 0}
               </span>
             </div>
 
             {/* Center Controls */}
-            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0, justifyContent: "center" }}>
               <button
                 onClick={() => {
                   setFrameIndex(0);
@@ -1373,7 +1380,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
               >
                 ⏮
               </button>
@@ -1385,7 +1392,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
               >
                 ◀
               </button>
@@ -1416,7 +1423,7 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
               >
                 ▶
               </button>
@@ -1428,15 +1435,15 @@ export default function App() {
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
-                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", outline: "none" }}
+                style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
               >
                 ⏭
               </button>
             </div>
 
             {/* Right Controls */}
-            <div style={{ minWidth: "150px", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "14px", color: "#888", fontWeight: "600", display: hasEpisode ? "block" : "none" }}>Speed</span>
+            <div style={{ flex: 1, minWidth: "100px", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", display: hasEpisode ? "block" : "none" }}>Speed</span>
               <select
                 value={playbackRate}
                 onChange={(e) => setPlaybackRate(Number(e.target.value))}
@@ -1445,9 +1452,9 @@ export default function App() {
                   background: hasEpisode ? "#2c2c2c" : "transparent",
                   color: hasEpisode ? "#fff" : "#444",
                   border: hasEpisode ? "1px solid #555" : "1px solid #2a2a2a",
-                  padding: "6px 8px 6px 12px",
+                  padding: "4px 6px 4px 10px",
                   borderRadius: "6px",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   fontWeight: "600",
                   cursor: hasEpisode ? "pointer" : "default",
                   outline: "none",
@@ -1464,8 +1471,6 @@ export default function App() {
             </div>
           </div>
         </div>
-
-
       </div>
 
       {/* Border separator */}
@@ -1567,11 +1572,11 @@ export default function App() {
             JSON 파일을 업로드해주세요
           </div>
         ) : intervals.length === 0 ? (
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", color: "#666", fontSize: "12px", textAlign: "center", gap: "10px", padding: "0 20px" }}>
-            <span style={{ fontSize: "24px", opacity: 0.6 }}>💬</span>
-            <div style={{ lineHeight: "1.6" }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", color: "#f0f0f0", fontSize: "16px", textAlign: "center", gap: "14px", padding: "0 20px" }}>
+            <span style={{ fontSize: "36px", opacity: 0.9 }}>💬</span>
+            <div style={{ lineHeight: "1.6", fontWeight: "500", letterSpacing: "0.2px" }}>
               No feedback yet.<br />
-              Navigate to a frame on the timeline, then press "Add Feedback" to get started.
+              <span style={{ color: "#bbb", fontSize: "15px", fontWeight: "400" }}>Select a frame to add feedback.</span>
             </div>
           </div>
         ) : (
@@ -1665,7 +1670,7 @@ export default function App() {
                       {/* FEEDBACK RANGE */}
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                          <span style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px" }}>1. Select a range to give feedback on</span>
+                          <span style={{ fontSize: "14px", fontWeight: "600", color: "#fff", letterSpacing: "0.3px" }}>1. Select a range to give feedback on</span>
                         </div>
                         <div>
                           {!intv.isFullRange && (
@@ -1831,14 +1836,14 @@ export default function App() {
                           id={`fullRangeCheckbox-${i}`}
                           style={{ width: "16px", height: "16px", accentColor: "#fcd34d", cursor: "pointer" }}
                         />
-                        <label htmlFor={`fullRangeCheckbox-${i}`} style={{ fontSize: "12px", color: "#888", cursor: "pointer", userSelect: "none" }}>
+                        <label htmlFor={`fullRangeCheckbox-${i}`} style={{ fontSize: "13px", color: "#eee", cursor: "pointer", userSelect: "none" }}>
                           I can't specify a range for this feedback
                         </label>
                       </div>
 
                       {/* What feedback would you like to give?*/}
                       <div style={{ marginBottom: "28px" }}>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
+                        <div style={{ fontSize: "14px", fontWeight: "600", color: "#fff", letterSpacing: "0.3px", marginBottom: "10px" }}>
                           2. What feedback would you like to give?
                         </div>
                         <textarea
@@ -1872,7 +1877,7 @@ export default function App() {
 
                       {/* Why are you giving this feedback? */}
                       <div style={{ marginBottom: "28px" }}>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
+                        <div style={{ fontSize: "14px", fontWeight: "600", color: "#fff", letterSpacing: "0.3px", marginBottom: "10px" }}>
                           3. What is the reason for this feedback?
                         </div>
                         <textarea
@@ -1906,7 +1911,7 @@ export default function App() {
 
                       {/* Sentiment Rating */}
                       <div>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#aaa", letterSpacing: "0.3px", marginBottom: "10px" }}>
+                        <div style={{ fontSize: "14px", fontWeight: "600", color: "#fff", letterSpacing: "0.3px", marginBottom: "10px" }}>
                           4. How would you rate the tone of your feedback?
                         </div>
                         <div style={{ marginBottom: "16px", marginTop: "16px" }}>

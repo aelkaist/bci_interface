@@ -256,6 +256,16 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     return tiles;
   }, [grid]);
 
+  const serveCenter = useMemo(() => {
+    if (serveTiles.length === 0) return { x: (width || 5) * gridSize / 2, y: (height || 5) * gridSize / 2 };
+    let sumX = 0, sumY = 0;
+    serveTiles.forEach(t => { sumX += t.x; sumY += t.y; });
+    return {
+      x: (sumX / serveTiles.length) * gridSize + gridSize / 2,
+      y: (sumY / serveTiles.length) * gridSize + gridSize / 2
+    };
+  }, [serveTiles, gridSize, width, height]);
+
   const renderSprite = (category, frameName, x, y, size, opacity = 1) => {
     if (!spritesData || !spritesData[category]) return null;
     let data = spritesData[category][frameName];
@@ -510,9 +520,11 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
   return (
     <svg
-      width={width * gridSize}
-      height={height * gridSize}
+      viewBox={`0 0 ${width * gridSize} ${height * gridSize}`}
       style={{
+        width: "100%",
+        maxWidth: `${width * gridSize * 1.2}px`,
+        height: "auto",
         border: "2px solid #999",
         background: "#d6c7a1",
         borderRadius: "8px",
@@ -526,14 +538,10 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
       {/* 배달 팝업 이펙트 */}
       {deliveryEffects.map((eff, index) => {
-         // Determine map size dynamically to prevent NaN default translations
          const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
          const mapH = staticInfo.height || (grid ? grid.length : 5);
          
-         // 서빙타일 중 하나를 선택, 없으면 정중앙으로 (약간 번갈아가면서 나오도록 처리)
          let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
-         
-         // If no serving tile 'S' is explicitly found, fallback to the physical center of the map
          if (!sTile) {
             sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
          }
@@ -542,32 +550,38 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
          const ty = sTile.y * gridSize - 15;
 
          return (
-            <g key={eff.id} style={{ animation: "popSlideUp 1.2s ease-out forwards" }} transform={`translate(${tx}, ${ty})`}>
-               <text textAnchor="middle" fill="#22c55e" fontSize="32" fontWeight="800" stroke="#052e16" strokeWidth="6" style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}>
-                  +{eff.count}
-               </text>
-               <text textAnchor="middle" fill="#4ade80" fontSize="32" fontWeight="800">
-                  +{eff.count}
-               </text>
+            <g key={eff.id} transform={`translate(${tx}, ${ty})`}>
+               <g style={{ animation: "popSlideUp 1.2s ease-out forwards" }}>
+                  <text textAnchor="middle" fill="#4ade80" fontSize="20" fontWeight="bold">
+                     +{eff.count}
+                  </text>
+               </g>
             </g>
          );
       })}
 
       {!isReplaying && (
-        <g transform="translate(10, 10)">
-          <rect x={0} y={0} width={90} height={26} rx={8} ry={8} fill="rgba(0,0,0,0.6)" stroke="#ffffff" strokeWidth={1.5} />
-          <text x={45} y={17} textAnchor="middle" fontSize="10" fontFamily="monospace" fill="#ffffff">Served {deliveredCount}</text>
+        <g transform={`translate(${serveCenter.x}, ${serveCenter.y})`}>
+          <text 
+            x={0} 
+            y={5} 
+            textAnchor="middle" 
+            fontSize="14" 
+            fontWeight="bold" 
+            fill="#ffffff"
+          >
+            Served: {deliveredCount}
+          </text>
         </g>
       )}
 
       {/* 팝업 이펙트용 스타일 정의 */}
       <style>{`
         @keyframes popSlideUp {
-          0% { transform: translateY(0px) scale(0.5); opacity: 0; }
-          15% { transform: translateY(-30px) scale(1.4); opacity: 1; }
-          30% { transform: translateY(-25px) scale(1); opacity: 1; }
-          80% { transform: translateY(-40px) scale(1); opacity: 1; }
-          100% { transform: translateY(-50px) scale(0.9); opacity: 0; }
+          0% { transform: translateY(0px); opacity: 0; }
+          20% { transform: translateY(-15px); opacity: 1; }
+          80% { transform: translateY(-25px); opacity: 1; }
+          100% { transform: translateY(-30px); opacity: 0; }
         }
       `}</style>
     </svg>
