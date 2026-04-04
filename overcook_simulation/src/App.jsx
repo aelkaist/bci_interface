@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import OvercookScene from "./components/OvercookScene";
 import { adaptEpisode } from "./data/overcook_episodes";
 import { Range } from "react-range";
+import { saveFeedbackToFirestore } from "./firebase";
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
@@ -34,6 +35,8 @@ export default function App() {
 
   const [episode, setEpisode] = useState(null); // 업로드된 에피소드
   const [fileName, setFileName] = useState(""); // 업로드된 파일 이름
+  const [isSaving, setIsSaving] = useState(false); // DB 저장 상태
+  const fileInputRef = useRef(null);
 
   // 전체화면 토글 함수
   const toggleFullscreen = () => {
@@ -50,6 +53,7 @@ export default function App() {
 
   const [frameIndex, setFrameIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const isPlayingRef = useRef(false);
   const [playMode, setPlayMode] = useState("full"); // "full" | "segment"
   const [elapsed, setElapsed] = useState(0); // 초 단위 경과 시간
   const [playbackRate, setPlaybackRate] = useState(1); // 재생 배속
@@ -67,6 +71,10 @@ export default function App() {
 
   const scrollContainerRef = useRef(null);
   const prevIntervalsLen = useRef(0);
+
+  const sessionStartRef = useRef(Date.now());
+  const pauseCountRef = useRef(0);
+  const playbackSpeedChangesRef = useRef([]);
 
   useEffect(() => {
     if (intervals.length > prevIntervalsLen.current) {
@@ -133,6 +141,11 @@ export default function App() {
         setRawMarkers([]);
         setIntervals([]);
         setSelectedInterval(null);
+
+        sessionStartRef.current = Date.now();
+        pauseCountRef.current = 0;
+        playbackSpeedChangesRef.current = [];
+        setPlaybackRate(1);
 
       } catch (err) {
         console.error("Failed to read JSON", err);
@@ -209,6 +222,7 @@ export default function App() {
         if (isPlaying) {
           cancelAnimationFrame(rafRef.current);
           setIsPlaying(false);
+          pauseCountRef.current += 1;
         } else {
           let targetFrame = frameIndex;
           let targetElapsed = elapsed;
@@ -242,6 +256,8 @@ export default function App() {
               endOffset: 2,
               reason: "",
               isFullRange: false,
+              createdAt: Date.now(),
+              lastModifiedAt: Date.now(),
             },
           ];
         });
@@ -289,6 +305,7 @@ export default function App() {
     if (isPlaying) {
       cancelAnimationFrame(rafRef.current);
       setIsPlaying(false);
+      pauseCountRef.current += 1;
       return;
     }
 
@@ -318,6 +335,9 @@ export default function App() {
           startOffset: -2,
           endOffset: 2,
           reason: "",
+          isFullRange: false,
+          createdAt: Date.now(),
+          lastModifiedAt: Date.now(),
         },
       ];
     });
@@ -348,6 +368,7 @@ export default function App() {
 
     const updated = [...intervals];
     updated[selectedInterval.index][field] = intValue;
+    updated[selectedInterval.index].lastModifiedAt = Date.now();
     setIntervals(updated);
 
     setSelectedInterval((prev) => ({
@@ -362,6 +383,7 @@ export default function App() {
 
     const updated = [...intervals];
     updated[selectedInterval.index].reason = value;
+    updated[selectedInterval.index].lastModifiedAt = Date.now();
     setIntervals(updated);
 
     setSelectedInterval((prev) => ({
@@ -376,6 +398,7 @@ export default function App() {
 
     const updated = [...intervals];
     updated[selectedInterval.index].correction = value;
+    updated[selectedInterval.index].lastModifiedAt = Date.now();
     setIntervals(updated);
 
     setSelectedInterval((prev) => ({
@@ -403,13 +426,12 @@ export default function App() {
     URL.revokeObjectURL(url);
   };
 
-  // 최종 export
-  const handleExport = () => {
-    if (!episode || totalFrames === 0) return;
+  const generatePayload = () => {
+    if (!episode || totalFrames === 0) return null;
 
-    const realTimeData = rawMarkers.slice();
+    const sessionDurationSec = Math.round((Date.now() - sessionStartRef.current) / 1000);
 
-    const calibratedData = intervals.map((intv) => {
+    const feedbackDetails = intervals.map((intv) => {
       const baseFrame = intv.baseFrame;
       let startFrame = intv.isFullRange ? baseFrame : baseFrame + intv.startOffset;
       let endFrame = intv.isFullRange ? baseFrame : baseFrame + intv.endOffset;
@@ -423,31 +445,69 @@ export default function App() {
         endFrame = tmp;
       }
 
-      return [startFrame, endFrame];
+      const isDidSpecify = !intv.isFullRange;
+      return {
+        startFrame: isDidSpecify ? startFrame : null,
+        endFrame: isDidSpecify ? endFrame : null,
+        baseFrame: baseFrame,
+        DidSpecifyRange: isDidSpecify,
+        feedback: intv.reason || "",
+        reason: intv.correction || "",
+        sentiment: intv.sentiment || 3,
+        timeSpentWritingFeedBackSec: Number((((intv.lastModifiedAt || Date.now()) - (intv.createdAt || Date.now())) / 1000).toFixed(2))
+      };
     });
 
-    const reasons = intervals.map((intv) => intv.reason || "");
-    const layout =
-      episode.staticInfo?.layoutName ||
-      episode.staticInfo?.mapName ||
-      "uploaded";
-
-    const payload = {
+    return {
+      episodeCount: episodeCount,
       fileName: episode.fileName || fileName || "uploaded.json",
-      errorInfo: [
-        {
-          type: "real-time",
-          data: realTimeData,
-        },
-        {
-          type: "calibrated",
-          data: calibratedData,
-          reason: reasons,
-        },
-      ],
+      timeSpentOnPageSec: sessionDurationSec,
+      videoPauseCount: pauseCountRef.current,
+      playbackSpeedChanges: playbackSpeedChangesRef.current,
+      feedbackDetails: feedbackDetails,
     };
+  };
 
-    exportJSON(payload, "error_info.json");
+  // 최종 export
+  const handleExport = async () => {
+    const payload = generatePayload();
+    if (!payload) return;
+
+    try {
+      setIsSaving(true);
+      await saveFeedbackToFirestore(payload);
+      alert("Firestore 저장에 성공했습니다!");
+    } catch (err) {
+      console.error(err);
+      alert("Firestore 저장에 실패했습니다. src/firebase.js의 설정을 갱신해주세요.");
+    } finally {
+      setIsSaving(false);
+      exportJSON(payload, "error_info.json");
+    }
+  };
+
+  const handleNextEpisodeClick = async () => {
+    if (hasEpisode) {
+      const payload = generatePayload();
+      if (payload) {
+        try {
+          setIsSaving(true);
+          await saveFeedbackToFirestore(payload);
+        } catch (err) {
+          console.error(err);
+          const ok = window.confirm("Firestore 저장에 실패했습니다. 이대로 다음 에피소드로 넘어가시겠습니까?");
+          if (!ok) {
+            setIsSaving(false);
+            return;
+          }
+        } finally {
+          setIsSaving(false);
+        }
+      }
+    }
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   // 업로드 버튼 기준 pill 스타일
@@ -1194,11 +1254,16 @@ export default function App() {
       }}
     >
       {/* Absolute Top Level Controls */}
-      <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100 }}>
+      <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100, display: "flex", alignItems: "center", gap: "12px" }}>
         {hasEpisode && (
-          <div style={{ background: "#000", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontFamily: "monospace", fontSize: "13px", fontWeight: "600", border: "1px solid #1f1f1f" }}>
-            Episode {episodeCount} / 4
-          </div>
+          <>
+            <div style={{ background: "#000", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontFamily: "monospace", fontSize: "13px", fontWeight: "600", border: "1px solid #1f1f1f" }}>
+              Episode {episodeCount} / 4
+            </div>
+            <div style={{ background: "rgba(239, 68, 68, 0.15)", color: "#ef4444", padding: "6px 12px", borderRadius: "6px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(239, 68, 68, 0.4)", display: "flex", alignItems: "center", gap: "6px", letterSpacing: "0.2px" }}>
+              <span>🚨</span> Please do not refresh this page
+            </div>
+          </>
         )}
       </div>
 
@@ -1207,25 +1272,24 @@ export default function App() {
         {hasEpisode && (
           <button
             onClick={handleExport}
-            style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)" }}
-            onMouseOver={e => { e.target.style.background = "#fde68a"; }}
-            onMouseOut={e => { e.target.style.background = "#fcd34d"; }}
+            disabled={isSaving}
+            style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)", opacity: isSaving ? 0.7 : 1 }}
+            onMouseOver={e => { if(!isSaving) e.target.style.background = "#fde68a"; }}
+            onMouseOut={e => { if(!isSaving) e.target.style.background = "#fcd34d"; }}
           >
-            Export JSON
+            {isSaving ? "Saving..." : "Export JSON"}
           </button>
         )}
-        <label
-          style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)" }}
-          onMouseOver={e => {
-            e.currentTarget.style.background = "#fde68a";
-          }}
-          onMouseOut={e => {
-            e.currentTarget.style.background = "#fcd34d";
-          }}
+        <button
+          onClick={handleNextEpisodeClick}
+          disabled={isSaving}
+          style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)", opacity: isSaving ? 0.7 : 1 }}
+          onMouseOver={e => { if(!isSaving) e.currentTarget.style.background = "#fde68a"; }}
+          onMouseOut={e => { if(!isSaving) e.currentTarget.style.background = "#fcd34d"; }}
         >
-          {hasEpisode ? "Next episode ▶" : "Upload JSON"}
-          <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
-        </label>
+          {isSaving ? "Saving..." : (hasEpisode ? "Next episode ▶" : "Upload JSON")}
+        </button>
+        <input ref={fileInputRef} type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
       </div>
 
 
@@ -1261,7 +1325,7 @@ export default function App() {
           >
             {hasEpisode && frame ? (
               <div
-                onClick={() => setIsPlaying(!isPlaying)}
+                onClick={togglePlay}
                 style={{
                   width: "100%",
                   maxWidth: "100%",
@@ -1334,9 +1398,9 @@ export default function App() {
               return (
                 <div key={i} style={{ position: "absolute", top: "-14px", left: "6px", right: "6px", height: "14px", pointerEvents: "none", zIndex: 10 }}>
                   {/* Range Highlight */}
-                  <div style={{ position: "absolute", left: `${leftPerc}%`, width: `${widthPerc}%`, top: "4px", height: "6px", background: isSelected ? "rgba(252, 211, 77, 0.55)" : "rgba(252, 211, 77, 0.25)", borderRadius: "3px", transition: "all 0.2s" }} />
+                  <div style={{ position: "absolute", left: `${leftPerc}%`, width: `${widthPerc}%`, top: "4px", height: "6px", background: isSelected ? "rgba(252, 211, 77, 0.55)" : "rgba(150, 150, 150, 0.3)", borderRadius: "3px", transition: "all 0.2s" }} />
                   {/* Base Frame Tick */}
-                  <div style={{ position: "absolute", left: `${basePerc}%`, top: "0px", width: "3px", height: "14px", background: isSelected ? "#fcd34d" : "rgba(252, 211, 77, 0.8)", transform: "translateX(-50%)", borderRadius: "2px", transition: "all 0.2s" }} />
+                  <div style={{ position: "absolute", left: `${basePerc}%`, top: "0px", width: "3px", height: "14px", background: isSelected ? "#fcd34d" : "#777", transform: "translateX(-50%)", borderRadius: "2px", transition: "all 0.2s" }} />
                 </div>
               );
             })}
@@ -1350,7 +1414,7 @@ export default function App() {
                 const val = Number(e.target.value);
                 setFrameIndex(val);
                 setElapsed(val * frameDuration);
-                setIsPlaying(false);
+                setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
               }}
               disabled={!hasEpisode}
               style={{
@@ -1377,7 +1441,7 @@ export default function App() {
                 onClick={() => {
                   setFrameIndex(0);
                   setElapsed(0);
-                  setIsPlaying(false);
+                  setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
                 }}
                 disabled={!hasEpisode}
                 style={{ background: "transparent", border: "none", color: hasEpisode ? "#777" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
@@ -1389,7 +1453,7 @@ export default function App() {
                   const target = Math.max(0, frameIndex - 1);
                   setFrameIndex(target);
                   setElapsed(target * frameDuration);
-                  setIsPlaying(false);
+                  setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
                 }}
                 disabled={!hasEpisode}
                 style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
@@ -1420,7 +1484,7 @@ export default function App() {
                   const target = Math.min(totalFrames - 1, frameIndex + 1);
                   setFrameIndex(target);
                   setElapsed(target * frameDuration);
-                  setIsPlaying(false);
+                  setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
                 }}
                 disabled={!hasEpisode}
                 style={{ background: "transparent", border: "none", color: hasEpisode ? "#fff" : "#333", cursor: hasEpisode ? "pointer" : "default", fontSize: "16px", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px", outline: "none" }}
@@ -1432,6 +1496,7 @@ export default function App() {
                   const target = totalFrames > 0 ? totalFrames - 1 : 0;
                   setFrameIndex(target);
                   setElapsed(target * frameDuration);
+                  if (isPlaying) pauseCountRef.current += 1;
                   setIsPlaying(false);
                 }}
                 disabled={!hasEpisode}
@@ -1446,7 +1511,15 @@ export default function App() {
               <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", display: hasEpisode ? "block" : "none" }}>Speed</span>
               <select
                 value={playbackRate}
-                onChange={(e) => setPlaybackRate(Number(e.target.value))}
+                onChange={(e) => {
+                  const newSpeed = Number(e.target.value);
+                  setPlaybackRate(newSpeed);
+                  playbackSpeedChangesRef.current.push({
+                    speed: newSpeed,
+                    timestampSec: Math.round((Date.now() - sessionStartRef.current) / 1000),
+                    frame: frameIndex
+                  });
+                }}
                 disabled={!hasEpisode}
                 style={{
                   background: hasEpisode ? "#2c2c2c" : "transparent",
@@ -1536,6 +1609,8 @@ export default function App() {
                 correction: "",
                 data: [],
                 isFullRange: false,
+                createdAt: Date.now(),
+                lastModifiedAt: Date.now(),
               };
               setIntervals((prev) => [...prev, newInterval]);
               setSelectedInterval({ index: intervals.length, ...newInterval });
@@ -1741,11 +1816,11 @@ export default function App() {
                                 if (values[0] !== boundedStart) {
                                   setFrameIndex(values[0]);
                                   setElapsed(values[0] * frameDuration);
-                                  setIsPlaying(false);
+                                  setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
                                 } else if (values[1] !== boundedEnd) {
                                   setFrameIndex(values[1]);
                                   setElapsed(values[1] * frameDuration);
-                                  setIsPlaying(false);
+                                  setIsPlaying(prev => { if (prev) pauseCountRef.current += 1; return false; });
                                 }
                               }}
                               onFinalChange={(values) => {
@@ -1840,7 +1915,7 @@ export default function App() {
                             e.stopPropagation();
                             setIntervals(prev => {
                               const next = [...prev];
-                              next[i] = { ...next[i], isFullRange: !next[i].isFullRange };
+                              next[i] = { ...next[i], isFullRange: !next[i].isFullRange, lastModifiedAt: Date.now() };
                               return next;
                             });
                             if (isSelected) {
@@ -1937,6 +2012,7 @@ export default function App() {
                             onChange={(values) => {
                               const newIntervals = [...intervals];
                               newIntervals[i].sentiment = values[0];
+                              newIntervals[i].lastModifiedAt = Date.now();
                               setIntervals(newIntervals);
                             }}
                             renderTrack={({ props, children }) => (
