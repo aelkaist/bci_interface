@@ -1253,13 +1253,18 @@ export default function App() {
         position: "relative"
       }}
     >
+      {/* 🚀 Faint Header Separator */}
+      {hasEpisode && (
+        <>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "72px", background: "#0a0a0a", zIndex: 50 }} />
+          <div style={{ position: "absolute", top: "72px", left: 0, right: 0, height: "1px", background: "rgba(255, 255, 255, 0.06)", zIndex: 50 }} />
+        </>
+      )}
+
       {/* Absolute Top Level Controls */}
       <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100, display: "flex", alignItems: "center", gap: "12px" }}>
         {hasEpisode && (
           <>
-            <div style={{ background: "#000", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontFamily: "monospace", fontSize: "13px", fontWeight: "600", border: "1px solid #1f1f1f" }}>
-              Episode {episodeCount} / 4
-            </div>
             <div style={{ background: "rgba(239, 68, 68, 0.15)", color: "#ef4444", padding: "6px 12px", borderRadius: "6px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(239, 68, 68, 0.4)", display: "flex", alignItems: "center", gap: "6px", letterSpacing: "0.2px" }}>
               <span>🚨</span> Please do not refresh this page
             </div>
@@ -1269,25 +1274,26 @@ export default function App() {
 
       {/* Absolute Top Right Controls (Export & Next Episode) */}
       <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
-        {hasEpisode && (
-          <button
-            onClick={handleExport}
-            disabled={isSaving}
-            style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)", opacity: isSaving ? 0.7 : 1 }}
-            onMouseOver={e => { if(!isSaving) e.target.style.background = "#fde68a"; }}
-            onMouseOut={e => { if(!isSaving) e.target.style.background = "#fcd34d"; }}
-          >
-            {isSaving ? "Saving..." : "Export JSON"}
-          </button>
-        )}
         <button
           onClick={handleNextEpisodeClick}
           disabled={isSaving}
-          style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)", opacity: isSaving ? 0.7 : 1 }}
-          onMouseOver={e => { if(!isSaving) e.currentTarget.style.background = "#fde68a"; }}
-          onMouseOut={e => { if(!isSaving) e.currentTarget.style.background = "#fcd34d"; }}
+          style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", opacity: isSaving ? 0.7 : 1 }}
+          onMouseOver={e => { 
+            if(!isSaving) {
+              e.currentTarget.style.background = "#fcd34d"; 
+              e.currentTarget.style.color = "#000";
+              e.currentTarget.style.borderColor = "#fcd34d";
+            } 
+          }}
+          onMouseOut={e => { 
+            if(!isSaving) {
+              e.currentTarget.style.background = "#111"; 
+              e.currentTarget.style.color = "#fff";
+              e.currentTarget.style.borderColor = "#333";
+            } 
+          }}
         >
-          {isSaving ? "Saving..." : (hasEpisode ? "Next episode ▶" : "Upload JSON")}
+          {isSaving ? "Saving..." : (hasEpisode ? `Next episode (${episodeCount}/4) ▶` : "Upload JSON")}
         </button>
         <input ref={fileInputRef} type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
       </div>
@@ -1577,22 +1583,6 @@ export default function App() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "16px" }}>
             <h3 style={{ margin: 0, color: "#fff", fontSize: "20px", fontWeight: "700", letterSpacing: "-0.5px" }}>Feedback</h3>
 
-            {intervals.length > 0 && (
-              <button
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to clear all recorded feedback? This action cannot be undone.")) {
-                    setRawMarkers([]);
-                    setIntervals([]);
-                    setSelectedInterval(null);
-                  }
-                }}
-                style={{ background: "#111", border: "1px solid #333", color: "#ccc", borderRadius: "6px", fontSize: "12px", fontWeight: "600", cursor: "pointer", outline: "none", padding: "6px 10px", transition: "all 0.2s", display: "flex", alignItems: "center", gap: "6px" }}
-                onMouseOver={e => { e.currentTarget.style.background = "#ef4444"; e.currentTarget.style.borderColor = "#ef4444"; e.currentTarget.style.color = "#fff"; }}
-                onMouseOut={e => { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#ccc"; }}
-              >
-                <span style={{ fontSize: "14px" }}>🔁</span> Reset Feedback
-              </button>
-            )}
           </div>
 
           <button
