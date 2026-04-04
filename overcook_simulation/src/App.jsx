@@ -1202,6 +1202,32 @@ export default function App() {
         )}
       </div>
 
+      {/* Absolute Top Right Controls (Export & Next Episode) */}
+      <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
+        {hasEpisode && (
+          <button
+            onClick={handleExport}
+            style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)" }}
+            onMouseOver={e => { e.target.style.background = "#fde68a"; }}
+            onMouseOut={e => { e.target.style.background = "#fcd34d"; }}
+          >
+            Export JSON
+          </button>
+        )}
+        <label
+          style={{ background: "#fcd34d", color: "#000", border: "none", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", boxShadow: "0 2px 8px rgba(252, 211, 77, 0.3)" }}
+          onMouseOver={e => {
+            e.currentTarget.style.background = "#fde68a";
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.background = "#fcd34d";
+          }}
+        >
+          {hasEpisode ? "Next episode ▶" : "Upload JSON"}
+          <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
+        </label>
+      </div>
+
 
 
       {/* Main viewer */}
@@ -1220,26 +1246,7 @@ export default function App() {
           boxSizing: "border-box"
         }}
       >
-        {/* Top Right Controls */}
-        <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
-          {hasEpisode && (
-            <button onClick={handleExport} style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s", display: "flex", justifyContent: "center", alignItems: "center" }} onMouseOver={e => { e.target.style.background = "#222"; }} onMouseOut={e => { e.target.style.background = "#111"; }}>
-              Export JSON
-            </button>
-          )}
-          <label
-            style={{ background: hasEpisode ? "#111" : "#4ade80", color: "#fff", border: hasEpisode ? "1px solid #333" : "none", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "700", cursor: "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px" }}
-            onMouseOver={e => {
-              e.currentTarget.style.background = hasEpisode ? "#222" : "#22c55e";
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.background = hasEpisode ? "#111" : "#4ade80";
-            }}
-          >
-            {hasEpisode ? "Next episode ▶" : "Upload JSON"}
-            <input type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
-          </label>
-        </div>
+
 
         {/* 에이전트 화면 */}
         <div
@@ -1472,7 +1479,7 @@ export default function App() {
           width: `${panelWidth}px`,
           flexShrink: 0,
           borderLeft: hasEpisode ? "none" : "1px solid #1a1a1a",
-          padding: "24px",
+          padding: "80px 24px 24px 24px",
           textAlign: "left",
           opacity: !hasEpisode ? 0.4 : 1,
           pointerEvents: !hasEpisode ? "none" : "auto",
@@ -1495,7 +1502,7 @@ export default function App() {
             {intervals.length > 0 && (
               <button
                 onClick={() => {
-                  if (window.confirm("현재 기록된 모든 피드백 마커를 초기화하시겠습니까? (이 작업은 되돌릴 수 없습니다.)")) {
+                  if (window.confirm("Are you sure you want to clear all recorded feedback? This action cannot be undone.")) {
                     setRawMarkers([]);
                     setIntervals([]);
                     setSelectedInterval(null);
@@ -1638,7 +1645,7 @@ export default function App() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (window.confirm(`Feedback #${i + 1} 항목을 삭제하시겠습니까? (이 작업은 되돌릴 수 없습니다.)`)) {
+                          if (window.confirm(`Feedback #${i + 1} Are you sure you want to delete this item? This action cannot be undone.`)) {
                             deleteInterval(i);
                           }
                         }}
