@@ -6,6 +6,18 @@ import { adaptEpisode } from "./data/overcook_episodes";
 import { Range } from "react-range";
 import { saveFeedbackToFirestore } from "./firebase";
 
+import random0_medium from "./maps/random0_medium.json";
+import random1 from "./maps/random1.json";
+import random3 from "./maps/random3.json";
+import small_corridor from "./maps/small_corridor.json";
+
+const ALL_MAPS = [
+  { name: "random0_medium.json", data: random0_medium },
+  { name: "random1.json", data: random1 },
+  { name: "random3.json", data: random3 },
+  { name: "small_corridor.json", data: small_corridor }
+];
+
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
 const FRAME_DURATION = 0.3;
@@ -33,10 +45,57 @@ export default function App() {
   });
   const [quiz3Order, setQuiz3Order] = useState([3, 1, 4, 2]);
 
-  const [episode, setEpisode] = useState(null); // 업로드된 에피소드
-  const [fileName, setFileName] = useState(""); // 업로드된 파일 이름
+  const [episode, setEpisode] = useState(null); // 현재 에피소드
+  const [fileName, setFileName] = useState(""); // 현재 맵 이름
   const [isSaving, setIsSaving] = useState(false); // DB 저장 상태
   const fileInputRef = useRef(null);
+
+  const [mapOrder, setMapOrder] = useState([]);
+  const [currentMapIdx, setCurrentMapIdx] = useState(0);
+
+  useEffect(() => {
+    let indices = [0, 1, 2, 3];
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    setMapOrder(indices);
+  }, []);
+
+  const loadMapByIndex = (index) => {
+    const mapObj = ALL_MAPS[index];
+    if (!mapObj) return;
+
+    try {
+      const adapted = adaptEpisode(mapObj.data, mapObj.name);
+
+      cancelAnimationFrame(rafRef.current);
+
+      setEpisode({
+        fileName: mapObj.name,
+        ...adapted,
+      });
+      setFileName(mapObj.name);
+
+      setIsPlaying(false);
+      setPlayMode("full");
+      segmentEndFrameRef.current = null;
+
+      setElapsed(0);
+      setFrameIndex(0);
+      setRawMarkers([]);
+      setIntervals([]);
+      setSelectedInterval(null);
+
+      sessionStartRef.current = Date.now();
+      pauseCountRef.current = 0;
+      playbackSpeedChangesRef.current = [];
+      setPlaybackRate(1);
+
+    } catch (err) {
+      console.error("Failed to parse map", err);
+    }
+  };
 
   // 전체화면 토글 함수
   const toggleFullscreen = () => {
@@ -505,8 +564,14 @@ export default function App() {
         }
       }
     }
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+    
+    if (currentMapIdx < mapOrder.length - 1) {
+      const nextIdx = currentMapIdx + 1;
+      loadMapByIndex(mapOrder[nextIdx]);
+      setCurrentMapIdx(nextIdx);
+      setEpisodeCount(nextIdx + 1);
+    } else {
+      setInstructionStep(5); // 끝
     }
   };
 
@@ -576,11 +641,17 @@ export default function App() {
 
           {/* 우상단 NEXT 버튼 */}
           {instructionStep === 3 ? (
-            <label
+            <button
+              disabled={isDisabled}
+              onClick={() => {
+                if (mapOrder.length > 0) {
+                  loadMapByIndex(mapOrder[0]);
+                  setCurrentMapIdx(0);
+                  setEpisodeCount(1);
+                  setInstructionStep(4);
+                }
+              }}
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
                 padding: "14px 40px", fontSize: "16px", fontWeight: "700",
                 background: isDisabled ? "#333" : "#fcd34d",
                 color: isDisabled ? "#888" : "#000",
@@ -593,19 +664,7 @@ export default function App() {
               }}
             >
               Start Experiment
-              <input
-                type="file"
-                accept="application/json,.json"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  if (e.target.files && e.target.files.length > 0) {
-                    handleFileUpload(e);
-                    // 파일이 성공적으로 로드되면 메인 뷰어로 이동
-                    setInstructionStep(4);
-                  }
-                }}
-              />
-            </label>
+            </button>
           ) : (
             <button
               disabled={isDisabled}
@@ -1239,6 +1298,15 @@ export default function App() {
     );
   }
 
+  if (instructionStep === 5) {
+    return (
+      <div style={{ display: "flex", width: "100%", height: "100vh", alignItems: "center", justifyContent: "center", background: "#080808", color: "#fff", flexDirection: "column", gap: "20px", fontFamily: "Inter, sans-serif" }}>
+        <h1 style={{ fontSize: "48px", fontWeight: "800", color: "#4ade80", margin: 0 }}>Thank You For Participating!</h1>
+        <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Your feedback has been successfully recorded.</p>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -1293,9 +1361,8 @@ export default function App() {
             } 
           }}
         >
-          {isSaving ? "Saving..." : (hasEpisode ? `Next episode (${episodeCount}/4) ▶` : "Upload JSON")}
+          {isSaving ? "Saving..." : (episodeCount >= 4 ? "Finish Experiment" : `Next episode (${episodeCount}/4) ▶`)}
         </button>
-        <input ref={fileInputRef} type="file" accept="application/json,.json" onChange={handleFileUpload} style={{ display: "none" }} />
       </div>
 
 
