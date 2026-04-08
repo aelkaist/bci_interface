@@ -6,16 +6,18 @@ import { adaptEpisode } from "./data/overcook_episodes";
 import { Range } from "react-range";
 import { saveFeedbackToFirestore } from "./firebase";
 
-import random0_medium from "./maps/random0_medium.json";
-import random1 from "./maps/random1.json";
-import random3 from "./maps/random3.json";
-import small_corridor from "./maps/small_corridor.json";
+import random3Seed5 from "./maps/random3_seed5_5020000.json";
+import smallCorridorSeed5 from "./maps/small_corridor_seed5_5020000.json";
+import random0MediumSeed5 from "./maps/random0_medium_seed5_5020000.json";
+import multiplayerSchelling3Seed5 from "./maps/multiplayer_schelling_3_seed5_5020000.json";
+import multiplayerSchellingSeed5 from "./maps/multiplayer_schelling_seed5_5020000.json";
 
 const ALL_MAPS = [
-  { name: "random0_medium.json", data: random0_medium },
-  { name: "random1.json", data: random1 },
-  { name: "random3.json", data: random3 },
-  { name: "small_corridor.json", data: small_corridor }
+  { name: "random3_seed5_5020000.json", data: random3Seed5 },
+  { name: "small_corridor_seed5_5020000.json", data: smallCorridorSeed5 },
+  { name: "random0_medium_seed5_5020000.json", data: random0MediumSeed5 },
+  { name: "multiplayer_schelling_3_seed5_5020000.json", data: multiplayerSchelling3Seed5 },
+  { name: "multiplayer_schelling_seed5_5020000.json", data: multiplayerSchellingSeed5 }
 ];
 
 const MIN_OFFSET = -20;
@@ -54,7 +56,7 @@ export default function App() {
   const [currentMapIdx, setCurrentMapIdx] = useState(0);
 
   useEffect(() => {
-    let indices = [0, 1, 2, 3];
+    let indices = Array.from({ length: ALL_MAPS.length }, (_, index) => index);
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
@@ -121,7 +123,7 @@ export default function App() {
   const [intervals, setIntervals] = useState([]); // [{ baseFrame, startOffset, endOffset, reason }, ...]
   const [selectedInterval, setSelectedInterval] = useState(null);
 
-  const [episodeCount, setEpisodeCount] = useState(1); // 1/4 에피소드 진행 상황
+  const [episodeCount, setEpisodeCount] = useState(1); // 현재 에피소드 진행 상황
 
   const panelWidth = 720; // 우측 패널 너비 고정
 
@@ -192,7 +194,7 @@ export default function App() {
         segmentEndFrameRef.current = null;
 
         if (hasEpisode) {
-          setEpisodeCount((c) => Math.min(c + 1, 4));
+          setEpisodeCount((c) => Math.min(c + 1, ALL_MAPS.length));
         }
 
         setElapsed(0);
@@ -1361,7 +1363,11 @@ export default function App() {
             } 
           }}
         >
-          {isSaving ? "Saving..." : (episodeCount >= 4 ? "Finish Experiment" : `Next episode (${episodeCount}/4) ▶`)}
+          {isSaving
+            ? "Saving..."
+            : episodeCount >= ALL_MAPS.length
+              ? "Finish Experiment"
+              : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
         </button>
       </div>
 

@@ -1,17 +1,11 @@
 // src/data/overcook_episodes.js
 
-// x, y 스왑 함수  (trajectory: x=row, y=col → viewer: x=col, y=row)
-export function swapPos(pos) {
-  if (!pos || typeof pos.x !== "number" || typeof pos.y !== "number") {
-    return pos;
-  }
-  return { x: pos.y, y: pos.x };
-}
-
 // 업로드된 trajectory 포맷을 viewer 포맷으로 통일
 // 지원 포맷
 // 1) { staticInfo, dynamicState: [...] }
 // 2) { staticInfo, frames: [...] }
+const MAX_PLAYBACK_FRAMES = 100;
+
 export function adaptEpisode(raw, fileName = "unknown") {
   const staticInfo = raw.staticInfo;
 
@@ -29,20 +23,18 @@ export function adaptEpisode(raw, fileName = "unknown") {
     );
   }
 
-  // 여기서 200 timestep만 사용하도록 slice 적용
-  const frames = rawFrames.slice(0, 80).map((state) => ({
+  // generate_realtime_state_json now matches the viewer's x/y convention.
+  // Keep coordinates as-is and only normalize the surrounding shape.
+  const frames = rawFrames.slice(0, MAX_PLAYBACK_FRAMES).map((state) => ({
     ...state,
     players: (state.players || []).map((p) => ({
       ...p,
-      position: swapPos(p.position),
-      heldObject:
-        p.heldObject && p.heldObject.position
-          ? { ...p.heldObject, position: swapPos(p.heldObject.position) }
-          : p.heldObject,
+      position: p.position,
+      heldObject: p.heldObject,
     })),
     objects: (state.objects || []).map((o) => ({
       ...o,
-      position: o.position ? swapPos(o.position) : o.position,
+      position: o.position,
     })),
   }));
 

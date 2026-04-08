@@ -1,5 +1,13 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 
+const CHEF_HAT_VARIANTS = [
+  "bluehat",
+  "greenhat",
+  "orangehat",
+  "purplehat",
+  "redhat",
+];
+
 export default function OvercookScene({ staticInfo, frame, frames, isReplaying }) {
   const gridSize = 80;
   const { grid, width, height } = staticInfo;
@@ -178,33 +186,36 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     return remainingByKey;
   }, [frames, frame, staticInfo.cookTime]);
 
-  // 배달 카운트 파생 (스크러빙 시 버그 방지 - 각 프레임의 보상을 누적 합산)
-  const deliveredCount = useMemo(() => {
-     let sum = 0;
-     if (frames) {
-       for (let i = 0; i <= frame.timestep && i < frames.length; i++) {
-          sum += (frames[i].score ?? 0);
-       }
-     }
-     return Math.floor(sum / (staticInfo.deliveryReward ?? 20));
-  }, [frame.timestep, frames, staticInfo.deliveryReward]);
-
-  const prevDeliveredCountRef = useRef(deliveredCount);
+  const deliveryReward = Math.max(1, staticInfo.deliveryReward ?? 20);
+  const currentScore = Number(frame.score ?? 0);
+  const previousScore = Number(
+    frame.timestep > 0 ? frames?.[frame.timestep - 1]?.score ?? 0 : 0
+  );
+  const deliveredCount = useMemo(
+    () => Math.floor(currentScore / deliveryReward),
+    [currentScore, deliveryReward]
+  );
+  const deliveredThisFrame = useMemo(
+    () => Math.max(0, Math.floor((currentScore - previousScore) / deliveryReward)),
+    [currentScore, previousScore, deliveryReward]
+  );
+  const prevRenderedTimestepRef = useRef(frame.timestep);
 
   useEffect(() => {
-    // 플레이어가 실제로 전진하는 중이면서 배달 수가 증가했을 때만 효과 발생
-    if (deliveredCount > prevDeliveredCountRef.current && frame.timestep !== 0) {
-      const diff = deliveredCount - prevDeliveredCountRef.current;
+    const steppedForwardOne = frame.timestep === prevRenderedTimestepRef.current + 1;
+
+    // 현재 프레임에서 실제 배달 reward가 발생한 경우에만 효과를 재생합니다.
+    if (steppedForwardOne && deliveredThisFrame > 0) {
       const effectId = Date.now() + Math.random();
-      setDeliveryEffects(prev => [...prev, { id: effectId, count: diff }]);
+      setDeliveryEffects(prev => [...prev, { id: effectId, count: deliveredThisFrame }]);
       
       // 애니메이션 재생 후 클린업
       setTimeout(() => {
         setDeliveryEffects(prev => prev.filter(e => e.id !== effectId));
       }, 1200);
     }
-    prevDeliveredCountRef.current = deliveredCount;
-  }, [deliveredCount, frame.timestep]);
+    prevRenderedTimestepRef.current = frame.timestep;
+  }, [deliveredThisFrame, frame.timestep]);
 
   // 바닥 타일 맵핑
   const tileMap = useMemo(() => ({
@@ -234,14 +245,15 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     return tiles;
   }, [grid]);
 
-  const serveCenter = useMemo(() => {
-    if (serveTiles.length === 0) return { x: (width || 5) * gridSize / 2, y: (height || 5) * gridSize / 2 };
-    let sumX = 0, sumY = 0;
-    serveTiles.forEach(t => { sumX += t.x; sumY += t.y; });
-    return {
-      x: (sumX / serveTiles.length) * gridSize + gridSize / 2,
-      y: (sumY / serveTiles.length) * gridSize + gridSize / 2
-    };
+  const serveLabelPositions = useMemo(() => {
+    if (serveTiles.length === 0) {
+      return [{ x: (width || 5) * gridSize / 2, y: (height || 5) * gridSize / 2 }];
+    }
+
+    return serveTiles.map((tile) => ({
+      x: tile.x * gridSize + gridSize / 2,
+      y: tile.y * gridSize + gridSize / 2,
+    }));
   }, [serveTiles, gridSize, width, height]);
 
   const renderSprite = (category, frameName, x, y, size, opacity = 1) => {
@@ -250,7 +262,8 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
 
     if (!data) {
       if (category === "chefs") {
-        const fallbackHat = frameName.includes("greenhat") ? "SOUTH-greenhat.png" : "SOUTH-bluehat.png";
+        const hatMatch = frameName.match(/-(bluehat|greenhat|orangehat|purplehat|redhat)\.png$/);
+        const fallbackHat = hatMatch ? `SOUTH-${hatMatch[1]}.png` : "SOUTH-bluehat.png";
         data = spritesData[category][fallbackHat] || spritesData[category]["SOUTH.png"];
         if (!data) return null;
       } else {
@@ -447,7 +460,8 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     const heldLower = (held || "").toLowerCase();
     
     let frameName = null;
-    let hatName = index === 0 ? `${orientation}-bluehat.png` : `${orientation}-greenhat.png`;
+    const hatVariant = CHEF_HAT_VARIANTS[index % CHEF_HAT_VARIANTS.length];
+    const hatName = `${orientation}-${hatVariant}.png`;
     
     if (heldLower === "onion") {
        frameName = `${orientation}-onion.png`;
@@ -532,8 +546,8 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
          );
       })}
 
-      {!isReplaying && (
-        <g transform={`translate(${serveCenter.x}, ${serveCenter.y})`}>
+      {!isReplaying && serveLabelPositions.map((position, index) => (
+        <g key={`served-label-${index}`} transform={`translate(${position.x}, ${position.y})`}>
           <text 
             x={0} 
             y={5} 
@@ -545,7 +559,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
             Served: {deliveredCount}
           </text>
         </g>
-      )}
+      ))}
 
       {/* 팝업 이펙트용 스타일 정의 */}
       <style>{`

@@ -1,0 +1,8668 @@
+{
+  "staticInfo": {
+    "layoutName": "marshmallow_ooo",
+    "width": 13,
+    "height": 5,
+    "grid": [
+      [
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X"
+      ],
+      [
+        "O",
+        " ",
+        " ",
+        " ",
+        "D",
+        "T",
+        "X",
+        "T",
+        "D",
+        " ",
+        " ",
+        " ",
+        "O"
+      ],
+      [
+        "X",
+        "X",
+        " ",
+        " ",
+        " ",
+        " ",
+        "P",
+        " ",
+        " ",
+        " ",
+        " ",
+        "X",
+        "X"
+      ],
+      [
+        "S",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "P",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "S"
+      ],
+      [
+        "X",
+        "X",
+        "X",
+        "X",
+        "X",
+        "T",
+        "X",
+        "T",
+        "X",
+        "X",
+        "X",
+        "X",
+        "X"
+      ]
+    ],
+    "startPlayerPositions": [
+      {
+        "id": 0,
+        "position": {
+          "x": 8,
+          "y": 3
+        }
+      },
+      {
+        "id": 1,
+        "position": {
+          "x": 4,
+          "y": 3
+        }
+      }
+    ],
+    "allOrders": [
+      {
+        "ingredients": [
+          "onion",
+          "onion",
+          "onion"
+        ]
+      },
+      {
+        "ingredients": [
+          "tomato",
+          "tomato",
+          "tomato"
+        ]
+      }
+    ],
+    "cookTime": 30,
+    "soupIngredientCapacity": 3,
+    "deliveryReward": 300
+  },
+  "dynamicState": [
+    {
+      "timestep": 0,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 1,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 2,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 3,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 4,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 5,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 6,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 7,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 8,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 9,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 10,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 11,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 12,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 13,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 14,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 1
+        }
+      ]
+    },
+    {
+      "timestep": 15,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 2
+        }
+      ]
+    },
+    {
+      "timestep": 16,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 1
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 3
+        }
+      ]
+    },
+    {
+      "timestep": 17,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 2
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 4
+        }
+      ]
+    },
+    {
+      "timestep": 18,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 3
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 5
+        }
+      ]
+    },
+    {
+      "timestep": 19,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 4
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 6
+        }
+      ]
+    },
+    {
+      "timestep": 20,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 5
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 7
+        }
+      ]
+    },
+    {
+      "timestep": 21,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 6
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 8
+        }
+      ]
+    },
+    {
+      "timestep": 22,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 7
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 9
+        }
+      ]
+    },
+    {
+      "timestep": 23,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 8
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 10
+        }
+      ]
+    },
+    {
+      "timestep": 24,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 9
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 11
+        }
+      ]
+    },
+    {
+      "timestep": 25,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 10
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 12
+        }
+      ]
+    },
+    {
+      "timestep": 26,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 11
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 13
+        }
+      ]
+    },
+    {
+      "timestep": 27,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 12
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 14
+        }
+      ]
+    },
+    {
+      "timestep": 28,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 13
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 15
+        }
+      ]
+    },
+    {
+      "timestep": 29,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 14
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 16
+        }
+      ]
+    },
+    {
+      "timestep": 30,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 15
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 17
+        }
+      ]
+    },
+    {
+      "timestep": 31,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 16
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 18
+        }
+      ]
+    },
+    {
+      "timestep": 32,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 17
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 19
+        }
+      ]
+    },
+    {
+      "timestep": 33,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 18
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 20
+        }
+      ]
+    },
+    {
+      "timestep": 34,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 19
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 21
+        }
+      ]
+    },
+    {
+      "timestep": 35,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 20
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 22
+        }
+      ]
+    },
+    {
+      "timestep": 36,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 21
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 23
+        }
+      ]
+    },
+    {
+      "timestep": 37,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 22
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 24
+        }
+      ]
+    },
+    {
+      "timestep": 38,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 23
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 25
+        }
+      ]
+    },
+    {
+      "timestep": 39,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 24
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 26
+        }
+      ]
+    },
+    {
+      "timestep": 40,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 25
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 27
+        }
+      ]
+    },
+    {
+      "timestep": 41,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 26
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 28
+        }
+      ]
+    },
+    {
+      "timestep": 42,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 27
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 29
+        }
+      ]
+    },
+    {
+      "timestep": 43,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 28
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": true,
+          "cookTime": 30,
+          "cookingTick": 30
+        }
+      ]
+    },
+    {
+      "timestep": 44,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 5,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 29
+        }
+      ]
+    },
+    {
+      "timestep": 45,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 4,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": true,
+          "cookTime": 30,
+          "cookingTick": 30
+        }
+      ]
+    },
+    {
+      "timestep": 46,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 2
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 3,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 3,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 47,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 8,
+              "y": 2
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 2,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 48,
+      "score": 0,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 8,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 1,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 1,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 49,
+      "score": 15,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 9,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 9,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 1,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 50,
+      "score": 15,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 10,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 10,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "east",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 51,
+      "score": 15,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 11,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 11,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "east",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 3,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 52,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 11,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 53,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 10,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 54,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 9,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 55,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 56,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 57,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 58,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 59,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 60,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 61,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 62,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 63,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 64,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 65,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 66,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 67,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "tomato",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 1
+        }
+      ]
+    },
+    {
+      "timestep": 68,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 0
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 2
+        }
+      ]
+    },
+    {
+      "timestep": 69,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 1
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 3
+        }
+      ]
+    },
+    {
+      "timestep": 70,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 2
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 4
+        }
+      ]
+    },
+    {
+      "timestep": 71,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 3
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 5
+        }
+      ]
+    },
+    {
+      "timestep": 72,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 4
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 6
+        }
+      ]
+    },
+    {
+      "timestep": 73,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 5
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 7
+        }
+      ]
+    },
+    {
+      "timestep": 74,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 6
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 8
+        }
+      ]
+    },
+    {
+      "timestep": 75,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 7
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 9
+        }
+      ]
+    },
+    {
+      "timestep": 76,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 8
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 10
+        }
+      ]
+    },
+    {
+      "timestep": 77,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 9
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 11
+        }
+      ]
+    },
+    {
+      "timestep": 78,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 10
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 12
+        }
+      ]
+    },
+    {
+      "timestep": 79,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 11
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 13
+        }
+      ]
+    },
+    {
+      "timestep": 80,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 4,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 12
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 14
+        }
+      ]
+    },
+    {
+      "timestep": 81,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 13
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 15
+        }
+      ]
+    },
+    {
+      "timestep": 82,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 8,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 14
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 16
+        }
+      ]
+    },
+    {
+      "timestep": 83,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 15
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 17
+        }
+      ]
+    },
+    {
+      "timestep": 84,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 16
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 18
+        }
+      ]
+    },
+    {
+      "timestep": 85,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 17
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 19
+        }
+      ]
+    },
+    {
+      "timestep": 86,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 18
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 20
+        }
+      ]
+    },
+    {
+      "timestep": 87,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 19
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 21
+        }
+      ]
+    },
+    {
+      "timestep": 88,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 20
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 22
+        }
+      ]
+    },
+    {
+      "timestep": 89,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 21
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 23
+        }
+      ]
+    },
+    {
+      "timestep": 90,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 22
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 24
+        }
+      ]
+    },
+    {
+      "timestep": 91,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 23
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 25
+        }
+      ]
+    },
+    {
+      "timestep": 92,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 24
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 26
+        }
+      ]
+    },
+    {
+      "timestep": 93,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 25
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 27
+        }
+      ]
+    },
+    {
+      "timestep": 94,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 26
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 28
+        }
+      ]
+    },
+    {
+      "timestep": 95,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 27
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 29
+        }
+      ]
+    },
+    {
+      "timestep": 96,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 28
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 3
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": true,
+          "cookTime": 30,
+          "cookingTick": 30
+        }
+      ]
+    },
+    {
+      "timestep": 97,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 5,
+            "y": 3
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 5,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 30,
+          "cookingTick": 29
+        }
+      ]
+    },
+    {
+      "timestep": 98,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 4,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 6,
+            "y": 2
+          },
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ],
+          "isCooking": false,
+          "isReady": true,
+          "cookTime": 30,
+          "cookingTick": 30
+        }
+      ]
+    },
+    {
+      "timestep": 99,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 2
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 3,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 3,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 100,
+      "score": 30,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        },
+        {
+          "ingredients": [
+            "tomato",
+            "tomato",
+            "tomato"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 8,
+            "y": 2
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 8,
+              "y": 2
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "east",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 2,
+              "y": 3
+            },
+            "ingredients": [
+              "tomato",
+              "tomato",
+              "tomato"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 30,
+            "cookingTick": 30
+          },
+          "action": {
+            "current": "west",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": []
+    }
+  ]
+}
