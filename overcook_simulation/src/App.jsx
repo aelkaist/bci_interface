@@ -9,15 +9,15 @@ import { saveFeedbackToFirestore } from "./firebase";
 import random3Seed5 from "./maps/random3_seed5_5020000.json";
 import smallCorridorSeed5 from "./maps/small_corridor_seed5_5020000.json";
 import random0MediumSeed5 from "./maps/random0_medium_seed5_5020000.json";
-import multiplayerSchelling3Seed5 from "./maps/multiplayer_schelling_3_seed5_5020000.json";
-import multiplayerSchellingSeed5 from "./maps/multiplayer_schelling_seed5_5020000.json";
+import multiplayerSchelling3Seed5 from "./maps/multiplayer_schelling_3_seed5_8020000.json";
+import multiplayerSchellingSeed5 from "./maps/multiplayer_schelling_seed5_8020000.json";
 
 const ALL_MAPS = [
   { name: "random3_seed5_5020000.json", data: random3Seed5 },
   { name: "small_corridor_seed5_5020000.json", data: smallCorridorSeed5 },
   { name: "random0_medium_seed5_5020000.json", data: random0MediumSeed5 },
-  { name: "multiplayer_schelling_3_seed5_5020000.json", data: multiplayerSchelling3Seed5 },
-  { name: "multiplayer_schelling_seed5_5020000.json", data: multiplayerSchellingSeed5 }
+  { name: "multiplayer_schelling_3_seed5_8020000.json", data: multiplayerSchelling3Seed5 },
+  { name: "multiplayer_schelling_seed5_8020000.json", data: multiplayerSchellingSeed5 }
 ];
 
 const MIN_OFFSET = -20;
