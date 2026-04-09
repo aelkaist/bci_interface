@@ -1540,6 +1540,7 @@ export default function App() {
                   display: "flex",
                   justifyContent: "center",
                   cursor: "pointer",
+                  position: "relative"
                 }}
               >
                 <OvercookScene
@@ -1548,6 +1549,12 @@ export default function App() {
                   frames={episode.frames}
                   isReplaying={isReplaying}
                 />
+                
+                {frameIndex === 0 && !isPlaying && (
+                  <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "rgba(0, 0, 0, 0.75)", padding: "16px 36px", borderRadius: "100px", border: "1px solid rgba(255, 255, 255, 0.2)", display: "flex", alignItems: "center", backdropFilter: "blur(8px)", pointerEvents: "none", boxShadow: "0 10px 30px rgba(0,0,0,0.5)" }}>
+                    <span style={{ fontSize: "20px", fontWeight: "700", color: "#fff", letterSpacing: "0.5px", textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>Click to start the video</span>
+                  </div>
+                )}
               </div>
             ) : (
               <div
