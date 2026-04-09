@@ -130,6 +130,7 @@ export default function App() {
 
   const rafRef = useRef(null);
   const segmentEndFrameRef = useRef(null); // 구간 재생 끝 프레임
+  const bottomDockRef = useRef(null);
 
   const scrollContainerRef = useRef(null);
   const prevIntervalsLen = useRef(0);
@@ -137,6 +138,8 @@ export default function App() {
   const sessionStartRef = useRef(Date.now());
   const pauseCountRef = useRef(0);
   const playbackSpeedChangesRef = useRef([]);
+  const elapsedRef = useRef(0);
+  const [bottomDockHeight, setBottomDockHeight] = useState(0);
 
   useEffect(() => {
     if (intervals.length > prevIntervalsLen.current) {
@@ -151,6 +154,33 @@ export default function App() {
     }
     prevIntervalsLen.current = intervals.length;
   }, [intervals.length]);
+
+  useEffect(() => {
+    elapsedRef.current = elapsed;
+  }, [elapsed]);
+
+  useEffect(() => {
+    const dock = bottomDockRef.current;
+    if (!dock) return;
+
+    const updateDockHeight = () => {
+      setBottomDockHeight(dock.getBoundingClientRect().height);
+    };
+
+    updateDockHeight();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateDockHeight);
+      return () => window.removeEventListener("resize", updateDockHeight);
+    }
+
+    const observer = new ResizeObserver(() => {
+      updateDockHeight();
+    });
+
+    observer.observe(dock);
+    return () => observer.disconnect();
+  }, []);
 
   const frameDuration = FRAME_DURATION;
   const totalFrames = episode?.frames?.length ?? 0;
@@ -224,7 +254,7 @@ export default function App() {
       return;
     }
 
-    const startTime = performance.now() - (elapsed * 1000) / playbackRate;
+    const startTime = performance.now() - (elapsedRef.current * 1000) / playbackRate;
 
     const update = () => {
       const now = performance.now();
@@ -263,7 +293,7 @@ export default function App() {
 
     rafRef.current = requestAnimationFrame(update);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [isPlaying, playMode, frameDuration, totalFrames, totalTime, elapsed, episode]);
+  }, [isPlaying, playMode, frameDuration, totalFrames, totalTime, episode, playbackRate]);
 
   // Space key → Play/Pause, M key → 현재 프레임 마커 추가
   useEffect(() => {
@@ -1511,21 +1541,37 @@ export default function App() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "stretch",
           position: "relative",
           height: "100%",
-          paddingBottom: "120px",
+          minHeight: 0,
+          paddingTop: hasEpisode ? "88px" : 0,
+          paddingBottom: 0,
           boxSizing: "border-box",
           overflow: "hidden"
         }}
       >
 
-        <div style={{ width: "100%", maxWidth: "800px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "800px",
+            flex: 1,
+            minHeight: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom: `${Math.max(bottomDockHeight, 120) + 16}px`,
+            boxSizing: "border-box"
+          }}
+        >
 
           {/* 에이전트 화면 */}
           <div
             style={{
               width: "100%",
+              height: "100%",
+              minHeight: 0,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -1536,9 +1582,12 @@ export default function App() {
                 onClick={togglePlay}
                 style={{
                   width: "100%",
+                  height: "100%",
+                  minHeight: 0,
                   maxWidth: "100%",
                   display: "flex",
                   justifyContent: "center",
+                  alignItems: "center",
                   cursor: "pointer",
                   position: "relative"
                 }}
@@ -1548,6 +1597,8 @@ export default function App() {
                   frame={frame}
                   frames={episode.frames}
                   isReplaying={isReplaying}
+                  playbackRate={playbackRate}
+                  frameDuration={frameDuration}
                 />
                 
                 {frameIndex === 0 && !isPlaying && (
@@ -1578,6 +1629,7 @@ export default function App() {
 
         {/* Bottom Control Bar (Embedded Dock) */}
         <div
+          ref={bottomDockRef}
           style={{
             position: "absolute",
             bottom: 0,

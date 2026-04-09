@@ -8,17 +8,27 @@ const CHEF_HAT_VARIANTS = [
   "redhat",
 ];
 
-export default function OvercookScene({ staticInfo, frame, frames, isReplaying }) {
+export default function OvercookScene({
+  staticInfo,
+  frame,
+  frames,
+  isReplaying,
+  playbackRate = 1,
+  frameDuration = 0.3,
+}) {
   const gridSize = 80;
   const { grid, width, height } = staticInfo;
+  const sceneContainerRef = useRef(null);
 
   // 애니메이션용 이전 프레임
   const prevFrameRef = useRef(frame);
+  const transitionFromFrameRef = useRef(frame);
 
   const [interpProgress, setInterpProgress] = useState(1);
 
   const [spritesData, setSpritesData] = useState(null);
   const [deliveryEffects, setDeliveryEffects] = useState([]);
+  const [sceneBounds, setSceneBounds] = useState({ width: 0, height: 0 });
 
   // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
   useEffect(() => {
@@ -52,22 +62,51 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     }).catch(e => console.error("Sprite load error", e));
   }, []);
 
+  useEffect(() => {
+    const container = sceneContainerRef.current;
+    if (!container) return;
+
+    const updateBounds = () => {
+      const rect = container.getBoundingClientRect();
+      setSceneBounds({
+        width: rect.width,
+        height: rect.height,
+      });
+    };
+
+    updateBounds();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateBounds);
+      return () => window.removeEventListener("resize", updateBounds);
+    }
+
+    const observer = new ResizeObserver(() => {
+      updateBounds();
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   // 플레이어 이동 보간용
   useEffect(() => {
+    transitionFromFrameRef.current = prevFrameRef.current;
+    prevFrameRef.current = frame;
     setInterpProgress(0);
     let raf;
     let start;
+    const stepDurationMs = (frameDuration * 1000) / Math.max(playbackRate, 0.01);
+    const transitionMs = Math.max(60, Math.min(150, stepDurationMs - 16));
 
     const animate = (time) => {
       if (!start) start = time;
       const elapsed = time - start;
-      // 150ms 동안 부드럽게 이동하게 합니다.
-      const progress = Math.min(elapsed / 150, 1);
+      // 다음 프레임이 들어오기 전에 보간을 끝내서 고배속에서 누적 점프를 막습니다.
+      const progress = Math.min(elapsed / transitionMs, 1);
       setInterpProgress(progress);
       if (progress < 1) {
         raf = requestAnimationFrame(animate);
-      } else {
-        prevFrameRef.current = frame;
       }
     };
     raf = requestAnimationFrame(animate);
@@ -75,7 +114,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
     return () => {
       cancelAnimationFrame(raf);
     };
-  }, [frame]);
+  }, [frame, frameDuration, playbackRate]);
 
   // 양파 요리 타이머 계산용
   const cookingRemainingByKey = useMemo(() => {
@@ -384,7 +423,7 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   };
 
   const renderPlayer = (player, index) => {
-    const prevPlayer = prevFrameRef.current?.players?.[index] || player;
+    const prevPlayer = transitionFromFrameRef.current?.players?.[index] || player;
 
     const { x, y } = player.position;
     const prevX = prevPlayer.position?.x ?? x;
@@ -435,10 +474,31 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   };
 
   const combinedObjects = Array.isArray(frame.objects) ? frame.objects : [];
+  const boardWidth = width * gridSize;
+  const boardHeight = height * gridSize;
+  const widthScale =
+    sceneBounds.width > 0 ? sceneBounds.width / boardWidth : 1;
+  const heightScale =
+    sceneBounds.height > 0 ? sceneBounds.height / boardHeight : 1;
+  const containScale = Math.min(widthScale, heightScale);
+  const svgWidth = Math.max(1, Math.floor(boardWidth * containScale));
+  const svgHeight = Math.max(1, Math.floor(boardHeight * containScale));
 
   if (!spritesData) {
     return (
-      <div style={{ color: "#888", display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", fontSize: "18px" }}>
+      <div
+        ref={sceneContainerRef}
+        style={{
+          color: "#888",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          minHeight: 0,
+          fontSize: "18px",
+        }}
+      >
          Loading graphics assets...
       </div>
     );
@@ -449,71 +509,88 @@ export default function OvercookScene({ staticInfo, frame, frames, isReplaying }
   }
 
   return (
-    <svg
-      viewBox={`0 0 ${width * gridSize} ${height * gridSize}`}
+    <div
+      ref={sceneContainerRef}
       style={{
         width: "100%",
-        maxWidth: `${width * gridSize * 1.2}px`,
-        height: "auto",
-        border: "2px solid #999",
-        background: "#d6c7a1",
-        borderRadius: "8px",
-        imageRendering: "pixelated",
-        overflow: "visible"
+        height: "100%",
+        minHeight: 0,
+        minWidth: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
       }}
     >
-      {backgroundTiles}
-      {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
-      {frame.players.map((p, i) => renderPlayer(p, i))}
+      <svg
+        width={svgWidth}
+        height={svgHeight}
+        viewBox={`0 0 ${boardWidth} ${boardHeight}`}
+        preserveAspectRatio="xMidYMid meet"
+        style={{
+          flex: "0 0 auto",
+          maxWidth: "100%",
+          maxHeight: "100%",
+          border: "2px solid #999",
+          background: "#d6c7a1",
+          borderRadius: "8px",
+          imageRendering: "pixelated",
+          overflow: "visible"
+        }}
+      >
+        {backgroundTiles}
+        {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
+        {frame.players.map((p, i) => renderPlayer(p, i))}
 
-      {/* 배달 팝업 이펙트 */}
-      {deliveryEffects.map((eff, index) => {
-         const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
-         const mapH = staticInfo.height || (grid ? grid.length : 5);
-         
-         let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
-         if (!sTile) {
-            sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
-         }
-         
-         const tx = sTile.x * gridSize + gridSize / 2;
-         const ty = sTile.y * gridSize - 15;
+        {/* 배달 팝업 이펙트 */}
+        {deliveryEffects.map((eff, index) => {
+           const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
+           const mapH = staticInfo.height || (grid ? grid.length : 5);
+           
+           let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
+           if (!sTile) {
+              sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
+           }
+           
+           const tx = sTile.x * gridSize + gridSize / 2;
+           const ty = sTile.y * gridSize - 15;
 
-         return (
-            <g key={eff.id} transform={`translate(${tx}, ${ty})`}>
-               <g style={{ animation: "popSlideUp 1.2s ease-out forwards" }}>
-                  <text textAnchor="middle" fill="#4ade80" fontSize="20" fontWeight="bold">
-                     +{eff.count}
-                  </text>
-               </g>
-            </g>
-         );
-      })}
+           return (
+              <g key={eff.id} transform={`translate(${tx}, ${ty})`}>
+                 <g style={{ animation: "popSlideUp 1.2s ease-out forwards" }}>
+                    <text textAnchor="middle" fill="#4ade80" fontSize="20" fontWeight="bold">
+                       +{eff.count}
+                    </text>
+                 </g>
+              </g>
+           );
+        })}
 
-      {!isReplaying && serveLabelPositions.map((position, index) => (
-        <g key={`served-label-${index}`} transform={`translate(${position.x}, ${position.y})`}>
-          <text 
-            x={0} 
-            y={5} 
-            textAnchor="middle" 
-            fontSize="14" 
-            fontWeight="bold" 
-            fill="#ffffff"
-          >
-            Served: {deliveredCount}
-          </text>
-        </g>
-      ))}
+        {!isReplaying && serveLabelPositions.map((position, index) => (
+          <g key={`served-label-${index}`} transform={`translate(${position.x}, ${position.y})`}>
+            <text 
+              x={0} 
+              y={5} 
+              textAnchor="middle" 
+              fontSize="14" 
+              fontWeight="bold" 
+              fill="#ffffff"
+            >
+              Served: {deliveredCount}
+            </text>
+          </g>
+        ))}
 
-      {/* 팝업 이펙트용 스타일 정의 */}
-      <style>{`
-        @keyframes popSlideUp {
-          0% { transform: translateY(0px); opacity: 0; }
-          20% { transform: translateY(-15px); opacity: 1; }
-          80% { transform: translateY(-25px); opacity: 1; }
-          100% { transform: translateY(-30px); opacity: 0; }
-        }
-      `}</style>
-    </svg>
+        {/* 팝업 이펙트용 스타일 정의 */}
+        <style>{`
+          @keyframes popSlideUp {
+            0% { transform: translateY(0px); opacity: 0; }
+            20% { transform: translateY(-15px); opacity: 1; }
+            80% { transform: translateY(-25px); opacity: 1; }
+            100% { transform: translateY(-30px); opacity: 0; }
+          }
+        `}</style>
+      </svg>
+    </div>
   );
 }
