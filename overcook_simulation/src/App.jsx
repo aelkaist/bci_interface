@@ -30,7 +30,8 @@ function baseTimeLabel(frame) {
 }
 
 export default function App() {
-  const [instructionStep, setInstructionStep] = useState(0);
+  const [instructionStep, setInstructionStep] = useState(-1);
+  const [prolificId, setProlificId] = useState("");
   const [hasReadInstructions, setHasReadInstructions] = useState(false);
   const [testSliderValue, setTestSliderValue] = useState([0]);
 
@@ -520,6 +521,7 @@ export default function App() {
     });
 
     return {
+      prolificId: prolificId,
       episodeCount: episodeCount,
       fileName: episode.fileName || fileName || "uploaded.json",
       timeSpentOnPageSec: sessionDurationSec,
@@ -601,7 +603,9 @@ export default function App() {
     let isDisabled = false;
     let onNextClick = () => setInstructionStep(st => st + 1);
 
-    if (instructionStep === 2) {
+    if (instructionStep === -1) {
+      isDisabled = prolificId.trim().length === 0;
+    } else if (instructionStep === 2) {
       const q1Correct = quiz1Answer === 2;
       const q2Correct = Object.keys(quiz2Matches).length === 5 &&
         quiz2Matches.onion === "Onion" &&
@@ -617,15 +621,15 @@ export default function App() {
     }
 
     return (
-      <div style={{ zoom: 1.1, height: instructionStep === 0 ? "100vh" : "auto", minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: instructionStep === 0 ? "30px 60px" : "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: instructionStep === 0 ? "hidden" : "auto" }}>
+      <div style={{ zoom: 1.1, minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: "auto" }}>
 
         {/* 상단 헤더 컨테이너: Back/Next 네비게이션 */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: instructionStep === 0 ? "20px" : "40px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "40px" }}>
 
           {/* 좌상단 BACK 버튼 */}
-          <div style={{ visibility: instructionStep > 0 ? "visible" : "hidden" }}>
+          <div style={{ visibility: instructionStep > -1 ? "visible" : "hidden" }}>
             <button
-              onClick={() => setInstructionStep(st => Math.max(0, st - 1))}
+              onClick={() => setInstructionStep(st => Math.max(-1, st - 1))}
               style={{
                 padding: "14px 40px", fontSize: "16px", fontWeight: "700",
                 background: "transparent",
@@ -688,6 +692,38 @@ export default function App() {
 
         {/* 메인 콘텐츠 영역 (maxWidth 제한 해제) */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
+          {instructionStep === -1 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%", alignItems: "center", justifyContent: "flex-start", flex: 1, marginTop: "10vh" }}>
+              <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome! 👋</h1>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>Please enter your Prolific ID to begin.</p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%", maxWidth: "400px", background: "#111", padding: "30px", borderRadius: "16px", border: "1px solid #222" }}>
+                <label style={{ fontSize: "14px", fontWeight: "600", color: "#888", textTransform: "uppercase", letterSpacing: "1px" }}>Prolific ID</label>
+                <input
+                  type="text"
+                  placeholder="Enter your Prolific ID"
+                  value={prolificId}
+                  onChange={(e) => setProlificId(e.target.value)}
+                  style={{
+                    padding: "16px 20px",
+                    borderRadius: "8px",
+                    border: "1px solid #333",
+                    background: "#0a0a0c",
+                    color: "#fff",
+                    fontSize: "18px",
+                    outline: "none",
+                    width: "100%",
+                    boxSizing: "border-box",
+                    transition: "border-color 0.2s"
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = "#fcd34d"}
+                  onBlur={(e) => e.target.style.borderColor = "#333"}
+                />
+              </div>
+            </div>
+          )}
+
           {instructionStep === 0 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
               <style>{`
@@ -1302,9 +1338,102 @@ export default function App() {
 
   if (instructionStep === 5) {
     return (
-      <div style={{ display: "flex", width: "100%", height: "100vh", alignItems: "center", justifyContent: "center", background: "#080808", color: "#fff", flexDirection: "column", gap: "20px", fontFamily: "Inter, sans-serif" }}>
-        <h1 style={{ fontSize: "48px", fontWeight: "800", color: "#4ade80", margin: 0 }}>Thank You For Participating!</h1>
-        <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Your feedback has been successfully recorded.</p>
+      <div style={{ display: "flex", width: "100%", minHeight: "100vh", alignItems: "center", justifyContent: "center", background: "#050505", color: "#fff", flexDirection: "column", fontFamily: "Inter, sans-serif", padding: "40px", boxSizing: "border-box" }}>
+        
+        <style>{`
+          @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes checkmarkBreathe {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.8)); }
+          }
+        `}</style>
+        
+        <div style={{
+          background: "#0a0a0c", 
+          border: "1px solid #1f1f23", 
+          borderRadius: "24px", 
+          padding: "60px", 
+          display: "flex", 
+          flexDirection: "column", 
+          alignItems: "center", 
+          maxWidth: "500px", 
+          width: "100%",
+          boxShadow: "0 24px 60px rgba(0,0,0,0.8)",
+          animation: "slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+          boxSizing: "border-box"
+        }}>
+          {/* Checkmark icon with green soft glow */}
+          <div style={{ 
+            width: "80px", 
+            height: "80px", 
+            borderRadius: "40px", 
+            background: "rgba(34, 197, 94, 0.1)", 
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            marginBottom: "32px",
+            border: "1px solid rgba(34, 197, 94, 0.2)",
+            animation: "checkmarkBreathe 3s ease-in-out infinite"
+          }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+
+          <h1 style={{ fontSize: "36px", fontWeight: "800", color: "#fff", margin: "0 0 12px 0", textAlign: "center", letterSpacing: "-0.5px" }}>Thank You!</h1>
+          <p style={{ fontSize: "16px", color: "#a1a1aa", margin: "0 0 40px 0", textAlign: "center", lineHeight: "1.6" }}>Your feedback has been successfully recorded. We appreciate your time and effort in helping our research.</p>
+          
+          <div style={{ 
+            background: "#121214", 
+            padding: "24px", 
+            borderRadius: "16px", 
+            border: "1px dashed #27272a", 
+            width: "100%", 
+            display: "flex", 
+            flexDirection: "column", 
+            gap: "16px", 
+            alignItems: "center",
+            boxSizing: "border-box" 
+          }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+              <span style={{ color: "#71717a", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "700" }}>Completion Code</span>
+              <strong style={{ color: "#fcd34d", fontSize: "28px", letterSpacing: "4px", fontFamily: "monospace", textShadow: "0 0 20px rgba(252, 211, 77, 0.3)" }}>C5V8YMO7</strong>
+            </div>
+          </div>
+
+          <div style={{ width: "100%", marginTop: "32px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <a 
+              href="https://app.prolific.com/submissions/complete?cc=C5V8YMO7" 
+              style={{ 
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                width: "100%",
+                padding: "16px 24px", 
+                background: "#fcd34d", 
+                color: "#18181b", 
+                fontWeight: "700", 
+                textDecoration: "none", 
+                borderRadius: "12px", 
+                fontSize: "16px", 
+                boxSizing: "border-box"
+              }}
+            >
+              Return to Prolific
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <p style={{ marginTop: "16px", fontSize: "13px", color: "#52525b", textAlign: "center", margin: "16px 0 0 0" }}>
+              Or use this redirect URL: <a href="https://app.prolific.com/submissions/complete?cc=C5V8YMO7" style={{ color: "#71717a", textDecoration: "underline", wordBreak: "break-all" }}>https://app.prolific.com/submissions/complete?cc=C5V8YMO7</a>
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
