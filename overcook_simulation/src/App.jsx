@@ -4,7 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import OvercookScene from "./components/OvercookScene";
 import { adaptEpisode } from "./data/overcook_episodes";
 import { Range } from "react-range";
-import { saveFeedbackToFirestore } from "./firebase";
+import {
+  saveFeedbackToFirestore,
+  upsertExperimentSessionToFirestore,
+} from "./firebase";
 
 import random3Seed5 from "./maps/random3_5_7520000.json";
 import smallCorridorSeed5 from "./maps/small_corridor_5_7520000.json";
@@ -27,6 +30,22 @@ const FRAME_DURATION = 0.3;
 // 시간 라벨 (필요하면 사용)
 function baseTimeLabel(frame) {
   return `${(frame * FRAME_DURATION).toFixed(2)}s`;
+}
+
+function durationMsToSec(durationMs) {
+  return Number((Math.max(durationMs, 0) / 1000).toFixed(2));
+}
+
+function timestampToIso(timestamp) {
+  return timestamp ? new Date(timestamp).toISOString() : null;
+}
+
+function createExperimentSessionId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+
+  return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
 export default function App() {
@@ -140,6 +159,66 @@ export default function App() {
   const playbackSpeedChangesRef = useRef([]);
   const elapsedRef = useRef(0);
   const [bottomDockHeight, setBottomDockHeight] = useState(0);
+  const experimentSessionIdRef = useRef(null);
+  const tutorialStartRef = useRef(Date.now());
+  const tutorialEndRef = useRef(null);
+  const mainStartRef = useRef(null);
+
+  if (!experimentSessionIdRef.current) {
+    experimentSessionIdRef.current = createExperimentSessionId();
+  }
+
+  const getTutorialDurationSec = (endAt = tutorialEndRef.current) => {
+    if (!endAt) return null;
+    return durationMsToSec(endAt - tutorialStartRef.current);
+  };
+
+  const getMainDurationSec = (endAt = Date.now()) => {
+    if (!mainStartRef.current) return null;
+    return durationMsToSec(endAt - mainStartRef.current);
+  };
+
+  const buildExperimentSessionPayload = ({
+    status,
+    mainEndedAt = null,
+    completedEpisodeCount = currentMapIdx,
+  } = {}) => ({
+    experimentSessionId: experimentSessionIdRef.current,
+    status,
+    tutorialStartedAt: timestampToIso(tutorialStartRef.current),
+    tutorialEndedAt: timestampToIso(tutorialEndRef.current),
+    tutorialDurationSec: getTutorialDurationSec(),
+    mainStartedAt: timestampToIso(mainStartRef.current),
+    mainEndedAt: timestampToIso(mainEndedAt),
+    mainDurationSec:
+      mainEndedAt !== null
+        ? getMainDurationSec(mainEndedAt)
+        : getMainDurationSec(),
+    totalEpisodeCount: mapOrder.length || ALL_MAPS.length,
+    completedEpisodeCount,
+    currentEpisodeIndex: hasEpisode ? currentMapIdx + 1 : null,
+    currentEpisodeFileName: episode?.fileName || fileName || null,
+    mapOrder: mapOrder.map((index) => ALL_MAPS[index]?.name).filter(Boolean),
+    createdAt: timestampToIso(tutorialStartRef.current),
+  });
+
+  const maybeMarkMainStart = () => {
+    if (mainStartRef.current) return;
+
+    const startedAt = Date.now();
+    mainStartRef.current = startedAt;
+    tutorialEndRef.current = startedAt;
+
+    void upsertExperimentSessionToFirestore(
+      experimentSessionIdRef.current,
+      buildExperimentSessionPayload({
+        status: "main_started",
+        completedEpisodeCount: 0,
+      })
+    ).catch((error) => {
+      console.error("Failed to initialize experiment session", error);
+    });
+  };
 
   useEffect(() => {
     if (intervals.length > prevIntervalsLen.current) {
@@ -327,6 +406,7 @@ export default function App() {
           cancelAnimationFrame(rafRef.current);
           setPlayMode("full");
 
+          maybeMarkMainStart();
           setIsPlaying(true);
         }
       } else if (e.code === "KeyM") {
@@ -387,6 +467,7 @@ export default function App() {
     requestAnimationFrame(() => {
       setFrameIndex(startFrame);
       setElapsed(startTime);
+      maybeMarkMainStart();
       setIsPlaying(true);
     });
   };
@@ -409,6 +490,7 @@ export default function App() {
     cancelAnimationFrame(rafRef.current);
     setPlayMode("full");
 
+    maybeMarkMainStart();
     setIsPlaying(true);
   };
 
@@ -518,10 +600,13 @@ export default function App() {
     URL.revokeObjectURL(url);
   };
 
-  const generatePayload = () => {
+  const generatePayload = ({ isFinalEpisode = false, mainEndedAt = null } = {}) => {
     if (!episode || totalFrames === 0) return null;
 
-    const sessionDurationSec = Math.round((Date.now() - sessionStartRef.current) / 1000);
+    const measuredAt = mainEndedAt ?? Date.now();
+    const sessionDurationSec = Math.round((measuredAt - sessionStartRef.current) / 1000);
+    const tutorialDurationSec = getTutorialDurationSec();
+    const mainDurationSec = getMainDurationSec(measuredAt);
 
     const feedbackDetails = intervals.map((intv) => {
       const baseFrame = intv.baseFrame;
@@ -552,9 +637,18 @@ export default function App() {
 
     return {
       prolificId: prolificId,
+      experimentSessionId: experimentSessionIdRef.current,
       episodeCount: episodeCount,
       fileName: episode.fileName || fileName || "uploaded.json",
       timeSpentOnPageSec: sessionDurationSec,
+      tutorialDurationSec: tutorialDurationSec,
+      mainDurationSecAtSave: mainDurationSec,
+      mainTotalDurationSec: isFinalEpisode ? mainDurationSec : null,
+      isFinalEpisodeSave: isFinalEpisode,
+      tutorialStartedAt: timestampToIso(tutorialStartRef.current),
+      tutorialEndedAt: timestampToIso(tutorialEndRef.current),
+      mainStartedAt: timestampToIso(mainStartRef.current),
+      mainEndedAt: isFinalEpisode ? timestampToIso(mainEndedAt) : null,
       videoPauseCount: pauseCountRef.current,
       playbackSpeedChanges: playbackSpeedChangesRef.current,
       feedbackDetails: feedbackDetails,
@@ -580,8 +674,14 @@ export default function App() {
   };
 
   const handleNextEpisodeClick = async () => {
+    const isFinalEpisode = currentMapIdx >= mapOrder.length - 1;
+    const finalMainEndedAt = isFinalEpisode ? Date.now() : null;
+
     if (hasEpisode) {
-      const payload = generatePayload();
+      const payload = generatePayload({
+        isFinalEpisode,
+        mainEndedAt: finalMainEndedAt,
+      });
       if (payload) {
         try {
           setIsSaving(true);
@@ -598,13 +698,30 @@ export default function App() {
         }
       }
     }
-    
+
     if (currentMapIdx < mapOrder.length - 1) {
       const nextIdx = currentMapIdx + 1;
       loadMapByIndex(mapOrder[nextIdx]);
       setCurrentMapIdx(nextIdx);
       setEpisodeCount(nextIdx + 1);
     } else {
+      try {
+        await upsertExperimentSessionToFirestore(
+          experimentSessionIdRef.current,
+          buildExperimentSessionPayload({
+            status: "completed",
+            mainEndedAt: finalMainEndedAt,
+            completedEpisodeCount: mapOrder.length || ALL_MAPS.length,
+          })
+        );
+      } catch (err) {
+        console.error(err);
+        const ok = window.confirm("실험 전체 시간 저장에 실패했습니다. 그래도 종료하시겠습니까?");
+        if (!ok) {
+          return;
+        }
+      }
+
       setInstructionStep(5); // 끝
     }
   };

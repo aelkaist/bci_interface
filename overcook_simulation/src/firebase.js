@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 // .env 파일에 정의된 환경 변수 사용
 const firebaseConfig = {
@@ -46,6 +46,25 @@ export const saveFeedbackToFirestore = async (payload) => {
     return mainDocRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
+    throw e;
+  }
+};
+
+export const upsertExperimentSessionToFirestore = async (sessionId, payload) => {
+  try {
+    const sessionRef = doc(db, "experiment_sessions", sessionId);
+    await setDoc(
+      sessionRef,
+      {
+        ...payload,
+        updatedAt: new Date().toISOString(),
+      },
+      { merge: true }
+    );
+
+    return sessionId;
+  } catch (e) {
+    console.error("Error upserting experiment session: ", e);
     throw e;
   }
 };
