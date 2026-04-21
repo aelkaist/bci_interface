@@ -76,12 +76,9 @@ export default function App() {
   const [currentMapIdx, setCurrentMapIdx] = useState(0);
 
   useEffect(() => {
-    let indices = Array.from({ length: ALL_MAPS.length }, (_, index) => index);
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-    setMapOrder(indices);
+    // Keep the map sequence deterministic so the two multiplayer schelling
+    // maps always appear as the 4th and 5th episodes.
+    setMapOrder(Array.from({ length: ALL_MAPS.length }, (_, index) => index));
   }, []);
 
   const loadMapByIndex = (index) => {
