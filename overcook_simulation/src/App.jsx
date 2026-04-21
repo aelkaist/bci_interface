@@ -1547,13 +1547,13 @@ export default function App() {
           }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
               <span style={{ color: "#71717a", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "700" }}>Completion Code</span>
-              <strong style={{ color: "#fcd34d", fontSize: "28px", letterSpacing: "4px", fontFamily: "monospace", textShadow: "0 0 20px rgba(252, 211, 77, 0.3)" }}>C5V8YMO7</strong>
+              <strong style={{ color: "#fcd34d", fontSize: "28px", letterSpacing: "4px", fontFamily: "monospace", textShadow: "0 0 20px rgba(252, 211, 77, 0.3)" }}>C20S7VS9</strong>
             </div>
           </div>
 
           <div style={{ width: "100%", marginTop: "32px", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <a 
-              href="https://app.prolific.com/submissions/complete?cc=C5V8YMO7" 
+              href="https://app.prolific.com/submissions/complete?cc=C20S7VS9" 
               style={{ 
                 display: "flex",
                 alignItems: "center",
@@ -1577,7 +1577,7 @@ export default function App() {
               </svg>
             </a>
             <p style={{ marginTop: "16px", fontSize: "13px", color: "#52525b", textAlign: "center", margin: "16px 0 0 0" }}>
-              Or use this redirect URL: <a href="https://app.prolific.com/submissions/complete?cc=C5V8YMO7" style={{ color: "#71717a", textDecoration: "underline", wordBreak: "break-all" }}>https://app.prolific.com/submissions/complete?cc=C5V8YMO7</a>
+              Or use this redirect URL: <a href="https://app.prolific.com/submissions/complete?cc=C20S7VS9" style={{ color: "#71717a", textDecoration: "underline", wordBreak: "break-all" }}>https://app.prolific.com/submissions/complete?cc=C20S7VS9</a>
             </p>
           </div>
         </div>
