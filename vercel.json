@@ -1,0 +1,6 @@
+{
+  "installCommand": "cd overcook_simulation && npm install",
+  "buildCommand": "cd overcook_simulation && npm run build",
+  "outputDirectory": "overcook_simulation/dist",
+  "framework": "vite"
+}
