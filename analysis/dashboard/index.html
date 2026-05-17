@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --bg: #0c0c0f;
+  --surface: #16161a;
+  --surface-2: #1e1e24;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --accent: #818cf8;
+  --text-primary: #e8e8f0;
+  --text-secondary: #8888a0;
+  --text-tertiary: #55556a;
+  --chart-accent: #818cf8;
+  --chart-pink: #f472b6;
+  --chart-green: #34d399;
+  --color-background-primary: var(--bg);
+  --color-background-secondary: var(--surface);
+  --color-background-tertiary: var(--surface-2);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border-primary: var(--border);
+  --color-border-secondary: var(--border);
+  --color-border-tertiary: var(--border);
+  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.nav {
+  height: 44px;
+  background: rgba(12,12,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0;
+  margin-right: 28px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.nav-logo em { font-style: normal; color: var(--accent); }
+
+.nav-tabs { display: flex; height: 100%; overflow-x: auto; }
+
+.nav-tab {
+  position: relative;
+  height: 44px;
+  padding: 0 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-tab.active {
+  color: var(--text-primary);
+  background: var(--surface-2);
+  border-left-color: var(--accent);
+}
+.nav-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.035);
+}
+
+.nav-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.nav-dot.dashboard { background: var(--chart-accent); }
+.nav-dot.taxonomy { background: var(--chart-green); }
+.nav-dot.split { background: var(--accent); }
+
+.panel-wrap {
+  padding: 16px 20px 24px;
+}
+
+.panel {
+  display: none;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.panel:hover { border-color: var(--border-hover); }
+
+body[data-view="dashboard"] #panel-pilot,
+body[data-view="taxonomy"] #panel-taxonomy { display: block; }
+
+body[data-view="split"] {
+  overflow: hidden;
+}
+
+body[data-view="split"] .panel-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  height: calc(100vh - 44px);
+  overflow: hidden;
+}
+
+body[data-view="split"] .panel {
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.kv, .sv, .cat-n, .s-chip, .fb-s, .dp-pid, .item-pid { font-family: var(--font-mono); }
+
+.panel-content { padding: 12px 0 24px; }
+.panel-content.compact { padding-bottom: 20px; }
+.chart-frame { position: relative; }
+.chart-frame.sm { height: 160px; }
+.chart-frame.md { height: 180px; }
+.chart-frame.lg { height: 200px; }
+
+@media (max-width: 768px) {
+  .nav { padding: 0 12px; }
+  .nav-logo { margin-right: 12px; }
+  .nav-tab { padding: 0 12px; }
+  .panel-wrap { padding: 12px; }
+  .panel { padding: 10px; border-radius: 12px; }
+  .nav-tab[data-view="split"] { display: none; }
+  body[data-view="split"] { overflow: auto; }
+  body[data-view="split"] .panel-wrap {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+  body[data-view="split"] #panel-pilot { display: block; }
+  body[data-view="split"] #panel-taxonomy { display: none; }
+  body[data-view="split"] .panel {
+    height: auto;
+    overflow: visible;
+  }
+}
+</style>
+</head>
+<body data-view="dashboard">
+
+<nav class="nav">
+  <span class="nav-logo">Research <em>Dashboard</em></span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-view="dashboard" type="button" aria-pressed="true">
+      <span class="nav-dot dashboard"></span>
+      Pilot Dashboard
+    </button>
+    <button class="nav-tab" data-view="taxonomy" type="button" aria-pressed="false">
+      <span class="nav-dot taxonomy"></span>
+      Taxonomy Browser
+    </button>
+    <button class="nav-tab" data-view="split" type="button" aria-pressed="false">
+      <span class="nav-dot split"></span>
+      Split View
+    </button>
+  </div>
+</nav>
+
+<div class="panel-wrap">
+
+<!-- ═══════════════════════════════════════════════════════════
+     PILOT DASHBOARD
+═══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-pilot">
+<style>
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.kpi{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;transition:transform .15s ease,border-color .15s ease}
+.kpi:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.kv{font-size:20px;font-weight:500;color:var(--text-primary)}
+.kl{font-size:10px;color:var(--color-text-secondary);margin-top:1px;line-height:1.3}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tb{font-size:11px;font-weight:600;padding:6px 11px;border-radius:8px;border:1px solid var(--border);border-left:2px solid transparent;cursor:pointer;background:var(--surface);color:var(--text-secondary);transition:transform .15s ease,border-color .15s ease,background .15s ease,color .15s ease}
+.tb.on{background:var(--surface-2);color:var(--text-primary);border-color:var(--border);border-left-color:var(--accent)}
+.tb:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.pn{display:none}.pn.on{display:block}
+.cw{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;transition:transform .15s ease,border-color .15s ease}
+.cw:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.ct{font-size:12px;font-weight:700;margin-bottom:2px;color:var(--text-primary)}
+.cs{font-size:10px;color:var(--color-text-secondary);margin-bottom:10px}
+.sr{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
+.sb{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px;text-align:center}
+.sv{font-size:12px;font-weight:500;color:var(--text-primary)}
+.sl{font-size:9px;color:var(--color-text-secondary);margin-top:1px}
+.nt{font-size:10px;color:var(--color-text-secondary);margin-top:8px;padding:7px 10px;background:var(--surface-2);border-radius:8px;border-left:2px solid var(--accent);line-height:1.5}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bar-hint{font-size:10px;color:var(--color-text-tertiary);margin-top:6px;text-align:center}
+.detail-panel{margin-top:10px;background:var(--surface);border-radius:10px;border:1px solid var(--border);display:none}
+.detail-panel.show{display:block}
+.dp-head{padding:8px 12px;font-size:11px;font-weight:700;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:44px;background:var(--surface);z-index:1}
+.dp-close{cursor:pointer;font-size:14px;color:var(--color-text-tertiary);line-height:1;background:transparent;border:0;padding:0;font-family:inherit}
+.dp-body{padding:10px 12px;max-height:300px;overflow-y:auto}
+.dp-item-simple{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;padding:6px 8px;background:var(--surface-2);border-radius:8px;border:1px solid var(--border)}
+.dp-item-simple span{color:var(--color-text-primary);font-weight:500}
+.fb-card{background:var(--surface-2);border-radius:8px;padding:8px 10px;margin-bottom:6px;border:1px solid var(--border);display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;transition:transform .15s ease,border-color .15s ease}
+.fb-card:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.fb-s{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.fb-main{font-size:11px;color:var(--color-text-primary);font-weight:500;line-height:1.4;margin-bottom:2px}
+.fb-reason{font-size:10px;color:var(--color-text-secondary);line-height:1.4}
+.analysis-section{margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+.analysis-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.analysis-card{background:var(--surface-2);border-radius:8px;padding:8px 10px;border:1px solid var(--border)}
+.ac-lbl{font-size:9px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.ac-val{font-size:12px;font-weight:500;color:var(--color-text-primary);line-height:1.4}
+.bias-chip{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-top:2px}
+.depth-chip{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-top:2px}
+.focus-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.focus-chip{font-size:10px;padding:2px 7px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:var(--color-text-secondary)}
+.analysis-body{background:var(--surface-2);border-radius:8px;padding:8px 10px;border:1px solid var(--border);font-size:11px;color:var(--color-text-secondary);line-height:1.65}
+.dp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.dp-item{background:var(--surface-2);border-radius:8px;padding:6px 8px;font-size:10px;border:1px solid var(--border)}
+.dp-pid{font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.dp-ep{color:var(--color-text-secondary)}
+@media (max-width: 900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.sr{grid-template-columns:repeat(3,1fr)}}
+</style>
+
+<div class="wrap panel-content compact">
+<div class="kpi-row">
+  <div class="kpi"><div class="kv">14</div><div class="kl">유효 피험자</div></div>
+  <div class="kpi"><div class="kv">70</div><div class="kl">총 feedbackId</div></div>
+  <div class="kpi"><div class="kv">93</div><div class="kl">총 아이템 수</div></div>
+  <div class="kpi"><div class="kv">6.6</div><div class="kl">피험자당 평균 아이템</div></div>
+  <div class="kpi"><div class="kv">1.33</div><div class="kl">feedbackId당 평균 아이템</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tb on" data-panel="p1" type="button">① Tutorial / Main 시간</button>
+  <button class="tb" data-panel="p2" type="button">② feedbackId 작성시간 분포</button>
+  <button class="tb" data-panel="p3" type="button">③ 피험자당 아이템 수</button>
+  <button class="tb" data-panel="p4" type="button">④ feedbackId당 아이템 수</button>
+</div>
+
+<div class="pn on" id="p1">
+  <div class="g2">
+    <div class="cw">
+      <div class="ct">Tutorial 소요 시간</div>
+      <div class="cs">피험자당 (초) · NaN 3명 = 빨간 막대</div>
+      <div class="chart-frame sm"><canvas id="ca"></canvas></div>
+      <div class="sr">
+        <div class="sb"><div class="sv">203s</div><div class="sl">평균</div></div>
+        <div class="sb"><div class="sv">158s</div><div class="sl">중앙값</div></div>
+        <div class="sb"><div class="sv">104s</div><div class="sl">최소</div></div>
+        <div class="sb"><div class="sv">465s</div><div class="sl">최대</div></div>
+        <div class="sb"><div class="sv">134s</div><div class="sl">Q1</div></div>
+        <div class="sb"><div class="sv">254s</div><div class="sl">Q3</div></div>
+      </div>
+    </div>
+    <div class="cw">
+      <div class="ct">Main 총 소요 시간</div>
+      <div class="cs">피험자당 5 에피소드 합산 (초) · Y축 5000s 캡 · 주황=이상값</div>
+      <div class="chart-frame sm"><canvas id="cb"></canvas></div>
+      <div class="sr">
+        <div class="sb"><div class="sv">2279s</div><div class="sl">평균</div></div>
+        <div class="sb"><div class="sv">1523s</div><div class="sl">중앙값</div></div>
+        <div class="sb"><div class="sv">0s</div><div class="sl">최소</div></div>
+        <div class="sb"><div class="sv">10513s</div><div class="sl">최대</div></div>
+        <div class="sb"><div class="sv">528s</div><div class="sl">Q1</div></div>
+        <div class="sb"><div class="sv">2902s</div><div class="sl">Q3</div></div>
+      </div>
+      <div class="nt">⚠ 69bda464 = 10,513s (약 175분) 이상값 · 0s 3명 = NaN 합산</div>
+    </div>
+  </div>
+</div>
+
+<div class="pn" id="p2">
+  <div class="cw">
+    <div class="ct">feedbackId당 총 작성 소요시간 분포</div>
+    <div class="cs">x축: 작성시간 구간(초) · y축: feedbackId 개수</div>
+    <div class="chart-frame lg"><canvas id="cc"></canvas></div>
+    <div class="bar-hint">막대 클릭 → 아래에 feedbackId 목록 펼침</div>
+    <div class="sr">
+      <div class="sb"><div class="sv">131s</div><div class="sl">평균</div></div>
+      <div class="sb"><div class="sv">85s</div><div class="sl">중앙값</div></div>
+      <div class="sb"><div class="sv">0s</div><div class="sl">최소</div></div>
+      <div class="sb"><div class="sv">785s</div><div class="sl">최대</div></div>
+      <div class="sb"><div class="sv">42s</div><div class="sl">Q1</div></div>
+      <div class="sb"><div class="sv">150s</div><div class="sl">Q3</div></div>
+    </div>
+    <div class="nt">⚠ 0s = 12개(17%) — 아이템 미작성 에피소드</div>
+  </div>
+  <div class="detail-panel" id="dp2">
+    <div class="dp-head">
+      <span id="dp2-title"></span>
+      <button class="dp-close" data-close="dp2" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div class="dp-body" id="dp2-body"></div>
+  </div>
+</div>
+
+<div class="pn" id="p3">
+  <div class="cw">
+    <div class="ct">피험자당 총 피드백 아이템 수</div>
+    <div class="cs">14명 · 5 에피소드 전체 합산</div>
+    <div class="chart-frame md"><canvas id="cd"></canvas></div>
+    <div class="bar-hint">막대 클릭 → 피드백 목록 + 피험자 성향 분석 펼침</div>
+    <div class="sr">
+      <div class="sb"><div class="sv">6.6개</div><div class="sl">평균</div></div>
+      <div class="sb"><div class="sv">6개</div><div class="sl">중앙값</div></div>
+      <div class="sb"><div class="sv">1개</div><div class="sl">최소</div></div>
+      <div class="sb"><div class="sv">17개</div><div class="sl">최대</div></div>
+      <div class="sb"><div class="sv">4.25개</div><div class="sl">Q1</div></div>
+      <div class="sb"><div class="sv">8개</div><div class="sl">Q3</div></div>
+    </div>
+  </div>
+  <div class="detail-panel" id="dp3">
+    <div class="dp-head">
+      <span id="dp3-title"></span>
+      <button class="dp-close" data-close="dp3" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div class="dp-body" id="dp3-body"></div>
+  </div>
+</div>
+
+<div class="pn" id="p4">
+  <div class="cw">
+    <div class="ct">feedbackId당 아이템 수 분포</div>
+    <div class="cs">x축: 아이템 개수 · y축: 해당 개수를 가진 feedbackId 수</div>
+    <div class="chart-frame lg"><canvas id="ce"></canvas></div>
+    <div class="bar-hint">막대 클릭 → 아래에 feedbackId 목록 펼침</div>
+    <div class="sr">
+      <div class="sb"><div class="sv">1.33개</div><div class="sl">평균</div></div>
+      <div class="sb"><div class="sv">1개</div><div class="sl">중앙값</div></div>
+      <div class="sb"><div class="sv">0개</div><div class="sl">최소</div></div>
+      <div class="sb"><div class="sv">5개</div><div class="sl">최대</div></div>
+      <div class="sb"><div class="sv">1개</div><div class="sl">Q1</div></div>
+      <div class="sb"><div class="sv">2개</div><div class="sl">Q3</div></div>
+    </div>
+    <div class="nt">0개 = 11건(16%) · 최다 5개 = 698ea1be ep3</div>
+  </div>
+  <div class="detail-panel" id="dp4">
+    <div class="dp-head">
+      <span id="dp4-title"></span>
+      <button class="dp-close" data-close="dp4" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-grid" id="dp4-grid"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function sw(btn,id){
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+  document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on')});
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+function scrollTo(id){setTimeout(function(){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
+
+document.querySelectorAll('.tb[data-panel]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    sw(btn, btn.dataset.panel);
+  });
+});
+
+document.querySelectorAll('.dp-close[data-close]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.getElementById(btn.dataset.close).classList.remove('show');
+  });
+});
+
+var P=['5c747244','5d9b7c7e','5dd005a9','64a9858b','662fa9da','66708c3d','66e9a454','67d41165','67e1da8a','698ea1be','69bda464','69bf9e3d','69c57c99','69e2ed0f'];
+var nanIdx={1:true,5:true,11:true};
+
+function baseOpts(xT,yT){return{responsive:true,maintainAspectRatio:false,animation:{duration:0},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{ticks:{font:{size:9},color:'#8888a0',maxRotation:45},grid:{display:false},title:{display:!!xT,text:xT||'',color:'#8888a0',font:{size:9,family:'DM Sans'}}},y:{ticks:{font:{size:9},color:'#8888a0'},grid:{color:'rgba(255,255,255,0.07)'},title:{display:!!yT,text:yT||'',color:'#8888a0',font:{size:9,family:'DM Sans'}}}}}}
+
+var tutV=[163.5,0,143.8,115,103.7,0,465,158.2,310.7,241.4,267.3,0,144,123.3];
+var tutC=tutV.map(function(v,i){return nanIdx[i]?'#f472b6':'#818cf8'});
+var oA=baseOpts('','초'); oA.plugins.tooltip={enabled:true,callbacks:{label:function(ctx){return nanIdx[ctx.dataIndex]?'NaN':tutV[ctx.dataIndex]+'s'}}};
+new Chart(document.getElementById('ca'),{type:'bar',data:{labels:P,datasets:[{data:tutV,backgroundColor:tutC,borderRadius:3,borderWidth:0}]},options:oA});
+
+var mainRaw=[477.5,0,2366.1,1567,678.4,0,2967.7,1478.4,1330.3,3365.9,10513.2,0,2705.5,4459.2];
+var mainCap=mainRaw.map(function(v){return Math.min(v,5000)});
+var mainC=mainRaw.map(function(v,i){return nanIdx[i]?'#f472b6':v>5000?'#818cf8':'#34d399'});
+var oB=baseOpts('','초'); oB.scales.y.max=5000; oB.plugins.tooltip={enabled:true,callbacks:{label:function(ctx){return mainRaw[ctx.dataIndex]+'s'+(mainRaw[ctx.dataIndex]>5000?' (cap)':'')}}};
+new Chart(document.getElementById('cb'),{type:'bar',data:{labels:P,datasets:[{data:mainCap,backgroundColor:mainC,borderRadius:3,borderWidth:0}]},options:oB});
+
+var bL=['0','1–50','50–100','100–150','150–200','200–300','300–400','400–500','500–600','600–700','700+'];
+var bC=[12,9,17,14,6,5,2,2,1,0,2];
+var bItems={'0':[{pid:'5c747244',ep:1,sec:0},{pid:'5c747244',ep:3,sec:0},{pid:'5c747244',ep:4,sec:0},{pid:'5c747244',ep:5,sec:0},{pid:'5dd005a9',ep:4,sec:0},{pid:'662fa9da',ep:1,sec:0},{pid:'662fa9da',ep:2,sec:0},{pid:'662fa9da',ep:4,sec:0},{pid:'662fa9da',ep:5,sec:0},{pid:'66e9a454',ep:2,sec:0},{pid:'67e1da8a',ep:3,sec:0},{pid:'67e1da8a',ep:4,sec:0}],'1–50':[{pid:'5d9b7c7e',ep:4,sec:37.1},{pid:'64a9858b',ep:1,sec:32},{pid:'64a9858b',ep:3,sec:36.2},{pid:'66708c3d',ep:3,sec:39.2},{pid:'66e9a454',ep:3,sec:45.8},{pid:'66e9a454',ep:4,sec:49.2},{pid:'66e9a454',ep:5,sec:47.7},{pid:'67e1da8a',ep:2,sec:33.4},{pid:'67e1da8a',ep:5,sec:41.1}],'50–100':[{pid:'5c747244',ep:2,sec:68.4},{pid:'5d9b7c7e',ep:5,sec:52.3},{pid:'5dd005a9',ep:1,sec:88.4},{pid:'5dd005a9',ep:3,sec:71.9},{pid:'5dd005a9',ep:5,sec:73.3},{pid:'64a9858b',ep:2,sec:54.1},{pid:'662fa9da',ep:3,sec:51.6},{pid:'66708c3d',ep:4,sec:61.6},{pid:'67d41165',ep:1,sec:65.8},{pid:'67d41165',ep:2,sec:85.4},{pid:'67d41165',ep:3,sec:71.9},{pid:'67d41165',ep:4,sec:70.7},{pid:'67e1da8a',ep:1,sec:56.3},{pid:'698ea1be',ep:2,sec:86.1},{pid:'69bf9e3d',ep:1,sec:78.8},{pid:'69c57c99',ep:4,sec:83.8},{pid:'69e2ed0f',ep:4,sec:67.2}],'100–150':[{pid:'5dd005a9',ep:2,sec:116.1},{pid:'64a9858b',ep:4,sec:110.6},{pid:'66708c3d',ep:2,sec:136.3},{pid:'66708c3d',ep:5,sec:106.9},{pid:'66e9a454',ep:1,sec:113.4},{pid:'67d41165',ep:5,sec:108.1},{pid:'698ea1be',ep:1,sec:107.2},{pid:'698ea1be',ep:5,sec:141.1},{pid:'69bf9e3d',ep:3,sec:132.6},{pid:'69c57c99',ep:2,sec:110.2},{pid:'69c57c99',ep:3,sec:139.5},{pid:'69e2ed0f',ep:1,sec:110.3},{pid:'69e2ed0f',ep:2,sec:138.1},{pid:'69e2ed0f',ep:3,sec:103.1}],'150–200':[{pid:'5d9b7c7e',ep:2,sec:153.1},{pid:'5d9b7c7e',ep:3,sec:174.4},{pid:'64a9858b',ep:5,sec:165.6},{pid:'69c57c99',ep:1,sec:175.5},{pid:'69c57c99',ep:5,sec:164.4},{pid:'69e2ed0f',ep:5,sec:181.7}],'200–300':[{pid:'5d9b7c7e',ep:1,sec:264.9},{pid:'66708c3d',ep:1,sec:213.2},{pid:'698ea1be',ep:3,sec:209.1},{pid:'698ea1be',ep:4,sec:250.4},{pid:'69bf9e3d',ep:5,sec:281.8}],'300–400':[{pid:'69bda464',ep:2,sec:390.2},{pid:'69bf9e3d',ep:2,sec:324.7}],'400–500':[{pid:'69bda464',ep:4,sec:469.6},{pid:'69bf9e3d',ep:4,sec:400.2}],'500–600':[{pid:'69bda464',ep:1,sec:564.1}],'600–700':[],'700+':[{pid:'69bda464',ep:3,sec:785.2},{pid:'69bda464',ep:5,sec:768.6}]};
+var bColor=bC.map(function(v,i){return i===0?'#f472b6':'#818cf8'});
+var ccChart=new Chart(document.getElementById('cc'),{type:'bar',data:{labels:bL,datasets:[{data:bC,backgroundColor:bColor,borderRadius:4,borderWidth:0,barThickness:32}]},options:baseOpts('작성 소요시간 (초)','feedbackId 개수')});
+document.getElementById('cc').addEventListener('click',function(e){
+  var pts=ccChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+  if(!pts.length) return;
+  var i=pts[0].index, lbl=bL[i], items=bItems[lbl]||[];
+  document.getElementById('dp2-title').textContent=lbl+'초 구간 — '+items.length+'개 feedbackId';
+  var body=document.getElementById('dp2-body'); body.innerHTML='';
+  if(!items.length){body.innerHTML='<div class="dp-item-simple">해당 없음</div>';}
+  else{items.forEach(function(it){var d=document.createElement('div');d.className='dp-item-simple';d.innerHTML='<span>'+it.pid+'</span> · ep'+it.ep+' · '+it.sec+'s';body.appendChild(d)});}
+  document.getElementById('dp2').classList.add('show'); scrollTo('dp2');
+});
+
+var pidData={
+  '5c747244':{count:1,items:[{s:4,fb:'I think that it is clear what the chefs are doing',rs:'Because I can understand what they are trying to achieve'}]},
+  '5d9b7c7e':{count:5,items:[{s:4,fb:'the feed back I would like to do that they are doing great work.',rs:'The reason for this feedback is they are good at working'},{s:1,fb:'The feedback is negative here.',rs:'There is totally miscommunication between two chefs'},{s:5,fb:'There is a miscommunication between chef they all are doing the same work',rs:'They need to work together by team management'},{s:3,fb:'There is a communication gap for that one chef had to wait for another.',rs:'The blue chef had to wait for green chef'},{s:5,fb:'I have positive feedback for this.',rs:'Because they worked together make served 2'}]},
+  '5dd005a9':{count:6,items:[{s:1,fb:'Blue hat never hands green hat an empty plate.',rs:'Bad strategy.'},{s:5,fb:'They are working well as a team and saving time.',rs:'It seems like they are implementing a successful strategy.'},{s:2,fb:'Why did blue hat chef put an onion there?',rs:'Strange behavior.'},{s:1,fb:'Having to wait for each other.',rs:'not a very efficient strategy.'},{s:1,fb:'They are getting in each others way.',rs:'Bad strategy for serving the most dishes.'},{s:1,fb:"They don't seem very coordinated and got in each other way.",rs:'They could work more efficiently.'}]},
+  '64a9858b':{count:8,items:[{s:2,fb:'They are all focusing on the bottom stove, top stove not being used.',rs:'Inefficient decision making and movement.'},{s:4,fb:'Finally using the other stove, but a little too late.',rs:'Made some good decisions, but it was far too late.'},{s:2,fb:'They all went to the same stove, which caused a delay.',rs:'Inefficient decision making.'},{s:5,fb:'They worked really well, and had the correct way of doing things.',rs:'They were extremely efficient.'},{s:5,fb:'Really good flow state where all 3 chefs are working in unison.',rs:'Really well done with their movements and actions.'},{s:2,fb:'Chef in the green hat was stood around waiting instead of helping.',rs:"Wasn't efficient time spent by green hat."},{s:2,fb:'Chef in the green hat let the onions cooked for far too long.',rs:'Lack of awareness of cooked onions.'},{s:2,fb:"They were all over the place and didn't stay on their side.",rs:'Not efficient.'}]},
+  '662fa9da':{count:2,items:[{s:3,fb:'(empty)',rs:'(empty)'},{s:3,fb:'The blue hate chef did not grab a plate for the other chef',rs:'It would be a good idea for the AI to give the other one plates'}]},
+  '66708c3d':{count:12,items:[{s:3,fb:'(empty)',rs:'(empty)'},{s:5,fb:'good transition and efficient movement',rs:'efficient and productive'},{s:1,fb:'Logjam at one stove with the other empty and all chefs fighting for space',rs:'inefficient'},{s:2,fb:'AI chef travels 1 square in the wrong direction to start',rs:'It is an unnecessary movement'},{s:1,fb:'This is a huge dead time zone, where one chef is not preparing or contributing',rs:'massively unproductive'},{s:3,fb:'(empty)',rs:'(empty)'},{s:1,fb:'Chef doesnt drop the dish for the other chef, leading to massive downtime',rs:'inefficient for no reason'},{s:5,fb:'AI chefs get into a good rythym',rs:'efficient actions by the chefs'},{s:1,fb:'moves without substance passing things needing picked up',rs:'unproductive'},{s:1,fb:'Never make use of both stoves',rs:'Failure to use all equipment available'},{s:1,fb:'Green hat chef is not completing any tasks, aimlessly wandering',rs:'massive inefficiency'},{s:1,fb:'Needless movement around when it could have continued passing for efficiency',rs:'Needless inefficiency with no gain'}]},
+  '66e9a454':{count:4,items:[{s:5,fb:'the number of chefs increase to 4',rs:'to point out the chefs effective collaboration'},{s:4,fb:'there were 3 chefs in the place for two but collaborated effectively',rs:'the number of chefs had increased'},{s:2,fb:'the chefs prepared two onions instead of three',rs:'to raise the wrong number of onions was used'},{s:4,fb:'both chefs worked on their work areas without collaborating',rs:'(empty)'}]},
+  '67d41165':{count:5,items:[{s:5,fb:'Each of the 4 chefs was picking up onion and walking through the sequence',rs:'The 4 chefs was actually doing the exact steps'},{s:4,fb:'pick up onion. add onion to the soup, pick up a dish and serve the soup',rs:'the chef was actually doing the exact steps'},{s:4,fb:'one of the chef pick up the onion, the other was in the serving area',rs:'the chefs was actually doing the exact'},{s:4,fb:'2 chefs: one picked up the onion, another add onion to the soup',rs:'the chefs was actually doing the exact'},{s:5,fb:'3 chefs present, each picking up the onion they needed',rs:'the 3 chefs was actually doing the exact steps'}]},
+  '67e1da8a':{count:3,items:[{s:5,fb:'It is going really well',rs:'For update'},{s:2,fb:'There was a drop of onion',rs:'Everywhere is supposed to be clean'},{s:2,fb:'Dropping the onions where they are not supposed to',rs:'Distort order'}]},
+  '698ea1be':{count:17,items:[{s:5,fb:'Served 1',rs:'Served 1 correctly'},{s:5,fb:'Correct onions to the pot x3',rs:'Correct amount of onions to the pot.'},{s:2,fb:'Here chefs were not in the correct open spot to transfer the soup.',rs:'Negative — chefs were not in the correct place'},{s:5,fb:'Correctly served 2 soups chef in green hat.',rs:'Good — served 2 soups correctly.'},{s:5,fb:'Chef in green hat correctly served one soup.',rs:'Correctly served one soup'},{s:5,fb:'Chef in blue hat correctly put 3 onions in pot.',rs:'Correctly placed 3 onions'},{s:5,fb:'Chef blue hat handed off soup to chef in green hat.',rs:'Good placement of soup'},{s:5,fb:'positive-served 4 at the right spot to serve',rs:'Positive — served 4 in the right area.'},{s:4,fb:'All three worked together 3 onions now in soup pot.',rs:'Positive — all three onions in pot.'},{s:2,fb:'says served 3 but did not see chef at serving area.',rs:'did not see chef at serving spot'},{s:5,fb:'more onions in soup pot correctly',rs:'positive — more onions correct amount.'},{s:5,fb:'correct amount of onions in the pot',rs:'positive — correct amount of 3 onions.'},{s:5,fb:'worked very fast to get first 3 onions in pot',rs:'positive — got first three onions correctly.'},{s:5,fb:'chef in orange correctly served 2 correct serving location',rs:'chef in orange correctly served 2'},{s:5,fb:'Chef in blue served fast one in correct serving area.',rs:'positive — chef in blue correctly served one'},{s:5,fb:'Chef in green hat correctly served one.',rs:'Chef in green hat correctly served one soup.'},{s:5,fb:'Correct amount of 3 onions to the pot.',rs:'Correct amount of 3 onions to the pot.'}]},
+  '69bda464':{count:7,items:[{s:5,fb:'All three chefs are functioning efficiently as a unit.',rs:'The three chefs are operating as a quick, efficient team'},{s:2,fb:'The movement of the four chefs could be significantly improved.',rs:'When the four chefs are all crowded together they appeared lost'},{s:1,fb:'The green-hatted chef appears confused and fails to realize a plate is ready.',rs:'The green-hatted chef appeared idle and confused'},{s:5,fb:'Both chefs are working well, in tandem, filling their respective pots.',rs:'Both chefs are working together far more efficiently'},{s:3,fb:'(empty)',rs:'(empty)'},{s:2,fb:'The chef with the blue hat had previously passed onions but this time chose to travel.',rs:'It would have been better to continue passing'},{s:2,fb:'The chef in the blue hat is confusing the chef in green by serving onions in two different locations.',rs:'It would have been better to stay consistent'}]},
+  '69bf9e3d':{count:8,items:[{s:2,fb:'One chef is passing the onion but not very efficient.',rs:'If they both took the onions to the pot it would be faster.'},{s:1,fb:'The same chef takes the onions, dishes, and serves while the other only moves onions.',rs:"It's not very efficient."},{s:2,fb:'The chefs seem to be somewhat disorganised with taking the dishes to the pots.',rs:'Assigning tasks better would have made things more efficient'},{s:2,fb:'The chefs appear to be trying to take onions to both pots, but are highly disorganised.',rs:'If they had organised who takes onions to each pot it would be faster'},{s:5,fb:'The chef are working together to fill both pots with onions.',rs:'They are efficiently working together'},{s:1,fb:'The blue chef has all the dishes on their side and is not sharing.',rs:'The blue chef is causing the kitchen to become inefficient.'},{s:5,fb:'The chefs are working together to bring the onions to two pots simultaneously.',rs:'The chefs are working together well'},{s:4,fb:'The chefs are working together to take the onions to the pot, take dishes and serve.',rs:'The chefs are working together well and doing it in the correct order'}]},
+  '69c57c99':{count:9,items:[{s:1,fb:'Unsure what chef in the blue hat is doing — seems to be pacing around.',rs:"Questioning what blue chef's role is here."},{s:2,fb:'Taking the onions to the pot one at a time seems very inefficient.',rs:'There is a better way to complete this task.'},{s:5,fb:'Both are working together and efficiently, getting more done simultaneously.',rs:'Seeing the increased efficiency in their tasking and output'},{s:1,fb:'Green chef is pacing seemingly without purpose while blue chef continues to work.',rs:'Blue chef seems to now be working harder than green chef'},{s:5,fb:'Chefs are working very collaboratively, each taking on different tasks.',rs:'How they are interacting with each other (e.g. tossing onions)'},{s:5,fb:'They are both taking turns doing the same job, picking up from the other.',rs:'They seem to have a good flow and are task sharing'},{s:1,fb:'While they are all moving around, this seems very inefficient with no clear process.',rs:'Seeing many moving bodies, without much thought or process'},{s:2,fb:'This scene feels more productive, but also too crowded with now 4 chefs.',rs:'Too many cooks in the kitchen — questioning the efficiency'},{s:4,fb:'Chefs seem to be moving better and more cooperatively. This part feels more organized.',rs:'Seeing more order and efficiency in their movements'}]},
+  '69e2ed0f':{count:6,items:[{s:1,fb:'The Chef get stuck',rs:'The AI gets confused trying to have all the chef put their onions at the same pot'},{s:1,fb:'The AI mainly focuses on one pot',rs:'I assume the AI momentarily forgets the upper pot exists'},{s:5,fb:'The AI places onions on two separate counters (Brown Squares).',rs:'Efficiently, after the chef in the green hat serves, they can retrieve an onion sooner'},{s:2,fb:'Over the course of the video both chefs make unnecessary movements, wasting time.',rs:'The AI does not understand or was not instructed to be as efficient as possible'},{s:2,fb:'The chef with the blue hat does not give Green hat an empty plate to use',rs:'The AI either is incapable or was not instructed'},{s:4,fb:'With the addition of the third chef, they become more efficient',rs:'Another Chef'}]}
+};
+
+var pidAnalysis={
+  '5c747244':{keyword:'Legibility observer',bias:'neutral',biasLabel:'중립',focus:['RW3 (legibility)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'1개 아이템만 제출. 에이전트 행동이 관찰자에게 얼마나 이해 가능한지에 집중. 행동 투명성/가독성 렌즈.'},
+  '5d9b7c7e':{keyword:'Task-confused rater',bias:'mixed',biasLabel:'혼재',focus:['Low-information'],depth:'descriptive',depthLabel:'Descriptive',analysis:'과제 자체를 오해한 것으로 보임. 자기 지시적 피드백("I have positive feedback")이나 메타 코멘트가 대부분. Sentiment-text 불일치 발생. 분류 불가 항목 다수.'},
+  '5dd005a9':{keyword:'Coordination critic',bias:'negative',biasLabel:'부정 편향',focus:['CQ (handoff failure)','SC (collision)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'협업 실패에 예민하게 반응. Handoff 누락, 물리적 충돌, 상호 대기를 지속적으로 포착. 반사실적 판단 포함. Taxonomy 신호 품질 높음.'},
+  '64a9858b':{keyword:'Resource strategist',bias:'negative',biasLabel:'부정 편향',focus:['SR (unused equipment, timing)','CQ (flow)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'자원 배분에 일관되게 주목 — 사용되지 않는 냄비, 동일 스토브 집중, 조리 타이밍 실패를 반복 포착. 간헐적으로 팀 흐름도 평가.'},
+  '662fa9da':{keyword:'Minimal participant',bias:'neutral',biasLabel:'중립',focus:['Low-information'],depth:'descriptive',depthLabel:'Descriptive',analysis:'2개 중 1개는 빈칸. 참여 의지 매우 낮음. 일관된 피드백 패턴 파악 불가. 분석 제외 또는 플래그 권고.'},
+  '66708c3d':{keyword:'Efficiency watchdog',bias:'negative',biasLabel:'부정 편향',focus:['SR (unused equipment)','RW2 (idle agent)','FP (path)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'12개 중 8개가 S=1–2. 이동 효율과 유휴 에이전트를 체계적으로 추적. 간결하지만 일관된 평가 언어 사용. Taxonomy 신호 품질 높음.'},
+  '66e9a454':{keyword:'Environment describer',bias:'positive',biasLabel:'긍정 편향',focus:['PD (monitoring log)'],depth:'descriptive',depthLabel:'Descriptive',analysis:'에이전트 수 변화를 긍정적 사건으로 기록하는 환경 묘사 중심. 협업 품질 평가가 거의 없음. Taxonomy 가치 낮음.'},
+  '67d41165':{keyword:'Scorekeeper logger',bias:'positive',biasLabel:'긍정 편향',focus:['PD (monitoring log)'],depth:'descriptive',depthLabel:'Descriptive',analysis:'5개 모두 순차 행동 기록 ("pick up onion, add onion, serve"). 평가 판단 없음. 순수 진행 상황 로그 패턴. Taxonomy 가치 최하.'},
+  '67e1da8a':{keyword:'Norm-based observer',bias:'mixed',biasLabel:'혼재',focus:['SC (spatial norm)','SR (procedural)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'공간적 청결 규범을 기준으로 평가 ("Everywhere is supposed to be clean"). 다른 참여자와 다른 독특한 기준 적용. Taxonomy 경계 케이스.'},
+  '698ea1be':{keyword:'Outcome scorekeeper',bias:'positive',biasLabel:'긍정 편향',focus:['PD (scorekeeper)'],depth:'descriptive',depthLabel:'Descriptive',analysis:'17개 중 14개가 마일스톤 기록 ("Served 1", "Correct onions x3"). 피드백을 채점 시스템처럼 사용. 협업 해석 없음. Taxonomy 가치 최하.'},
+  '69bda464':{keyword:'Reflective analyst',bias:'negative',biasLabel:'부정 편향',focus:['CQ (strategy inconsistency)','SA (mental state)','RW (idle)'],depth:'sensemaking',depthLabel:'Sensemaking',analysis:'가장 분석적인 참여자. 시간적 추론("이전에는 pass했지만 이번에는 돌아갔다")과 에이전트 정신 상태 귀인을 포함. CQ·SA·RW 복수 차원 커버. Taxonomy 최고 가치.'},
+  '69bf9e3d':{keyword:'Role-division critic',bias:'negative',biasLabel:'부정 편향',focus:['RW (unequal workload)','SR (parallel resource)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'워크로드 비대칭을 반복적으로 포착 — 한 에이전트가 모든 것을 하고 다른 에이전트는 제한적으로 기여. 병렬 자원 사용도 긍정 평가. 반사실적 판단 명확.'},
+  '69c57c99':{keyword:'Holistic coordination judge',bias:'mixed',biasLabel:'균형',focus:['CQ (flow, parallel)','SC (crowding)','RW (legibility)'],depth:'evaluative',depthLabel:'Evaluative',analysis:'가장 균형 잡힌 sentiment 분포. 팀 흐름·공간 혼잡·역할 가독성을 동시에 평가. 다차원적 관찰. Taxonomy 신호 품질 최상급.'},
+  '69e2ed0f':{keyword:'AI-attributing analyst',bias:'mixed',biasLabel:'부정 경향',focus:['SA (ToM + capability)','SR (resource neglect)'],depth:'sensemaking',depthLabel:'Sensemaking',analysis:'AI 시스템 원인 귀인에 특화 ("AI forgets", "not instructed"). 거의 모든 항목에 SA 수식어 적용. 에이전트 내부 상태를 추론하려는 독특한 관찰 방식.'}
+};
+
+function biasStyle(b){
+  if(b==='negative') return {bg:'#FFCDD2',fc:'#C62828'};
+  if(b==='positive') return {bg:'#C8E6C9',fc:'#2E7D32'};
+  return {bg:'#FFF9C4',fc:'#E65100'};
+}
+function depthStyle(d){
+  if(d==='sensemaking') return {bg:'#E8EAF6',fc:'#3949AB'};
+  if(d==='evaluative') return {bg:'#E3F2FD',fc:'#1565C0'};
+  return {bg:'#F5F5F5',fc:'#616161'};
+}
+
+var pidKeys=Object.keys(pidData);
+var pidCounts=pidKeys.map(function(k){return pidData[k].count});
+var pidColors=pidCounts.map(function(v){return v<=2?'#f472b6':v>=10?'#34d399':'#818cf8'});
+var cdChart=new Chart(document.getElementById('cd'),{
+  type:'bar',
+  data:{labels:pidKeys,datasets:[{data:pidCounts,backgroundColor:pidColors,borderRadius:3,borderWidth:0}]},
+  options:baseOpts('','아이템 수')
+});
+
+document.getElementById('cd').addEventListener('click',function(e){
+  var pts=cdChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+  if(!pts.length) return;
+  var k=pidKeys[pts[0].index], d=pidData[k], an=pidAnalysis[k];
+  document.getElementById('dp3-title').textContent=k+' — 총 '+d.count+'개 아이템';
+  var body=document.getElementById('dp3-body'); body.innerHTML='';
+  d.items.forEach(function(it){
+    var bg=it.s>=4?'#C8E6C9':it.s<=2?'#FFCDD2':'#FFF9C4';
+    var fc=it.s>=4?'#2E7D32':it.s<=2?'#C62828':'#E65100';
+    var card=document.createElement('div'); card.className='fb-card';
+    card.innerHTML='<span class="fb-s" style="background:'+bg+';color:'+fc+'">'+it.s+'</span>'
+      +'<div class="fb-texts"><div class="fb-main">'+it.fb+'</div><div class="fb-reason">'+it.rs+'</div></div>';
+    body.appendChild(card);
+  });
+  if(an){
+    var bs=biasStyle(an.bias), ds=depthStyle(an.depth);
+    var sec=document.createElement('div'); sec.className='analysis-section';
+    var row=document.createElement('div'); row.className='analysis-row';
+    var c1=document.createElement('div'); c1.className='analysis-card';
+    c1.innerHTML='<div class="ac-lbl">키워드</div><div class="ac-val">'+an.keyword+'</div>';
+    var c2=document.createElement('div'); c2.className='analysis-card';
+    c2.innerHTML='<div class="ac-lbl">Sentiment bias</div>'
+      +'<span class="bias-chip" style="background:'+bs.bg+';color:'+bs.fc+'">'+an.biasLabel+'</span>';
+    var c3=document.createElement('div'); c3.className='analysis-card';
+    c3.innerHTML='<div class="ac-lbl">분석 깊이</div>'
+      +'<span class="depth-chip" style="background:'+ds.bg+';color:'+ds.fc+'">'+an.depthLabel+'</span>';
+    row.appendChild(c1); row.appendChild(c2); row.appendChild(c3);
+    sec.appendChild(row);
+    var fc2=document.createElement('div'); fc2.className='analysis-card'; fc2.style.marginBottom='8px';
+    fc2.innerHTML='<div class="ac-lbl">주요 Taxonomy 차원</div><div class="focus-chips">'
+      +an.focus.map(function(f){return'<span class="focus-chip">'+f+'</span>'}).join('')+'</div>';
+    sec.appendChild(fc2);
+    var ab=document.createElement('div'); ab.className='analysis-body';
+    ab.textContent=an.analysis;
+    sec.appendChild(ab);
+    body.appendChild(sec);
+  }
+  document.getElementById('dp3').classList.add('show'); scrollTo('dp3');
+});
+
+var nidDist={0:{count:11,items:[{pid:'5c747244',ep:1},{pid:'5c747244',ep:3},{pid:'5c747244',ep:4},{pid:'5c747244',ep:5},{pid:'5dd005a9',ep:4},{pid:'662fa9da',ep:2},{pid:'662fa9da',ep:4},{pid:'662fa9da',ep:5},{pid:'66e9a454',ep:2},{pid:'67e1da8a',ep:3},{pid:'67e1da8a',ep:4}]},1:{count:35,items:[{pid:'5c747244',ep:2},{pid:'5d9b7c7e',ep:1},{pid:'5d9b7c7e',ep:2},{pid:'5d9b7c7e',ep:3},{pid:'5d9b7c7e',ep:4},{pid:'5d9b7c7e',ep:5},{pid:'5dd005a9',ep:1},{pid:'5dd005a9',ep:3},{pid:'64a9858b',ep:1},{pid:'64a9858b',ep:2},{pid:'64a9858b',ep:3},{pid:'662fa9da',ep:1},{pid:'662fa9da',ep:3},{pid:'66e9a454',ep:1},{pid:'66e9a454',ep:3},{pid:'66e9a454',ep:4},{pid:'66e9a454',ep:5},{pid:'67d41165',ep:1},{pid:'67d41165',ep:2},{pid:'67d41165',ep:3},{pid:'67d41165',ep:4},{pid:'67d41165',ep:5},{pid:'67e1da8a',ep:1},{pid:'67e1da8a',ep:2},{pid:'67e1da8a',ep:5},{pid:'69bda464',ep:2},{pid:'69bda464',ep:4},{pid:'69bda464',ep:5},{pid:'69bf9e3d',ep:1},{pid:'69bf9e3d',ep:3},{pid:'69c57c99',ep:4},{pid:'69e2ed0f',ep:1},{pid:'69e2ed0f',ep:2},{pid:'69e2ed0f',ep:3},{pid:'69e2ed0f',ep:4}]},2:{count:18,items:[{pid:'5dd005a9',ep:2},{pid:'5dd005a9',ep:5},{pid:'64a9858b',ep:4},{pid:'66708c3d',ep:1},{pid:'66708c3d',ep:2},{pid:'66708c3d',ep:3},{pid:'698ea1be',ep:1},{pid:'698ea1be',ep:2},{pid:'69bda464',ep:1},{pid:'69bda464',ep:3},{pid:'69bf9e3d',ep:2},{pid:'69bf9e3d',ep:4},{pid:'69bf9e3d',ep:5},{pid:'69c57c99',ep:1},{pid:'69c57c99',ep:2},{pid:'69c57c99',ep:3},{pid:'69c57c99',ep:5},{pid:'69e2ed0f',ep:5}]},3:{count:3,items:[{pid:'64a9858b',ep:5},{pid:'66708c3d',ep:4},{pid:'66708c3d',ep:5}]},4:{count:2,items:[{pid:'698ea1be',ep:4},{pid:'698ea1be',ep:5}]},5:{count:1,items:[{pid:'698ea1be',ep:3}]}};
+var nidKeys=[0,1,2,3,4,5];
+var nidCounts=nidKeys.map(function(k){return nidDist[k].count});
+var nidColors=nidKeys.map(function(k){return k===0?'#f472b6':k>=4?'#34d399':'#818cf8'});
+var ceChart=new Chart(document.getElementById('ce'),{type:'bar',data:{labels:nidKeys.map(function(k){return k+'개'}),datasets:[{data:nidCounts,backgroundColor:nidColors,borderRadius:4,borderWidth:0,barThickness:44}]},options:baseOpts('feedbackId당 아이템 수','feedbackId 개수')});
+document.getElementById('ce').addEventListener('click',function(e){
+  var pts=ceChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+  if(!pts.length) return;
+  var k=nidKeys[pts[0].index], d=nidDist[k];
+  document.getElementById('dp4-title').textContent='아이템 '+k+'개 feedbackId — 총 '+d.count+'건';
+  var grid=document.getElementById('dp4-grid'); grid.innerHTML='';
+  d.items.forEach(function(it){var div=document.createElement('div');div.className='dp-item';div.innerHTML='<div class="dp-pid">'+it.pid+'</div><div class="dp-ep">ep '+it.ep+'</div>';grid.appendChild(div)});
+  document.getElementById('dp4').classList.add('show'); scrollTo('dp4');
+});
+</script>
+</div><!-- /panel-pilot -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAXONOMY BROWSER
+═══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-taxonomy">
+<style>
+.top-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-label{font-size:11px;color:var(--color-text-secondary);white-space:nowrap}
+.filter-btn{font-size:11px;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid var(--border);border-left:2px solid transparent;cursor:pointer;background:var(--surface);color:var(--text-secondary);transition:transform .15s ease,border-color .15s ease,background .15s ease,color .15s ease}
+.filter-btn.on{color:var(--text-primary);border-color:var(--border);border-left-color:var(--accent);background:var(--surface-2)}
+.filter-btn:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.count-badge{font-size:11px;padding:5px 9px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:var(--color-text-secondary);margin-left:auto}
+.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.cat-tab{font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:5px;background:var(--surface);color:var(--text-primary);transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.cat-tab:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.cat-tab.on{border-width:1.5px}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cat-n{font-size:10px;font-weight:500;padding:1px 5px;border-radius:6px;min-width:18px;text-align:center}
+.item-list{display:grid;gap:8px}
+.item-card{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:transform .15s ease,border-color .15s ease}
+.item-card:hover{transform:translateY(-1px);border-color:var(--border-hover)}
+.item-head{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer}
+.s-chip{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.item-fb{font-size:12px;color:var(--color-text-primary);flex:1;line-height:1.4}
+.item-pid{font-size:10px;color:var(--color-text-tertiary);white-space:nowrap;flex-shrink:0}
+.item-chevron{font-size:10px;color:var(--color-text-tertiary);flex-shrink:0}
+.item-body{display:none;padding:8px 12px;border-top:1px solid var(--border);background:var(--surface)}
+.item-reason-lbl{font-size:9px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.item-reason{font-size:11px;color:var(--color-text-secondary);line-height:1.55}
+.empty-msg{font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:32px 0}
+.oot-section{margin-top:20px;border-top:1px dashed var(--border-hover);padding-top:14px}
+.oot-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:10px}
+</style>
+
+<div class="panel-content">
+<div class="top-row">
+  <span class="filter-label">필터</span>
+  <button class="filter-btn on" data-filter="all" type="button">전체 보기</button>
+  <button class="filter-btn" data-filter="pos" type="button">긍정만 (S≥4)</button>
+  <button class="filter-btn" data-filter="neg" type="button">부정만 (S≤2)</button>
+  <span class="count-badge" id="count-badge">총 67개 (OOT 22개 별도)</span>
+</div>
+
+<div class="cat-tabs" id="cat-tabs"></div>
+<div class="item-list" id="item-list"></div>
+
+<div class="oot-section" id="oot-section">
+  <div class="oot-title">⚠ Task 미이해 / 분류 불가 항목 (OOT) — 22개 · Taxonomy 분석에서 제외</div>
+  <div class="item-list" id="oot-list"></div>
+</div>
+</div>
+
+<script>
+var CATS = [
+  {id:'CQ', label:'Coordination Quality', desc:'협력의 질 전반', color:'#4F86F7', light:'#EBF1FE'},
+  {id:'RW', label:'Role Fairness',        desc:'역할 분배 공정성', color:'#E06C3A', light:'#FDF0EA'},
+  {id:'SR', label:'Strategy',             desc:'자원 배분·전략 일치', color:'#2DB37A', light:'#E6F7F0'},
+  {id:'SP', label:'Spatial',              desc:'공간·혼잡', color:'#9B59B6', light:'#F3EBF9'},
+  {id:'SA', label:'Sensemaking',          desc:'원인 귀인·ToM', color:'#C0A000', light:'#FDF8E1'},
+];
+
+var ALL_ITEMS = [{"idx":0,"pid":"69c57c99","sentiment":1,"feedback":"Unsure what chef in the blue hat is doing here. He seems to be pacing around while chef in the green hat is moving all about.","reason":"Questioning what blue chef's role is here.","cat":"RW","valence":"neg"},{"idx":1,"pid":"69c57c99","sentiment":2,"feedback":"Taking the onions to the pot one at a time seems very inefficient. ","reason":"There is a better way to complete this task.","cat":"SR","valence":"neg"},{"idx":3,"pid":"69c57c99","sentiment":5,"feedback":"Both are working together and efficiently, getting more done while both are simultaneously doing the same task for a greater output ","reason":"Seeing the increased efficiency in their tasking and output","cat":"CQ","valence":"pos"},{"idx":4,"pid":"69c57c99","sentiment":1,"feedback":"Green chef is pacing seemingly without purpose here while blue chef continues to work. It makes green chef look lazy or tired","reason":"Blue chef seems to now be working harder than green chef","cat":"RW","valence":"neg"},{"idx":5,"pid":"69e2ed0f","sentiment":1,"feedback":"The Chef get stuck","reason":"The AI gets confused trying to have all the chef put there onions at the same pot. Because of this they get stuck on one another. Wasting time.","cat":"SA","valence":"neg"},{"idx":6,"pid":"69e2ed0f","sentiment":1,"feedback":"The AI mainly focuses on one pot","reason":"I assume it happens because the AI momentarily forgets that the upper pot exists and tells all the chefs to do everything with the bottom pot.","cat":"SA","valence":"neg"},{"idx":7,"pid":"64a9858b","sentiment":2,"feedback":"They are all, focusing on the bottom stove again, and the top stove is not being used properly.","reason":"Inefficient decision making and movement.","cat":"SR","valence":"neg"},{"idx":8,"pid":"64a9858b","sentiment":4,"feedback":"Finally using the other stove, but a little too late.","reason":"Made some good decisions, but it was far too late.","cat":"SR","valence":"pos"},{"idx":9,"pid":"64a9858b","sentiment":2,"feedback":"They all went to the same stove, which caused a delay.","reason":"Inefficient decision making.","cat":"SR","valence":"neg"},{"idx":12,"pid":"64a9858b","sentiment":5,"feedback":"They worked really well, and had the correct way of doing things.","reason":"They were extremely efficient.","cat":"CQ","valence":"pos"},{"idx":14,"pid":"69bda464","sentiment":5,"feedback":"All three chefs are functioning efficiently as a unit, with minimal unnecessary actions, movements or delay.","reason":"The three chefs are operating as quick, efficient team by filling the pots in quick succession, cooking and serving with minimal delay.","cat":"SR","valence":"pos"},{"idx":15,"pid":"69bf9e3d","sentiment":2,"feedback":"One chef is passing the onion to the other chef to take to the pot. They are working together, but it isn't very efficient.","reason":"If they both took the onions to the pot it would be faster.","cat":"SR","valence":"neg"},{"idx":16,"pid":"69bf9e3d","sentiment":1,"feedback":"The same chef that took the onions to the pot starts taking the dishes to the pot and then serves while the other chef just moves onions around.","reason":"It's not very efficient. If both chefs were working together, such as one taking the dishes and the other serving, it would be a faster process.","cat":"RW","valence":"neg"},{"idx":17,"pid":"69bda464","sentiment":2,"feedback":"The movement of the four chefs could be significantly improved here. When the four chefs, onions in hand, are all crowded together in a single spot, they appeared lost and confused.","reason":"This kitchen is chaotic and too crowded and not well organized.","cat":"SA","valence":"neg"},{"idx":18,"pid":"69bda464","sentiment":1,"feedback":"The green-hatted chef appears confused in this section and fails to realize that there is a plate ready to serve in the top-right area.","reason":"The green-hatted chef appeared idle and confused — failed completely to meet their objective.","cat":"SA","valence":"neg"},{"idx":19,"pid":"69bda464","sentiment":5,"feedback":"Both chefs are working well, in tandem, filling their respective pots with onions with minimal delay. Good, solid teamwork.","reason":"Both chefs are working together far more efficiently this episode, without wasting time.","cat":"SR","valence":"pos"},{"idx":20,"pid":"69bda464","sentiment":2,"feedback":"The chef with the blue hat had previously efficiently chosen to pass the onions to the green hat; however, this time chose to travel around the entire kitchen — a time wasting, inefficient move.","reason":"It would have been better to pass all onions to the green hat, who was standing closest to the pot.","cat":"SR","valence":"neg"},{"idx":21,"pid":"5dd005a9","sentiment":1,"feedback":"Blue hat never hands green hat an empty plate.","reason":"Bad strategy.","cat":"CQ","valence":"neg"},{"idx":22,"pid":"5dd005a9","sentiment":5,"feedback":"They are working well as a team and saving time.","reason":"It seems like they are implementing a successful strategy.","cat":"CQ","valence":"pos"},{"idx":23,"pid":"5dd005a9","sentiment":2,"feedback":"Why did blue hat chef put an onion there?","reason":"Strange behavior.","cat":"CQ","valence":"neg"},{"idx":25,"pid":"66e9a454","sentiment":4,"feedback":"There were 3 chefs in the place for two but collaborated effectively","reason":"The number of chefs had increased","cat":"CQ","valence":"pos"},{"idx":26,"pid":"66708c3d","sentiment":5,"feedback":"Good transition and efficient movement","reason":"Efficient and productive","cat":"CQ","valence":"pos"},{"idx":27,"pid":"66708c3d","sentiment":1,"feedback":"Logjam at one stove with the other empty and all chefs fighting for space","reason":"Inefficient.","cat":"SP","valence":"neg"},{"idx":28,"pid":"69c57c99","sentiment":5,"feedback":"Chefs are working very collaboratively, each taking on different tasks.","reason":"How they are interacting with each other (e.g. tossing onions to be cooked in pot) and getting right into the task.","cat":"SR","valence":"pos"},{"idx":29,"pid":"69c57c99","sentiment":5,"feedback":"They are both taking turns doing the same job, as to pick up from the other","reason":"They seem to have a good flow and are task sharing, responding to what is needed in the moment.","cat":"SA","valence":"pos"},{"idx":30,"pid":"66708c3d","sentiment":2,"feedback":"AI chef travels 1 square in the wrong direction to start","reason":"It is an unnecessary movement","cat":"CQ","valence":"neg"},{"idx":31,"pid":"66708c3d","sentiment":1,"feedback":"This is a huge dead time zone, where one chef is not preparing or contributing while the other does all the work","reason":"Massively unproductive","cat":"RW","valence":"neg"},{"idx":32,"pid":"69bf9e3d","sentiment":2,"feedback":"The chefs also seem to be somewhat disorganised with taking the dishes to the pots and serving. At times they don't seem to know where they are supposed to go.","reason":"Assigning tasks better would have made things more efficient.","cat":"SR","valence":"neg"},{"idx":33,"pid":"69bf9e3d","sentiment":2,"feedback":"The chefs appear to be trying to take onions to both pots, but are highly disorganised and don't seem to know where they are supposed to go.","reason":"If they had organised who was supposed to take onions to each pot, the process would be streamlined and faster.","cat":"SR","valence":"neg"},{"idx":35,"pid":"69e2ed0f","sentiment":5,"feedback":"The AI places onions on two separate counters (Brown Squares).","reason":"Efficiently, after the chef in the green hat serves the first soup, they can retrieve an onion sooner.","cat":"SA","valence":"pos"},{"idx":36,"pid":"69bf9e3d","sentiment":5,"feedback":"The chef are working together to fill both pots with onions.","reason":"They are efficiently working together to make as much as possible.","cat":"SR","valence":"pos"},{"idx":37,"pid":"69bf9e3d","sentiment":1,"feedback":"The blue chef has all the dishes on their side. They take plates near the green chef but don't hand them any. The green chef is never able to serve anything.","reason":"If they had moved dishes to where the green chef could reach them, the green chef would also be able to serve.","cat":"RW","valence":"neg"},{"idx":38,"pid":"5c747244","sentiment":4,"feedback":"I think that it is clear what the chefs are doing","reason":"Because I can understand what they are trying to achieve","cat":"CQ","valence":"pos"},{"idx":39,"pid":"5dd005a9","sentiment":1,"feedback":"Having to wait for each other.","reason":"Not a very efficient strategy.","cat":"CQ","valence":"neg"},{"idx":40,"pid":"5dd005a9","sentiment":1,"feedback":"They are getting in each others way.","reason":"Bad strategy for serving the most dishes.","cat":"SP","valence":"neg"},{"idx":42,"pid":"64a9858b","sentiment":5,"feedback":"Really good flow state where all 3 chefs are working in unison. Real good work.","reason":"Really well done with their movements and actions.","cat":"CQ","valence":"pos"},{"idx":43,"pid":"64a9858b","sentiment":2,"feedback":"Chef in the green hat was stood around waiting for it to be cooked, instead of going helping the other chefs.","reason":"Wasn't efficient time spent by green hat.","cat":"CQ","valence":"neg"},{"idx":46,"pid":"66708c3d","sentiment":1,"feedback":"Chef doesn't drop the dish for the other chef, leading to massive downtime on its side","reason":"Inefficient for no reason","cat":"CQ","valence":"neg"},{"idx":47,"pid":"69c57c99","sentiment":1,"feedback":"While they are all moving around and contributing, this seems very inefficient with no clear process.","reason":"Seeing many moving bodies, without much thought or process.","cat":"CQ","valence":"neg"},{"idx":48,"pid":"69e2ed0f","sentiment":2,"feedback":"Over the course of the video both chefs make unnecessary movements, wasting time.","reason":"The AI does not understand or was not instructed to be as efficient as possible.","cat":"SA","valence":"neg"},{"idx":49,"pid":"69c57c99","sentiment":2,"feedback":"This scene feels more productive, but also too crowded with now 4 chefs. Still feels disorganized, but at a faster pace, which does not equal better output.","reason":"Questioning the efficiency — too many cooks in the kitchen.","cat":"SP","valence":"neg"},{"idx":50,"pid":"69c57c99","sentiment":4,"feedback":"Chefs seem to be moving better and more cooperatively here. This part feels more organized and collaborative rather than all of them bouncing around.","reason":"Seeing more order and efficiency in their movements.","cat":"CQ","valence":"pos"},{"idx":51,"pid":"66708c3d","sentiment":5,"feedback":"AI chefs get into a good rhythm","reason":"Efficient actions by the chefs","cat":"CQ","valence":"pos"},{"idx":52,"pid":"66708c3d","sentiment":1,"feedback":"Moves without substance — passing things needing picked up","reason":"Unproductive","cat":"CQ","valence":"neg"},{"idx":53,"pid":"66e9a454","sentiment":2,"feedback":"The chefs prepared two onions instead of three","reason":"The wrong number of onions was used","cat":"SR","valence":"neg"},{"idx":54,"pid":"69bf9e3d","sentiment":5,"feedback":"The chefs are working together to bring the onions to two pots simultaneously.","reason":"The chefs are working together well, and correctly doing the first step.","cat":"SR","valence":"pos"},{"idx":55,"pid":"69bf9e3d","sentiment":4,"feedback":"The chefs are working together to take the onions to the pot, take the dishes while cooking and serve. Would only be more efficient if they filled both pots.","reason":"The chefs are working together well and doing it in the correct order.","cat":"SR","valence":"pos"},{"idx":56,"pid":"66e9a454","sentiment":4,"feedback":"Both chefs worked on their work areas without collaborating","reason":"(observed station division)","cat":"CQ","valence":"pos"},{"idx":57,"pid":"5d9b7c7e","sentiment":3,"feedback":"There is a communication gap — one chef had to wait for another.","reason":"The blue chef had to wait for green chef and this took time to serve dishes.","cat":"CQ","valence":"mixed"},{"idx":58,"pid":"67e1da8a","sentiment":2,"feedback":"There was a drop of onion","reason":"Everywhere is supposed to be clean","cat":"CQ","valence":"neg"},{"idx":59,"pid":"64a9858b","sentiment":2,"feedback":"Chef in the green hat let the onions cooked on his stove for far too long.","reason":"Lack of awareness of cooked onions.","cat":"SR","valence":"neg"},{"idx":60,"pid":"67e1da8a","sentiment":2,"feedback":"Dropping the onions where they are not supposed to","reason":"Distort order","cat":"CQ","valence":"neg"},{"idx":61,"pid":"698ea1be","sentiment":2,"feedback":"Here chefs were not in the correct open spot to transfer the soup.","reason":"Chefs were not in the correct open place to transfer the soup.","cat":"SR","valence":"neg"},{"idx":65,"pid":"698ea1be","sentiment":5,"feedback":"Chef blue hat handed off soup to chef in green hat.","reason":"Good placement of soup from chef in blue hat to chef in green hat.","cat":"CQ","valence":"pos"},{"idx":66,"pid":"67d41165","sentiment":4,"feedback":"One of the chef pick up the onion, the other was in the serving area also picking up the dish to serve the food","reason":"The chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":67,"pid":"66708c3d","sentiment":1,"feedback":"Never make use of both stoves","reason":"Failure to use all equipment available","cat":"SR","valence":"neg"},{"idx":68,"pid":"66708c3d","sentiment":1,"feedback":"Green hat chef is not completing any tasks, aimlessly wandering","reason":"Massive inefficiency","cat":"RW","valence":"neg"},{"idx":69,"pid":"66708c3d","sentiment":1,"feedback":"Needless movement around when it could have continued passing for efficiency","reason":"Needless inefficiency with no gain","cat":"CQ","valence":"neg"},{"idx":70,"pid":"5dd005a9","sentiment":1,"feedback":"They don't seem very coordinated and got in each other's way.","reason":"They could work more efficiently.","cat":"CQ","valence":"neg"},{"idx":72,"pid":"67d41165","sentiment":4,"feedback":"2 chefs: one picked up the onion, another added onion to the soup and picked up the dish in the serving area","reason":"The chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":77,"pid":"69e2ed0f","sentiment":2,"feedback":"The chef with the blue hat does not give Green hat an empty plate to use","reason":"The AI either is incapable of placing an empty plate on the counter or wasn't instructed that they could","cat":"SA","valence":"neg"},{"idx":78,"pid":"69bda464","sentiment":2,"feedback":"The chef in the blue hat is confusing the chef in green and forcing them to travel unnecessarily by serving onions in two different locations.","reason":"It would have been better to continue placing onions in a single, reliable spot. The abrupt switch is a time wasting, inefficient move.","cat":"SR","valence":"neg"},{"idx":79,"pid":"69e2ed0f","sentiment":4,"feedback":"With the addition of the third chef, they become more efficient","reason":"Another Chef","cat":"CQ","valence":"pos"},{"idx":80,"pid":"67d41165","sentiment":5,"feedback":"3 chefs present, each picking up the onion they needed and putting it in the soup, picking up a dish and serving the food","reason":"The 3 chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":81,"pid":"662fa9da","sentiment":3,"feedback":"The blue hat chef did not grab a plate for the other chef","reason":"It would be a good idea for the AI to give the other one plates because it cannot reach it","cat":"CQ","valence":"mixed"},{"idx":82,"pid":"64a9858b","sentiment":2,"feedback":"They were all over the place and didn't stay on their side of the middle table.","reason":"Not efficient.","cat":"SP","valence":"neg"}];
+
+var OOT_ITEMS = [{"idx":2,"pid":"67e1da8a","sentiment":5,"feedback":"It is going really well","reason":"For update","cat":"OOT","valence":"pos"},{"idx":10,"pid":"698ea1be","sentiment":5,"feedback":"Served 1","reason":"Served 1 correctly","cat":"OOT","valence":"pos"},{"idx":11,"pid":"698ea1be","sentiment":5,"feedback":"Correct onions to the pot x3","reason":"Correct amount of onions to the pot.","cat":"OOT","valence":"pos"},{"idx":13,"pid":"5d9b7c7e","sentiment":4,"feedback":"The feedback I would like to do that they are doing great work. They served 3 and their working process is fast.","reason":"The reason for this feedback is they are good at working","cat":"OOT","valence":"pos"},{"idx":24,"pid":"66e9a454","sentiment":5,"feedback":"The number of chefs increase to 4","reason":"To point out the chefs effective collaboration","cat":"OOT","valence":"pos"},{"idx":41,"pid":"5d9b7c7e","sentiment":1,"feedback":"The feedback is negative here.","reason":"There is totally miscommunication between two chefs so they not did good work.","cat":"OOT","valence":"neg"},{"idx":44,"pid":"67d41165","sentiment":4,"feedback":"Pick up onion. Add onion to the soup, pick up a dish and serve the soup","reason":"The chef was actually doing the exact steps","cat":"OOT","valence":"pos"},{"idx":45,"pid":"5d9b7c7e","sentiment":5,"feedback":"There is a miscommunication between chef they all are doing the same work rather than doing it in a strategic way.","reason":"They need to work together by team management.","cat":"OOT","valence":"pos"},{"idx":62,"pid":"698ea1be","sentiment":5,"feedback":"Correctly served 2 soups chef in green hat.","reason":"Good — served 2 soups correctly.","cat":"OOT","valence":"pos"},{"idx":63,"pid":"698ea1be","sentiment":5,"feedback":"Chef in green hat correctly served one soup.","reason":"Chef in green hat correctly served one soup.","cat":"OOT","valence":"pos"},{"idx":64,"pid":"698ea1be","sentiment":5,"feedback":"Chef in blue hat correctly put 3 onions in pot for the soup.","reason":"Chef in blue hat correctly placed 3 onions in the pot.","cat":"OOT","valence":"pos"},{"idx":71,"pid":"5d9b7c7e","sentiment":5,"feedback":"I have positive feedback for this.","reason":"Because they worked together make served 2","cat":"OOT","valence":"pos"},{"idx":73,"pid":"698ea1be","sentiment":5,"feedback":"positive-served 4 at the right spot to serve","reason":"Positive — served 4 in the right area.","cat":"OOT","valence":"pos"},{"idx":74,"pid":"698ea1be","sentiment":4,"feedback":"All three worked together 3 onions now in soup pot.","reason":"Positive — worked together all three onions in pot. Served one and 2 very fast.","cat":"OOT","valence":"pos"},{"idx":75,"pid":"698ea1be","sentiment":2,"feedback":"Says served 3 but did not see chef at serving area when 3 came up.","reason":"Did not see chef at serving spot for serve three.","cat":"OOT","valence":"neg"},{"idx":76,"pid":"698ea1be","sentiment":5,"feedback":"More onions in soup pot correctly","reason":"Positive — more onions in soup pot correct amount.","cat":"OOT","valence":"pos"},{"idx":83,"pid":"698ea1be","sentiment":5,"feedback":"Correct amount of onions in the pot","reason":"Positive — correct amount of 3 onions in the pot.","cat":"OOT","valence":"pos"},{"idx":84,"pid":"698ea1be","sentiment":5,"feedback":"Worked very fast to get first 3 onions in pot","reason":"Positive — got first three onions in pot correctly.","cat":"OOT","valence":"pos"},{"idx":85,"pid":"698ea1be","sentiment":5,"feedback":"Chef in orange correctly served 2 correct serving location","reason":"Chef in orange correctly served 2 — positive.","cat":"OOT","valence":"pos"},{"idx":86,"pid":"698ea1be","sentiment":5,"feedback":"Chef in blue served fast one in correct serving area.","reason":"Positive — chef in blue hat correctly served one.","cat":"OOT","valence":"pos"},{"idx":87,"pid":"698ea1be","sentiment":5,"feedback":"Chef in green hat correctly served one.","reason":"Chef in green hat correctly served one soup.","cat":"OOT","valence":"pos"},{"idx":88,"pid":"698ea1be","sentiment":5,"feedback":"Correct amount of 3 onions to the pot.","reason":"Correct amount of 3 onions to the pot.","cat":"OOT","valence":"pos"}];
+
+var currentFilter = 'all';
+var currentCat = 'ALL';
+
+function sColor(s){ return s>=4?{bg:'#C8E6C9',fc:'#2E7D32'}:s<=2?{bg:'#FFCDD2',fc:'#C62828'}:{bg:'#FFF9C4',fc:'#E65100'} }
+
+function getFiltered(){
+  return ALL_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  }).filter(function(it){
+    if(currentCat==='ALL') return true;
+    return it.cat===currentCat;
+  });
+}
+
+function catCount(catId, filter){
+  return ALL_ITEMS.filter(function(it){
+    var valOk = filter==='all'||( filter==='pos'&&it.valence==='pos' )||( filter==='neg'&&it.valence==='neg' );
+    return valOk && (catId==='ALL'||it.cat===catId);
+  }).length;
+}
+
+function buildCatTabs(){
+  var tabsEl = document.getElementById('cat-tabs');
+  tabsEl.innerHTML = '';
+  var allBtn = document.createElement('button');
+  allBtn.className = 'cat-tab' + (currentCat==='ALL'?' on':'');
+  allBtn.style.borderColor = currentCat==='ALL'?'#818cf8':'';
+  allBtn.style.color = currentCat==='ALL'?'var(--color-text-primary)':'var(--color-text-secondary)';
+  allBtn.innerHTML = '<span style="font-size:12px">전체</span><span class="cat-n" style="background:'+(currentCat==='ALL'?'#818cf8':'var(--surface-2)')+';color:'+(currentCat==='ALL'?'#0c0c0f':'var(--color-text-secondary)')+'">'+catCount('ALL',currentFilter)+'</span>';
+  allBtn.onclick = function(){ currentCat='ALL'; buildCatTabs(); renderItems(); };
+  tabsEl.appendChild(allBtn);
+
+  CATS.forEach(function(c){
+    var n = catCount(c.id, currentFilter);
+    var isOn = currentCat===c.id;
+    var btn = document.createElement('button');
+    btn.className = 'cat-tab' + (isOn?' on':'');
+    btn.style.borderColor = isOn?c.color:'';
+    btn.innerHTML = '<span class="cat-dot" style="background:'+c.color+'"></span>'
+      +'<span style="font-size:12px;color:'+(isOn?c.color:'var(--color-text-primary)')+'">'+c.label+'</span>'
+      +'<span class="cat-n" style="background:'+(isOn?c.color:c.light)+';color:'+(isOn?'#fff':c.color)+'">'+n+'</span>';
+    btn.onclick = (function(cid){ return function(){ currentCat=cid; buildCatTabs(); renderItems(); }; })(c.id);
+    tabsEl.appendChild(btn);
+  });
+}
+
+function renderItems(){
+  var items = getFiltered();
+  var list = document.getElementById('item-list');
+  list.innerHTML = '';
+
+  var total = ALL_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  }).length;
+  var catLabel = currentCat==='ALL'?'전체':CATS.find(function(c){return c.id===currentCat}).label;
+  document.getElementById('count-badge').textContent = catLabel+' '+items.length+'개 표시 / 유효 '+total+'개';
+
+  if(!items.length){
+    list.innerHTML = '<div class="empty-msg">해당 필터 조건에 맞는 항목이 없습니다.</div>';
+  } else {
+    var catColor = currentCat==='ALL'?'var(--color-border-secondary)':CATS.find(function(c){return c.id===currentCat}).color;
+    items.forEach(function(it){
+      var sc = sColor(it.sentiment);
+      var card = document.createElement('div');
+      card.className = 'item-card';
+      card.style.borderLeft = '3px solid ' + (currentCat==='ALL'?(CATS.find(function(c){return c.id===it.cat})||{color:'#ccc'}).color:catColor);
+      var head = document.createElement('div');
+      head.className = 'item-head';
+      head.innerHTML = '<span class="s-chip" style="background:'+sc.bg+';color:'+sc.fc+'">'+it.sentiment+'</span>'
+        +'<span class="item-fb">'+it.feedback+'</span>'
+        +'<span class="item-pid">'+it.pid+'</span>'
+        +'<span class="item-chevron">▼</span>';
+      var body = document.createElement('div');
+      body.className = 'item-body';
+      var catObj = CATS.find(function(c){return c.id===it.cat})||{label:it.cat,color:'#888',light:'#eee'};
+      body.innerHTML = '<div class="item-reason-lbl">Reason</div>'
+        +'<div class="item-reason">'+it.reason+'</div>'
+        +'<div style="margin-top:8px"><span style="font-size:10px;padding:2px 7px;border-radius:6px;background:'+catObj.light+';color:'+catObj.color+';font-weight:500">'+catObj.label+'</span></div>';
+      head.onclick = function(){
+        var open = body.style.display==='block';
+        body.style.display = open?'none':'block';
+        head.querySelector('.item-chevron').textContent = open?'▼':'▲';
+      };
+      card.appendChild(head);
+      card.appendChild(body);
+      list.appendChild(card);
+    });
+  }
+
+  var ootList = document.getElementById('oot-list');
+  ootList.innerHTML='';
+  var ootFiltered = OOT_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  });
+  document.querySelector('.oot-title').textContent = '⚠ Task 미이해 / 분류 불가 항목 (OOT) — '+ootFiltered.length+'개 · Taxonomy 분석에서 제외';
+  ootFiltered.forEach(function(it){
+    var sc = sColor(it.sentiment);
+    var card = document.createElement('div');
+    card.className = 'item-card';
+    card.style.borderLeft = '3px solid #444';
+    card.style.opacity = '0.7';
+    var head = document.createElement('div');
+    head.className = 'item-head';
+    head.innerHTML = '<span class="s-chip" style="background:'+sc.bg+';color:'+sc.fc+'">'+it.sentiment+'</span>'
+      +'<span class="item-fb">'+it.feedback+'</span>'
+      +'<span class="item-pid">'+it.pid+'</span>'
+      +'<span class="item-chevron">▼</span>';
+    var body = document.createElement('div');
+    body.className = 'item-body';
+    body.innerHTML = '<div class="item-reason-lbl">Reason</div><div class="item-reason">'+it.reason+'</div>';
+    head.onclick = function(){
+      var open=body.style.display==='block';
+      body.style.display=open?'none':'block';
+      head.querySelector('.item-chevron').textContent=open?'▼':'▲';
+    };
+    card.appendChild(head); card.appendChild(body); ootList.appendChild(card);
+  });
+}
+
+function setFilter(f, btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  currentFilter = f;
+  buildCatTabs();
+  renderItems();
+}
+
+document.querySelectorAll('.filter-btn[data-filter]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    setFilter(btn.dataset.filter, btn);
+  });
+});
+
+buildCatTabs();
+renderItems();
+</script>
+</div><!-- /panel-taxonomy -->
+
+</div><!-- /panel-wrap -->
+
+<script>
+(function initViewController() {
+  var DEFAULT_VIEW = 'dashboard';
+  var MOBILE_QUERY = '(max-width: 768px)';
+  var validViews = {dashboard:true, taxonomy:true, split:true};
+  var mobileQuery = window.matchMedia(MOBILE_QUERY);
+  var navTabs = Array.prototype.slice.call(document.querySelectorAll('.nav-tab[data-view]'));
+
+  function viewFromHash() {
+    return (window.location.hash || '#' + DEFAULT_VIEW).slice(1);
+  }
+
+  function normalizeView(name) {
+    if (!validViews[name]) return DEFAULT_VIEW;
+    if (name === 'split' && mobileQuery.matches) return DEFAULT_VIEW;
+    return name;
+  }
+
+  function syncHash(view) {
+    var nextHash = '#' + view;
+    if (window.location.hash !== nextHash) {
+      history.replaceState(null, '', nextHash);
+    }
+  }
+
+  function resizeCharts() {
+    setTimeout(function(){
+      if (!window.Chart || !Chart.getChart) return;
+      document.querySelectorAll('canvas').forEach(function(canvas){
+        var chart = Chart.getChart(canvas);
+        if (chart) chart.resize();
+      });
+    }, 80);
+  }
+
+  function applyView(name) {
+    var view = normalizeView(name);
+
+    document.body.setAttribute('data-view', view);
+    navTabs.forEach(function(tab){
+      var isActive = tab.dataset.view === view;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    syncHash(view);
+    resizeCharts();
+  }
+
+  navTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      applyView(tab.dataset.view);
+    });
+  });
+
+  window.addEventListener('hashchange', function(){
+    applyView(viewFromHash());
+  });
+
+  if (mobileQuery.addEventListener) {
+    mobileQuery.addEventListener('change', function(){ applyView(viewFromHash()); });
+  } else {
+    mobileQuery.addListener(function(){ applyView(viewFromHash()); });
+  }
+
+  applyView(viewFromHash());
+})();
+</script>
+
+</body>
+</html>

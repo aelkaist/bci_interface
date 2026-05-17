@@ -1,0 +1,220 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);font-size:13px}
+.wrap{padding:12px 0 24px}
+
+/* 상단 필터 + 요약 */
+.top-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-label{font-size:11px;color:var(--color-text-secondary);white-space:nowrap}
+.filter-btn{font-size:11px;padding:4px 12px;border-radius:14px;border:0.5px solid var(--color-border-secondary);cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary)}
+.filter-btn.on{color:var(--color-text-primary);border-color:var(--color-border-primary);background:var(--color-background-secondary)}
+.count-badge{font-size:11px;padding:3px 9px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);margin-left:auto}
+
+/* 카테고리 탭 */
+.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.cat-tab{font-size:11px;padding:5px 12px;border-radius:14px;border:0.5px solid var(--color-border-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;background:var(--color-background-primary)}
+.cat-tab.on{border-width:1.5px}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cat-n{font-size:10px;font-weight:500;padding:1px 5px;border-radius:6px;min-width:18px;text-align:center}
+
+/* 아이템 리스트 */
+.item-list{display:grid;gap:8px}
+.item-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;overflow:hidden}
+.item-head{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer}
+.s-chip{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.item-fb{font-size:12px;color:var(--color-text-primary);flex:1;line-height:1.4}
+.item-pid{font-size:10px;color:var(--color-text-tertiary);white-space:nowrap;flex-shrink:0}
+.item-chevron{font-size:10px;color:var(--color-text-tertiary);flex-shrink:0}
+.item-body{display:none;padding:8px 12px;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.item-reason-lbl{font-size:9px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.item-reason{font-size:11px;color:var(--color-text-secondary);line-height:1.55}
+
+.empty-msg{font-size:12px;color:var(--color-text-tertiary);text-align:center;padding:32px 0}
+
+/* OOT 구분선 */
+.oot-section{margin-top:20px;border-top:1px dashed var(--color-border-secondary);padding-top:14px}
+.oot-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:10px}
+</style>
+
+<div class="wrap">
+
+<div class="top-row">
+  <span class="filter-label">필터</span>
+  <button class="filter-btn on" onclick="setFilter('all',this)">전체 보기</button>
+  <button class="filter-btn" onclick="setFilter('pos',this)">긍정만 (S≥4)</button>
+  <button class="filter-btn" onclick="setFilter('neg',this)">부정만 (S≤2)</button>
+  <span class="count-badge" id="count-badge">총 67개 (OOT 22개 별도)</span>
+</div>
+
+<div class="cat-tabs" id="cat-tabs"></div>
+
+<div class="item-list" id="item-list"></div>
+
+<div class="oot-section" id="oot-section">
+  <div class="oot-title">⚠ Task 미이해 / 분류 불가 항목 (OOT) — 22개 · Taxonomy 분석에서 제외</div>
+  <div class="item-list" id="oot-list"></div>
+</div>
+
+</div>
+
+<script>
+var CATS = [
+  {id:'CQ', label:'Coordination Quality', desc:'협력의 질 전반', color:'#4F86F7', light:'#EBF1FE'},
+  {id:'RW', label:'Role Fairness',        desc:'역할 분배 공정성', color:'#E06C3A', light:'#FDF0EA'},
+  {id:'SR', label:'Strategy',             desc:'자원 배분·전략 일치', color:'#2DB37A', light:'#E6F7F0'},
+  {id:'SP', label:'Spatial',              desc:'공간·혼잡', color:'#9B59B6', light:'#F3EBF9'},
+  {id:'SA', label:'Sensemaking',          desc:'원인 귀인·ToM', color:'#C0A000', light:'#FDF8E1'},
+];
+
+var ALL_ITEMS = [{"idx":0,"pid":"69c57c99","sentiment":1,"feedback":"Unsure what chef in the blue hat is doing here. He seems to be pacing around while chef in the green hat is moving all about.","reason":"Questioning what blue chef's role is here.","cat":"RW","valence":"neg"},{"idx":1,"pid":"69c57c99","sentiment":2,"feedback":"Taking the onions to the pot one at a time seems very inefficient. ","reason":"There is a better way to complete this task.","cat":"SR","valence":"neg"},{"idx":3,"pid":"69c57c99","sentiment":5,"feedback":"Both are working together and efficiently, getting more done while both are simultaneously doing the same task for a greater output ","reason":"Seeing the increased efficiency in their tasking and output","cat":"CQ","valence":"pos"},{"idx":4,"pid":"69c57c99","sentiment":1,"feedback":"Green chef is pacing seemingly without purpose here while blue chef continues to work. It makes green chef look lazy or tired","reason":"Blue chef seems to now be working harder than green chef","cat":"RW","valence":"neg"},{"idx":5,"pid":"69e2ed0f","sentiment":1,"feedback":"The Chef get stuck","reason":"The AI gets confused trying to have all the chef put there onions at the same pot. Because of this they get stuck on one another. Wasting time.","cat":"SA","valence":"neg"},{"idx":6,"pid":"69e2ed0f","sentiment":1,"feedback":"The AI mainly focuses on one pot","reason":"I assume it happens because the AI momentarily forgets that the upper pot exists and tells all the chefs to do everything with the bottom pot.","cat":"SA","valence":"neg"},{"idx":7,"pid":"64a9858b","sentiment":2,"feedback":"They are all, focusing on the bottom stove again, and the top stove is not being used properly.","reason":"Inefficient decision making and movement.","cat":"SR","valence":"neg"},{"idx":8,"pid":"64a9858b","sentiment":4,"feedback":"Finally using the other stove, but a little too late.","reason":"Made some good decisions, but it was far too late.","cat":"SR","valence":"pos"},{"idx":9,"pid":"64a9858b","sentiment":2,"feedback":"They all went to the same stove, which caused a delay.","reason":"Inefficient decision making.","cat":"SR","valence":"neg"},{"idx":12,"pid":"64a9858b","sentiment":5,"feedback":"They worked really well, and had the correct way of doing things.","reason":"They were extremely efficient.","cat":"CQ","valence":"pos"},{"idx":14,"pid":"69bda464","sentiment":5,"feedback":"All three chefs are functioning efficiently as a unit, with minimal unnecessary actions, movements or delay.","reason":"The three chefs are operating as quick, efficient team by filling the pots in quick succession, cooking and serving with minimal delay.","cat":"SR","valence":"pos"},{"idx":15,"pid":"69bf9e3d","sentiment":2,"feedback":"One chef is passing the onion to the other chef to take to the pot. They are working together, but it isn't very efficient.","reason":"If they both took the onions to the pot it would be faster.","cat":"SR","valence":"neg"},{"idx":16,"pid":"69bf9e3d","sentiment":1,"feedback":"The same chef that took the onions to the pot starts taking the dishes to the pot and then serves while the other chef just moves onions around.","reason":"It's not very efficient. If both chefs were working together, such as one taking the dishes and the other serving, it would be a faster process.","cat":"RW","valence":"neg"},{"idx":17,"pid":"69bda464","sentiment":2,"feedback":"The movement of the four chefs could be significantly improved here. When the four chefs, onions in hand, are all crowded together in a single spot, they appeared lost and confused.","reason":"This kitchen is chaotic and too crowded and not well organized.","cat":"SA","valence":"neg"},{"idx":18,"pid":"69bda464","sentiment":1,"feedback":"The green-hatted chef appears confused in this section and fails to realize that there is a plate ready to serve in the top-right area.","reason":"The green-hatted chef appeared idle and confused — failed completely to meet their objective.","cat":"SA","valence":"neg"},{"idx":19,"pid":"69bda464","sentiment":5,"feedback":"Both chefs are working well, in tandem, filling their respective pots with onions with minimal delay. Good, solid teamwork.","reason":"Both chefs are working together far more efficiently this episode, without wasting time.","cat":"SR","valence":"pos"},{"idx":20,"pid":"69bda464","sentiment":2,"feedback":"The chef with the blue hat had previously efficiently chosen to pass the onions to the green hat; however, this time chose to travel around the entire kitchen — a time wasting, inefficient move.","reason":"It would have been better to pass all onions to the green hat, who was standing closest to the pot.","cat":"SR","valence":"neg"},{"idx":21,"pid":"5dd005a9","sentiment":1,"feedback":"Blue hat never hands green hat an empty plate.","reason":"Bad strategy.","cat":"CQ","valence":"neg"},{"idx":22,"pid":"5dd005a9","sentiment":5,"feedback":"They are working well as a team and saving time.","reason":"It seems like they are implementing a successful strategy.","cat":"CQ","valence":"pos"},{"idx":23,"pid":"5dd005a9","sentiment":2,"feedback":"Why did blue hat chef put an onion there?","reason":"Strange behavior.","cat":"CQ","valence":"neg"},{"idx":25,"pid":"66e9a454","sentiment":4,"feedback":"There were 3 chefs in the place for two but collaborated effectively","reason":"The number of chefs had increased","cat":"CQ","valence":"pos"},{"idx":26,"pid":"66708c3d","sentiment":5,"feedback":"Good transition and efficient movement","reason":"Efficient and productive","cat":"CQ","valence":"pos"},{"idx":27,"pid":"66708c3d","sentiment":1,"feedback":"Logjam at one stove with the other empty and all chefs fighting for space","reason":"Inefficient.","cat":"SP","valence":"neg"},{"idx":28,"pid":"69c57c99","sentiment":5,"feedback":"Chefs are working very collaboratively, each taking on different tasks.","reason":"How they are interacting with each other (e.g. tossing onions to be cooked in pot) and getting right into the task.","cat":"SR","valence":"pos"},{"idx":29,"pid":"69c57c99","sentiment":5,"feedback":"They are both taking turns doing the same job, as to pick up from the other","reason":"They seem to have a good flow and are task sharing, responding to what is needed in the moment.","cat":"SA","valence":"pos"},{"idx":30,"pid":"66708c3d","sentiment":2,"feedback":"AI chef travels 1 square in the wrong direction to start","reason":"It is an unnecessary movement","cat":"CQ","valence":"neg"},{"idx":31,"pid":"66708c3d","sentiment":1,"feedback":"This is a huge dead time zone, where one chef is not preparing or contributing while the other does all the work","reason":"Massively unproductive","cat":"RW","valence":"neg"},{"idx":32,"pid":"69bf9e3d","sentiment":2,"feedback":"The chefs also seem to be somewhat disorganised with taking the dishes to the pots and serving. At times they don't seem to know where they are supposed to go.","reason":"Assigning tasks better would have made things more efficient.","cat":"SR","valence":"neg"},{"idx":33,"pid":"69bf9e3d","sentiment":2,"feedback":"The chefs appear to be trying to take onions to both pots, but are highly disorganised and don't seem to know where they are supposed to go.","reason":"If they had organised who was supposed to take onions to each pot, the process would be streamlined and faster.","cat":"SR","valence":"neg"},{"idx":35,"pid":"69e2ed0f","sentiment":5,"feedback":"The AI places onions on two separate counters (Brown Squares).","reason":"Efficiently, after the chef in the green hat serves the first soup, they can retrieve an onion sooner.","cat":"SA","valence":"pos"},{"idx":36,"pid":"69bf9e3d","sentiment":5,"feedback":"The chef are working together to fill both pots with onions.","reason":"They are efficiently working together to make as much as possible.","cat":"SR","valence":"pos"},{"idx":37,"pid":"69bf9e3d","sentiment":1,"feedback":"The blue chef has all the dishes on their side. They take plates near the green chef but don't hand them any. The green chef is never able to serve anything.","reason":"If they had moved dishes to where the green chef could reach them, the green chef would also be able to serve.","cat":"RW","valence":"neg"},{"idx":38,"pid":"5c747244","sentiment":4,"feedback":"I think that it is clear what the chefs are doing","reason":"Because I can understand what they are trying to achieve","cat":"CQ","valence":"pos"},{"idx":39,"pid":"5dd005a9","sentiment":1,"feedback":"Having to wait for each other.","reason":"Not a very efficient strategy.","cat":"CQ","valence":"neg"},{"idx":40,"pid":"5dd005a9","sentiment":1,"feedback":"They are getting in each others way.","reason":"Bad strategy for serving the most dishes.","cat":"SP","valence":"neg"},{"idx":42,"pid":"64a9858b","sentiment":5,"feedback":"Really good flow state where all 3 chefs are working in unison. Real good work.","reason":"Really well done with their movements and actions.","cat":"CQ","valence":"pos"},{"idx":43,"pid":"64a9858b","sentiment":2,"feedback":"Chef in the green hat was stood around waiting for it to be cooked, instead of going helping the other chefs.","reason":"Wasn't efficient time spent by green hat.","cat":"CQ","valence":"neg"},{"idx":46,"pid":"66708c3d","sentiment":1,"feedback":"Chef doesn't drop the dish for the other chef, leading to massive downtime on its side","reason":"Inefficient for no reason","cat":"CQ","valence":"neg"},{"idx":47,"pid":"69c57c99","sentiment":1,"feedback":"While they are all moving around and contributing, this seems very inefficient with no clear process.","reason":"Seeing many moving bodies, without much thought or process.","cat":"CQ","valence":"neg"},{"idx":48,"pid":"69e2ed0f","sentiment":2,"feedback":"Over the course of the video both chefs make unnecessary movements, wasting time.","reason":"The AI does not understand or was not instructed to be as efficient as possible.","cat":"SA","valence":"neg"},{"idx":49,"pid":"69c57c99","sentiment":2,"feedback":"This scene feels more productive, but also too crowded with now 4 chefs. Still feels disorganized, but at a faster pace, which does not equal better output.","reason":"Questioning the efficiency — too many cooks in the kitchen.","cat":"SP","valence":"neg"},{"idx":50,"pid":"69c57c99","sentiment":4,"feedback":"Chefs seem to be moving better and more cooperatively here. This part feels more organized and collaborative rather than all of them bouncing around.","reason":"Seeing more order and efficiency in their movements.","cat":"CQ","valence":"pos"},{"idx":51,"pid":"66708c3d","sentiment":5,"feedback":"AI chefs get into a good rhythm","reason":"Efficient actions by the chefs","cat":"CQ","valence":"pos"},{"idx":52,"pid":"66708c3d","sentiment":1,"feedback":"Moves without substance — passing things needing picked up","reason":"Unproductive","cat":"CQ","valence":"neg"},{"idx":53,"pid":"66e9a454","sentiment":2,"feedback":"The chefs prepared two onions instead of three","reason":"The wrong number of onions was used","cat":"SR","valence":"neg"},{"idx":54,"pid":"69bf9e3d","sentiment":5,"feedback":"The chefs are working together to bring the onions to two pots simultaneously.","reason":"The chefs are working together well, and correctly doing the first step.","cat":"SR","valence":"pos"},{"idx":55,"pid":"69bf9e3d","sentiment":4,"feedback":"The chefs are working together to take the onions to the pot, take the dishes while cooking and serve. Would only be more efficient if they filled both pots.","reason":"The chefs are working together well and doing it in the correct order.","cat":"SR","valence":"pos"},{"idx":56,"pid":"66e9a454","sentiment":4,"feedback":"Both chefs worked on their work areas without collaborating","reason":"(observed station division)","cat":"CQ","valence":"pos"},{"idx":57,"pid":"5d9b7c7e","sentiment":3,"feedback":"There is a communication gap — one chef had to wait for another.","reason":"The blue chef had to wait for green chef and this took time to serve dishes.","cat":"CQ","valence":"mixed"},{"idx":58,"pid":"67e1da8a","sentiment":2,"feedback":"There was a drop of onion","reason":"Everywhere is supposed to be clean","cat":"CQ","valence":"neg"},{"idx":59,"pid":"64a9858b","sentiment":2,"feedback":"Chef in the green hat let the onions cooked on his stove for far too long.","reason":"Lack of awareness of cooked onions.","cat":"SR","valence":"neg"},{"idx":60,"pid":"67e1da8a","sentiment":2,"feedback":"Dropping the onions where they are not supposed to","reason":"Distort order","cat":"CQ","valence":"neg"},{"idx":61,"pid":"698ea1be","sentiment":2,"feedback":"Here chefs were not in the correct open spot to transfer the soup.","reason":"Chefs were not in the correct open place to transfer the soup.","cat":"SR","valence":"neg"},{"idx":65,"pid":"698ea1be","sentiment":5,"feedback":"Chef blue hat handed off soup to chef in green hat.","reason":"Good placement of soup from chef in blue hat to chef in green hat.","cat":"CQ","valence":"pos"},{"idx":66,"pid":"67d41165","sentiment":4,"feedback":"One of the chef pick up the onion, the other was in the serving area also picking up the dish to serve the food","reason":"The chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":67,"pid":"66708c3d","sentiment":1,"feedback":"Never make use of both stoves","reason":"Failure to use all equipment available","cat":"SR","valence":"neg"},{"idx":68,"pid":"66708c3d","sentiment":1,"feedback":"Green hat chef is not completing any tasks, aimlessly wandering","reason":"Massive inefficiency","cat":"RW","valence":"neg"},{"idx":69,"pid":"66708c3d","sentiment":1,"feedback":"Needless movement around when it could have continued passing for efficiency","reason":"Needless inefficiency with no gain","cat":"CQ","valence":"neg"},{"idx":70,"pid":"5dd005a9","sentiment":1,"feedback":"They don't seem very coordinated and got in each other's way.","reason":"They could work more efficiently.","cat":"CQ","valence":"neg"},{"idx":72,"pid":"67d41165","sentiment":4,"feedback":"2 chefs: one picked up the onion, another added onion to the soup and picked up the dish in the serving area","reason":"The chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":77,"pid":"69e2ed0f","sentiment":2,"feedback":"The chef with the blue hat does not give Green hat an empty plate to use","reason":"The AI either is incapable of placing an empty plate on the counter or wasn't instructed that they could","cat":"SA","valence":"neg"},{"idx":78,"pid":"69bda464","sentiment":2,"feedback":"The chef in the blue hat is confusing the chef in green and forcing them to travel unnecessarily by serving onions in two different locations.","reason":"It would have been better to continue placing onions in a single, reliable spot. The abrupt switch is a time wasting, inefficient move.","cat":"SR","valence":"neg"},{"idx":79,"pid":"69e2ed0f","sentiment":4,"feedback":"With the addition of the third chef, they become more efficient","reason":"Another Chef","cat":"CQ","valence":"pos"},{"idx":80,"pid":"67d41165","sentiment":5,"feedback":"3 chefs present, each picking up the onion they needed and putting it in the soup, picking up a dish and serving the food","reason":"The 3 chefs were actually doing the exact steps","cat":"CQ","valence":"pos"},{"idx":81,"pid":"662fa9da","sentiment":3,"feedback":"The blue hat chef did not grab a plate for the other chef","reason":"It would be a good idea for the AI to give the other one plates because it cannot reach it","cat":"CQ","valence":"mixed"},{"idx":82,"pid":"64a9858b","sentiment":2,"feedback":"They were all over the place and didn't stay on their side of the middle table.","reason":"Not efficient.","cat":"SP","valence":"neg"}];
+
+var OOT_ITEMS = [{"idx":2,"pid":"67e1da8a","sentiment":5,"feedback":"It is going really well","reason":"For update","cat":"OOT","valence":"pos"},{"idx":10,"pid":"698ea1be","sentiment":5,"feedback":"Served 1","reason":"Served 1 correctly","cat":"OOT","valence":"pos"},{"idx":11,"pid":"698ea1be","sentiment":5,"feedback":"Correct onions to the pot x3","reason":"Correct amount of onions to the pot.","cat":"OOT","valence":"pos"},{"idx":13,"pid":"5d9b7c7e","sentiment":4,"feedback":"The feedback I would like to do that they are doing great work. They served 3 and their working process is fast.","reason":"The reason for this feedback is they are good at working","cat":"OOT","valence":"pos"},{"idx":24,"pid":"66e9a454","sentiment":5,"feedback":"The number of chefs increase to 4","reason":"To point out the chefs effective collaboration","cat":"OOT","valence":"pos"},{"idx":41,"pid":"5d9b7c7e","sentiment":1,"feedback":"The feedback is negative here.","reason":"There is totally miscommunication between two chefs so they not did good work.","cat":"OOT","valence":"neg"},{"idx":44,"pid":"67d41165","sentiment":4,"feedback":"Pick up onion. Add onion to the soup, pick up a dish and serve the soup","reason":"The chef was actually doing the exact steps","cat":"OOT","valence":"pos"},{"idx":45,"pid":"5d9b7c7e","sentiment":5,"feedback":"There is a miscommunication between chef they all are doing the same work rather than doing it in a strategic way.","reason":"They need to work together by team management.","cat":"OOT","valence":"pos"},{"idx":62,"pid":"698ea1be","sentiment":5,"feedback":"Correctly served 2 soups chef in green hat.","reason":"Good — served 2 soups correctly.","cat":"OOT","valence":"pos"},{"idx":63,"pid":"698ea1be","sentiment":5,"feedback":"Chef in green hat correctly served one soup.","reason":"Chef in green hat correctly served one soup.","cat":"OOT","valence":"pos"},{"idx":64,"pid":"698ea1be","sentiment":5,"feedback":"Chef in blue hat correctly put 3 onions in pot for the soup.","reason":"Chef in blue hat correctly placed 3 onions in the pot.","cat":"OOT","valence":"pos"},{"idx":71,"pid":"5d9b7c7e","sentiment":5,"feedback":"I have positive feedback for this.","reason":"Because they worked together make served 2","cat":"OOT","valence":"pos"},{"idx":73,"pid":"698ea1be","sentiment":5,"feedback":"positive-served 4 at the right spot to serve","reason":"Positive — served 4 in the right area.","cat":"OOT","valence":"pos"},{"idx":74,"pid":"698ea1be","sentiment":4,"feedback":"All three worked together 3 onions now in soup pot.","reason":"Positive — worked together all three onions in pot. Served one and 2 very fast.","cat":"OOT","valence":"pos"},{"idx":75,"pid":"698ea1be","sentiment":2,"feedback":"Says served 3 but did not see chef at serving area when 3 came up.","reason":"Did not see chef at serving spot for serve three.","cat":"OOT","valence":"neg"},{"idx":76,"pid":"698ea1be","sentiment":5,"feedback":"More onions in soup pot correctly","reason":"Positive — more onions in soup pot correct amount.","cat":"OOT","valence":"pos"},{"idx":83,"pid":"698ea1be","sentiment":5,"feedback":"Correct amount of onions in the pot","reason":"Positive — correct amount of 3 onions in the pot.","cat":"OOT","valence":"pos"},{"idx":84,"pid":"698ea1be","sentiment":5,"feedback":"Worked very fast to get first 3 onions in pot","reason":"Positive — got first three onions in pot correctly.","cat":"OOT","valence":"pos"},{"idx":85,"pid":"698ea1be","sentiment":5,"feedback":"Chef in orange correctly served 2 correct serving location","reason":"Chef in orange correctly served 2 — positive.","cat":"OOT","valence":"pos"},{"idx":86,"pid":"698ea1be","sentiment":5,"feedback":"Chef in blue served fast one in correct serving area.","reason":"Positive — chef in blue hat correctly served one.","cat":"OOT","valence":"pos"},{"idx":87,"pid":"698ea1be","sentiment":5,"feedback":"Chef in green hat correctly served one.","reason":"Chef in green hat correctly served one soup.","cat":"OOT","valence":"pos"},{"idx":88,"pid":"698ea1be","sentiment":5,"feedback":"Correct amount of 3 onions to the pot.","reason":"Correct amount of 3 onions to the pot.","cat":"OOT","valence":"pos"}];
+
+var currentFilter = 'all';
+var currentCat = 'ALL';
+
+function sColor(s){ return s>=4?{bg:'#C8E6C9',fc:'#2E7D32'}:s<=2?{bg:'#FFCDD2',fc:'#C62828'}:{bg:'#FFF9C4',fc:'#E65100'} }
+
+function getFiltered(){
+  var items = ALL_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  }).filter(function(it){
+    if(currentCat==='ALL') return true;
+    return it.cat===currentCat;
+  });
+  return items;
+}
+
+function catCount(catId, filter){
+  return ALL_ITEMS.filter(function(it){
+    var valOk = filter==='all'||( filter==='pos'&&it.valence==='pos' )||( filter==='neg'&&it.valence==='neg' );
+    return valOk && (catId==='ALL'||it.cat===catId);
+  }).length;
+}
+
+function buildCatTabs(){
+  var tabsEl = document.getElementById('cat-tabs');
+  tabsEl.innerHTML = '';
+
+  // ALL tab
+  var allBtn = document.createElement('button');
+  allBtn.className = 'cat-tab' + (currentCat==='ALL'?' on':'');
+  allBtn.style.borderColor = currentCat==='ALL'?'#555':'';
+  allBtn.innerHTML = '<span style="font-size:12px">전체</span><span class="cat-n" style="background:#E0E0E0;color:#555">'+catCount('ALL',currentFilter)+'</span>';
+  allBtn.onclick = function(){ currentCat='ALL'; buildCatTabs(); renderItems(); };
+  tabsEl.appendChild(allBtn);
+
+  CATS.forEach(function(c){
+    var n = catCount(c.id, currentFilter);
+    var isOn = currentCat===c.id;
+    var btn = document.createElement('button');
+    btn.className = 'cat-tab' + (isOn?' on':'');
+    btn.style.borderColor = isOn?c.color:'';
+    btn.innerHTML = '<span class="cat-dot" style="background:'+c.color+'"></span>'
+      +'<span style="font-size:12px;color:'+(isOn?c.color:'var(--color-text-primary)')+'">'+c.label+'</span>'
+      +'<span class="cat-n" style="background:'+(isOn?c.color:c.light)+';color:'+(isOn?'#fff':c.color)+'">'+n+'</span>';
+    btn.onclick = (function(cid){ return function(){ currentCat=cid; buildCatTabs(); renderItems(); }; })(c.id);
+    tabsEl.appendChild(btn);
+  });
+}
+
+function renderItems(){
+  var items = getFiltered();
+  var list = document.getElementById('item-list');
+  list.innerHTML = '';
+
+  // badge
+  var total = ALL_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  }).length;
+  var catLabel = currentCat==='ALL'?'전체':CATS.find(function(c){return c.id===currentCat}).label;
+  document.getElementById('count-badge').textContent = catLabel+' '+items.length+'개 표시 / 유효 '+total+'개';
+
+  if(!items.length){
+    list.innerHTML = '<div class="empty-msg">해당 필터 조건에 맞는 항목이 없습니다.</div>';
+    return;
+  }
+
+  var catColor = currentCat==='ALL'?'var(--color-border-secondary)':CATS.find(function(c){return c.id===currentCat}).color;
+
+  items.forEach(function(it){
+    var sc = sColor(it.sentiment);
+    var card = document.createElement('div');
+    card.className = 'item-card';
+    card.style.borderLeft = '3px solid ' + (currentCat==='ALL'?(CATS.find(function(c){return c.id===it.cat})||{color:'#ccc'}).color:catColor);
+
+    var head = document.createElement('div');
+    head.className = 'item-head';
+    head.innerHTML = '<span class="s-chip" style="background:'+sc.bg+';color:'+sc.fc+'">'+it.sentiment+'</span>'
+      +'<span class="item-fb">'+it.feedback+'</span>'
+      +'<span class="item-pid">'+it.pid+'</span>'
+      +'<span class="item-chevron">▼</span>';
+
+    var body = document.createElement('div');
+    body.className = 'item-body';
+    var catObj = CATS.find(function(c){return c.id===it.cat})||{label:it.cat,color:'#888',light:'#eee'};
+    body.innerHTML = '<div class="item-reason-lbl">Reason</div>'
+      +'<div class="item-reason">'+it.reason+'</div>'
+      +'<div style="margin-top:8px"><span style="font-size:10px;padding:2px 7px;border-radius:6px;background:'+catObj.light+';color:'+catObj.color+';font-weight:500">'+catObj.label+'</span></div>';
+
+    head.onclick = function(){
+      var open = body.style.display==='block';
+      body.style.display = open?'none':'block';
+      head.querySelector('.item-chevron').textContent = open?'▼':'▲';
+    };
+
+    card.appendChild(head);
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+
+  // OOT 렌더
+  var ootList = document.getElementById('oot-list');
+  ootList.innerHTML='';
+  var ootFiltered = OOT_ITEMS.filter(function(it){
+    if(currentFilter==='pos') return it.valence==='pos';
+    if(currentFilter==='neg') return it.valence==='neg';
+    return true;
+  });
+  document.querySelector('.oot-title').textContent = '⚠ Task 미이해 / 분류 불가 항목 (OOT) — '+ootFiltered.length+'개 · Taxonomy 분석에서 제외';
+  ootFiltered.forEach(function(it){
+    var sc = sColor(it.sentiment);
+    var card = document.createElement('div');
+    card.className = 'item-card';
+    card.style.borderLeft = '3px solid #bbb';
+    card.style.opacity = '0.7';
+    var head = document.createElement('div');
+    head.className = 'item-head';
+    head.innerHTML = '<span class="s-chip" style="background:'+sc.bg+';color:'+sc.fc+'">'+it.sentiment+'</span>'
+      +'<span class="item-fb">'+it.feedback+'</span>'
+      +'<span class="item-pid">'+it.pid+'</span>'
+      +'<span class="item-chevron">▼</span>';
+    var body = document.createElement('div');
+    body.className = 'item-body';
+    body.innerHTML = '<div class="item-reason-lbl">Reason</div><div class="item-reason">'+it.reason+'</div>';
+    head.onclick = function(){
+      var open=body.style.display==='block';
+      body.style.display=open?'none':'block';
+      head.querySelector('.item-chevron').textContent=open?'▼':'▲';
+    };
+    card.appendChild(head); card.appendChild(body); ootList.appendChild(card);
+  });
+}
+
+function setFilter(f, btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+  currentFilter = f;
+  buildCatTabs();
+  renderItems();
+}
+
+// init
+buildCatTabs();
+renderItems();
+</script>
