@@ -143,7 +143,6 @@ export default function App() {
   const [isSurveySubmitting, setIsSurveySubmitting] = useState(false);
 
   // Per-episode survey states
-  const [showEpisodeSurvey, setShowEpisodeSurvey] = useState(false);
   const [episodeSurveyAnswers, setEpisodeSurveyAnswers] = useState({
     eq1: null,
     eq2: "",
@@ -152,7 +151,6 @@ export default function App() {
     eq5: "",
   });
   const [isEpisodeSurveySubmitting, setIsEpisodeSurveySubmitting] = useState(false);
-  const pendingEpisodeTransitionRef = useRef(null);
 
   // Quiz states
   const [quiz1Answer, setQuiz1Answer] = useState(null);
@@ -320,11 +318,9 @@ export default function App() {
   useEffect(() => {
     if (intervals.length > prevIntervalsLen.current) {
       setTimeout(() => {
-        if (scrollContainerRef.current) {
-          scrollContainerRef.current.scrollTo({
-            top: scrollContainerRef.current.scrollHeight,
-            behavior: "smooth"
-          });
+        const newItem = document.getElementById(`feedback-item-${intervals.length - 1}`);
+        if (newItem) {
+          newItem.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       }, 100);
     }
@@ -796,23 +792,12 @@ export default function App() {
       }
     }
 
-    // Store pending transition and show per-episode survey
-    pendingEpisodeTransitionRef.current = {
-      isFinalEpisode,
-      finalMainEndedAt,
-      nextIdx: currentMapIdx + 1,
-      completedEpisodeFileName: episode?.fileName || fileName || null,
-      completedEpisodeIndex: currentMapIdx + 1,
-    };
-    setEpisodeSurveyAnswers({ eq1: null, eq2: "", eq3: "", eq4: null, eq5: "" });
     cancelAnimationFrame(rafRef.current);
     setIsPlaying(false);
-    setShowEpisodeSurvey(true);
-  };
 
-  const handleEpisodeSurveySubmit = async () => {
-    const transition = pendingEpisodeTransitionRef.current;
-    if (!transition) return;
+    const nextIdx = currentMapIdx + 1;
+    const completedEpisodeIndex = currentMapIdx + 1;
+    const completedEpisodeFileName = episode?.fileName || fileName || null;
 
     // Save episode survey to Firestore
     try {
@@ -820,8 +805,8 @@ export default function App() {
       await saveEpisodeSurveyToFirestore({
         prolificId,
         experimentSessionId: experimentSessionIdRef.current,
-        episodeIndex: transition.completedEpisodeIndex,
-        episodeFileName: transition.completedEpisodeFileName,
+        episodeIndex: completedEpisodeIndex,
+        episodeFileName: completedEpisodeFileName,
         answers: episodeSurveyAnswers,
       });
     } catch (err) {
@@ -831,14 +816,14 @@ export default function App() {
       setIsEpisodeSurveySubmitting(false);
     }
 
-    setShowEpisodeSurvey(false);
-    pendingEpisodeTransitionRef.current = null;
+    // Reset survey for next episode
+    setEpisodeSurveyAnswers({ eq1: null, eq2: "", eq3: "", eq4: null, eq5: "" });
 
-    // Execute the pending transition
-    if (!transition.isFinalEpisode && transition.nextIdx < mapOrder.length) {
-      loadMapByIndex(mapOrder[transition.nextIdx]);
-      setCurrentMapIdx(transition.nextIdx);
-      setEpisodeCount(transition.nextIdx + 1);
+    // Execute the transition
+    if (!isFinalEpisode && nextIdx < mapOrder.length) {
+      loadMapByIndex(mapOrder[nextIdx]);
+      setCurrentMapIdx(nextIdx);
+      setEpisodeCount(nextIdx + 1);
     } else {
       // Go directly to post-experiment survey FIRST to avoid flash
       setInstructionStep(5);
@@ -849,7 +834,7 @@ export default function App() {
           experimentSessionIdRef.current,
           buildExperimentSessionPayload({
             status: "completed",
-            mainEndedAt: transition.finalMainEndedAt,
+            mainEndedAt: finalMainEndedAt,
             completedEpisodeCount: mapOrder.length || ALL_MAPS.length,
           })
         );
@@ -1119,7 +1104,7 @@ export default function App() {
                           <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", width: "85%", maxWidth: "320px", display: "flex", flexDirection: "column", gap: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
                             <div style={{ fontSize: "14px", fontWeight: "700", color: "#fff", textAlign: "left" }}>Survey</div>
                             <div style={{ fontSize: "13px", color: "#aaa", textAlign: "left", lineHeight: 1.4 }}>Overall, how would you rate the collaboration in this episode?</div>
-                            
+
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "4px" }}>
                               <span style={{ fontSize: "14px", filter: "grayscale(100%)", opacity: 0.6 }}>👎</span>
                               {[1, 2, 3, 4, 5].map(num => (
@@ -1612,19 +1597,19 @@ export default function App() {
       {
         id: "q1",
         type: "text",
-        text: "What did you notice most about the agents' collaboration across episodes?",
+        text: "Across all episodes, what challenges did you experience while monitoring the AI agents?",
         placeholder: "Type your response here...",
       },
       {
         id: "q2",
         type: "text",
-        text: "How did the environment or task setup affect your interpretation?",
+        text: "What, if anything, would have helped you monitor the AI agents more easily?",
         placeholder: "Type your response here...",
       },
       {
         id: "q3",
         type: "text",
-        text: "What was difficult to evaluate, and what information or tools would have helped?",
+        text: "Is there anything else you would like to share about your experience in this study?",
         placeholder: "Type your response here...",
       },
     ];
@@ -1668,11 +1653,7 @@ export default function App() {
     return (
       <div style={{ zoom: 1.1, minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: "auto" }}>
         {/* Top header bar — matches onboarding/episode survey nav */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-          {/* Left: badge */}
-          <span style={{ background: "rgba(252, 211, 77, 0.15)", color: "#fcd34d", padding: "4px 12px", borderRadius: "20px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(252, 211, 77, 0.3)" }}>
-            Final Survey
-          </span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "16px" }}>
           {/* Right: submit button */}
           <button
             disabled={!allAnswered || isSurveySubmitting}
@@ -1695,7 +1676,7 @@ export default function App() {
         {/* Content area — matches onboarding */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
           <h1 style={{ fontSize: "32px", fontWeight: "800", margin: "0 0 8px 0" }}>Post-Experiment Survey</h1>
-          <p style={{ fontSize: "16px", color: "#aaa", margin: "0 0 28px 0", lineHeight: 1.5 }}>You've completed all episodes. Please answer the following questions about your overall experience.</p>
+          <p style={{ fontSize: "16px", color: "#aaa", margin: "0 0 28px 0", lineHeight: 1.5 }}>You've completed all episodes. Please answer the following questions.</p>
 
           {/* Questions */}
           <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
@@ -1833,168 +1814,6 @@ export default function App() {
     );
   }
 
-  // ── Per-Episode Survey (between episodes) ──
-  if (showEpisodeSurvey) {
-    const EPISODE_SURVEY_QUESTIONS = [
-      {
-        id: "eq1",
-        type: "likert",
-        text: "To what extent did you feel that the agents collaborated in this episode?",
-        lowLabel: "Not at all",
-        highLabel: "Extremely",
-        scale: 5,
-      },
-      {
-        id: "eq2",
-        type: "text",
-        text: "Please briefly explain your rating.",
-      },
-      {
-        id: "eq3",
-        type: "text",
-        text: "How did the agents' behavior compare with what you expected in this episode?",
-      },
-      {
-        id: "eq4",
-        type: "likert",
-        text: "Did you have enough information to evaluate this episode?",
-        lowLabel: "Not enough at all",
-        highLabel: "Completely enough",
-        scale: 5,
-      },
-      {
-        id: "eq5",
-        type: "text",
-        text: "Please briefly explain your rating.",
-      },
-    ];
-
-    const epAllAnswered = EPISODE_SURVEY_QUESTIONS.every((q) => {
-      const val = episodeSurveyAnswers[q.id];
-      if (q.type === "likert") return val !== null;
-      return typeof val === "string" && val.trim().length > 0;
-    });
-    const epAnsweredCount = EPISODE_SURVEY_QUESTIONS.filter((q) => {
-      const val = episodeSurveyAnswers[q.id];
-      if (q.type === "likert") return val !== null;
-      return typeof val === "string" && val.trim().length > 0;
-    }).length;
-    const epTotalQuestions = EPISODE_SURVEY_QUESTIONS.length;
-    const transition = pendingEpisodeTransitionRef.current;
-
-    return (
-      <div style={{ zoom: 1.1, minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: "auto" }}>
-        {/* Top header bar — matches onboarding nav */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-          {/* Left: episode badge */}
-          <span style={{ background: "rgba(252, 211, 77, 0.15)", color: "#fcd34d", padding: "4px 12px", borderRadius: "20px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(252, 211, 77, 0.3)" }}>
-            Episode {transition?.completedEpisodeIndex || episodeCount} / {ALL_MAPS.length}
-          </span>
-          {/* Right: submit button (matches onboarding Next button) */}
-          <button
-            disabled={!epAllAnswered || isEpisodeSurveySubmitting}
-            onClick={handleEpisodeSurveySubmit}
-            style={{
-              padding: "14px 40px", fontSize: "16px", fontWeight: "700",
-              background: !epAllAnswered || isEpisodeSurveySubmitting ? "#333" : "#fcd34d",
-              color: !epAllAnswered || isEpisodeSurveySubmitting ? "#888" : "#000",
-              border: "none", borderRadius: "8px",
-              cursor: !epAllAnswered || isEpisodeSurveySubmitting ? "not-allowed" : "pointer",
-              boxShadow: "none", flexShrink: 0, transition: "all 0.2s",
-              pointerEvents: !epAllAnswered || isEpisodeSurveySubmitting ? "none" : "auto",
-              opacity: !epAllAnswered || isEpisodeSurveySubmitting ? 0.8 : 1,
-            }}
-          >
-            {isEpisodeSurveySubmitting ? "Saving..." : transition?.isFinalEpisode ? "To final survey →" : "To next episode →"}
-          </button>
-        </div>
-
-        {/* Content area — matches onboarding */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
-          <h1 style={{ fontSize: "32px", fontWeight: "800", margin: "0 0 8px 0" }}>Quick Episode Review</h1>
-          <p style={{ fontSize: "16px", color: "#aaa", margin: "0 0 28px 0", lineHeight: 1.5 }}>Before moving on, please share your thoughts on this episode.</p>
-
-          {/* Mini Episode Replay Player */}
-          {episode && episode.frames && episode.frames.length > 0 && (
-            <div style={{ marginBottom: "28px", padding: "20px", background: "#111", borderRadius: "16px", border: "1px solid #1a1a1a" }}>
-              <ReplayPlayer episode={episode} frameDuration={FRAME_DURATION} />
-            </div>
-          )}
-          {/* Questions */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-
-            {/* ── Question 1: Collaboration ── */}
-            <div style={{ padding: "32px 36px", background: "#111", borderRadius: "16px", border: "1px solid #1a1a1a" }}>
-              <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 20px 0", color: "#fff", lineHeight: 1.6 }}>
-                1. To what extent did you feel that the agents collaborated in this episode?
-              </p>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
-                <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", minWidth: "120px", textAlign: "right", paddingRight: "18px" }}>1 = Not at all</span>
-                <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
-                  {[1, 2, 3, 4, 5].map((val) => {
-                    const isSelected = episodeSurveyAnswers.eq1 === val;
-                    return (
-                      <button key={val} onClick={() => setEpisodeSurveyAnswers((prev) => ({ ...prev, eq1: val }))}
-                        style={{ width: "48px", height: "48px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", border: isSelected ? "2px solid #fcd34d" : "2px solid #333", background: isSelected ? "#fcd34d" : "#1a1a1a", color: isSelected ? "#000" : "#aaa", fontSize: "16px", fontWeight: "700", cursor: "pointer", transition: "all 0.15s ease", outline: "none", padding: 0 }}
-                        onMouseOver={(e) => { if (!isSelected) { e.currentTarget.style.borderColor = "#fcd34d"; e.currentTarget.style.background = "#222"; } }}
-                        onMouseOut={(e) => { if (!isSelected) { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.background = "#1a1a1a"; } }}
-                      >{val}</button>
-                    );
-                  })}
-                </div>
-                <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", minWidth: "120px", textAlign: "left", paddingLeft: "18px" }}>5 = Extremely</span>
-              </div>
-              <p style={{ fontSize: "15px", fontWeight: "500", margin: "0 0 12px 0", color: "#bbb", lineHeight: 1.5 }}>Please briefly explain your rating.</p>
-              <textarea value={episodeSurveyAnswers.eq2 || ""} onChange={(e) => setEpisodeSurveyAnswers((prev) => ({ ...prev, eq2: e.target.value }))} placeholder="Type your response here..." rows={3}
-                style={{ width: "100%", padding: "14px 16px", background: "#1a1a1a", border: "1px solid #333", borderRadius: "10px", color: "#f0f0f0", fontSize: "15px", fontFamily: "Inter, sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#fcd34d"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "#333"; }}
-              />
-            </div>
-
-            {/* ── Question 2: Expectations ── */}
-            <div style={{ padding: "32px 36px", background: "#111", borderRadius: "16px", border: "1px solid #1a1a1a" }}>
-              <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff", lineHeight: 1.6 }}>
-                2. How did the agents' behavior compare with what you expected in this episode?
-              </p>
-              <textarea value={episodeSurveyAnswers.eq3 || ""} onChange={(e) => setEpisodeSurveyAnswers((prev) => ({ ...prev, eq3: e.target.value }))} placeholder="Type your response here..." rows={3}
-                style={{ width: "100%", padding: "14px 16px", background: "#1a1a1a", border: "1px solid #333", borderRadius: "10px", color: "#f0f0f0", fontSize: "15px", fontFamily: "Inter, sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#fcd34d"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "#333"; }}
-              />
-            </div>
-
-            {/* ── Question 3: Information Sufficiency ── */}
-            <div style={{ padding: "32px 36px", background: "#111", borderRadius: "16px", border: "1px solid #1a1a1a" }}>
-              <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 20px 0", color: "#fff", lineHeight: 1.6 }}>
-                3. Did you have enough information to evaluate this episode?
-              </p>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "28px" }}>
-                <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", minWidth: "120px", textAlign: "right", paddingRight: "18px" }}>1 = Not enough at all</span>
-                <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
-                  {[1, 2, 3, 4, 5].map((val) => {
-                    const isSelected = episodeSurveyAnswers.eq4 === val;
-                    return (
-                      <button key={val} onClick={() => setEpisodeSurveyAnswers((prev) => ({ ...prev, eq4: val }))}
-                        style={{ width: "48px", height: "48px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", border: isSelected ? "2px solid #fcd34d" : "2px solid #333", background: isSelected ? "#fcd34d" : "#1a1a1a", color: isSelected ? "#000" : "#aaa", fontSize: "16px", fontWeight: "700", cursor: "pointer", transition: "all 0.15s ease", outline: "none", padding: 0 }}
-                        onMouseOver={(e) => { if (!isSelected) { e.currentTarget.style.borderColor = "#fcd34d"; e.currentTarget.style.background = "#222"; } }}
-                        onMouseOut={(e) => { if (!isSelected) { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.background = "#1a1a1a"; } }}
-                      >{val}</button>
-                    );
-                  })}
-                </div>
-                <span style={{ fontSize: "13px", color: "#888", fontWeight: "600", minWidth: "120px", textAlign: "left", paddingLeft: "18px" }}>5 = Completely enough</span>
-              </div>
-              <p style={{ fontSize: "15px", fontWeight: "500", margin: "0 0 12px 0", color: "#bbb", lineHeight: 1.5 }}>Please briefly explain your rating.</p>
-              <textarea value={episodeSurveyAnswers.eq5 || ""} onChange={(e) => setEpisodeSurveyAnswers((prev) => ({ ...prev, eq5: e.target.value }))} placeholder="Type your response here..." rows={3}
-                style={{ width: "100%", padding: "14px 16px", background: "#1a1a1a", border: "1px solid #333", borderRadius: "10px", color: "#f0f0f0", fontSize: "15px", fontFamily: "Inter, sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#fcd34d"; }} onBlur={(e) => { e.currentTarget.style.borderColor = "#333"; }}
-              />
-            </div>
-          </div>
-
-        </div>
-      </div>
-    );
-  }
 
 
   return (
@@ -2353,7 +2172,7 @@ export default function App() {
           width: `${panelWidth}px`,
           flexShrink: 0,
           borderLeft: hasEpisode ? "none" : "1px solid #1a1a1a",
-          padding: "80px 24px 24px 24px",
+          padding: "80px 24px 0px 24px",
           textAlign: "left",
           opacity: !hasEpisode ? 0.4 : 1,
           pointerEvents: !hasEpisode ? "none" : "auto",
@@ -2361,17 +2180,48 @@ export default function App() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden",
+          overflowY: "auto",
           background: "#080808",
           boxSizing: "border-box"
         }}
       >
-        <div style={{ marginBottom: "20px" }}>
 
 
-          {/* 타이틀 및 리셋(Reset) 버튼 */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "16px" }}>
-            <h3 style={{ margin: 0, color: "#fff", fontSize: "20px", fontWeight: "700", letterSpacing: "-0.5px" }}>Feedback</h3>
+        <div style={{ marginBottom: "24px" }}>
+          {hasEpisode && (
+            <div style={{ marginBottom: "32px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                <div style={{ width: "24px", height: "24px", background: "#333", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "12px" }}>1</div>
+                <h3 style={{ margin: 0, color: "#fff", fontSize: "18px", fontWeight: "700", letterSpacing: "-0.3px" }}>Collaboration Rating</h3>
+              </div>
+              <div style={{ padding: "24px", background: "#111", borderRadius: "12px", border: "1px solid #1a1a1a" }}>
+                <p style={{ fontSize: "14px", fontWeight: "600", margin: "0 0 20px 0", color: "#eee", lineHeight: 1.4 }}>
+                  Overall, how would you rate the collaboration in this episode?
+                </p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "0 10px", boxSizing: "border-box" }}>
+                  <span style={{ fontSize: "12px", color: "#aaa", fontWeight: "500" }}>Poor</span>
+                  {[1, 2, 3, 4, 5].map(num => (
+                    <div
+                      key={num}
+                      onClick={() => setEpisodeSurveyAnswers(prev => ({ ...prev, eq1: num }))}
+                      style={{
+                        width: "28px", height: "28px", borderRadius: "50%",
+                        background: episodeSurveyAnswers.eq1 === num ? "#fcd34d" : "#3f3f46",
+                        boxShadow: episodeSurveyAnswers.eq1 === num ? "none" : "inset 0 2px 4px rgba(0,0,0,0.5)",
+                        cursor: "pointer", transition: "all 0.2s"
+                      }}
+                    />
+                  ))}
+                  <span style={{ fontSize: "12px", color: "#aaa", fontWeight: "500" }}>Excellent</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section 2. Feedback */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+            <div style={{ width: "24px", height: "24px", background: "#333", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "12px" }}>2</div>
+            <h3 style={{ margin: 0, color: "#fff", fontSize: "18px", fontWeight: "700", letterSpacing: "-0.3px" }}>Feedback</h3>
 
           </div>
 
@@ -2427,7 +2277,7 @@ export default function App() {
             JSON 파일을 업로드해주세요
           </div>
         ) : intervals.length === 0 ? (
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", color: "#f0f0f0", fontSize: "16px", textAlign: "center", gap: "14px", padding: "0 20px" }}>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", color: "#f0f0f0", fontSize: "16px", fontFamily: "Inter, sans-serif", textAlign: "center", gap: "14px", padding: "80px 20px" }}>
             <span style={{ fontSize: "36px", opacity: 0.9 }}>💬</span>
             <div style={{ lineHeight: "1.6", fontWeight: "500", letterSpacing: "0.2px" }}>
               No feedback yet.<br />
@@ -2438,8 +2288,6 @@ export default function App() {
           <div
             ref={scrollContainerRef}
             style={{
-              flex: 1,
-              overflowY: "auto",
               textAlign: "left",
               paddingRight: "8px",
               paddingBottom: "20px",
@@ -2466,6 +2314,7 @@ export default function App() {
 
               return (
                 <div
+                  id={`feedback-item-${i}`}
                   key={i}
                   onClick={() => {
                     if (!isSelected) {
@@ -2860,6 +2709,50 @@ export default function App() {
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {hasEpisode && (
+          <div style={{ marginTop: "24px", marginBottom: "0px", flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+              <div style={{ width: "24px", height: "24px", background: "#333", color: "#fff", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "12px" }}>3</div>
+              <h3 style={{ margin: 0, color: "#fff", fontSize: "18px", fontWeight: "700", letterSpacing: "-0.3px" }}>Monitoring Difficulty</h3>
+            </div>
+            <div style={{ padding: "24px", background: "#111", borderRadius: "12px", border: "1px solid #1a1a1a" }}>
+              <p style={{ fontSize: "14px", fontWeight: "600", margin: "0 0 20px 0", color: "#eee", lineHeight: 1.4 }}>
+                How difficult was it to perceive and monitor what the agents were doing in this episode?
+              </p>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "0 10px", boxSizing: "border-box", marginBottom: "20px" }}>
+                <span style={{ fontSize: "12px", color: "#aaa" }}>Very Difficult</span>
+                {[1, 2, 3, 4, 5].map(num => (
+                  <div
+                    key={num}
+                    onClick={() => setEpisodeSurveyAnswers(prev => ({ ...prev, eq4: num }))}
+                    style={{
+                      width: "24px", height: "24px", borderRadius: "50%",
+                      background: episodeSurveyAnswers.eq4 === num ? "#fcd34d" : "#3f3f46",
+                      boxShadow: episodeSurveyAnswers.eq4 === num ? "none" : "inset 0 2px 4px rgba(0,0,0,0.5)",
+                      cursor: "pointer", transition: "all 0.2s"
+                    }}
+                  />
+                ))}
+                <span style={{ fontSize: "12px", color: "#aaa" }}>Very Easy</span>
+              </div>
+
+              <p style={{ fontSize: "14px", fontWeight: "600", margin: "0 0 8px 0", color: "#fff" }}>
+                Reason for your rating:
+              </p>
+              <textarea
+                value={episodeSurveyAnswers.eq5}
+                onChange={(e) => setEpisodeSurveyAnswers(prev => ({ ...prev, eq5: e.target.value }))}
+                placeholder="Write your reason here..."
+                rows={3}
+                style={{
+                  width: "100%", padding: "12px", background: "transparent", border: "1px solid #2a2a2a",
+                  borderRadius: "8px", color: "#ccc", fontSize: "13px", resize: "vertical", boxSizing: "border-box", outline: "none", fontFamily: "inherit"
+                }}
+              />
+            </div>
           </div>
         )}
       </div>
