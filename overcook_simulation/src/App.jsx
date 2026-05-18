@@ -1007,41 +1007,51 @@ export default function App() {
           {instructionStep === 0 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
               <style>{`
-                 @keyframes mouseMoveClick {
-                   0% { transform: translate(40px, 80px) rotate(-15deg); opacity: 0; }
-                   10% { transform: translate(40px, 80px) rotate(-15deg); opacity: 1; }
-                   20% { transform: translate(0px, 5px) rotate(-15deg); }
-                   23% { transform: translate(0px, 5px) rotate(-15deg) scale(0.8); }
-                   27% { transform: translate(0px, 5px) rotate(-15deg) scale(1); }
-                   35% { transform: translate(0px, 5px) rotate(-15deg); }
-                   45% { transform: translate(52px, 82px) rotate(-15deg); }
-                   48% { transform: translate(52px, 82px) rotate(-15deg) scale(0.8); }
-                   52% { transform: translate(52px, 82px) rotate(-15deg) scale(1); }
-                   75% { transform: translate(60px, 90px) rotate(-15deg); opacity: 1; }
-                   85% { opacity: 0; }
-                   100% { transform: translate(40px, 80px) rotate(-15deg); opacity: 0; }
+                 @keyframes feedbackStep {
+                   0%, 45% { opacity: 1; transform: translateX(0); pointer-events: auto; }
+                   50%, 100% { opacity: 0; transform: translateX(-20px); pointer-events: none; }
                  }
-                 @keyframes buttonClickMock {
-                   0%, 20% { transform: scale(1); boxShadow: 0 0 28px rgba(252, 211, 77, 0.4); }
-                   23% { transform: scale(0.94); boxShadow: 0 0 12px rgba(252, 211, 77, 0.8); background: #fde68a; }
-                   27%, 100% { transform: scale(1); boxShadow: 0 0 28px rgba(252, 211, 77, 0.4); background: #fcd34d; }
+                 @keyframes surveyStep {
+                   0%, 45% { opacity: 0; transform: translateX(20px); pointer-events: none; }
+                   50%, 95% { opacity: 1; transform: translateX(0); pointer-events: auto; }
+                   100% { opacity: 0; transform: translateX(20px); pointer-events: none; }
                  }
-                 @keyframes likertFadeIn {
-                   0%, 25% { opacity: 0; transform: translateY(-10px); pointer-events: none; }
-                   30%, 85% { opacity: 1; transform: translateY(0); pointer-events: auto; }
-                   90%, 100% { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+
+                 @keyframes cursorBlink {
+                   0%, 100% { opacity: 1; }
+                   50% { opacity: 0; }
                  }
-                 @keyframes likertPointClick {
-                   0%, 48% { background: #3f3f46; transform: scale(1); boxShadow: inset 0 2px 4px rgba(0,0,0,0.5); }
-                   50% { background: #22c55e; transform: scale(0.8); boxShadow: 0 0 12px rgba(34,197,94,0.6); } 
-                   55%, 85% { background: #22c55e; transform: scale(1.2); boxShadow: 0 0 16px rgba(34,197,94,0.8); }
-                   90%, 100% { background: #3f3f46; transform: scale(1); boxShadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+                 @keyframes surveyLikertClick {
+                   0%, 65% { background: #3f3f46; transform: scale(1); }
+                   68% { background: #22c55e; transform: scale(0.8); boxShadow: 0 0 12px rgba(34,197,94,0.6); }
+                   72%, 95% { background: #22c55e; transform: scale(1.2); boxShadow: 0 0 16px rgba(34,197,94,0.8); }
+                   100% { background: #3f3f46; transform: scale(1); }
+                 }
+                 @keyframes mouseMoveCombined {
+                   /* Feedback Phase: 0% ~ 50% */
+                   0% { transform: translate(50px, 80px) rotate(-15deg); opacity: 0; }
+                   5% { transform: translate(50px, 80px) rotate(-15deg); opacity: 1; }
+                   12% { transform: translate(-30px, -10px) rotate(-15deg); }
+                   14% { transform: translate(-30px, -10px) rotate(-15deg) scale(0.8); }
+                   16% { transform: translate(-30px, -10px) rotate(-15deg) scale(1); }
+                   35% { transform: translate(-30px, -10px) rotate(-15deg); }
+                   40% { transform: translate(60px, 90px) rotate(-15deg); opacity: 1; }
+                   45% { opacity: 0; transform: translate(60px, 90px) rotate(-15deg); }
+                   
+                   /* Survey Phase: 50% ~ 100% */
+                   50% { transform: translate(50px, 80px) rotate(-15deg); opacity: 0; }
+                   55% { transform: translate(50px, 80px) rotate(-15deg); opacity: 1; }
+                   65% { transform: translate(30px, 30px) rotate(-15deg); }
+                   68% { transform: translate(30px, 30px) rotate(-15deg) scale(0.8); }
+                   70% { transform: translate(30px, 30px) rotate(-15deg) scale(1); }
+                   85% { transform: translate(30px, 30px) rotate(-15deg); opacity: 1; }
+                   90%, 100% { opacity: 0; transform: translate(50px, 80px) rotate(-15deg); }
                  }
                `}</style>
               <div>
-                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome to Our Experiment 👋</h1>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Watch AI Chefs Collaborate and Give Feedback 👋</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
-                  In this study, your task is to <strong style={{ color: "#fff" }}>watch AI chef characters work together</strong> and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration.
+                  In this study, your task is to <strong style={{ color: "#fff" }}> watch 4 short videos </strong>  of AI chef characters work together and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration.
                 </p>
               </div>
               <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -1065,7 +1075,7 @@ export default function App() {
                         </div>
                       </div>
                     </div>
-                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Watch AI Chefs work together</h2>
+                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>1. Watch AI Chefs work together</h2>
                     <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch short videos of AI chef characters making onion soup.</p>
                   </div>
 
@@ -1075,86 +1085,66 @@ export default function App() {
                     {/* Feedback UI Mockup Container */}
                     <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
                       {/* Sleek Dark Card */}
-                      <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", flexShrink: 0 }}>
+                      <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
 
-                        <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", width: "85%", maxWidth: "320px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-                          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", opacity: 0.6 }}>
-                            <div style={{ width: "70%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
-                            <div style={{ width: "45%", height: "6px", background: "#3f3f46", borderRadius: "3px" }} />
-                          </div>
+                        {/* Fake Mouse Cursor Overlay - shared across phases */}
+                        <div style={{
+                          position: "absolute",
+                          top: "50%", left: "50%",
+                          marginLeft: "-10px", marginTop: "-30px",
+                          width: "20px", height: "20px",
+                          pointerEvents: "none", zIndex: 20,
+                          animation: "mouseMoveCombined 12s ease-in-out infinite"
+                        }}>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
+                            <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
+                          </svg>
+                        </div>
 
-                          <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-                            <div style={{
-                              background: "#fcd34d",
-                              color: "#18181b",
-                              padding: "10px 24px",
-                              borderRadius: "8px",
-                              fontSize: "13px",
-                              fontWeight: "700",
-                              position: "relative",
-                              zIndex: 2,
-                              animation: "buttonClickMock 6s ease-in-out infinite"
-                            }}>
-                              + Add Feedback
-                            </div>
-
-                            {/* Likert Scale Container */}
-                            <div style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              gap: "10px",
-                              background: "#222",
-                              padding: "12px 18px",
-                              borderRadius: "12px",
-                              border: "1px solid #333",
-                              position: "absolute",
-                              top: "100%",
-                              marginTop: "12px",
-                              width: "max-content",
-                              zIndex: 1,
-                              animation: "likertFadeIn 6s ease-in-out infinite",
-                              boxShadow: "0 8px 24px rgba(0,0,0,0.6)"
-                            }}>
-                              <span style={{ fontSize: "11px", color: "#aaa", fontWeight: "600", letterSpacing: "0.2px" }}>RATE THIS BEHAVIOR</span>
-                              <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
-                                <span style={{ fontSize: "16px", filter: "grayscale(100%)", opacity: 0.6 }}>👎</span>
-                                {[1, 2, 3, 4, 5].map(num => (
-                                  <div key={num} style={{
-                                    width: "18px", height: "18px",
-                                    borderRadius: "50%",
-                                    background: "#3f3f46",
-                                    boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5)",
-                                    animation: num === 5 ? "likertPointClick 6s ease-in-out infinite" : "none"
-                                  }} />
-                                ))}
-                                <span style={{ fontSize: "16px" }}>👍</span>
+                        {/* Phase 1: Feedback */}
+                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", animation: "feedbackStep 12s ease-in-out infinite" }}>
+                          <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", width: "85%", maxWidth: "320px", display: "flex", flexDirection: "column", gap: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+                            <div style={{ fontSize: "14px", fontWeight: "700", color: "#fff", textAlign: "left" }}>Add Feedback</div>
+                            <div style={{ width: "100%", height: "60px", background: "#111", border: "1px solid #333", borderRadius: "8px", padding: "10px 12px", display: "flex", alignItems: "flex-start" }}>
+                              <div style={{ display: "flex", alignItems: "center", height: "14px", width: "100%" }}>
+                                <span style={{ color: "#777", fontSize: "13px" }}>Write your feedback here...</span>
                               </div>
                             </div>
+                            <div style={{ padding: "4px 12px", background: "#fcd34d", color: "#000", fontSize: "11px", fontWeight: "bold", borderRadius: "6px", alignSelf: "flex-end" }}>Submit</div>
+                          </div>
+                        </div>
 
-                            {/* Fake Mouse Cursor Overlay */}
-                            <div style={{
-                              position: "absolute",
-                              top: "6px", left: "50%",
-                              marginLeft: "-6px",
-                              width: "20px", height: "20px",
-                              pointerEvents: "none", zIndex: 10,
-                              animation: "mouseMoveClick 6s ease-in-out infinite"
-                            }}>
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
-                                <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
-                              </svg>
+                        {/* Phase 2: Survey */}
+                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", animation: "surveyStep 12s ease-in-out infinite" }}>
+                          <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", width: "85%", maxWidth: "320px", display: "flex", flexDirection: "column", gap: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
+                            <div style={{ fontSize: "14px", fontWeight: "700", color: "#fff", textAlign: "left" }}>Survey</div>
+                            <div style={{ fontSize: "13px", color: "#aaa", textAlign: "left", lineHeight: 1.4 }}>Overall, how would you rate the collaboration in this episode?</div>
+                            
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "4px" }}>
+                              <span style={{ fontSize: "14px", filter: "grayscale(100%)", opacity: 0.6 }}>👎</span>
+                              {[1, 2, 3, 4, 5].map(num => (
+                                <div key={num} style={{
+                                  width: "22px", height: "22px",
+                                  borderRadius: "50%",
+                                  background: "#3f3f46",
+                                  boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5)",
+                                  animation: num === 4 ? "surveyLikertClick 12s ease-in-out infinite" : "none",
+                                  boxSizing: "border-box"
+                                }} />
+                              ))}
+                              <span style={{ fontSize: "14px" }}>👍</span>
                             </div>
                           </div>
                         </div>
+
                       </div>
 
                       {/* Spacer to match Card 1's progress bar height */}
                       <div style={{ height: "16px", width: "100%" }} />
                     </div>
 
-                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>Give Feedback</h2>
-                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Whenever you spot a mistake or effective collaboration, pause the video and share your feedback.</p>
+                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>2. Give Feedback and Complete the Survey</h2>
+                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Pause the video to give feedback on effective teamwork or possible mistakes. Afterward, complete a short survey.</p>
                   </div>
                 </div>
               </div>
@@ -1168,7 +1158,7 @@ export default function App() {
 
               {/* To cook onion soup timeline */}
               <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
-                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To cook onion soup,</strong> AI chefs need:</p>
+                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To cook onion soup, </strong> AI chefs need:</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
 
                   {/* Onions */}
