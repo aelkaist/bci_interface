@@ -8,23 +8,30 @@ const CHEF_HAT_VARIANTS = [
   "redhat",
 ];
 
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function smoothStep(t) {
+  return t * t * (3 - 2 * t);
+}
+
 export default function OvercookScene({
   staticInfo,
   frame,
   frames,
+  frameIndex = null,
+  elapsed = null,
   isReplaying,
-  playbackRate = 1,
   frameDuration = 0.3,
 }) {
   const gridSize = 80;
   const { grid, width, height } = staticInfo;
   const sceneContainerRef = useRef(null);
-
-  // 애니메이션용 이전 프레임
-  const prevFrameRef = useRef(frame);
-  const transitionFromFrameRef = useRef(frame);
-
-  const [interpProgress, setInterpProgress] = useState(1);
 
   const [spritesData, setSpritesData] = useState(null);
   const [deliveryEffects, setDeliveryEffects] = useState([]);
@@ -88,33 +95,6 @@ export default function OvercookScene({
     observer.observe(container);
     return () => observer.disconnect();
   }, []);
-
-  // 플레이어 이동 보간용
-  useEffect(() => {
-    transitionFromFrameRef.current = prevFrameRef.current;
-    prevFrameRef.current = frame;
-    setInterpProgress(0);
-    let raf;
-    let start;
-    const stepDurationMs = (frameDuration * 1000) / Math.max(playbackRate, 0.01);
-    const transitionMs = Math.max(60, Math.min(150, stepDurationMs - 16));
-
-    const animate = (time) => {
-      if (!start) start = time;
-      const elapsed = time - start;
-      // 다음 프레임이 들어오기 전에 보간을 끝내서 고배속에서 누적 점프를 막습니다.
-      const progress = Math.min(elapsed / transitionMs, 1);
-      setInterpProgress(progress);
-      if (progress < 1) {
-        raf = requestAnimationFrame(animate);
-      }
-    };
-    raf = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(raf);
-    };
-  }, [frame, frameDuration, playbackRate]);
 
   // 양파 요리 타이머 계산용
   const cookingRemainingByKey = useMemo(() => {
@@ -422,21 +402,61 @@ export default function OvercookScene({
     );
   };
 
+  const frameArray = Array.isArray(frames) ? frames : [];
+  const fallbackFrameIndex = Math.max(frameArray.indexOf(frame), 0);
+  const resolvedFrameIndex =
+    Number.isInteger(frameIndex) && frameIndex >= 0
+      ? frameIndex
+      : fallbackFrameIndex;
+  const exactFramePosition =
+    Number.isFinite(elapsed) && frameDuration > 0
+      ? elapsed / frameDuration
+      : resolvedFrameIndex;
+  const maxFrameIndex = Math.max(frameArray.length - 1, 0);
+  const clampedFramePosition = clamp(exactFramePosition, 0, maxFrameIndex);
+  const playerSourceIndex = clamp(Math.floor(clampedFramePosition), 0, maxFrameIndex);
+  const playerTargetIndex = Math.min(playerSourceIndex + 1, maxFrameIndex);
+  const playerFrame = frameArray[playerSourceIndex] || frame;
+  const playerTargetFrame = frameArray[playerTargetIndex] || playerFrame;
+  const playerInterpolationProgress =
+    playerTargetIndex !== playerSourceIndex
+      ? smoothStep(clamp(clampedFramePosition - playerSourceIndex, 0, 1))
+      : 0;
+
+  const getPlayerKey = (player, index) =>
+    player?.id ?? player?.playerId ?? player?.name ?? `player-${index}`;
+
+  const findTargetPlayer = (player, index) => {
+    const playerKey = getPlayerKey(player, index);
+    return (
+      playerTargetFrame?.players?.find(
+        (candidate, candidateIndex) =>
+          getPlayerKey(candidate, candidateIndex) === playerKey
+      ) ||
+      playerTargetFrame?.players?.[index] ||
+      player
+    );
+  };
+
   const renderPlayer = (player, index) => {
-    const prevPlayer = transitionFromFrameRef.current?.players?.[index] || player;
+    const targetPlayer = findTargetPlayer(player, index);
 
     const { x, y } = player.position;
-    const prevX = prevPlayer.position?.x ?? x;
-    const prevY = prevPlayer.position?.y ?? y;
+    const targetX = targetPlayer.position?.x ?? x;
+    const targetY = targetPlayer.position?.y ?? y;
+    const movementDistance = Math.abs(targetX - x) + Math.abs(targetY - y);
+    const canInterpolateMove = movementDistance <= 1.01;
+    const movementProgress = canInterpolateMove ? playerInterpolationProgress : 0;
 
-    const interpX = lerp(prevX, x, interpProgress);
-    const interpY = lerp(prevY, y, interpProgress);
+    const interpX = lerp(x, targetX, movementProgress);
+    const interpY = lerp(y, targetY, movementProgress);
 
     const scale = 1.0;
     const offset = (gridSize * (scale - 1)) / 2;
 
     const isInitialFrame = frame.timestep === 0;
-    const rawOrientation = player.orientation || "south";
+    const orientationPlayer = movementProgress > 0.15 ? targetPlayer : player;
+    const rawOrientation = orientationPlayer.orientation || player.orientation || "south";
     const orientation = isInitialFrame ? "SOUTH" : normalizeDir(rawOrientation);
 
     const held = player.heldObject?.name;
@@ -504,10 +524,6 @@ export default function OvercookScene({
     );
   }
 
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
   return (
     <div
       ref={sceneContainerRef}
@@ -540,7 +556,7 @@ export default function OvercookScene({
       >
         {backgroundTiles}
         {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
-        {frame.players.map((p, i) => renderPlayer(p, i))}
+        {(playerFrame.players || []).map((p, i) => renderPlayer(p, i))}
 
         {/* 배달 팝업 이펙트 */}
         {deliveryEffects.map((eff, index) => {

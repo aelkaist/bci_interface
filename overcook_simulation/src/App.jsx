@@ -11,7 +11,19 @@ import {
   saveEpisodeSurveyToFirestore,
 } from "./firebase";
 
-const mapModules = import.meta.glob("./maps/*/*.json");
+const FIXED_MAP_PATHS = [
+  "2_forced_hard/2_forced_hard_seed1_3520000_120.json",
+  "2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
+  "2_incentivized_hard/2_incentivized_hard_seed1_2520000_140.json",
+  "2_incentivized_hard_4/2_incentivized_hard_4_seed2_2520000_140.json",
+];
+
+const mapModules = import.meta.glob([
+  "./maps/2_forced_hard/2_forced_hard_seed1_3520000_120.json",
+  "./maps/2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
+  "./maps/2_incentivized_hard/2_incentivized_hard_seed1_2520000_140.json",
+  "./maps/2_incentivized_hard_4/2_incentivized_hard_4_seed2_2520000_140.json",
+]);
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -25,32 +37,23 @@ function shuffle(items) {
 }
 
 function buildRandomizedMapSet(modules) {
-  const mapsByLayout = Object.entries(modules).reduce((acc, [path, load]) => {
-    const relativePath = path.replace("./maps/", "");
-    const [layoutName] = relativePath.split("/");
+  const fixedMaps = FIXED_MAP_PATHS.map((name) => {
+    const load = modules[`./maps/${name}`];
+    const [layoutName] = name.split("/");
 
-    if (!layoutName || !relativePath.endsWith(".json")) return acc;
+    if (!load) {
+      console.error(`[maps] Missing fixed map: ${name}`);
+      return null;
+    }
 
-    if (!acc[layoutName]) acc[layoutName] = [];
-    acc[layoutName].push({
-      name: relativePath,
+    return {
+      name,
       layoutName,
       load,
-    });
+    };
+  }).filter(Boolean);
 
-    return acc;
-  }, {});
-
-  const oneMapPerLayout = Object.keys(mapsByLayout)
-    .sort((a, b) => a.localeCompare(b))
-    .map((layoutName) => {
-      const candidates = mapsByLayout[layoutName].sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    });
-
-  return shuffle(oneMapPerLayout);
+  return shuffle(fixedMaps);
 }
 
 const ALL_MAPS = buildRandomizedMapSet(mapModules);
@@ -82,13 +85,17 @@ function createExperimentSessionId() {
 
 // ── Mini Replay Player for Episode Survey ──
 function ReplayPlayer({ episode, frameDuration }) {
-  const [replayIdx, setReplayIdx] = React.useState(0);
+  const [replayElapsed, setReplayElapsed] = React.useState(0);
   const [playing, setPlaying] = React.useState(true);
   const rafRef = React.useRef(null);
   const lastTimeRef = React.useRef(null);
-  const accRef = React.useRef(0);
   const frames = episode?.frames || [];
   const total = frames.length;
+  const totalDuration = total * frameDuration;
+  const replayIdx =
+    total > 0
+      ? Math.min(Math.floor(replayElapsed / frameDuration), total - 1)
+      : 0;
 
   React.useEffect(() => {
     if (!playing || total === 0) {
@@ -98,26 +105,18 @@ function ReplayPlayer({ episode, frameDuration }) {
     const tick = (now) => {
       if (lastTimeRef.current !== null) {
         const dt = (now - lastTimeRef.current) / 1000;
-        accRef.current += dt;
-        if (accRef.current >= frameDuration) {
-          const steps = Math.floor(accRef.current / frameDuration);
-          accRef.current -= steps * frameDuration;
-          setReplayIdx((prev) => {
-            const next = prev + steps;
-            return next >= total ? 0 : next; // loop
-          });
-        }
+        setReplayElapsed((prev) => (prev + dt) % totalDuration);
       }
       lastTimeRef.current = now;
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(rafRef.current); lastTimeRef.current = null; };
-  }, [playing, total, frameDuration]);
+  }, [playing, total, totalDuration]);
 
   if (total === 0) return null;
   const currentFrame = frames[Math.min(replayIdx, total - 1)];
-  const pct = ((replayIdx / (total - 1)) * 100).toFixed(1);
+  const pct = totalDuration > 0 ? ((replayElapsed / totalDuration) * 100).toFixed(1) : 0;
 
   return (
     <div>
@@ -127,8 +126,9 @@ function ReplayPlayer({ episode, frameDuration }) {
             staticInfo={episode.staticInfo}
             frame={currentFrame}
             frames={frames}
+            frameIndex={replayIdx}
+            elapsed={replayElapsed}
             isReplaying={false}
-            playbackRate={1}
             frameDuration={frameDuration}
           />
         </div>
@@ -142,7 +142,7 @@ function ReplayPlayer({ episode, frameDuration }) {
           {playing ? "⏸ Pause" : "▶ Play"}
         </button>
         <button
-          onClick={() => { setReplayIdx(0); setPlaying(true); accRef.current = 0; lastTimeRef.current = null; }}
+          onClick={() => { setReplayElapsed(0); setPlaying(true); lastTimeRef.current = null; }}
           style={{ background: "#1a1a1a", border: "1px solid #333", borderRadius: "8px", color: "#f0f0f0", fontSize: "14px", padding: "6px 14px", cursor: "pointer", fontWeight: "600", transition: "all 0.15s" }}
         >
           ↺ Restart
@@ -915,7 +915,7 @@ export default function App() {
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
       btnText = "Start Experiment";
-      isDisabled = !hasReadInstructions || mapOrder.length === 0;
+      isDisabled = !hasReadInstructions || mapOrder.length !== FIXED_MAP_PATHS.length;
     }
 
     return (
@@ -1979,8 +1979,9 @@ export default function App() {
                   staticInfo={episode.staticInfo}
                   frame={frame}
                   frames={episode.frames}
+                  frameIndex={frameIndex}
+                  elapsed={elapsed}
                   isReplaying={isReplaying}
-                  playbackRate={playbackRate}
                   frameDuration={frameDuration}
                 />
 
