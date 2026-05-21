@@ -11,19 +11,49 @@ import {
   saveEpisodeSurveyToFirestore,
 } from "./firebase";
 
-import random3Seed5 from "./maps/random3_5_7520000.json";
-import smallCorridorSeed5 from "./maps/small_corridor_5_7520000.json";
-import random0MediumSeed5 from "./maps/random0_medium_5_7520000.json";
-import multiplayerSchelling3Seed5 from "./maps/multiplayer_schelling_3_5_7520000.json";
-import multiplayerSchellingSeed5 from "./maps/multiplayer_schelling_5_7520000.json";
+const mapModules = import.meta.glob("./maps/*/*.json");
 
-const ALL_MAPS = [
-  { name: "random3_5_7520000.json", data: random3Seed5 },
-  { name: "small_corridor_5_7520000.json", data: smallCorridorSeed5 },
-  { name: "random0_medium_5_7520000.json", data: random0MediumSeed5 },
-  { name: "multiplayer_schelling_3_5_7520000.json", data: multiplayerSchelling3Seed5 },
-  { name: "multiplayer_schelling_5_7520000.json", data: multiplayerSchellingSeed5 }
-];
+function shuffle(items) {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
+
+function buildRandomizedMapSet(modules) {
+  const mapsByLayout = Object.entries(modules).reduce((acc, [path, load]) => {
+    const relativePath = path.replace("./maps/", "");
+    const [layoutName] = relativePath.split("/");
+
+    if (!layoutName || !relativePath.endsWith(".json")) return acc;
+
+    if (!acc[layoutName]) acc[layoutName] = [];
+    acc[layoutName].push({
+      name: relativePath,
+      layoutName,
+      load,
+    });
+
+    return acc;
+  }, {});
+
+  const oneMapPerLayout = Object.keys(mapsByLayout)
+    .sort((a, b) => a.localeCompare(b))
+    .map((layoutName) => {
+      const candidates = mapsByLayout[layoutName].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    });
+
+  return shuffle(oneMapPerLayout);
+}
+
+const ALL_MAPS = buildRandomizedMapSet(mapModules);
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
@@ -170,26 +200,23 @@ export default function App() {
   const [isSaving, setIsSaving] = useState(false); // DB 저장 상태
   const fileInputRef = useRef(null);
 
-  const [mapOrder, setMapOrder] = useState([]);
+  const [mapOrder] = useState(() => ALL_MAPS.map((_, index) => index));
   const [currentMapIdx, setCurrentMapIdx] = useState(0);
 
-  useEffect(() => {
-    // Keep the map sequence deterministic so the two multiplayer schelling
-    // maps always appear as the 4th and 5th episodes.
-    setMapOrder(Array.from({ length: ALL_MAPS.length }, (_, index) => index));
-  }, []);
-
-  const loadMapByIndex = (index) => {
+  const loadMapByIndex = async (index) => {
     const mapObj = ALL_MAPS[index];
-    if (!mapObj) return;
+    if (!mapObj) return false;
 
     try {
-      const adapted = adaptEpisode(mapObj.data, mapObj.name);
+      const module = await mapObj.load();
+      const rawMap = module.default ?? module;
+      const adapted = adaptEpisode(rawMap, mapObj.name);
 
       cancelAnimationFrame(rafRef.current);
 
       setEpisode({
         fileName: mapObj.name,
+        layoutName: mapObj.layoutName,
         ...adapted,
       });
       setFileName(mapObj.name);
@@ -209,8 +236,10 @@ export default function App() {
       playbackSpeedChangesRef.current = [];
       setPlaybackRate(1);
 
+      return true;
     } catch (err) {
       console.error("Failed to parse map", err);
+      return false;
     }
   };
 
@@ -293,6 +322,7 @@ export default function App() {
     completedEpisodeCount,
     currentEpisodeIndex: hasEpisode ? currentMapIdx + 1 : null,
     currentEpisodeFileName: episode?.fileName || fileName || null,
+    currentEpisodeLayoutName: episode?.layoutName || episode?.staticInfo?.layoutName || null,
     mapOrder: mapOrder.map((index) => ALL_MAPS[index]?.name).filter(Boolean),
     createdAt: timestampToIso(tutorialStartRef.current),
   });
@@ -733,6 +763,7 @@ export default function App() {
       experimentSessionId: experimentSessionIdRef.current,
       episodeCount: episodeCount,
       fileName: episode.fileName || fileName || "uploaded.json",
+      layoutName: episode.layoutName || episode.staticInfo?.layoutName || null,
       timeSpentOnPageSec: sessionDurationSec,
       tutorialDurationSec: tutorialDurationSec,
       mainDurationSecAtSave: mainDurationSec,
@@ -821,7 +852,9 @@ export default function App() {
 
     // Execute the transition
     if (!isFinalEpisode && nextIdx < mapOrder.length) {
-      loadMapByIndex(mapOrder[nextIdx]);
+      const loaded = await loadMapByIndex(mapOrder[nextIdx]);
+      if (!loaded) return;
+
       setCurrentMapIdx(nextIdx);
       setEpisodeCount(nextIdx + 1);
     } else {
@@ -882,7 +915,7 @@ export default function App() {
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
       btnText = "Start Experiment";
-      isDisabled = !hasReadInstructions;
+      isDisabled = !hasReadInstructions || mapOrder.length === 0;
     }
 
     return (
@@ -914,13 +947,15 @@ export default function App() {
           {instructionStep === 3 ? (
             <button
               disabled={isDisabled}
-              onClick={() => {
-                if (mapOrder.length > 0) {
-                  loadMapByIndex(mapOrder[0]);
-                  setCurrentMapIdx(0);
-                  setEpisodeCount(1);
-                  setInstructionStep(4);
-                }
+              onClick={async () => {
+                if (mapOrder.length === 0) return;
+
+                const loaded = await loadMapByIndex(mapOrder[0]);
+                if (!loaded) return;
+
+                setCurrentMapIdx(0);
+                setEpisodeCount(1);
+                setInstructionStep(4);
               }}
               style={{
                 padding: "14px 40px", fontSize: "16px", fontWeight: "700",
@@ -1022,7 +1057,7 @@ export default function App() {
                    35% { transform: translate(-30px, -10px) rotate(-15deg); }
                    40% { transform: translate(60px, 90px) rotate(-15deg); opacity: 1; }
                    45% { opacity: 0; transform: translate(60px, 90px) rotate(-15deg); }
-                   
+
                    /* Survey Phase: 50% ~ 100% */
                    50% { transform: translate(50px, 80px) rotate(-15deg); opacity: 0; }
                    55% { transform: translate(50px, 80px) rotate(-15deg); opacity: 1; }
