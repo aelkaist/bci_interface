@@ -15,24 +15,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+// ── 모든 데이터는 participants/{prolificId}/ 하위에 저장 ──
+
 export const saveFeedbackToFirestore = async (payload) => {
   try {
-    // 1. 에피소드 고유 통계 데이터와 피드백 리스트를 분리
-    const { feedbackDetails, ...episodeStats } = payload;
-    
-    // 2. Firestore 콘솔에서 한 눈에 파악하기 쉽도록 전체 데이터를 이쁘게 정렬된 문자열로도 저장
+    const { prolificId, feedbackDetails, ...episodeStats } = payload;
+    if (!prolificId) throw new Error("prolificId is required");
+
     const rawJsonView = JSON.stringify(payload, null, 2);
 
-    // 3. 메인 문서(feedbacks 컬렉션)에는 에피소드 정보와 문자열 저장
-    const mainDocRef = await addDoc(collection(db, "feedbacks"), {
+    // participants/{prolificId}/feedbacks/{docId}
+    const feedbacksCol = collection(db, `participants/${prolificId}/feedbacks`);
+    const mainDocRef = await addDoc(feedbacksCol, {
       ...episodeStats,
-      _rawJsonView: rawJsonView, // 이 필드를 펼치면 JSON 구조 그대로 볼 수 있음
+      prolificId,
+      _rawJsonView: rawJsonView,
       createdAt: new Date().toISOString()
     });
 
-    // 4. 각각의 피드백 카드는 클릭하기 편하게 하위 컬렉션(Subcollection)으로 개별 문서화
+    // participants/{prolificId}/feedbacks/{docId}/feedback_items/{itemId}
     if (feedbackDetails && feedbackDetails.length > 0) {
-      const detailsCollectionRef = collection(db, `feedbacks/${mainDocRef.id}/feedback_items`);
+      const detailsCollectionRef = collection(
+        db,
+        `participants/${prolificId}/feedbacks/${mainDocRef.id}/feedback_items`
+      );
       for (const [index, detail] of feedbackDetails.entries()) {
         await addDoc(detailsCollectionRef, {
           index: index + 1,
@@ -52,8 +58,14 @@ export const saveFeedbackToFirestore = async (payload) => {
 
 export const saveEpisodeSurveyToFirestore = async (payload) => {
   try {
-    const docRef = await addDoc(collection(db, "episode_surveys"), {
-      ...payload,
+    const { prolificId, ...rest } = payload;
+    if (!prolificId) throw new Error("prolificId is required");
+
+    // participants/{prolificId}/episode_surveys/{docId}
+    const surveysCol = collection(db, `participants/${prolificId}/episode_surveys`);
+    const docRef = await addDoc(surveysCol, {
+      ...rest,
+      prolificId,
       createdAt: new Date().toISOString(),
     });
     return docRef.id;
@@ -63,13 +75,17 @@ export const saveEpisodeSurveyToFirestore = async (payload) => {
   }
 };
 
-export const savePostSurveyToFirestore = async (sessionId, surveyPayload) => {
+export const savePostSurveyToFirestore = async (prolificId, sessionId, surveyPayload) => {
   try {
-    const surveyRef = doc(db, "post_surveys", sessionId);
+    if (!prolificId) throw new Error("prolificId is required");
+
+    // participants/{prolificId}/post_surveys/{sessionId}
+    const surveyRef = doc(db, `participants/${prolificId}/post_surveys`, sessionId);
     await setDoc(
       surveyRef,
       {
         ...surveyPayload,
+        prolificId,
         createdAt: new Date().toISOString(),
       },
       { merge: true }
@@ -82,13 +98,17 @@ export const savePostSurveyToFirestore = async (sessionId, surveyPayload) => {
   }
 };
 
-export const upsertExperimentSessionToFirestore = async (sessionId, payload) => {
+export const upsertExperimentSessionToFirestore = async (prolificId, sessionId, payload) => {
   try {
-    const sessionRef = doc(db, "experiment_sessions", sessionId);
+    if (!prolificId) throw new Error("prolificId is required");
+
+    // participants/{prolificId}/experiment_sessions/{sessionId}
+    const sessionRef = doc(db, `participants/${prolificId}/experiment_sessions`, sessionId);
     await setDoc(
       sessionRef,
       {
         ...payload,
+        prolificId,
         updatedAt: new Date().toISOString(),
       },
       { merge: true }

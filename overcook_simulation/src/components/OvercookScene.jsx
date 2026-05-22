@@ -16,8 +16,17 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function smoothStep(t) {
-  return t * t * (3 - 2 * t);
+// Hold-then-snap easing: the agent stays at its current position
+// for the first HOLD_RATIO of the frame, then moves quickly to the
+// next position. This gives a deliberate, game-like "pause → move" feel.
+// HOLD_RATIO: 0.0 = move immediately, 0.6 = wait a long time then snap.
+const HOLD_RATIO = 0.4;
+
+function snapEase(t) {
+  if (t < HOLD_RATIO) return 0;
+  const moved = (t - HOLD_RATIO) / (1 - HOLD_RATIO);
+  // quick ease-out for the snap portion
+  return 1 - (1 - moved) * (1 - moved);
 }
 
 export default function OvercookScene({
@@ -420,7 +429,7 @@ export default function OvercookScene({
   const playerTargetFrame = frameArray[playerTargetIndex] || playerFrame;
   const playerInterpolationProgress =
     playerTargetIndex !== playerSourceIndex
-      ? smoothStep(clamp(clampedFramePosition - playerSourceIndex, 0, 1))
+      ? snapEase(clamp(clampedFramePosition - playerSourceIndex, 0, 1))
       : 0;
 
   const getPlayerKey = (player, index) =>

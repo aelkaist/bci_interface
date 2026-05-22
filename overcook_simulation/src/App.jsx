@@ -60,7 +60,7 @@ const ALL_MAPS = buildRandomizedMapSet(mapModules);
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
-const FRAME_DURATION = 0.3;
+const FRAME_DURATION = 0.45;
 
 // 시간 라벨 (필요하면 사용)
 function baseTimeLabel(frame) {
@@ -335,6 +335,7 @@ export default function App() {
     tutorialEndRef.current = startedAt;
 
     void upsertExperimentSessionToFirestore(
+      prolificId,
       experimentSessionIdRef.current,
       buildExperimentSessionPayload({
         status: "main_started",
@@ -864,6 +865,7 @@ export default function App() {
       // Save experiment session in background
       try {
         await upsertExperimentSessionToFirestore(
+          prolificId,
           experimentSessionIdRef.current,
           buildExperimentSessionPayload({
             status: "completed",
@@ -1665,7 +1667,7 @@ export default function App() {
       if (!allAnswered) return;
       try {
         setIsSurveySubmitting(true);
-        await savePostSurveyToFirestore(experimentSessionIdRef.current, {
+        await savePostSurveyToFirestore(prolificId, experimentSessionIdRef.current, {
           prolificId,
           experimentSessionId: experimentSessionIdRef.current,
           surveyAnswers,
