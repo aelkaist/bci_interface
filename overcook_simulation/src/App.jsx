@@ -8,7 +8,6 @@ import {
   saveFeedbackToFirestore,
   upsertExperimentSessionToFirestore,
   savePostSurveyToFirestore,
-  saveEpisodeSurveyToFirestore,
 } from "./firebase";
 
 const FIXED_MAP_PATHS = [
@@ -172,15 +171,12 @@ export default function App() {
   });
   const [isSurveySubmitting, setIsSurveySubmitting] = useState(false);
 
-  // Per-episode survey states
+  // Per-episode survey states (embedded in episode page)
   const [episodeSurveyAnswers, setEpisodeSurveyAnswers] = useState({
     eq1: null,
-    eq2: "",
-    eq3: "",
     eq4: null,
     eq5: "",
   });
-  const [isEpisodeSurveySubmitting, setIsEpisodeSurveySubmitting] = useState(false);
 
   // Quiz states
   const [quiz1Answer, setQuiz1Answer] = useState(null);
@@ -307,7 +303,6 @@ export default function App() {
     mainEndedAt = null,
     completedEpisodeCount = currentMapIdx,
   } = {}) => ({
-    experimentSessionId: experimentSessionIdRef.current,
     status,
     tutorialStartedAt: timestampToIso(tutorialStartRef.current),
     tutorialEndedAt: timestampToIso(tutorialEndRef.current),
@@ -324,7 +319,6 @@ export default function App() {
     currentEpisodeFileName: episode?.fileName || fileName || null,
     currentEpisodeLayoutName: episode?.layoutName || episode?.staticInfo?.layoutName || null,
     mapOrder: mapOrder.map((index) => ALL_MAPS[index]?.name).filter(Boolean),
-    createdAt: timestampToIso(tutorialStartRef.current),
   });
 
   const maybeMarkMainStart = () => {
@@ -761,22 +755,17 @@ export default function App() {
 
     return {
       prolificId: prolificId,
-      experimentSessionId: experimentSessionIdRef.current,
       episodeCount: episodeCount,
       fileName: episode.fileName || fileName || "uploaded.json",
       layoutName: episode.layoutName || episode.staticInfo?.layoutName || null,
       timeSpentOnPageSec: sessionDurationSec,
-      tutorialDurationSec: tutorialDurationSec,
-      mainDurationSecAtSave: mainDurationSec,
-      mainTotalDurationSec: isFinalEpisode ? mainDurationSec : null,
-      isFinalEpisodeSave: isFinalEpisode,
-      tutorialStartedAt: timestampToIso(tutorialStartRef.current),
-      tutorialEndedAt: timestampToIso(tutorialEndRef.current),
-      mainStartedAt: timestampToIso(mainStartRef.current),
-      mainEndedAt: isFinalEpisode ? timestampToIso(mainEndedAt) : null,
       videoPauseCount: pauseCountRef.current,
       playbackSpeedChanges: playbackSpeedChangesRef.current,
       feedbackDetails: feedbackDetails,
+      // Episode-level survey answers (embedded in episode page)
+      collaborationRating: episodeSurveyAnswers.eq1,
+      monitoringDifficulty: episodeSurveyAnswers.eq4,
+      monitoringDifficultyReason: episodeSurveyAnswers.eq5 || "",
     };
   };
 
@@ -831,25 +820,8 @@ export default function App() {
     const completedEpisodeIndex = currentMapIdx + 1;
     const completedEpisodeFileName = episode?.fileName || fileName || null;
 
-    // Save episode survey to Firestore
-    try {
-      setIsEpisodeSurveySubmitting(true);
-      await saveEpisodeSurveyToFirestore({
-        prolificId,
-        experimentSessionId: experimentSessionIdRef.current,
-        episodeIndex: completedEpisodeIndex,
-        episodeFileName: completedEpisodeFileName,
-        answers: episodeSurveyAnswers,
-      });
-    } catch (err) {
-      console.error(err);
-      // Don't block progression on save failure
-    } finally {
-      setIsEpisodeSurveySubmitting(false);
-    }
-
     // Reset survey for next episode
-    setEpisodeSurveyAnswers({ eq1: null, eq2: "", eq3: "", eq4: null, eq5: "" });
+    setEpisodeSurveyAnswers({ eq1: null, eq4: null, eq5: "" });
 
     // Execute the transition
     if (!isFinalEpisode && nextIdx < mapOrder.length) {
@@ -957,6 +929,7 @@ export default function App() {
 
                 setCurrentMapIdx(0);
                 setEpisodeCount(1);
+                maybeMarkMainStart();
                 setInstructionStep(4);
               }}
               style={{
@@ -1668,8 +1641,6 @@ export default function App() {
       try {
         setIsSurveySubmitting(true);
         await savePostSurveyToFirestore(prolificId, experimentSessionIdRef.current, {
-          prolificId,
-          experimentSessionId: experimentSessionIdRef.current,
           surveyAnswers,
         });
       } catch (err) {

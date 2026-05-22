@@ -19,28 +19,27 @@ export const db = getFirestore(app);
 
 export const saveFeedbackToFirestore = async (payload) => {
   try {
-    const { prolificId, feedbackDetails, ...episodeStats } = payload;
+    const { prolificId, feedbackDetails, episodeCount, ...episodeStats } = payload;
     if (!prolificId) throw new Error("prolificId is required");
 
-    const rawJsonView = JSON.stringify(payload, null, 2);
+    const episodeId = `episode_${episodeCount}`;
 
-    // participants/{prolificId}/feedbacks/{docId}
-    const feedbacksCol = collection(db, `participants/${prolificId}/feedbacks`);
-    const mainDocRef = await addDoc(feedbacksCol, {
+    // participants/{prolificId}/episodes/episode_N
+    const episodeRef = doc(db, `participants/${prolificId}/episodes`, episodeId);
+    await setDoc(episodeRef, {
       ...episodeStats,
-      prolificId,
-      _rawJsonView: rawJsonView,
+      episodeCount,
       createdAt: new Date().toISOString()
     });
 
-    // participants/{prolificId}/feedbacks/{docId}/feedback_items/{itemId}
+    // participants/{prolificId}/episodes/episode_N/feedback_items/{itemId}
     if (feedbackDetails && feedbackDetails.length > 0) {
-      const detailsCollectionRef = collection(
+      const itemsCol = collection(
         db,
-        `participants/${prolificId}/feedbacks/${mainDocRef.id}/feedback_items`
+        `participants/${prolificId}/episodes/${episodeId}/feedback_items`
       );
       for (const [index, detail] of feedbackDetails.entries()) {
-        await addDoc(detailsCollectionRef, {
+        await addDoc(itemsCol, {
           index: index + 1,
           ...detail,
           createdAt: new Date().toISOString()
@@ -48,32 +47,14 @@ export const saveFeedbackToFirestore = async (payload) => {
       }
     }
 
-    console.log("Document written with ID: ", mainDocRef.id);
-    return mainDocRef.id;
+    console.log("Episode saved:", episodeId);
+    return episodeId;
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error("Error saving episode: ", e);
     throw e;
   }
 };
 
-export const saveEpisodeSurveyToFirestore = async (payload) => {
-  try {
-    const { prolificId, ...rest } = payload;
-    if (!prolificId) throw new Error("prolificId is required");
-
-    // participants/{prolificId}/episode_surveys/{docId}
-    const surveysCol = collection(db, `participants/${prolificId}/episode_surveys`);
-    const docRef = await addDoc(surveysCol, {
-      ...rest,
-      prolificId,
-      createdAt: new Date().toISOString(),
-    });
-    return docRef.id;
-  } catch (e) {
-    console.error("Error saving episode survey: ", e);
-    throw e;
-  }
-};
 
 export const savePostSurveyToFirestore = async (prolificId, sessionId, surveyPayload) => {
   try {
@@ -85,7 +66,6 @@ export const savePostSurveyToFirestore = async (prolificId, sessionId, surveyPay
       surveyRef,
       {
         ...surveyPayload,
-        prolificId,
         createdAt: new Date().toISOString(),
       },
       { merge: true }
@@ -108,7 +88,6 @@ export const upsertExperimentSessionToFirestore = async (prolificId, sessionId, 
       sessionRef,
       {
         ...payload,
-        prolificId,
         updatedAt: new Date().toISOString(),
       },
       { merge: true }
