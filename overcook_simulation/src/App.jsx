@@ -971,13 +971,13 @@ export default function App() {
             <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%", alignItems: "center", justifyContent: "flex-start", flex: 1, marginTop: "10vh" }}>
               <div style={{ textAlign: "center", marginBottom: "20px" }}>
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome! 👋</h1>
-                <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>Please enter your Prolific ID to begin.</p>
+                <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>Please enter your Participant ID to begin.</p>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%", maxWidth: "400px", background: "#111", padding: "30px", borderRadius: "16px", border: "1px solid #222" }}>
-                <label style={{ fontSize: "14px", fontWeight: "600", color: "#888", textTransform: "uppercase", letterSpacing: "1px" }}>Prolific ID</label>
+                <label style={{ fontSize: "14px", fontWeight: "600", color: "#888", textTransform: "uppercase", letterSpacing: "1px" }}>Participant ID</label>
                 <input
                   type="text"
-                  placeholder="Enter your Prolific ID"
+                  placeholder="Enter your Participant ID"
                   value={prolificId}
                   onChange={(e) => setProlificId(e.target.value)}
                   style={{
