@@ -42,7 +42,7 @@ async function fetchAllData() {
     const parts = doc.ref.path.split('/');
     if (parts[0] !== 'participants') continue;
     const pId = parts[1];
-    if (!participantMap[pId]) participantMap[pId] = { id: pId, sessions: [], episodes: [], feedbackItems: [] };
+    if (!participantMap[pId]) participantMap[pId] = { id: pId, sessions: [], episodes: [], feedbackItems: [], postSurveys: [] };
     participantMap[pId].sessions.push({ docId: doc.id, ...doc.data() });
   }
 
@@ -56,6 +56,11 @@ async function fetchAllData() {
       participantMap[pId].feedbackItems.push(...ep.feedbackItems);
     }
     participantMap[pId].episodes.sort((a, b) => (a.episodeCount || 0) - (b.episodeCount || 0));
+
+    const surveySnap = await getDocs(collection(db, `participants/${pId}/post_surveys`));
+    for (const sDoc of surveySnap.docs) {
+      participantMap[pId].postSurveys.push({ docId: sDoc.id, ...sDoc.data() });
+    }
   }
 
   const outPath = path.resolve(__dirname, "../analysis/dashboard/data.json");

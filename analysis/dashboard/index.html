@@ -176,6 +176,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
       <button class="tb" data-panel="p2">③ Episode Time</button>
       <button class="tb" data-panel="p3">④ Items / Participant</button>
       <button class="tb" data-panel="p4">⑤ Ratings</button>
+      <button class="tb" data-panel="p6">⑥ Post Surveys</button>
     </div>
 
     <!-- Tab 1 -->
@@ -264,6 +265,15 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
       <div class="participant-detail" id="participant-detail">
         <div class="dp-head"><span id="pd-title"></span><button class="dp-close" data-close="participant-detail">✕</button></div>
         <div class="dp-body" id="pd-body"></div>
+      </div>
+    </div>
+
+    <!-- Tab 6: Post Surveys -->
+    <div class="pn" id="p6">
+      <div class="cw">
+        <div class="ct">Post-Experiment Surveys</div>
+        <div class="cs">Feedback and answers provided by participants at the end of the study</div>
+        <div id="post-surveys-container" style="display:flex;flex-direction:column;gap:16px;margin-top:16px;"></div>
       </div>
     </div>
   </div>
@@ -463,6 +473,20 @@ function render(pm){
     });
     tbody.appendChild(tr);
   });
+
+  // ── Tab 6: Post Surveys ──
+  const psContainer=document.getElementById('post-surveys-container');
+  const psHtml = completed.map(p=>{
+    if(!p.postSurveys || !p.postSurveys.length) return '';
+    const ans = p.postSurveys[0].surveyAnswers || {};
+    return `<div class="ep-group" style="background:var(--surface);padding:16px;border-radius:12px;border:1px solid var(--border)">
+      <div style="font-weight:600;font-size:14px;color:var(--text-1);margin-bottom:12px">${shortId(p.id)}</div>
+      ${ans.q1 ? `<div style="margin-bottom:12px;line-height:1.5"><strong style="color:var(--accent)">Q1:</strong> ${ans.q1}</div>` : ''}
+      ${ans.q2 ? `<div style="margin-bottom:12px;line-height:1.5"><strong style="color:var(--accent)">Q2:</strong> ${ans.q2}</div>` : ''}
+      ${ans.q3 ? `<div style="line-height:1.5"><strong style="color:var(--accent)">Q3:</strong> ${ans.q3}</div>` : ''}
+    </div>`;
+  }).filter(Boolean).join('');
+  if (psContainer) psContainer.innerHTML = psHtml || '<div class="no-items">No post surveys submitted yet.</div>';
 }
 
 function renderParticipantEpisodes(p){
