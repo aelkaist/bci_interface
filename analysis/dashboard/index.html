@@ -121,6 +121,13 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 .ep-rating-item .num{font-size:16px;font-weight:700;color:var(--text-1);font-family:var(--mono);margin-right:4px}
 .no-items{font-size:12px;color:var(--text-3);padding:16px;text-align:center}
 
+/* Tone Columns */
+.tone-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.tone-col{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.tone-col-head{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tone-item{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px;font-size:12px;color:var(--text-1);line-height:1.5}
+.tone-item-meta{font-size:10px;color:var(--text-3);margin-top:8px;font-family:var(--mono)}
+
 /* Participant table */
 .ptable{width:100%;border-collapse:collapse;font-size:12px}
 .ptable th{text-align:left;padding:10px 12px;color:var(--text-2);font-weight:600;border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
@@ -177,6 +184,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
       <button class="tb" data-panel="p3">④ Items / Participant</button>
       <button class="tb" data-panel="p4">⑤ Ratings</button>
       <button class="tb" data-panel="p6">⑥ Post Surveys</button>
+      <button class="tb" data-panel="p7">⑦ Feedback Tone</button>
     </div>
 
     <!-- Tab 1 -->
@@ -193,6 +201,18 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
           <div class="cs">Per participant — total across all episodes (minutes)</div>
           <div class="chart-frame sm"><canvas id="chart-main"></canvas></div>
           <div class="sr" id="stats-main"></div>
+        </div>
+      </div>
+      <div class="g2" style="margin-top:20px">
+        <div class="cw">
+          <div class="ct">Tutorial Time Distribution</div>
+          <div class="cs">Histogram of completion times</div>
+          <div class="chart-frame sm"><canvas id="chart-tutorial-dist"></canvas></div>
+        </div>
+        <div class="cw">
+          <div class="ct">Main Time Distribution</div>
+          <div class="cs">Histogram of completion times</div>
+          <div class="chart-frame sm"><canvas id="chart-main-dist"></canvas></div>
         </div>
       </div>
     </div>
@@ -218,6 +238,11 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
         <div class="cs">Summed across all episodes · Click a bar for details</div>
         <div class="chart-frame md"><canvas id="chart-pititems"></canvas></div>
         <div class="sr" id="stats-pititems"></div>
+      </div>
+      <div class="cw" style="margin-top:20px;">
+        <div class="ct">Feedback Items Distribution</div>
+        <div class="cs">Histogram of total feedback items per participant</div>
+        <div class="chart-frame sm"><canvas id="chart-pititems-dist"></canvas></div>
       </div>
       <div class="detail-panel" id="dp-pititems">
         <div class="dp-head"><span id="dp-pititems-title"></span><button class="dp-close" data-close="dp-pititems">✕</button></div>
@@ -274,6 +299,29 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
         <div class="ct">Post-Experiment Surveys</div>
         <div class="cs">Feedback and answers provided by participants at the end of the study</div>
         <div id="post-surveys-container" style="display:flex;flex-direction:column;gap:16px;margin-top:16px;"></div>
+      </div>
+    </div>
+
+    <!-- Tab 7: Feedback Tone -->
+    <div class="pn" id="p7">
+      <div class="cw">
+        <div class="ct">Participant Feedback Tone</div>
+        <div class="cs">Distribution of sentiment (Negative vs Neutral vs Positive) per participant</div>
+        <div class="chart-frame md"><canvas id="chart-tone"></canvas></div>
+      </div>
+      <div class="tone-cols" id="tone-container">
+        <div class="tone-col">
+          <div class="tone-col-head" style="color:#f472b6">Negative (1-2)</div>
+          <div id="tone-neg" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+        <div class="tone-col">
+          <div class="tone-col-head" style="color:#fbbf24">Neutral (3)</div>
+          <div id="tone-neu" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+        <div class="tone-col">
+          <div class="tone-col-head" style="color:#34d399">Positive (4-5)</div>
+          <div id="tone-pos" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -362,6 +410,40 @@ function render(pm){
   });
   renderStats('stats-main',calcStats(mainVals.filter(v=>v!=null&&v>0)),' min');
 
+  // Histograms
+  function buildHist(data, ranges) {
+    const counts = ranges.map(() => 0);
+    data.forEach(v => {
+      if (v == null) return;
+      for(let i=0; i<ranges.length; i++){
+        const [lo,hi] = ranges[i];
+        if ((lo===hi && v===lo) || (lo!==hi && ((i===0 && v>=lo && v<=hi) || (i>0 && v>lo && v<=hi)))) {
+          counts[i]++;
+          break;
+        }
+      }
+    });
+    return counts;
+  }
+  
+  const tutBinLabels = ['0–2','2–4','4–6','6–8','8–10','10+'];
+  const tutBinR = [[0,2],[2,4],[4,6],[6,8],[8,10],[10,Infinity]];
+  const tutCounts = buildHist(tutVals, tutBinR);
+
+  const mainBinLabels = ['0–10','10–20','20–30','30–40','40–50','50+'];
+  const mainBinR = [[0,10],[10,20],[20,30],[30,40],[40,50],[50,Infinity]];
+  const mainCounts = buildHist(mainVals, mainBinR);
+
+  new Chart(document.getElementById('chart-tutorial-dist'),{type:'bar',
+    data:{labels:tutBinLabels,datasets:[{data:tutCounts,backgroundColor:'#818cf8',borderRadius:4}]},
+    options:baseOpts('Time Range (min)','Participants')
+  });
+
+  new Chart(document.getElementById('chart-main-dist'),{type:'bar',
+    data:{labels:mainBinLabels,datasets:[{data:mainCounts,backgroundColor:'#34d399',borderRadius:4}]},
+    options:baseOpts('Time Range (min)','Participants')
+  });
+
   // ── Tab 2: Episode time ──
   const allEp=[];
   completed.forEach(p=>p.episodes.forEach(ep=>{
@@ -395,6 +477,15 @@ function render(pm){
     data:{labels,datasets:[{data:pitVals,backgroundColor:pitVals.map(v=>v<=2?'#f472b6':v>=10?'#34d399':'#818cf8'),borderRadius:4,borderSkipped:false}]},
     options:baseOpts('','Items')});
   renderStats('stats-pititems',calcStats(pitVals),'');
+
+  const pitMax = Math.max(0, ...pitVals);
+  const pitBinLabels = Array.from({length: pitMax+1}, (_, i) => i.toString());
+  const pitBinR = Array.from({length: pitMax+1}, (_, i) => [i, i]);
+  const pitCounts = buildHist(pitVals, pitBinR);
+  new Chart(document.getElementById('chart-pititems-dist'),{type:'bar',
+    data:{labels:pitBinLabels,datasets:[{data:pitCounts,backgroundColor:'#818cf8',borderRadius:4}]},
+    options:baseOpts('Feedback Items Count','Participants')
+  });
 
   document.getElementById('chart-pititems').addEventListener('click',e=>{
     const pts=pitChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
@@ -487,6 +578,40 @@ function render(pm){
     </div>`;
   }).filter(Boolean).join('');
   if (psContainer) psContainer.innerHTML = psHtml || '<div class="no-items">No post surveys submitted yet.</div>';
+
+  // ── Tab 7: Feedback Tone ──
+  const negCounts=[], neuCounts=[], posCounts=[];
+  const allNeg=[], allNeu=[], allPos=[];
+  completed.forEach(p=>{
+    let n1=0,n2=0,n3=0;
+    p.feedbackItems.forEach(it=>{
+      const s = it.sentiment ?? 3;
+      const fn=it.fileName||'';
+      const obj = { pid: p.id, text: it.feedback||it.reason||'(empty)', s, ep: it.docId };
+      if (s <= 2) { n1++; allNeg.push(obj); }
+      else if (s === 3) { n2++; allNeu.push(obj); }
+      else { n3++; allPos.push(obj); }
+    });
+    negCounts.push(n1); neuCounts.push(n2); posCounts.push(n3);
+  });
+
+  new Chart(document.getElementById('chart-tone'),{type:'bar',
+    data:{labels:completed.map(p=>shortId(p.id)), datasets:[
+      {label:'Negative (1-2)', data:negCounts, backgroundColor:'#f472b6', borderRadius:4},
+      {label:'Neutral (3)', data:neuCounts, backgroundColor:'#fbbf24', borderRadius:4},
+      {label:'Positive (4-5)', data:posCounts, backgroundColor:'#34d399', borderRadius:4}
+    ]},
+    options:{...baseOpts('','Feedback Items'), scales:{x:{stacked:true,...baseOpts().scales.x}, y:{stacked:true,...baseOpts().scales.y}}, plugins:{legend:{display:true,labels:{color:'#8888a0',font:{family:'Inter'}}}}}
+  });
+
+  const renderToneCard = it => `<div class="tone-item">
+    <div style="margin-bottom:6px">${it.text}</div>
+    <div class="tone-item-meta">${shortId(it.pid)} · Score: ${it.s}</div>
+  </div>`;
+  
+  document.getElementById('tone-neg').innerHTML = allNeg.length ? allNeg.map(renderToneCard).join('') : '<div class="no-items">None</div>';
+  document.getElementById('tone-neu').innerHTML = allNeu.length ? allNeu.map(renderToneCard).join('') : '<div class="no-items">None</div>';
+  document.getElementById('tone-pos').innerHTML = allPos.length ? allPos.map(renderToneCard).join('') : '<div class="no-items">None</div>';
 }
 
 function renderParticipantEpisodes(p){
