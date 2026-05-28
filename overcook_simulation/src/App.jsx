@@ -11,17 +11,17 @@ import {
 } from "./firebase";
 
 const FIXED_MAP_PATHS = [
-  "2_forced_hard/2_forced_hard_seed1_3520000_120.json",
+  "2_forced_hard/2_forced_hard_seed4_3520000_100.json",
   "2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
-  "2_incentivized_hard/2_incentivized_hard_seed1_2520000_140.json",
-  "2_incentivized_hard_4/2_incentivized_hard_4_seed2_2520000_140.json",
+  "2_incentivized_hard/2_incentivized_hard_seed2_2520000_120.json",
+  "2_incentivized_hard_4/2_incentivized_hard_4_seed1_5020000_80.json",
 ];
 
 const mapModules = import.meta.glob([
-  "./maps/2_forced_hard/2_forced_hard_seed1_3520000_120.json",
+  "./maps/2_forced_hard/2_forced_hard_seed4_3520000_100.json",
   "./maps/2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
-  "./maps/2_incentivized_hard/2_incentivized_hard_seed1_2520000_140.json",
-  "./maps/2_incentivized_hard_4/2_incentivized_hard_4_seed2_2520000_140.json",
+  "./maps/2_incentivized_hard/2_incentivized_hard_seed2_2520000_120.json",
+  "./maps/2_incentivized_hard_4/2_incentivized_hard_4_seed1_5020000_80.json",
 ]);
 
 function shuffle(items) {
