@@ -361,7 +361,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
           <div class="replay-marker" id="replay-marker" style="display:none"></div>
           <input type="range" class="replay-slider" id="replay-slider" min="0" max="100" value="0">
         </div>
-        <div style="font-family:var(--mono);font-size:12px;width:100px;text-align:right" id="replay-frame-label">Frame: 0/100</div>
+        <div style="font-family:var(--mono);font-size:12px;min-width:120px;text-align:right;white-space:nowrap" id="replay-frame-label">Frame: 0 / 100</div>
         <select id="replay-speed" style="background:var(--surface-3);border:1px solid var(--border);color:var(--text-1);padding:4px 8px;border-radius:4px">
           <option value="0.5">0.5x</option>
           <option value="1" selected>1x</option>
@@ -754,7 +754,7 @@ function bindAccordions(containerId){
 async function adaptEpisode(raw, fileName) {
   const staticInfo = raw.staticInfo;
   const rawFrames = Array.isArray(raw.dynamicState) && raw.dynamicState.length > 0 ? raw.dynamicState : (Array.isArray(raw.frames) ? raw.frames : []);
-  const frames = rawFrames.slice(0, 100).map((state) => ({
+  const frames = rawFrames.map((state) => ({
     ...state,
     players: (state.players || []).map((p) => ({...p, position: p.position, heldObject: p.heldObject})),
     objects: (state.objects || []).map((o) => ({...o, position: o.position}))
@@ -769,7 +769,7 @@ function renderReplayFrame() {
   sceneRenderer.render(staticInfo, frames[fIdx], frames, fIdx, currentFrame * 0.45, 0.45);
   
   document.getElementById('replay-slider').value = currentFrame;
-  document.getElementById('replay-frame-label').textContent = `Frame: ${Math.floor(currentFrame)}/${frames.length-1}`;
+  document.getElementById('replay-frame-label').textContent = `Frame: ${Math.floor(currentFrame)} / ${replayState.maxFrame}`;
 }
 
 function replayLoop(timestamp) {
