@@ -96,7 +96,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 .dp-body{padding:14px 18px;max-height:500px;overflow-y:auto}
 
 /* Feedback cards */
-.fb-card{background:var(--surface-2);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--border);display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;transition:all .15s}
+.fb-card{background:var(--surface-2);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--border);display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;transition:all .15s}
 .fb-card:hover{border-color:var(--border-hover);transform:translateY(-1px)}
 .fb-s{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--mono)}
 .fb-main{font-size:12px;color:var(--text-1);font-weight:500;line-height:1.5;margin-bottom:3px}
@@ -127,6 +127,24 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 .tone-col-head{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
 .tone-item{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px;font-size:12px;color:var(--text-1);line-height:1.5}
 .tone-item-meta{font-size:10px;color:var(--text-3);margin-top:8px;font-family:var(--mono)}
+
+/* Replay Modal */
+.replay-modal-backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center}
+.replay-modal-backdrop.show{display:flex;animation:fadeIn 0.2s}
+.replay-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:90%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+.replay-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.replay-close{background:none;border:none;color:var(--text-2);cursor:pointer;font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.replay-close:hover{background:var(--surface-3);color:var(--text-1)}
+.replay-body{padding:20px;display:flex;flex-direction:column;gap:16px;overflow-y:auto;flex:1}
+.replay-scene-container{width:100%;aspect-ratio:16/9;background:var(--surface-2);border-radius:8px;position:relative}
+.replay-controls{display:flex;align-items:center;gap:16px;background:var(--surface-2);padding:12px 16px;border-radius:8px}
+.replay-btn{background:var(--surface-3);border:1px solid var(--border);color:var(--text-1);padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+.replay-btn:hover{background:var(--accent-glow);color:var(--accent);border-color:var(--accent)}
+.replay-slider-container{flex:1;position:relative;height:32px;display:flex;align-items:center}
+.replay-slider{width:100%;cursor:pointer;position:relative;z-index:2}
+.replay-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:4px;height:20px;background:var(--pink);pointer-events:none;border-radius:2px;z-index:3;box-shadow:0 0 6px var(--pink-glow)}
+.replay-range{position:absolute;top:50%;transform:translateY(-50%);height:16px;background:rgba(99,102,241,0.3);pointer-events:none;border-radius:2px;z-index:1}
+.replay-feedback-box{padding:16px;background:var(--surface-2);border-radius:8px;border-left:4px solid var(--accent)}
 
 /* Participant table */
 .ptable{width:100%;border-collapse:collapse;font-size:12px}
@@ -165,7 +183,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 <div class="wrap">
   <div id="loading" class="loading-overlay">
     <div class="loading-spinner"></div>
-    <div class="loading-text">Loading data from Firebase...</div>
+    <div class="loading-text">Loading Dashboard Data...</div>
   </div>
 
   <div id="content" style="display:none">
@@ -324,10 +342,52 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
         </div>
       </div>
     </div>
+    </div>
+  </div>
+</div>
+
+<div class="replay-modal-backdrop" id="replay-modal-backdrop">
+  <div class="replay-modal">
+    <div class="replay-header">
+      <span id="replay-title">Replay</span>
+      <button class="replay-close" id="replay-close">✕</button>
+    </div>
+    <div class="replay-body">
+      <div class="replay-scene-container" id="replay-scene"></div>
+      <div class="replay-controls">
+        <button class="replay-btn" id="replay-btn-play" style="width:60px;justify-content:center">▶</button>
+        <div class="replay-slider-container">
+          <div class="replay-range" id="replay-range" style="display:none"></div>
+          <div class="replay-marker" id="replay-marker" style="display:none"></div>
+          <input type="range" class="replay-slider" id="replay-slider" min="0" max="100" value="0">
+        </div>
+        <div style="font-family:var(--mono);font-size:12px;width:100px;text-align:right" id="replay-frame-label">Frame: 0/100</div>
+        <select id="replay-speed" style="background:var(--surface-3);border:1px solid var(--border);color:var(--text-1);padding:4px 8px;border-radius:4px">
+          <option value="0.5">0.5x</option>
+          <option value="1" selected>1x</option>
+          <option value="2">2x</option>
+        </select>
+      </div>
+      <div class="replay-feedback-box" id="replay-feedback-box"></div>
+    </div>
   </div>
 </div>
 
 <script type="module">
+import { SceneRenderer } from './scene-renderer.js';
+
+let sceneRenderer = null;
+let replayState = {
+  frames: [],
+  staticInfo: null,
+  currentFrame: 0,
+  minFrame: 0,
+  maxFrame: 100,
+  playing: false,
+  speed: 1,
+  animationId: null,
+  lastTime: 0
+};
 
 
 // ── Helpers ──
@@ -586,8 +646,18 @@ function render(pm){
     let n1=0,n2=0,n3=0;
     p.feedbackItems.forEach(it=>{
       const s = it.sentiment ?? 3;
-      const fn=it.fileName||'';
-      const obj = { pid: p.id, text: it.feedback||it.reason||'(empty)', s, ep: it.docId };
+      const epObj = p.episodes.find(e => e.feedbackItems.some(f => f.docId === it.docId));
+      const fn = it.fileName || (epObj ? epObj.fileName : '');
+      const obj = { 
+        pid: p.id, 
+        text: it.feedback||it.reason||'(empty)', 
+        s, 
+        ep: it.docId,
+        fileName: fn,
+        baseFrame: it.baseFrame,
+        startFrame: it.startFrame,
+        endFrame: it.endFrame
+      };
       if (s <= 2) { n1++; allNeg.push(obj); }
       else if (s === 3) { n2++; allNeu.push(obj); }
       else { n3++; allPos.push(obj); }
@@ -606,7 +676,10 @@ function render(pm){
 
   const renderToneCard = it => `<div class="tone-item">
     <div style="margin-bottom:6px">${it.text}</div>
-    <div class="tone-item-meta">${shortId(it.pid)} · Score: ${it.s}</div>
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <div class="tone-item-meta">${shortId(it.pid)} · Score: ${it.s}</div>
+      <button class="replay-btn" style="padding:4px 8px; font-size:11px" data-replay='${encodeURIComponent(JSON.stringify({fileName: it.fileName, baseFrame: it.baseFrame, startFrame: it.startFrame, endFrame: it.endFrame, text: it.text, reason: "", score: it.s, pid: it.pid, epId: it.ep})).replace(/'/g, "%27")}'>▶ Replay</button>
+    </div>
   </div>`;
   
   document.getElementById('tone-neg').innerHTML = allNeg.length ? allNeg.map(renderToneCard).join('') : '<div class="no-items">None</div>';
@@ -621,13 +694,15 @@ function renderParticipantEpisodes(p){
       ? '<div class="no-items">No feedback items for this episode</div>'
       : ep.feedbackItems.map(it=>{
         const st=sentimentStyle(it.sentiment??3);
+        const fileName = ep.fileName || '';
         return `<div class="fb-card">
           <span class="fb-s" style="background:${st.bg};color:${st.fc}">${it.sentiment??'?'}</span>
-          <div>
+          <div style="flex:1">
             <div class="fb-main">${it.feedback||it.reason||'(empty)'}</div>
             <div class="fb-reason">${it.reason||it.correction||'(empty)'}</div>
             <div class="fb-meta">Frame ${it.baseFrame??'?'} · Range ${it.startFrame??'?'}–${it.endFrame??'?'} · ${r(it.timeSpentWritingFeedBackSec)}s writing</div>
           </div>
+          <button class="replay-btn" style="align-self:flex-start" data-replay='${encodeURIComponent(JSON.stringify({fileName: fileName, baseFrame: it.baseFrame, startFrame: it.startFrame, endFrame: it.endFrame, text: it.feedback||it.reason, reason: it.reason||it.correction, score: it.sentiment, pid: p.id, epId: ep.docId})).replace(/'/g, "%27")}'>▶ Replay</button>
         </div>`;
       }).join('');
 
@@ -674,6 +749,157 @@ function bindAccordions(containerId){
     });
   });
 }
+
+// ── Replay Modal Logic ──
+async function adaptEpisode(raw, fileName) {
+  const staticInfo = raw.staticInfo;
+  const rawFrames = Array.isArray(raw.dynamicState) && raw.dynamicState.length > 0 ? raw.dynamicState : (Array.isArray(raw.frames) ? raw.frames : []);
+  const frames = rawFrames.slice(0, 100).map((state) => ({
+    ...state,
+    players: (state.players || []).map((p) => ({...p, position: p.position, heldObject: p.heldObject})),
+    objects: (state.objects || []).map((o) => ({...o, position: o.position}))
+  }));
+  return { staticInfo, frames };
+}
+
+function renderReplayFrame() {
+  if (!sceneRenderer || !replayState.frames.length) return;
+  const { staticInfo, frames, currentFrame } = replayState;
+  const fIdx = Math.floor(currentFrame);
+  sceneRenderer.render(staticInfo, frames[fIdx], frames, fIdx, currentFrame * 0.45, 0.45);
+  
+  document.getElementById('replay-slider').value = currentFrame;
+  document.getElementById('replay-frame-label').textContent = `Frame: ${Math.floor(currentFrame)}/${frames.length-1}`;
+}
+
+function replayLoop(timestamp) {
+  if (!replayState.playing) return;
+  if (!replayState.lastTime) replayState.lastTime = timestamp;
+  
+  const deltaMs = timestamp - replayState.lastTime;
+  const frameDurationMs = 450 / replayState.speed;
+  const framesToAdvance = deltaMs / frameDurationMs;
+  
+  replayState.currentFrame += framesToAdvance;
+  if (replayState.currentFrame >= replayState.maxFrame) {
+    replayState.currentFrame = replayState.maxFrame;
+    replayState.playing = false;
+    document.getElementById('replay-btn-play').textContent = '▶';
+  }
+  
+  replayState.lastTime = timestamp;
+  renderReplayFrame();
+  if (replayState.playing) {
+    replayState.animationId = requestAnimationFrame(replayLoop);
+  }
+}
+
+document.getElementById('replay-slider').addEventListener('input', e => {
+  replayState.currentFrame = parseFloat(e.target.value);
+  renderReplayFrame();
+});
+
+document.getElementById('replay-btn-play').addEventListener('click', () => {
+  replayState.playing = !replayState.playing;
+  document.getElementById('replay-btn-play').textContent = replayState.playing ? '⏸' : '▶';
+  if (replayState.playing) {
+    if (replayState.currentFrame >= replayState.maxFrame) replayState.currentFrame = replayState.minFrame;
+    replayState.lastTime = 0;
+    replayState.animationId = requestAnimationFrame(replayLoop);
+  } else {
+    cancelAnimationFrame(replayState.animationId);
+  }
+});
+
+document.getElementById('replay-speed').addEventListener('change', e => {
+  replayState.speed = parseFloat(e.target.value);
+});
+
+document.getElementById('replay-close').addEventListener('click', () => {
+  document.getElementById('replay-modal-backdrop').classList.remove('show');
+  replayState.playing = false;
+  cancelAnimationFrame(replayState.animationId);
+});
+
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('.replay-btn');
+  if (!btn || !btn.dataset.replay) return;
+  
+  const data = JSON.parse(decodeURIComponent(btn.dataset.replay));
+  if (!data.fileName) {
+    alert("This episode doesn't have a seed file associated with it.");
+    return;
+  }
+  
+  document.getElementById('replay-modal-backdrop').classList.add('show');
+  
+  if (!sceneRenderer) {
+    sceneRenderer = new SceneRenderer(document.getElementById('replay-scene'));
+    await sceneRenderer.loadSprites();
+  }
+  
+  document.getElementById('replay-title').textContent = `Replay — ${shortId(data.pid)} · ${data.epId}`;
+  
+  const fbSt = sentimentStyle(data.score??3);
+  document.getElementById('replay-feedback-box').innerHTML = `
+    <div style="font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px">
+      <span class="fb-s" style="background:${fbSt.bg};color:${fbSt.fc}">${data.score??'?'}</span>
+      ${data.text||'(empty)'}
+    </div>
+    <div style="font-size:12px;color:var(--text-2)">Reason: ${data.reason||'(empty)'}</div>
+  `;
+  
+  try {
+    const shortFile = data.fileName.split('/').pop();
+    const res = await fetch('./seeds/' + shortFile);
+    const raw = await res.json();
+    const adapted = await adaptEpisode(raw, shortFile);
+    
+    replayState.staticInfo = adapted.staticInfo;
+    replayState.frames = adapted.frames;
+    const maxF = replayState.frames.length - 1;
+    let rMin = 0, rMax = maxF;
+    if (data.startFrame != null && data.endFrame != null && data.startFrame <= maxF) {
+      rMin = data.startFrame;
+      rMax = Math.min(data.endFrame, maxF);
+    } else if (data.baseFrame != null && data.baseFrame <= maxF) {
+      rMin = Math.max(0, data.baseFrame - 10);
+      rMax = Math.min(maxF, data.baseFrame + 10);
+    }
+    
+    replayState.minFrame = rMin;
+    replayState.maxFrame = rMax;
+    replayState.currentFrame = rMin;
+    replayState.playing = false;
+    document.getElementById('replay-btn-play').textContent = '▶';
+    
+    const slider = document.getElementById('replay-slider');
+    slider.min = rMin;
+    slider.max = rMax;
+    slider.value = replayState.currentFrame;
+    
+    const marker = document.getElementById('replay-marker');
+    const rangeDiv = document.getElementById('replay-range');
+    
+    // Range div now just covers the whole slider because the slider IS the range
+    rangeDiv.style.display = 'block';
+    rangeDiv.style.left = '0%';
+    rangeDiv.style.width = '100%';
+    
+    if (data.baseFrame != null && data.baseFrame >= rMin && data.baseFrame <= rMax) {
+      marker.style.display = 'block';
+      const pct = rMax === rMin ? 0 : ((data.baseFrame - rMin) / (rMax - rMin)) * 100;
+      marker.style.left = `${pct}%`;
+    } else {
+      marker.style.display = 'none';
+    }
+    
+    renderReplayFrame();
+  } catch (err) {
+    console.error("Failed to load seed file for replay", err);
+    document.getElementById('replay-scene').innerHTML = '<div class="no-items">Failed to load replay data</div>';
+  }
+});
 
 // ── Tab switching ──
 document.querySelectorAll('.tb[data-panel]').forEach(btn=>{
