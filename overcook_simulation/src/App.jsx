@@ -10,19 +10,15 @@ import {
   savePostSurveyToFirestore,
 } from "./firebase";
 
-const FIXED_MAP_PATHS = [
-  "2_forced_hard/2_forced_hard_seed4_3520000_100.json",
-  "2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
-  "2_incentivized_hard/2_incentivized_hard_seed2_2520000_120.json",
-  "2_incentivized_hard_4/2_incentivized_hard_4_seed1_5020000_80.json",
+const LAYOUT_NAMES = [
+  "2_forced_hard",
+  "2_forced_hard_4",
+  "2_incentivized_hard",
+  "2_incentivized_hard_4",
 ];
+const SAMPLE_LEVEL = "L1";
 
-const mapModules = import.meta.glob([
-  "./maps/2_forced_hard/2_forced_hard_seed4_3520000_100.json",
-  "./maps/2_forced_hard_4/2_forced_hard_4_seed4_8520000_100.json",
-  "./maps/2_incentivized_hard/2_incentivized_hard_seed2_2520000_120.json",
-  "./maps/2_incentivized_hard_4/2_incentivized_hard_4_seed1_5020000_80.json",
-]);
+const mapModules = import.meta.glob("./maps/*/L1/*.json");
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -35,24 +31,39 @@ function shuffle(items) {
   return shuffled;
 }
 
-function buildRandomizedMapSet(modules) {
-  const fixedMaps = FIXED_MAP_PATHS.map((name) => {
-    const load = modules[`./maps/${name}`];
-    const [layoutName] = name.split("/");
+function getMapsForLayout(modules, layoutName, level) {
+  const prefix = `./maps/${layoutName}/${level}/`;
 
-    if (!load) {
-      console.error(`[maps] Missing fixed map: ${name}`);
+  return Object.entries(modules)
+    .filter(([path]) => path.startsWith(prefix))
+    .map(([path, load]) => ({
+      name: path.replace("./maps/", ""),
+      layoutName,
+      sampleLevel: level,
+      load,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function pickRandom(items) {
+  if (items.length === 0) return null;
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function buildRandomizedMapSet(modules) {
+  const sampledMaps = LAYOUT_NAMES.map((layoutName) => {
+    const candidates = getMapsForLayout(modules, layoutName, SAMPLE_LEVEL);
+    const picked = pickRandom(candidates);
+
+    if (!picked) {
+      console.warn(`[maps] Missing ${SAMPLE_LEVEL} maps for layout: ${layoutName}`);
       return null;
     }
 
-    return {
-      name,
-      layoutName,
-      load,
-    };
+    return picked;
   }).filter(Boolean);
 
-  return shuffle(fixedMaps);
+  return shuffle(sampledMaps);
 }
 
 const ALL_MAPS = buildRandomizedMapSet(mapModules);
@@ -889,7 +900,7 @@ export default function App() {
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
       btnText = "Start Experiment";
-      isDisabled = !hasReadInstructions || mapOrder.length !== FIXED_MAP_PATHS.length;
+      isDisabled = !hasReadInstructions || mapOrder.length === 0;
     }
 
     return (
