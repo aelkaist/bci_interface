@@ -16,9 +16,9 @@ const LAYOUT_NAMES = [
   "2_incentivized_hard",
   "2_incentivized_hard_4",
 ];
-const SAMPLE_LEVEL = "L1";
+const SAMPLE_LEVEL = "L3";
 
-const mapModules = import.meta.glob("./maps/*/L1/*.json");
+const mapModules = import.meta.glob("./maps/*/L3/*.json");
 
 function shuffle(items) {
   const shuffled = [...items];
