@@ -37,6 +37,12 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 /* Nav */
 .nav{height:52px;background:rgba(9,9,11,0.92);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100}
 .nav-logo{font-size:15px;font-weight:800;color:var(--text-1);margin-right:auto;user-select:none;letter-spacing:-0.3px}
+.nav-controls{display:flex;align-items:center;gap:16px}
+.pilot-filter{display:flex;align-items:center;gap:8px}
+.pilot-filter label{font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.5px}
+.pilot-select{min-width:210px;background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);font:600 11px var(--font);padding:7px 30px 7px 10px;border-radius:6px;cursor:pointer}
+.pilot-select:focus{outline:2px solid var(--accent-glow);border-color:var(--accent)}
+.pilot-select:disabled{cursor:wait;opacity:.6}
 .nav-status{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:8px}
 .nav-status .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green-glow);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -162,6 +168,11 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 .participant-detail.show{display:block;animation:slideDown .25s ease}
 
 @media(max-width:900px){
+  .nav{height:auto;min-height:52px;padding:10px 16px;gap:8px;align-items:stretch;flex-direction:column}
+  .nav-logo{margin-right:0}
+  .nav-controls{width:100%;align-items:center;justify-content:space-between;gap:10px}
+  .pilot-filter{min-width:0}
+  .pilot-select{width:clamp(140px,42vw,180px);min-width:0;max-width:none}
   .kpi-row{grid-template-columns:repeat(2,1fr)}
   .g2{grid-template-columns:1fr}
   .sr{grid-template-columns:repeat(3,1fr)}
@@ -173,10 +184,18 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 <body>
 
 <nav class="nav">
-  <span class="nav-logo">Pilot study 26/05/24</span>
-  <div class="nav-status">
-    <span class="dot"></span>
-    <span id="nav-status-text">Connecting...</span>
+  <span class="nav-logo" id="nav-logo">Pilot Dashboard</span>
+  <div class="nav-controls">
+    <div class="pilot-filter">
+      <label for="pilot-select">Pilot</label>
+      <select class="pilot-select" id="pilot-select" disabled>
+        <option>Loading...</option>
+      </select>
+    </div>
+    <div class="nav-status">
+      <span class="dot"></span>
+      <span id="nav-status-text">Loading local data...</span>
+    </div>
   </div>
 </nav>
 
@@ -389,6 +408,9 @@ let replayState = {
   lastTime: 0
 };
 
+let charts = [];
+const canvasClickHandlers = new Map();
+let pilotManifest = null;
 
 // ── Helpers ──
 const shortId = id => id.length > 12 ? id.slice(0,8)+'…' : id;
@@ -423,14 +445,74 @@ function sentimentStyle(s){
   return{bg:'rgba(251,191,36,0.15)',fc:'#fbbf24'};
 }
 
+function createChart(canvasId, config){
+  const chart = new Chart(document.getElementById(canvasId), config);
+  charts.push(chart);
+  return chart;
+}
+
+function bindCanvasClick(canvasId, handler){
+  const canvas = document.getElementById(canvasId);
+  const previousHandler = canvasClickHandlers.get(canvasId);
+  if(previousHandler) canvas.removeEventListener('click', previousHandler);
+  canvas.addEventListener('click', handler);
+  canvasClickHandlers.set(canvasId, handler);
+}
+
+function resetDashboard(){
+  charts.forEach(chart=>chart.destroy());
+  charts = [];
+  canvasClickHandlers.forEach((handler, canvasId)=>{
+    document.getElementById(canvasId)?.removeEventListener('click', handler);
+  });
+  canvasClickHandlers.clear();
+  document.querySelectorAll('.detail-panel.show,.participant-detail.show').forEach(panel=>panel.classList.remove('show'));
+}
+
+function showLoading(message='Loading Dashboard Data...'){
+  const loading = document.getElementById('loading');
+  loading.innerHTML=`<div class="loading-spinner"></div><div class="loading-text">${message}</div>`;
+  loading.style.display='flex';
+  document.getElementById('content').style.display='none';
+}
+
 // ── Fetch ──
 let DATA = {};
-async function fetchAllData(){
-  const response = await fetch('./data.json');
+async function fetchPilotManifest(){
+  const response = await fetch('./data/manifest.json', {cache:'no-store'});
   if (!response.ok) {
-    throw new Error('Failed to load data.json. Make sure to run fetch_data.js first.');
+    throw new Error('Failed to load Pilot manifest. Run npm run dashboard:split first.');
   }
   return await response.json();
+}
+
+async function fetchPilotData(pilot){
+  const response = await fetch(`./data/${pilot.file}`, {cache:'no-store'});
+  if (!response.ok) {
+    throw new Error(`Failed to load ${pilot.file}. Run npm run dashboard:split first.`);
+  }
+  return await response.json();
+}
+
+async function loadPilot(pilotId){
+  const select = document.getElementById('pilot-select');
+  const pilot = pilotManifest.pilots.find(item=>item.id===pilotId);
+  if(!pilot) throw new Error(`Unknown Pilot: ${pilotId}`);
+
+  select.disabled = true;
+  showLoading(`Loading ${pilot.label}...`);
+  resetDashboard();
+
+  try{
+    const data = await fetchPilotData(pilot);
+    render(data);
+    document.getElementById('nav-logo').textContent=pilot.label;
+    document.getElementById('nav-status-text').textContent=`Local · ${Object.keys(data).length} participants`;
+    document.getElementById('loading').style.display='none';
+    document.getElementById('content').style.display='block';
+  }finally{
+    select.disabled = false;
+  }
 }
 
 // ── Render ──
@@ -458,13 +540,13 @@ function render(pm){
   const mainVals=completed.map(p=>toMin(p.sessions[0]?.mainDurationSec));
   const labels=completed.map(p=>shortId(p.id));
 
-  new Chart(document.getElementById('chart-tutorial'),{type:'bar',
+  createChart('chart-tutorial',{type:'bar',
     data:{labels,datasets:[{data:tutVals.map(v=>v??0),backgroundColor:tutVals.map(v=>v==null||v===0?'#f472b6':'#818cf8'),borderRadius:4,borderSkipped:false}]},
     options:{...baseOpts('','min'),plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>r(tutVals[ctx.dataIndex],2)+' min'}}}}
   });
   renderStats('stats-tutorial',calcStats(tutVals.filter(v=>v!=null&&v>0)),' min');
 
-  new Chart(document.getElementById('chart-main'),{type:'bar',
+  createChart('chart-main',{type:'bar',
     data:{labels,datasets:[{data:mainVals.map(v=>v??0),backgroundColor:mainVals.map(v=>v==null||v===0?'#f472b6':v>60?'#fbbf24':'#34d399'),borderRadius:4,borderSkipped:false}]},
     options:{...baseOpts('','min'),plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>r(mainVals[ctx.dataIndex],2)+' min'}}}}
   });
@@ -494,12 +576,12 @@ function render(pm){
   const mainBinR = [[0,10],[10,20],[20,30],[30,40],[40,50],[50,Infinity]];
   const mainCounts = buildHist(mainVals, mainBinR);
 
-  new Chart(document.getElementById('chart-tutorial-dist'),{type:'bar',
+  createChart('chart-tutorial-dist',{type:'bar',
     data:{labels:tutBinLabels,datasets:[{data:tutCounts,backgroundColor:'#818cf8',borderRadius:4}]},
     options:baseOpts('Time Range (min)','Participants')
   });
 
-  new Chart(document.getElementById('chart-main-dist'),{type:'bar',
+  createChart('chart-main-dist',{type:'bar',
     data:{labels:mainBinLabels,datasets:[{data:mainCounts,backgroundColor:'#34d399',borderRadius:4}]},
     options:baseOpts('Time Range (min)','Participants')
   });
@@ -517,12 +599,12 @@ function render(pm){
   allEp.forEach(item=>{for(let i=0;i<binR.length;i++){const[lo,hi]=binR[i];
     if((i===0&&item.min===0)||(i>0&&item.min>lo&&item.min<=hi)||(i===binR.length-1&&item.min>10)){binC[i]++;binI[i].push(item);break;}}});
 
-  const epChart=new Chart(document.getElementById('chart-eptime'),{type:'bar',
+  const epChart=createChart('chart-eptime',{type:'bar',
     data:{labels:bins.map(b=>b+' min'),datasets:[{data:binC,backgroundColor:binC.map((_,i)=>i===0?'#f472b6':'#818cf8'),borderRadius:5,barThickness:32}]},
     options:baseOpts('Time spent (min)','Episode count')});
   renderStats('stats-eptime',calcStats(allEp.map(e=>e.min)),' min');
 
-  document.getElementById('chart-eptime').addEventListener('click',e=>{
+  bindCanvasClick('chart-eptime',e=>{
     const pts=epChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
     if(!pts.length)return;const i=pts[0].index;const items=binI[i];
     document.getElementById('dp-eptime-title').textContent=bins[i]+' min — '+items.length+' episodes';
@@ -533,7 +615,7 @@ function render(pm){
 
   // ── Tab 3: Items per participant ──
   const pitVals=completed.map(p=>p.feedbackItems.length);
-  const pitChart=new Chart(document.getElementById('chart-pititems'),{type:'bar',
+  const pitChart=createChart('chart-pititems',{type:'bar',
     data:{labels,datasets:[{data:pitVals,backgroundColor:pitVals.map(v=>v<=2?'#f472b6':v>=10?'#34d399':'#818cf8'),borderRadius:4,borderSkipped:false}]},
     options:baseOpts('','Items')});
   renderStats('stats-pititems',calcStats(pitVals),'');
@@ -542,12 +624,12 @@ function render(pm){
   const pitBinLabels = Array.from({length: pitMax+1}, (_, i) => i.toString());
   const pitBinR = Array.from({length: pitMax+1}, (_, i) => [i, i]);
   const pitCounts = buildHist(pitVals, pitBinR);
-  new Chart(document.getElementById('chart-pititems-dist'),{type:'bar',
+  createChart('chart-pititems-dist',{type:'bar',
     data:{labels:pitBinLabels,datasets:[{data:pitCounts,backgroundColor:'#818cf8',borderRadius:4}]},
     options:baseOpts('Feedback Items Count','Participants')
   });
 
-  document.getElementById('chart-pititems').addEventListener('click',e=>{
+  bindCanvasClick('chart-pititems',e=>{
     const pts=pitChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
     if(!pts.length)return;const p=completed[pts[0].index];
     document.getElementById('dp-pititems-title').textContent=shortId(p.id)+' — '+p.feedbackItems.length+' items';
@@ -571,18 +653,18 @@ function render(pm){
   const dHist=[0,0,0,0,0];diffR.forEach(v=>{if(v>=1&&v<=5)dHist[v-1]++});
   const ratingColors=['#f472b6','#fbbf24','#fbbf24','#818cf8','#34d399'];
 
-  new Chart(document.getElementById('chart-collab'),{type:'bar',
+  createChart('chart-collab',{type:'bar',
     data:{labels:['1','2','3','4','5'],datasets:[{data:cHist,backgroundColor:ratingColors,borderRadius:5,barThickness:36}]},
     options:baseOpts('Rating','Count')});
   renderStats('stats-collab',calcStats(collabR),'');
 
-  new Chart(document.getElementById('chart-difficulty'),{type:'bar',
+  createChart('chart-difficulty',{type:'bar',
     data:{labels:['1','2','3','4','5'],datasets:[{data:dHist,backgroundColor:ratingColors,borderRadius:5,barThickness:36}]},
     options:baseOpts('Rating','Count')});
   renderStats('stats-difficulty',calcStats(diffR),'');
 
   const mLabels=Object.keys(mapR);
-  new Chart(document.getElementById('chart-bymap'),{type:'bar',
+  createChart('chart-bymap',{type:'bar',
     data:{labels:mLabels.map(l=>l.length>22?l.slice(0,20)+'…':l),
       datasets:[
         {label:'Collaboration',data:mLabels.map(k=>{const a=mapR[k].collab;return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}),backgroundColor:'rgba(129,140,248,0.7)',borderRadius:4},
@@ -665,7 +747,7 @@ function render(pm){
     negCounts.push(n1); neuCounts.push(n2); posCounts.push(n3);
   });
 
-  new Chart(document.getElementById('chart-tone'),{type:'bar',
+  createChart('chart-tone',{type:'bar',
     data:{labels:completed.map(p=>shortId(p.id)), datasets:[
       {label:'Negative (1-2)', data:negCounts, backgroundColor:'#f472b6', borderRadius:4},
       {label:'Neutral (3)', data:neuCounts, backgroundColor:'#fbbf24', borderRadius:4},
@@ -917,14 +999,26 @@ document.querySelectorAll('.dp-close[data-close]').forEach(btn=>{
 // ── Init ──
 (async()=>{
   try{
-    const data=await fetchAllData();
-    document.getElementById('loading').style.display='none';
-    document.getElementById('content').style.display='block';
-    document.getElementById('nav-status-text').textContent=`Live · ${Object.keys(data).length} participants`;
-    render(data);
+    pilotManifest=await fetchPilotManifest();
+    const select=document.getElementById('pilot-select');
+    select.innerHTML=pilotManifest.pilots.map(pilot=>
+      `<option value="${pilot.id}">${pilot.label}</option>`
+    ).join('');
+    select.addEventListener('change',async event=>{
+      try{
+        await loadPilot(event.target.value);
+      }catch(err){
+        console.error(err);
+        document.getElementById('loading').innerHTML=`<div style="color:#f472b6;font-size:15px;font-weight:700">Failed to load</div><div style="color:#8888a0;font-size:12px;margin-top:8px">${err.message}</div>`;
+      }
+    });
+
+    if(!pilotManifest.pilots.length) throw new Error('No Pilot datasets are configured.');
+    await loadPilot(pilotManifest.pilots[0].id);
   }catch(err){
     console.error(err);
     document.getElementById('loading').innerHTML=`<div style="color:#f472b6;font-size:15px;font-weight:700">Failed to load</div><div style="color:#8888a0;font-size:12px;margin-top:8px">${err.message}</div>`;
+    document.getElementById('nav-status-text').textContent='Local data unavailable';
   }
 })();
 </script>

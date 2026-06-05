@@ -1,0 +1,2362 @@
+{
+  "213": {
+    "id": "213",
+    "sessions": [
+      {
+        "docId": "f4582cc2-08fd-444a-9b44-c9ca3266f6ad",
+        "status": "main_started",
+        "mainStartedAt": "2026-06-05T07:00:43.922Z",
+        "mainEndedAt": null,
+        "mainDurationSec": 0,
+        "currentEpisodeIndex": null,
+        "tutorialStartedAt": "2026-06-05T06:58:38.581Z",
+        "tutorialEndedAt": "2026-06-05T07:00:43.922Z",
+        "completedEpisodeCount": 0,
+        "currentEpisodeFileName": null,
+        "currentEpisodeLayoutName": null,
+        "updatedAt": "2026-06-05T07:00:43.923Z",
+        "tutorialDurationSec": 125.34,
+        "totalEpisodeCount": 4,
+        "mapOrder": [
+          "2_incentivized_hard/L3/2_incentivized_hard_seed4_4020000_160.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed3_8020000_220.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_9520000_160.json",
+          "2_forced_hard/L3/2_forced_hard_seed2_5520000_160.json"
+        ]
+      }
+    ],
+    "episodes": [],
+    "feedbackItems": [],
+    "postSurveys": [],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "33EA8481033D40D085A8FA4AF8B0ED69": {
+    "id": "33EA8481033D40D085A8FA4AF8B0ED69",
+    "sessions": [
+      {
+        "docId": "453f9d7b-b973-48ce-a420-b6fd698a03e8",
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:15:50.347Z",
+        "mainDurationSec": 879.51,
+        "mainEndedAt": "2026-06-04T15:30:29.855Z",
+        "currentEpisodeIndex": 4,
+        "tutorialStartedAt": "2026-06-04T15:10:37.803Z",
+        "tutorialEndedAt": "2026-06-04T15:15:50.347Z",
+        "completedEpisodeCount": 4,
+        "currentEpisodeFileName": "2_forced_hard/L3/2_forced_hard_seed7_7020000_160.json",
+        "currentEpisodeLayoutName": "2_forced_hard",
+        "updatedAt": "2026-06-04T15:30:30.603Z",
+        "tutorialDurationSec": 312.54,
+        "totalEpisodeCount": 4,
+        "mapOrder": [
+          "2_forced_hard_4/L3/2_forced_hard_4_seed1_10000000_160.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed5_4520000_200.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed9_7020000_180.json",
+          "2_forced_hard/L3/2_forced_hard_seed7_7020000_160.json"
+        ]
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "layoutName": "2_forced_hard_4",
+        "episodeCount": 1,
+        "videoPauseCount": 0,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:21:03.677Z",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 313,
+        "monitoringDifficultyReason": "I did not understand why the chefs  had different tasks",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed1_10000000_160.json",
+        "feedbackItems": [
+          {
+            "docId": "jUuctrX4UyfCKwzvEaSe",
+            "index": 1,
+            "baseFrame": 99,
+            "endFrame": 99,
+            "DidSpecifyRange": true,
+            "createdAt": "2026-06-04T15:21:04.293Z",
+            "startFrame": 97,
+            "feedback": "The same chef should have the same task",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 52.36,
+            "reason": "Chefs with one task are easier to follow"
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:24:25.121Z",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 4,
+        "episodeCount": 2,
+        "videoPauseCount": 0,
+        "layoutName": "2_incentivized_hard_4",
+        "monitoringDifficultyReason": "Some of the chefs were not collaborating enough",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed5_4520000_200.json",
+        "timeSpentOnPageSec": 200,
+        "collaborationRating": 1,
+        "feedbackItems": [
+          {
+            "docId": "Iebyer9w8TtqSL4jpmlR",
+            "createdAt": "2026-06-04T15:24:25.708Z",
+            "startFrame": 97,
+            "reason": "",
+            "timeSpentWritingFeedBackSec": 0,
+            "sentiment": 3,
+            "feedback": "",
+            "index": 1,
+            "baseFrame": 99,
+            "endFrame": 99,
+            "DidSpecifyRange": true
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "collaborationRating": null,
+        "timeSpentOnPageSec": 85,
+        "monitoringDifficultyReason": "one of the chefs was too slow",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed9_7020000_180.json",
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_incentivized_hard",
+        "episodeCount": 3,
+        "videoPauseCount": 0,
+        "createdAt": "2026-06-04T15:25:50.891Z",
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_4",
+        "layoutName": "2_forced_hard",
+        "videoPauseCount": 3,
+        "episodeCount": 4,
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:30:29.856Z",
+        "timeSpentOnPageSec": 278,
+        "collaborationRating": 3,
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed7_7020000_160.json",
+        "monitoringDifficultyReason": "",
+        "feedbackItems": [
+          {
+            "docId": "Z5euoHxNO0nYapjt5l1w",
+            "index": 1,
+            "baseFrame": 99,
+            "endFrame": 99,
+            "DidSpecifyRange": true,
+            "startFrame": 16,
+            "createdAt": "2026-06-04T15:30:30.416Z",
+            "timeSpentWritingFeedBackSec": 148.85,
+            "sentiment": 2,
+            "reason": "The chef on the left is not collaborating well",
+            "feedback": "The chef  on the left needs to provide a dish when the soup is ready"
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "jUuctrX4UyfCKwzvEaSe",
+        "index": 1,
+        "baseFrame": 99,
+        "endFrame": 99,
+        "DidSpecifyRange": true,
+        "createdAt": "2026-06-04T15:21:04.293Z",
+        "startFrame": 97,
+        "feedback": "The same chef should have the same task",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 52.36,
+        "reason": "Chefs with one task are easier to follow"
+      },
+      {
+        "docId": "Iebyer9w8TtqSL4jpmlR",
+        "createdAt": "2026-06-04T15:24:25.708Z",
+        "startFrame": 97,
+        "reason": "",
+        "timeSpentWritingFeedBackSec": 0,
+        "sentiment": 3,
+        "feedback": "",
+        "index": 1,
+        "baseFrame": 99,
+        "endFrame": 99,
+        "DidSpecifyRange": true
+      },
+      {
+        "docId": "Z5euoHxNO0nYapjt5l1w",
+        "index": 1,
+        "baseFrame": 99,
+        "endFrame": 99,
+        "DidSpecifyRange": true,
+        "startFrame": 16,
+        "createdAt": "2026-06-04T15:30:30.416Z",
+        "timeSpentWritingFeedBackSec": 148.85,
+        "sentiment": 2,
+        "reason": "The chef on the left is not collaborating well",
+        "feedback": "The chef  on the left needs to provide a dish when the soup is ready"
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "453f9d7b-b973-48ce-a420-b6fd698a03e8",
+        "surveyAnswers": {
+          "q2": "slowing down the video",
+          "q1": "Following the chefs to make and serve the soup",
+          "q3": " no"
+        },
+        "createdAt": "2026-06-04T15:31:35.340Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "53BF9B3A6FC44946A321FF497CAFED4E": {
+    "id": "53BF9B3A6FC44946A321FF497CAFED4E",
+    "sessions": [
+      {
+        "docId": "76f8b705-0a7d-4091-922f-116436e6c04e",
+        "mainEndedAt": "2026-06-04T15:31:50.315Z",
+        "mainDurationSec": 847.62,
+        "currentEpisodeIndex": 4,
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:17:42.699Z",
+        "currentEpisodeFileName": "2_forced_hard/L3/2_forced_hard_seed6_7020000_160.json",
+        "currentEpisodeLayoutName": "2_forced_hard",
+        "tutorialEndedAt": "2026-06-04T15:17:42.699Z",
+        "tutorialStartedAt": "2026-06-04T15:15:22.079Z",
+        "completedEpisodeCount": 4,
+        "updatedAt": "2026-06-04T15:31:51.052Z",
+        "mapOrder": [
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed6_8520000_220.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed8_3020000_160.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed7_9520000_160.json",
+          "2_forced_hard/L3/2_forced_hard_seed6_7020000_160.json"
+        ],
+        "totalEpisodeCount": 4,
+        "tutorialDurationSec": 140.62
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "createdAt": "2026-06-04T15:22:22.207Z",
+        "layoutName": "2_incentivized_hard_4",
+        "episodeCount": 1,
+        "videoPauseCount": 4,
+        "monitoringDifficulty": 3,
+        "playbackSpeedChanges": [],
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed6_8520000_220.json",
+        "monitoringDifficultyReason": "A lot of times they were moving around but not doing anything useful. ",
+        "collaborationRating": 2,
+        "timeSpentOnPageSec": 280,
+        "feedbackItems": [
+          {
+            "docId": "DafrywEnFG7eNE2G4se6",
+            "createdAt": "2026-06-04T15:22:22.729Z",
+            "startFrame": 22,
+            "reason": "While the pink chef is grabbing more onions and the green chef is waiting for the soup to be done, the blue and orange chefs are just running around aimlessly when they could be preparing another pot of soup instead. ",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 80.17,
+            "feedback": "The blue and orange chefs are not being helpful.",
+            "index": 1,
+            "baseFrame": 25,
+            "endFrame": 30,
+            "DidSpecifyRange": true
+          },
+          {
+            "docId": "ynuvGFUnIlAxcW0RM89G",
+            "createdAt": "2026-06-04T15:22:22.889Z",
+            "startFrame": null,
+            "reason": "There are a lot of moments where chefs will pause and just walk around for a second instead of grabbing more onions to put in the other pot. ",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 57.67,
+            "feedback": "It seems like overall, there is very poor collaboration as everyone is not moving together smoothly to get the job done. ",
+            "index": 2,
+            "baseFrame": 94,
+            "endFrame": null,
+            "DidSpecifyRange": false
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:26:44.987Z",
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_incentivized_hard",
+        "episodeCount": 2,
+        "videoPauseCount": 3,
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_3020000_160.json",
+        "monitoringDifficultyReason": "I did not have any trouble comprehending what they were doing.",
+        "collaborationRating": 3,
+        "timeSpentOnPageSec": 261,
+        "feedbackItems": [
+          {
+            "docId": "Iy8Cq0ZnDkB070Oc5VcL",
+            "createdAt": "2026-06-04T15:26:45.752Z",
+            "startFrame": 39,
+            "reason": "I am not understanding why the chefs are ignoring the other pot.",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 51.71,
+            "feedback": "The blue chef is holding the onion and waiting for the other chef to be done with that soup, when he could be using the other pot to make more soup.",
+            "index": 2,
+            "baseFrame": 41,
+            "endFrame": 53,
+            "DidSpecifyRange": true
+          },
+          {
+            "docId": "Mj56tn06AY9MhyqjvcTh",
+            "createdAt": "2026-06-04T15:26:46.105Z",
+            "startFrame": 79,
+            "reason": "He did not even grab an onion or do anything to help the process. He instead just stayed there for a few moments.",
+            "timeSpentWritingFeedBackSec": 58.57,
+            "sentiment": 1,
+            "feedback": "The green chef is not doing anything here. ",
+            "baseFrame": 81,
+            "index": 3,
+            "DidSpecifyRange": true,
+            "endFrame": 89
+          },
+          {
+            "docId": "lwJitV2uy6iU4XwkKDjq",
+            "feedback": "I like that they are moving around in a circle instead of bumping into one another.",
+            "sentiment": 5,
+            "timeSpentWritingFeedBackSec": 57.37,
+            "reason": "In the previous video, it felt like the chefs were awkward in their movements, but it seems like in this one they have a smooth system.",
+            "createdAt": "2026-06-04T15:26:45.609Z",
+            "startFrame": 11,
+            "endFrame": 19,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 13
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "episodeCount": 3,
+        "videoPauseCount": 2,
+        "layoutName": "2_forced_hard_4",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 1,
+        "createdAt": "2026-06-04T15:30:01.451Z",
+        "timeSpentOnPageSec": 195,
+        "collaborationRating": 3,
+        "monitoringDifficultyReason": "I did not have any problems monitoring the agents.",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed7_9520000_160.json",
+        "feedbackItems": [
+          {
+            "docId": "Dtx0v8xteFj3IWLSFYti",
+            "startFrame": 39,
+            "createdAt": "2026-06-04T15:30:02.100Z",
+            "feedback": "The chefs on the left seem to clash into one another, a problem that could be easily solved if the chefs would pay attention to the other pot on the right and use that to cook more soup.",
+            "timeSpentWritingFeedBackSec": 64.72,
+            "sentiment": 2,
+            "reason": "Like I said before, I do not understand why the chefs are ignoring the pot on the right. ",
+            "index": 1,
+            "baseFrame": 41,
+            "endFrame": 54,
+            "DidSpecifyRange": true
+          },
+          {
+            "docId": "yDzcWUoNfCoig0SjgyFw",
+            "startFrame": null,
+            "createdAt": "2026-06-04T15:30:02.244Z",
+            "timeSpentWritingFeedBackSec": 50.29,
+            "sentiment": 3,
+            "reason": "",
+            "feedback": "I like that overall the chefs each seem to have their own job to do, ensuring smoother communication. But I think it seems like the green and purple chefs are crashing into each other too often, a problem that could be solved by using the pot on the right. ",
+            "index": 2,
+            "baseFrame": 88,
+            "endFrame": null,
+            "DidSpecifyRange": false
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed6_7020000_160.json",
+        "monitoringDifficultyReason": "I could easily monitor both agents.",
+        "collaborationRating": 4,
+        "timeSpentOnPageSec": 107,
+        "createdAt": "2026-06-04T15:31:50.316Z",
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_forced_hard",
+        "episodeCount": 4,
+        "videoPauseCount": 0,
+        "feedbackItems": [
+          {
+            "docId": "mu3tRkuUDTiB2MMhkGIp",
+            "createdAt": "2026-06-04T15:31:50.909Z",
+            "startFrame": null,
+            "feedback": "I feel like out of all the videos so far, this one shows the best collaboration as there is nobody bumping into each other or standing and doing nothing. ",
+            "sentiment": 5,
+            "timeSpentWritingFeedBackSec": 48.24,
+            "reason": "",
+            "baseFrame": 65,
+            "index": 1,
+            "DidSpecifyRange": false,
+            "endFrame": null
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "DafrywEnFG7eNE2G4se6",
+        "createdAt": "2026-06-04T15:22:22.729Z",
+        "startFrame": 22,
+        "reason": "While the pink chef is grabbing more onions and the green chef is waiting for the soup to be done, the blue and orange chefs are just running around aimlessly when they could be preparing another pot of soup instead. ",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 80.17,
+        "feedback": "The blue and orange chefs are not being helpful.",
+        "index": 1,
+        "baseFrame": 25,
+        "endFrame": 30,
+        "DidSpecifyRange": true
+      },
+      {
+        "docId": "ynuvGFUnIlAxcW0RM89G",
+        "createdAt": "2026-06-04T15:22:22.889Z",
+        "startFrame": null,
+        "reason": "There are a lot of moments where chefs will pause and just walk around for a second instead of grabbing more onions to put in the other pot. ",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 57.67,
+        "feedback": "It seems like overall, there is very poor collaboration as everyone is not moving together smoothly to get the job done. ",
+        "index": 2,
+        "baseFrame": 94,
+        "endFrame": null,
+        "DidSpecifyRange": false
+      },
+      {
+        "docId": "Iy8Cq0ZnDkB070Oc5VcL",
+        "createdAt": "2026-06-04T15:26:45.752Z",
+        "startFrame": 39,
+        "reason": "I am not understanding why the chefs are ignoring the other pot.",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 51.71,
+        "feedback": "The blue chef is holding the onion and waiting for the other chef to be done with that soup, when he could be using the other pot to make more soup.",
+        "index": 2,
+        "baseFrame": 41,
+        "endFrame": 53,
+        "DidSpecifyRange": true
+      },
+      {
+        "docId": "Mj56tn06AY9MhyqjvcTh",
+        "createdAt": "2026-06-04T15:26:46.105Z",
+        "startFrame": 79,
+        "reason": "He did not even grab an onion or do anything to help the process. He instead just stayed there for a few moments.",
+        "timeSpentWritingFeedBackSec": 58.57,
+        "sentiment": 1,
+        "feedback": "The green chef is not doing anything here. ",
+        "baseFrame": 81,
+        "index": 3,
+        "DidSpecifyRange": true,
+        "endFrame": 89
+      },
+      {
+        "docId": "lwJitV2uy6iU4XwkKDjq",
+        "feedback": "I like that they are moving around in a circle instead of bumping into one another.",
+        "sentiment": 5,
+        "timeSpentWritingFeedBackSec": 57.37,
+        "reason": "In the previous video, it felt like the chefs were awkward in their movements, but it seems like in this one they have a smooth system.",
+        "createdAt": "2026-06-04T15:26:45.609Z",
+        "startFrame": 11,
+        "endFrame": 19,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 13
+      },
+      {
+        "docId": "Dtx0v8xteFj3IWLSFYti",
+        "startFrame": 39,
+        "createdAt": "2026-06-04T15:30:02.100Z",
+        "feedback": "The chefs on the left seem to clash into one another, a problem that could be easily solved if the chefs would pay attention to the other pot on the right and use that to cook more soup.",
+        "timeSpentWritingFeedBackSec": 64.72,
+        "sentiment": 2,
+        "reason": "Like I said before, I do not understand why the chefs are ignoring the pot on the right. ",
+        "index": 1,
+        "baseFrame": 41,
+        "endFrame": 54,
+        "DidSpecifyRange": true
+      },
+      {
+        "docId": "yDzcWUoNfCoig0SjgyFw",
+        "startFrame": null,
+        "createdAt": "2026-06-04T15:30:02.244Z",
+        "timeSpentWritingFeedBackSec": 50.29,
+        "sentiment": 3,
+        "reason": "",
+        "feedback": "I like that overall the chefs each seem to have their own job to do, ensuring smoother communication. But I think it seems like the green and purple chefs are crashing into each other too often, a problem that could be solved by using the pot on the right. ",
+        "index": 2,
+        "baseFrame": 88,
+        "endFrame": null,
+        "DidSpecifyRange": false
+      },
+      {
+        "docId": "mu3tRkuUDTiB2MMhkGIp",
+        "createdAt": "2026-06-04T15:31:50.909Z",
+        "startFrame": null,
+        "feedback": "I feel like out of all the videos so far, this one shows the best collaboration as there is nobody bumping into each other or standing and doing nothing. ",
+        "sentiment": 5,
+        "timeSpentWritingFeedBackSec": 48.24,
+        "reason": "",
+        "baseFrame": 65,
+        "index": 1,
+        "DidSpecifyRange": false,
+        "endFrame": null
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "76f8b705-0a7d-4091-922f-116436e6c04e",
+        "surveyAnswers": {
+          "q3": "No",
+          "q1": "If there were several chefs it was harder for me to monitor them all at once, so I preferred the videos with fewer agents.",
+          "q2": "I cannot think of anything that would have helped me other than having fewer agents in the videos. "
+        },
+        "createdAt": "2026-06-04T15:33:07.683Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "63D7B418580149AF98F4124345C6DCA0": {
+    "id": "63D7B418580149AF98F4124345C6DCA0",
+    "sessions": [
+      {
+        "docId": "b7c35acd-098e-409f-9342-0d565091fda3",
+        "currentEpisodeLayoutName": "2_forced_hard_4",
+        "currentEpisodeFileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json",
+        "completedEpisodeCount": 4,
+        "tutorialEndedAt": "2026-06-04T15:11:07.552Z",
+        "tutorialStartedAt": "2026-06-04T15:10:01.919Z",
+        "currentEpisodeIndex": 4,
+        "mainEndedAt": "2026-06-04T15:19:54.291Z",
+        "mainDurationSec": 526.74,
+        "mainStartedAt": "2026-06-04T15:11:07.552Z",
+        "status": "completed",
+        "mapOrder": [
+          "2_incentivized_hard/L3/2_incentivized_hard_seed4_4520000_160.json",
+          "2_forced_hard/L3/2_forced_hard_seed7_9520000_160.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed9_6520000_220.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json"
+        ],
+        "totalEpisodeCount": 4,
+        "tutorialDurationSec": 65.63,
+        "updatedAt": "2026-06-04T15:19:54.881Z"
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "timeSpentOnPageSec": 101,
+        "collaborationRating": 4,
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed4_4520000_160.json",
+        "monitoringDifficultyReason": "Neither moved chaotically or randomly.",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "episodeCount": 1,
+        "videoPauseCount": 2,
+        "layoutName": "2_incentivized_hard",
+        "createdAt": "2026-06-04T15:12:48.156Z",
+        "feedbackItems": [
+          {
+            "docId": "ygmGCYM71I7nP1ZDnDsm",
+            "endFrame": 42,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 32,
+            "reason": "It reduced efficiency.",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 25.6,
+            "feedback": "Instead of standing around waiting, Chef Blue could help add onions to the other pot.",
+            "createdAt": "2026-06-04T15:12:48.547Z",
+            "startFrame": 30
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "videoPauseCount": 1,
+        "episodeCount": 2,
+        "layoutName": "2_forced_hard",
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:14:27.939Z",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 99,
+        "monitoringDifficultyReason": "Blue seemed aware of what Green was doing and did a good job efficiently delivering across the closed line.",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed7_9520000_160.json",
+        "feedbackItems": [
+          {
+            "docId": "ASyzjC61FPGU59hmFlsT",
+            "endFrame": 47,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 31,
+            "timeSpentWritingFeedBackSec": 38.6,
+            "sentiment": 5,
+            "reason": "It increased efficiency.",
+            "feedback": "It was good that chef blue prepared another onion on his way to pick up the plate, so chef green could serve the dish and immediately begin making another pot.",
+            "createdAt": "2026-06-04T15:14:28.353Z",
+            "startFrame": 29
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "layoutName": "2_incentivized_hard_4",
+        "episodeCount": 3,
+        "videoPauseCount": 5,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:16:56.355Z",
+        "collaborationRating": null,
+        "timeSpentOnPageSec": 148,
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed9_6520000_220.json",
+        "monitoringDifficultyReason": "It was slightly harder watching four chefs vs. two.",
+        "feedbackItems": [
+          {
+            "docId": "dQEuWZ7dpwAu6HABg8YR",
+            "baseFrame": 51,
+            "index": 2,
+            "DidSpecifyRange": true,
+            "endFrame": 81,
+            "createdAt": "2026-06-04T15:16:56.694Z",
+            "startFrame": 49,
+            "reason": "It greatly reduced efficiency.",
+            "timeSpentWritingFeedBackSec": 23.67,
+            "sentiment": 1,
+            "feedback": "Once again, Pink wastes time standing around doing nothing instead of contributing to a task that needs to be accomplished"
+          },
+          {
+            "docId": "vaS9EOMml2MzBaapffjJ",
+            "baseFrame": 20,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 43,
+            "createdAt": "2026-06-04T15:16:56.585Z",
+            "startFrame": 18,
+            "feedback": "Pink wasted time standing around holding an onion instead of helping prepare the second pot or getting a plate ready.",
+            "reason": "It reduced efficiency.",
+            "timeSpentWritingFeedBackSec": 26.62,
+            "sentiment": 2
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "collaborationRating": null,
+        "timeSpentOnPageSec": 177,
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json",
+        "monitoringDifficultyReason": "Watching four chefs do four different things at once, all interacting with each other, took some pausing and repeat viewing, but it wasn't impossible or extremely difficult.",
+        "episodeCount": 4,
+        "videoPauseCount": 3,
+        "layoutName": "2_forced_hard_4",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 3,
+        "createdAt": "2026-06-04T15:19:54.291Z",
+        "feedbackItems": [
+          {
+            "docId": "2M2ST0Pcwqr7Ylo9OIwk",
+            "index": 1,
+            "baseFrame": 13,
+            "endFrame": 50,
+            "DidSpecifyRange": true,
+            "startFrame": 11,
+            "createdAt": "2026-06-04T15:19:54.669Z",
+            "feedback": "Blue is being very efficient, helping serve onions to the chefs with the pots and then moving on to provide plates. Orange however is being redundant, basically following blue around. They could have divided the two tasks between them.",
+            "timeSpentWritingFeedBackSec": 59.12,
+            "sentiment": 3,
+            "reason": "One chef is being very efficient and one is being very inefficient."
+          },
+          {
+            "docId": "Q7tSmBYl7AbKWNNvkNAS",
+            "feedback": "Green and pink are doing an excellent job working as a team to get both pots going, but neither is focused on delivering the final output, only one dish got served in the whole video.",
+            "timeSpentWritingFeedBackSec": 53.9,
+            "sentiment": 1,
+            "reason": "The bots are accomplishing one task but not seeing the \"big picture\"",
+            "startFrame": 51,
+            "createdAt": "2026-06-04T15:19:54.778Z",
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "baseFrame": 68,
+            "index": 2
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "ygmGCYM71I7nP1ZDnDsm",
+        "endFrame": 42,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 32,
+        "reason": "It reduced efficiency.",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 25.6,
+        "feedback": "Instead of standing around waiting, Chef Blue could help add onions to the other pot.",
+        "createdAt": "2026-06-04T15:12:48.547Z",
+        "startFrame": 30
+      },
+      {
+        "docId": "ASyzjC61FPGU59hmFlsT",
+        "endFrame": 47,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 31,
+        "timeSpentWritingFeedBackSec": 38.6,
+        "sentiment": 5,
+        "reason": "It increased efficiency.",
+        "feedback": "It was good that chef blue prepared another onion on his way to pick up the plate, so chef green could serve the dish and immediately begin making another pot.",
+        "createdAt": "2026-06-04T15:14:28.353Z",
+        "startFrame": 29
+      },
+      {
+        "docId": "dQEuWZ7dpwAu6HABg8YR",
+        "baseFrame": 51,
+        "index": 2,
+        "DidSpecifyRange": true,
+        "endFrame": 81,
+        "createdAt": "2026-06-04T15:16:56.694Z",
+        "startFrame": 49,
+        "reason": "It greatly reduced efficiency.",
+        "timeSpentWritingFeedBackSec": 23.67,
+        "sentiment": 1,
+        "feedback": "Once again, Pink wastes time standing around doing nothing instead of contributing to a task that needs to be accomplished"
+      },
+      {
+        "docId": "vaS9EOMml2MzBaapffjJ",
+        "baseFrame": 20,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 43,
+        "createdAt": "2026-06-04T15:16:56.585Z",
+        "startFrame": 18,
+        "feedback": "Pink wasted time standing around holding an onion instead of helping prepare the second pot or getting a plate ready.",
+        "reason": "It reduced efficiency.",
+        "timeSpentWritingFeedBackSec": 26.62,
+        "sentiment": 2
+      },
+      {
+        "docId": "2M2ST0Pcwqr7Ylo9OIwk",
+        "index": 1,
+        "baseFrame": 13,
+        "endFrame": 50,
+        "DidSpecifyRange": true,
+        "startFrame": 11,
+        "createdAt": "2026-06-04T15:19:54.669Z",
+        "feedback": "Blue is being very efficient, helping serve onions to the chefs with the pots and then moving on to provide plates. Orange however is being redundant, basically following blue around. They could have divided the two tasks between them.",
+        "timeSpentWritingFeedBackSec": 59.12,
+        "sentiment": 3,
+        "reason": "One chef is being very efficient and one is being very inefficient."
+      },
+      {
+        "docId": "Q7tSmBYl7AbKWNNvkNAS",
+        "feedback": "Green and pink are doing an excellent job working as a team to get both pots going, but neither is focused on delivering the final output, only one dish got served in the whole video.",
+        "timeSpentWritingFeedBackSec": 53.9,
+        "sentiment": 1,
+        "reason": "The bots are accomplishing one task but not seeing the \"big picture\"",
+        "startFrame": 51,
+        "createdAt": "2026-06-04T15:19:54.778Z",
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "baseFrame": 68,
+        "index": 2
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "b7c35acd-098e-409f-9342-0d565091fda3",
+        "createdAt": "2026-06-04T15:20:52.737Z",
+        "surveyAnswers": {
+          "q2": "N/A - the frame by frame and ability to pause and rewind made it much easier than it would have been otherwise.",
+          "q1": "It was especially difficult to keep track of all four independent agents when the kitchen was divided and each should have been doing a different task, although sometimes they just wandered or followed each other around.",
+          "q3": "No issues, questions, comments, or concerns, thank you!"
+        }
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "6E1EAE46C1494860A8E541B19C0746A7": {
+    "id": "6E1EAE46C1494860A8E541B19C0746A7",
+    "sessions": [
+      {
+        "docId": "7fecce9f-97ed-4b59-852b-5c99d49b6f62",
+        "currentEpisodeIndex": 4,
+        "mainDurationSec": 600.26,
+        "mainEndedAt": "2026-06-04T15:57:25.450Z",
+        "mainStartedAt": "2026-06-04T15:47:25.193Z",
+        "status": "completed",
+        "currentEpisodeLayoutName": "2_forced_hard_4",
+        "currentEpisodeFileName": "2_forced_hard_4/L3/2_forced_hard_4_seed7_10000000_160.json",
+        "completedEpisodeCount": 4,
+        "tutorialStartedAt": "2026-06-04T15:11:53.794Z",
+        "tutorialEndedAt": "2026-06-04T15:47:25.193Z",
+        "updatedAt": "2026-06-04T15:57:26.134Z",
+        "totalEpisodeCount": 4,
+        "mapOrder": [
+          "2_forced_hard/L3/2_forced_hard_seed1_6020000_160.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed1_8020000_180.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed4_7020000_220.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed7_10000000_160.json"
+        ],
+        "tutorialDurationSec": 2131.4
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "collaborationRating": 2,
+        "timeSpentOnPageSec": 181,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed1_6020000_160.json",
+        "videoPauseCount": 4,
+        "episodeCount": 1,
+        "layoutName": "2_forced_hard",
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:50:26.015Z",
+        "feedbackItems": [
+          {
+            "docId": "xqejf3TcV97aRhYeUuvt",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 96.39,
+            "reason": "you can see him wander aimlessly ",
+            "feedback": "the green hat chef takes longer steps and wanders around needlessly causing delays in collecting ingredients and cooking",
+            "createdAt": "2026-06-04T15:50:26.499Z",
+            "startFrame": null,
+            "endFrame": null,
+            "DidSpecifyRange": false,
+            "index": 1,
+            "baseFrame": 0
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:52:16.556Z",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 4,
+        "episodeCount": 2,
+        "videoPauseCount": 0,
+        "layoutName": "2_incentivized_hard",
+        "monitoringDifficultyReason": "",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed1_8020000_180.json",
+        "collaborationRating": 1,
+        "timeSpentOnPageSec": 110,
+        "feedbackItems": [
+          {
+            "docId": "3VvNt8pJlUNOut5uJ24C",
+            "reason": "they could have cooked more efficiently if they both were doing tasks at the same time instead of just standing around",
+            "timeSpentWritingFeedBackSec": 74.17,
+            "sentiment": 3,
+            "feedback": "blue hat does most of the work. green hat wanders aimlessly and just stands around unproductive instead anticipating the next step in the process",
+            "createdAt": "2026-06-04T15:52:16.931Z",
+            "startFrame": null,
+            "endFrame": null,
+            "DidSpecifyRange": false,
+            "index": 1,
+            "baseFrame": 58
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed4_7020000_220.json",
+        "monitoringDifficultyReason": "",
+        "collaborationRating": 4,
+        "timeSpentOnPageSec": 144,
+        "createdAt": "2026-06-04T15:54:42.035Z",
+        "layoutName": "2_incentivized_hard_4",
+        "episodeCount": 3,
+        "videoPauseCount": 0,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "feedbackItems": [
+          {
+            "docId": "dN8zZ2T3tO3q5TcnvNFK",
+            "DidSpecifyRange": false,
+            "endFrame": null,
+            "baseFrame": 83,
+            "index": 1,
+            "feedback": "they worked pretty well together considering there were twice as many chefs this round. they have a second stove and they would walk to the empty stove while the other stove was in use, yet no one took the initiative to cook on the second stove to make meals quicker.  ",
+            "sentiment": 4,
+            "timeSpentWritingFeedBackSec": 96.02,
+            "reason": "while they were productive and worked well togehter, they missed the oppurtunity to use the second stove and double their cooking rate",
+            "createdAt": "2026-06-04T15:54:42.599Z",
+            "startFrame": null
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "createdAt": "2026-06-04T15:57:25.450Z",
+        "monitoringDifficulty": 3,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_forced_hard_4",
+        "episodeCount": 4,
+        "videoPauseCount": 0,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed7_10000000_160.json",
+        "collaborationRating": null,
+        "timeSpentOnPageSec": 162,
+        "feedbackItems": [
+          {
+            "docId": "VsxmSmNed6Jeph6DSMEo",
+            "createdAt": "2026-06-04T15:57:25.994Z",
+            "startFrame": null,
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 133.81,
+            "reason": "i didn't feel they were being the most efficient with their time",
+            "feedback": "i had hope these guys would work better than the 3rd round since they were on seperate sides of a kitchen, but again, they missed the chance to use the second stove instead of just walking around. each person seemed to have their own task, but it was unesscery to have one person moving a plate over if they aren't even using the second stove",
+            "index": 1,
+            "baseFrame": 52,
+            "endFrame": null,
+            "DidSpecifyRange": false
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "xqejf3TcV97aRhYeUuvt",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 96.39,
+        "reason": "you can see him wander aimlessly ",
+        "feedback": "the green hat chef takes longer steps and wanders around needlessly causing delays in collecting ingredients and cooking",
+        "createdAt": "2026-06-04T15:50:26.499Z",
+        "startFrame": null,
+        "endFrame": null,
+        "DidSpecifyRange": false,
+        "index": 1,
+        "baseFrame": 0
+      },
+      {
+        "docId": "3VvNt8pJlUNOut5uJ24C",
+        "reason": "they could have cooked more efficiently if they both were doing tasks at the same time instead of just standing around",
+        "timeSpentWritingFeedBackSec": 74.17,
+        "sentiment": 3,
+        "feedback": "blue hat does most of the work. green hat wanders aimlessly and just stands around unproductive instead anticipating the next step in the process",
+        "createdAt": "2026-06-04T15:52:16.931Z",
+        "startFrame": null,
+        "endFrame": null,
+        "DidSpecifyRange": false,
+        "index": 1,
+        "baseFrame": 58
+      },
+      {
+        "docId": "dN8zZ2T3tO3q5TcnvNFK",
+        "DidSpecifyRange": false,
+        "endFrame": null,
+        "baseFrame": 83,
+        "index": 1,
+        "feedback": "they worked pretty well together considering there were twice as many chefs this round. they have a second stove and they would walk to the empty stove while the other stove was in use, yet no one took the initiative to cook on the second stove to make meals quicker.  ",
+        "sentiment": 4,
+        "timeSpentWritingFeedBackSec": 96.02,
+        "reason": "while they were productive and worked well togehter, they missed the oppurtunity to use the second stove and double their cooking rate",
+        "createdAt": "2026-06-04T15:54:42.599Z",
+        "startFrame": null
+      },
+      {
+        "docId": "VsxmSmNed6Jeph6DSMEo",
+        "createdAt": "2026-06-04T15:57:25.994Z",
+        "startFrame": null,
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 133.81,
+        "reason": "i didn't feel they were being the most efficient with their time",
+        "feedback": "i had hope these guys would work better than the 3rd round since they were on seperate sides of a kitchen, but again, they missed the chance to use the second stove instead of just walking around. each person seemed to have their own task, but it was unesscery to have one person moving a plate over if they aren't even using the second stove",
+        "index": 1,
+        "baseFrame": 52,
+        "endFrame": null,
+        "DidSpecifyRange": false
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "7fecce9f-97ed-4b59-852b-5c99d49b6f62",
+        "surveyAnswers": {
+          "q3": "no",
+          "q2": "nothing, the set up was fine ",
+          "q1": "no challenges aside from my percieved notions of how i would expect or want the chefs to interact with each other didnt meet my expectations"
+        },
+        "createdAt": "2026-06-04T16:01:27.821Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "98B103EC230F4F90A5E3EDA32E1A71E2": {
+    "id": "98B103EC230F4F90A5E3EDA32E1A71E2",
+    "sessions": [
+      {
+        "docId": "7c4f6956-28a5-4352-9358-2cbd5073b5e4",
+        "tutorialEndedAt": "2026-06-04T15:15:00.213Z",
+        "tutorialStartedAt": "2026-06-04T15:09:44.239Z",
+        "completedEpisodeCount": 4,
+        "currentEpisodeFileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json",
+        "currentEpisodeLayoutName": "2_forced_hard_4",
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:15:00.213Z",
+        "mainDurationSec": 523.42,
+        "mainEndedAt": "2026-06-04T15:23:43.632Z",
+        "currentEpisodeIndex": 4,
+        "tutorialDurationSec": 315.97,
+        "mapOrder": [
+          "2_forced_hard/L3/2_forced_hard_seed2_9520000_160.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed2_6520000_220.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed9_10000000_180.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json"
+        ],
+        "totalEpisodeCount": 4,
+        "updatedAt": "2026-06-04T15:23:44.150Z"
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "monitoringDifficultyReason": "while I am giving feedback I miss some of the action",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed2_9520000_160.json",
+        "collaborationRating": 4,
+        "timeSpentOnPageSec": 178,
+        "createdAt": "2026-06-04T15:17:58.651Z",
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_forced_hard",
+        "episodeCount": 1,
+        "videoPauseCount": 4,
+        "feedbackItems": [
+          {
+            "docId": "1Jya3iaxS7pA3fW76JuM",
+            "baseFrame": 27,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 20,
+            "startFrame": 0,
+            "createdAt": "2026-06-04T15:17:59.253Z",
+            "feedback": "they are working together to get onines in the pot",
+            "timeSpentWritingFeedBackSec": 35.3,
+            "sentiment": 3,
+            "reason": ""
+          },
+          {
+            "docId": "2IBmyYkPMyKdPNMnaUpx",
+            "endFrame": 62,
+            "DidSpecifyRange": true,
+            "index": 5,
+            "baseFrame": 60,
+            "timeSpentWritingFeedBackSec": 2.42,
+            "sentiment": 4,
+            "reason": "",
+            "feedback": "",
+            "startFrame": 58,
+            "createdAt": "2026-06-04T15:18:00.010Z"
+          },
+          {
+            "docId": "78axbrGASSbkBjV9Iwdv",
+            "DidSpecifyRange": true,
+            "endFrame": 66,
+            "baseFrame": 59,
+            "index": 3,
+            "feedback": "",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 4.15,
+            "reason": "",
+            "createdAt": "2026-06-04T15:17:59.770Z",
+            "startFrame": 51
+          },
+          {
+            "docId": "XB38knIDXfyvf0P9LX3H",
+            "baseFrame": 20,
+            "index": 2,
+            "DidSpecifyRange": true,
+            "endFrame": 22,
+            "createdAt": "2026-06-04T15:17:59.536Z",
+            "startFrame": 18,
+            "feedback": "",
+            "reason": "",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 0
+          },
+          {
+            "docId": "XRRi0saX92tTqZI1bchM",
+            "baseFrame": 58,
+            "index": 4,
+            "DidSpecifyRange": true,
+            "endFrame": 60,
+            "createdAt": "2026-06-04T15:17:59.920Z",
+            "startFrame": 54,
+            "reason": "",
+            "timeSpentWritingFeedBackSec": 21.04,
+            "sentiment": 3,
+            "feedback": "they are working together to get the soup served"
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:20:26.095Z",
+        "layoutName": "2_incentivized_hard_4",
+        "episodeCount": 2,
+        "videoPauseCount": 2,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "monitoringDifficultyReason": "still missing action while I write the feedback",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed2_6520000_220.json",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 146,
+        "feedbackItems": [
+          {
+            "docId": "AOyJKRDspV90eaeYgiaf",
+            "endFrame": 85,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 58,
+            "feedback": "4 chefs are getting the onions in the pot, and serving the soup",
+            "reason": "watching them do it",
+            "sentiment": 5,
+            "timeSpentWritingFeedBackSec": 73.27,
+            "createdAt": "2026-06-04T15:20:26.519Z",
+            "startFrame": 9
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 4,
+        "episodeCount": 3,
+        "videoPauseCount": 1,
+        "layoutName": "2_incentivized_hard",
+        "createdAt": "2026-06-04T15:22:18.555Z",
+        "timeSpentOnPageSec": 112,
+        "collaborationRating": 3,
+        "monitoringDifficultyReason": "I don't watch while I give feedback",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed9_10000000_180.json",
+        "feedbackItems": [
+          {
+            "docId": "8d85KNtEvUTSwb2PIZkM",
+            "baseFrame": 62,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 64,
+            "startFrame": 24,
+            "createdAt": "2026-06-04T15:22:19.212Z",
+            "feedback": "each chef works alone but still the soup gets made and the dishes served",
+            "timeSpentWritingFeedBackSec": 27.69,
+            "sentiment": 4,
+            "reason": ""
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "monitoringDifficultyReason": "still have trouble watching while I give feedback",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_8520000_140.json",
+        "collaborationRating": 4,
+        "timeSpentOnPageSec": 84,
+        "createdAt": "2026-06-04T15:23:43.633Z",
+        "layoutName": "2_forced_hard_4",
+        "episodeCount": 4,
+        "videoPauseCount": 0,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "feedbackItems": []
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "1Jya3iaxS7pA3fW76JuM",
+        "baseFrame": 27,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 20,
+        "startFrame": 0,
+        "createdAt": "2026-06-04T15:17:59.253Z",
+        "feedback": "they are working together to get onines in the pot",
+        "timeSpentWritingFeedBackSec": 35.3,
+        "sentiment": 3,
+        "reason": ""
+      },
+      {
+        "docId": "2IBmyYkPMyKdPNMnaUpx",
+        "endFrame": 62,
+        "DidSpecifyRange": true,
+        "index": 5,
+        "baseFrame": 60,
+        "timeSpentWritingFeedBackSec": 2.42,
+        "sentiment": 4,
+        "reason": "",
+        "feedback": "",
+        "startFrame": 58,
+        "createdAt": "2026-06-04T15:18:00.010Z"
+      },
+      {
+        "docId": "78axbrGASSbkBjV9Iwdv",
+        "DidSpecifyRange": true,
+        "endFrame": 66,
+        "baseFrame": 59,
+        "index": 3,
+        "feedback": "",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 4.15,
+        "reason": "",
+        "createdAt": "2026-06-04T15:17:59.770Z",
+        "startFrame": 51
+      },
+      {
+        "docId": "XB38knIDXfyvf0P9LX3H",
+        "baseFrame": 20,
+        "index": 2,
+        "DidSpecifyRange": true,
+        "endFrame": 22,
+        "createdAt": "2026-06-04T15:17:59.536Z",
+        "startFrame": 18,
+        "feedback": "",
+        "reason": "",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 0
+      },
+      {
+        "docId": "XRRi0saX92tTqZI1bchM",
+        "baseFrame": 58,
+        "index": 4,
+        "DidSpecifyRange": true,
+        "endFrame": 60,
+        "createdAt": "2026-06-04T15:17:59.920Z",
+        "startFrame": 54,
+        "reason": "",
+        "timeSpentWritingFeedBackSec": 21.04,
+        "sentiment": 3,
+        "feedback": "they are working together to get the soup served"
+      },
+      {
+        "docId": "AOyJKRDspV90eaeYgiaf",
+        "endFrame": 85,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 58,
+        "feedback": "4 chefs are getting the onions in the pot, and serving the soup",
+        "reason": "watching them do it",
+        "sentiment": 5,
+        "timeSpentWritingFeedBackSec": 73.27,
+        "createdAt": "2026-06-04T15:20:26.519Z",
+        "startFrame": 9
+      },
+      {
+        "docId": "8d85KNtEvUTSwb2PIZkM",
+        "baseFrame": 62,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 64,
+        "startFrame": 24,
+        "createdAt": "2026-06-04T15:22:19.212Z",
+        "feedback": "each chef works alone but still the soup gets made and the dishes served",
+        "timeSpentWritingFeedBackSec": 27.69,
+        "sentiment": 4,
+        "reason": ""
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "7c4f6956-28a5-4352-9358-2cbd5073b5e4",
+        "surveyAnswers": {
+          "q3": "It looked similar to each time",
+          "q2": "I should wait until the end to do the feedback",
+          "q1": "giving feedback is distracting me from watching the chefs"
+        },
+        "createdAt": "2026-06-04T15:24:45.418Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "9B51742216874E27A4816AA0F2C47166": {
+    "id": "9B51742216874E27A4816AA0F2C47166",
+    "sessions": [
+      {
+        "docId": "8fa8ba1a-49d1-4067-9a15-f36e4fde22dd",
+        "mainEndedAt": "2026-06-04T15:37:46.541Z",
+        "mainDurationSec": 1395.19,
+        "currentEpisodeIndex": 4,
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:14:31.354Z",
+        "currentEpisodeFileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed10_7520000_220.json",
+        "currentEpisodeLayoutName": "2_incentivized_hard_4",
+        "tutorialEndedAt": "2026-06-04T15:14:31.354Z",
+        "tutorialStartedAt": "2026-06-04T15:10:53.439Z",
+        "completedEpisodeCount": 4,
+        "updatedAt": "2026-06-04T15:37:48.479Z",
+        "mapOrder": [
+          "2_forced_hard_4/L3/2_forced_hard_4_seed4_10000000_160.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed1_8520000_180.json",
+          "2_forced_hard/L3/2_forced_hard_seed8_8020000_140.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed10_7520000_220.json"
+        ],
+        "totalEpisodeCount": 4,
+        "tutorialDurationSec": 217.91
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "timeSpentOnPageSec": 715,
+        "collaborationRating": 2,
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed4_10000000_160.json",
+        "monitoringDifficultyReason": "there were times orange and blue chefs are walking around aimlessly , they don't stay still once they finished their jobs",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 3,
+        "episodeCount": 1,
+        "videoPauseCount": 20,
+        "layoutName": "2_forced_hard_4",
+        "createdAt": "2026-06-04T15:26:26.279Z",
+        "feedbackItems": [
+          {
+            "docId": "VphLMQl7TqzSGV9ObQG7",
+            "createdAt": "2026-06-04T15:26:27.888Z",
+            "startFrame": 2,
+            "reason": "blue chef picked onions, green and pink chefs took them to pot, orange chef handed over plates, green chef served the dish",
+            "timeSpentWritingFeedBackSec": 475.14,
+            "sentiment": 3,
+            "feedback": "overall efficiently done",
+            "baseFrame": 98,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 97
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:30:25.726Z",
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_incentivized_hard",
+        "videoPauseCount": 5,
+        "episodeCount": 2,
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed1_8520000_180.json",
+        "monitoringDifficultyReason": "there are only 2 chefs and it's easier to follow their actions ",
+        "timeSpentOnPageSec": 237,
+        "collaborationRating": 2,
+        "feedbackItems": [
+          {
+            "docId": "ZHjFxyH687yasAHN718g",
+            "createdAt": "2026-06-04T15:30:27.126Z",
+            "startFrame": 64,
+            "feedback": "did not use second pot while waiting for first pot to be ready",
+            "reason": "both chefs just waited around for pot to finish instead of using the second pot",
+            "timeSpentWritingFeedBackSec": 138.23,
+            "sentiment": 2,
+            "index": 1,
+            "baseFrame": 99,
+            "endFrame": 99,
+            "DidSpecifyRange": true
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 255,
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed8_8020000_140.json",
+        "monitoringDifficultyReason": "they did not walk around aimlessly and it was easy to follow their actions ",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "episodeCount": 3,
+        "videoPauseCount": 4,
+        "layoutName": "2_forced_hard",
+        "createdAt": "2026-06-04T15:34:42.427Z",
+        "feedbackItems": [
+          {
+            "docId": "JMgp81zrhlHqoGZ8WxwR",
+            "baseFrame": 99,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "startFrame": 11,
+            "createdAt": "2026-06-04T15:34:43.609Z",
+            "timeSpentWritingFeedBackSec": 167.4,
+            "sentiment": 5,
+            "reason": "blue chef walked closer to middle to minimize steps the green chef needs to pick up onions, they were able to finish 2 pots",
+            "feedback": "cooperative and efficiently finishes 2 pots"
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "monitoringDifficultyReason": "there's a lot of times the chefs are walking around aimlessly, not assisting with any task",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed10_7520000_220.json",
+        "collaborationRating": 1,
+        "timeSpentOnPageSec": 182,
+        "createdAt": "2026-06-04T15:37:46.548Z",
+        "episodeCount": 4,
+        "videoPauseCount": 3,
+        "layoutName": "2_incentivized_hard_4",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 1,
+        "feedbackItems": [
+          {
+            "docId": "P4eOVgqz7Q2HPEdGEoGl",
+            "baseFrame": 69,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 96,
+            "createdAt": "2026-06-04T15:37:48.247Z",
+            "startFrame": 16,
+            "feedback": "inefficient and unorganized",
+            "reason": "there are 4 chefs but they only utilize one pot, they don't have clear separate duties, there are a lot of times they just walk around aimlessly ",
+            "sentiment": 1,
+            "timeSpentWritingFeedBackSec": 94
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "VphLMQl7TqzSGV9ObQG7",
+        "createdAt": "2026-06-04T15:26:27.888Z",
+        "startFrame": 2,
+        "reason": "blue chef picked onions, green and pink chefs took them to pot, orange chef handed over plates, green chef served the dish",
+        "timeSpentWritingFeedBackSec": 475.14,
+        "sentiment": 3,
+        "feedback": "overall efficiently done",
+        "baseFrame": 98,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 97
+      },
+      {
+        "docId": "ZHjFxyH687yasAHN718g",
+        "createdAt": "2026-06-04T15:30:27.126Z",
+        "startFrame": 64,
+        "feedback": "did not use second pot while waiting for first pot to be ready",
+        "reason": "both chefs just waited around for pot to finish instead of using the second pot",
+        "timeSpentWritingFeedBackSec": 138.23,
+        "sentiment": 2,
+        "index": 1,
+        "baseFrame": 99,
+        "endFrame": 99,
+        "DidSpecifyRange": true
+      },
+      {
+        "docId": "JMgp81zrhlHqoGZ8WxwR",
+        "baseFrame": 99,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "startFrame": 11,
+        "createdAt": "2026-06-04T15:34:43.609Z",
+        "timeSpentWritingFeedBackSec": 167.4,
+        "sentiment": 5,
+        "reason": "blue chef walked closer to middle to minimize steps the green chef needs to pick up onions, they were able to finish 2 pots",
+        "feedback": "cooperative and efficiently finishes 2 pots"
+      },
+      {
+        "docId": "P4eOVgqz7Q2HPEdGEoGl",
+        "baseFrame": 69,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 96,
+        "createdAt": "2026-06-04T15:37:48.247Z",
+        "startFrame": 16,
+        "feedback": "inefficient and unorganized",
+        "reason": "there are 4 chefs but they only utilize one pot, they don't have clear separate duties, there are a lot of times they just walk around aimlessly ",
+        "sentiment": 1,
+        "timeSpentWritingFeedBackSec": 94
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "8fa8ba1a-49d1-4067-9a15-f36e4fde22dd",
+        "surveyAnswers": {
+          "q3": "none",
+          "q2": "if there are indicators on top of their heads or bodies, signaling what they are doing.",
+          "q1": "it's hard to keep eyes on 4 agents at the same time instead of 2, you also need to follow each of  their steps and actions, and keep track of progress on the pot"
+        },
+        "createdAt": "2026-06-04T15:41:16.845Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "A37D6C13BEC34DB69E7F039AEE2FE2D4": {
+    "id": "A37D6C13BEC34DB69E7F039AEE2FE2D4",
+    "sessions": [
+      {
+        "docId": "31face7b-5541-4175-bd98-5d4f351d87a9",
+        "tutorialEndedAt": "2026-06-04T16:20:21.689Z",
+        "tutorialStartedAt": "2026-06-04T16:18:45.304Z",
+        "completedEpisodeCount": 4,
+        "currentEpisodeFileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_4520000_160.json",
+        "currentEpisodeLayoutName": "2_incentivized_hard",
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T16:20:21.689Z",
+        "mainEndedAt": "2026-06-04T16:28:01.957Z",
+        "mainDurationSec": 460.27,
+        "currentEpisodeIndex": 4,
+        "tutorialDurationSec": 96.39,
+        "mapOrder": [
+          "2_forced_hard/L3/2_forced_hard_seed7_7520000_160.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_10000000_180.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed2_9520000_240.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed8_4520000_160.json"
+        ],
+        "totalEpisodeCount": 4,
+        "updatedAt": "2026-06-04T16:28:03.624Z"
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "episodeCount": 1,
+        "videoPauseCount": 1,
+        "layoutName": "2_forced_hard",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "createdAt": "2026-06-04T16:21:53.976Z",
+        "timeSpentOnPageSec": 92,
+        "collaborationRating": 5,
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed7_7520000_160.json",
+        "monitoringDifficultyReason": "They worked on a single task at a time, making one onion soup. They waited and prepped for the next dish. ",
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_2",
+        "monitoringDifficultyReason": "They were slow and only focused on one job. Blue hat gave onions, orange hat gave plates, both green and blue worked on a single pot. ",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_10000000_180.json",
+        "timeSpentOnPageSec": 137,
+        "collaborationRating": 4,
+        "createdAt": "2026-06-04T16:24:12.679Z",
+        "episodeCount": 2,
+        "videoPauseCount": 1,
+        "layoutName": "2_forced_hard_4",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "feedbackItems": [
+          {
+            "docId": "0niavVe9AEaQrWBdCxlm",
+            "DidSpecifyRange": true,
+            "endFrame": 76,
+            "baseFrame": 99,
+            "index": 1,
+            "reason": "It seems like wasted effort",
+            "timeSpentWritingFeedBackSec": 42.29,
+            "sentiment": 2,
+            "feedback": "The green hat chef jus places an onion on second stove but does nothing.",
+            "createdAt": "2026-06-04T16:24:13.182Z",
+            "startFrame": 75
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 89,
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed2_9520000_240.json",
+        "monitoringDifficultyReason": "They all focused on working on one pot. They kind of did a revolving strategy of everyone taking the next item to be placed on the pot and the last person takes the plate and serve. ",
+        "videoPauseCount": 0,
+        "episodeCount": 3,
+        "layoutName": "2_incentivized_hard_4",
+        "monitoringDifficulty": 5,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T16:25:42.550Z",
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_4",
+        "monitoringDifficultyReason": "Again, they focused only on one stove, one soup at a time. ",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_4520000_160.json",
+        "timeSpentOnPageSec": 138,
+        "collaborationRating": 3,
+        "createdAt": "2026-06-04T16:28:01.957Z",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "episodeCount": 4,
+        "videoPauseCount": 3,
+        "layoutName": "2_incentivized_hard",
+        "feedbackItems": [
+          {
+            "docId": "Hs2Xbd8YGo4Qq3R4dU3x",
+            "feedback": "They often get into each others way",
+            "reason": "Blocking the path of the green hat would remove time from serving.",
+            "timeSpentWritingFeedBackSec": 64.83,
+            "sentiment": 3,
+            "createdAt": "2026-06-04T16:28:03.256Z",
+            "startFrame": 90,
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "baseFrame": 99,
+            "index": 1
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "0niavVe9AEaQrWBdCxlm",
+        "DidSpecifyRange": true,
+        "endFrame": 76,
+        "baseFrame": 99,
+        "index": 1,
+        "reason": "It seems like wasted effort",
+        "timeSpentWritingFeedBackSec": 42.29,
+        "sentiment": 2,
+        "feedback": "The green hat chef jus places an onion on second stove but does nothing.",
+        "createdAt": "2026-06-04T16:24:13.182Z",
+        "startFrame": 75
+      },
+      {
+        "docId": "Hs2Xbd8YGo4Qq3R4dU3x",
+        "feedback": "They often get into each others way",
+        "reason": "Blocking the path of the green hat would remove time from serving.",
+        "timeSpentWritingFeedBackSec": 64.83,
+        "sentiment": 3,
+        "createdAt": "2026-06-04T16:28:03.256Z",
+        "startFrame": 90,
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "baseFrame": 99,
+        "index": 1
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "31face7b-5541-4175-bd98-5d4f351d87a9",
+        "surveyAnswers": {
+          "q3": "They should use the 2nd stove ",
+          "q1": "Figuring out their path and who's job was assigned to do what. ",
+          "q2": "After understanding what each chef does on their assigned job, and figuring out the flow, helped me understand how well they worked together."
+        },
+        "createdAt": "2026-06-04T16:29:03.980Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "B5B1C8C4843A4C15A74639CA7BD2AE9A": {
+    "id": "B5B1C8C4843A4C15A74639CA7BD2AE9A",
+    "sessions": [
+      {
+        "docId": "953ce0f2-9947-4e9f-adce-53e00f351850",
+        "updatedAt": "2026-06-04T15:19:13.403Z",
+        "mapOrder": [
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed3_8020000_220.json",
+          "2_forced_hard/L3/2_forced_hard_seed7_6020000_160.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_9020000_160.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed8_2020000_160.json"
+        ],
+        "totalEpisodeCount": 4,
+        "tutorialDurationSec": 109.37,
+        "mainEndedAt": "2026-06-04T15:19:12.925Z",
+        "mainDurationSec": 439.82,
+        "currentEpisodeIndex": 4,
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:11:53.108Z",
+        "currentEpisodeFileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_2020000_160.json",
+        "currentEpisodeLayoutName": "2_incentivized_hard",
+        "tutorialEndedAt": "2026-06-04T15:11:53.108Z",
+        "tutorialStartedAt": "2026-06-04T15:10:03.738Z",
+        "completedEpisodeCount": 4
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "createdAt": "2026-06-04T15:13:25.689Z",
+        "layoutName": "2_incentivized_hard_4",
+        "episodeCount": 1,
+        "videoPauseCount": 2,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed3_8020000_220.json",
+        "monitoringDifficultyReason": "it is easy to see what they are doing",
+        "collaborationRating": 1,
+        "timeSpentOnPageSec": 93,
+        "feedbackItems": [
+          {
+            "docId": "yKF0i732OkdcUf1AUJiZ",
+            "index": 1,
+            "baseFrame": 70,
+            "endFrame": 99,
+            "DidSpecifyRange": true,
+            "createdAt": "2026-06-04T15:13:26.093Z",
+            "startFrame": 0,
+            "reason": "the soup will not be cooked",
+            "timeSpentWritingFeedBackSec": 27.04,
+            "sentiment": 1,
+            "feedback": "the chefs are not getting onions to the pot"
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed7_6020000_160.json",
+        "monitoringDifficultyReason": "it was kind of hard to tell what exactly they were doing until the number served changed.",
+        "collaborationRating": 4,
+        "timeSpentOnPageSec": 135,
+        "createdAt": "2026-06-04T15:15:41.346Z",
+        "episodeCount": 2,
+        "videoPauseCount": 0,
+        "layoutName": "2_forced_hard",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 3,
+        "feedbackItems": [
+          {
+            "docId": "gXNUzhDwcQiWJnxo0BXi",
+            "endFrame": 99,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 99,
+            "feedback": "the two chefs got 2 people served soup",
+            "reason": "they made a final product",
+            "sentiment": 5,
+            "timeSpentWritingFeedBackSec": 29.18,
+            "createdAt": "2026-06-04T15:15:41.929Z",
+            "startFrame": 0
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "videoPauseCount": 0,
+        "episodeCount": 3,
+        "layoutName": "2_forced_hard_4",
+        "monitoringDifficulty": 2,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T15:17:30.950Z",
+        "collaborationRating": 3,
+        "timeSpentOnPageSec": 108,
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_9020000_160.json",
+        "monitoringDifficultyReason": "the chefs looked confused",
+        "feedbackItems": [
+          {
+            "docId": "VrejQa3f39Vv06IpXNBj",
+            "baseFrame": 99,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "createdAt": "2026-06-04T15:17:31.414Z",
+            "startFrame": 0,
+            "reason": "there were 4 of them and they only served 2 people",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 32.16,
+            "feedback": "they got 2 people served"
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_incentivized_hard",
+        "episodeCount": 4,
+        "videoPauseCount": 0,
+        "createdAt": "2026-06-04T15:19:12.925Z",
+        "collaborationRating": 3,
+        "timeSpentOnPageSec": 101,
+        "monitoringDifficultyReason": "it was clear to see what they were doing",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_2020000_160.json",
+        "feedbackItems": [
+          {
+            "docId": "zYc4pg0OEqrKZbYJrNE6",
+            "endFrame": 99,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 99,
+            "feedback": "they got one person served",
+            "reason": "they only got 1 person served and should have been more",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 36.96,
+            "createdAt": "2026-06-04T15:19:13.270Z",
+            "startFrame": 0
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "yKF0i732OkdcUf1AUJiZ",
+        "index": 1,
+        "baseFrame": 70,
+        "endFrame": 99,
+        "DidSpecifyRange": true,
+        "createdAt": "2026-06-04T15:13:26.093Z",
+        "startFrame": 0,
+        "reason": "the soup will not be cooked",
+        "timeSpentWritingFeedBackSec": 27.04,
+        "sentiment": 1,
+        "feedback": "the chefs are not getting onions to the pot"
+      },
+      {
+        "docId": "gXNUzhDwcQiWJnxo0BXi",
+        "endFrame": 99,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 99,
+        "feedback": "the two chefs got 2 people served soup",
+        "reason": "they made a final product",
+        "sentiment": 5,
+        "timeSpentWritingFeedBackSec": 29.18,
+        "createdAt": "2026-06-04T15:15:41.929Z",
+        "startFrame": 0
+      },
+      {
+        "docId": "VrejQa3f39Vv06IpXNBj",
+        "baseFrame": 99,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "createdAt": "2026-06-04T15:17:31.414Z",
+        "startFrame": 0,
+        "reason": "there were 4 of them and they only served 2 people",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 32.16,
+        "feedback": "they got 2 people served"
+      },
+      {
+        "docId": "zYc4pg0OEqrKZbYJrNE6",
+        "endFrame": 99,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 99,
+        "feedback": "they got one person served",
+        "reason": "they only got 1 person served and should have been more",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 36.96,
+        "createdAt": "2026-06-04T15:19:13.270Z",
+        "startFrame": 0
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "953ce0f2-9947-4e9f-adce-53e00f351850",
+        "createdAt": "2026-06-04T15:19:42.694Z",
+        "surveyAnswers": {
+          "q2": "seeing the number of people served change",
+          "q1": "trying to tell what they were doing",
+          "q3": "no"
+        }
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "C27DF9511B6347B7A7B234A40E90F8F7": {
+    "id": "C27DF9511B6347B7A7B234A40E90F8F7",
+    "sessions": [
+      {
+        "docId": "32168016-f6af-4d08-98e8-ce44e7e7da22",
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T16:44:47.595Z",
+        "mainEndedAt": "2026-06-04T16:47:50.297Z",
+        "mainDurationSec": 182.7,
+        "currentEpisodeIndex": 4,
+        "tutorialStartedAt": "2026-06-04T16:17:24.718Z",
+        "tutorialEndedAt": "2026-06-04T16:44:47.595Z",
+        "completedEpisodeCount": 4,
+        "currentEpisodeFileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed6_4520000_200.json",
+        "currentEpisodeLayoutName": "2_incentivized_hard_4",
+        "updatedAt": "2026-06-04T16:47:50.407Z",
+        "tutorialDurationSec": 1642.88,
+        "totalEpisodeCount": 4,
+        "mapOrder": [
+          "2_forced_hard/L3/2_forced_hard_seed9_4520000_140.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed3_3020000_160.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_10000000_180.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed6_4520000_200.json"
+        ]
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "createdAt": "2026-06-04T16:45:54.626Z",
+        "layoutName": "2_forced_hard",
+        "videoPauseCount": 0,
+        "episodeCount": 1,
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "monitoringDifficultyReason": "",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed9_4520000_140.json",
+        "timeSpentOnPageSec": 67,
+        "collaborationRating": 4,
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_2",
+        "layoutName": "2_incentivized_hard",
+        "videoPauseCount": 0,
+        "episodeCount": 2,
+        "monitoringDifficulty": 3,
+        "playbackSpeedChanges": [],
+        "createdAt": "2026-06-04T16:46:59.610Z",
+        "timeSpentOnPageSec": 64,
+        "collaborationRating": 5,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed3_3020000_160.json",
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_3",
+        "createdAt": "2026-06-04T16:47:48.178Z",
+        "monitoringDifficulty": 3,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_forced_hard_4",
+        "videoPauseCount": 0,
+        "episodeCount": 3,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed9_10000000_180.json",
+        "timeSpentOnPageSec": 48,
+        "collaborationRating": 5,
+        "feedbackItems": []
+      },
+      {
+        "docId": "episode_4",
+        "createdAt": "2026-06-04T16:47:50.297Z",
+        "monitoringDifficulty": null,
+        "playbackSpeedChanges": [],
+        "videoPauseCount": 0,
+        "episodeCount": 4,
+        "layoutName": "2_incentivized_hard_4",
+        "monitoringDifficultyReason": "",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed6_4520000_200.json",
+        "collaborationRating": null,
+        "timeSpentOnPageSec": 2,
+        "feedbackItems": []
+      }
+    ],
+    "feedbackItems": [],
+    "postSurveys": [
+      {
+        "docId": "32168016-f6af-4d08-98e8-ce44e7e7da22",
+        "createdAt": "2026-06-04T16:48:49.675Z",
+        "surveyAnswers": {
+          "q3": "Good",
+          "q2": "pattern ",
+          "q1": "Planning execution "
+        }
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "DDF654B04475461CAA83D9BFD3636F52": {
+    "id": "DDF654B04475461CAA83D9BFD3636F52",
+    "sessions": [
+      {
+        "docId": "2e4715ae-eb7b-43f1-b810-8c413ff6a51b",
+        "tutorialEndedAt": "2026-06-04T15:12:00.048Z",
+        "tutorialStartedAt": "2026-06-04T15:09:43.615Z",
+        "completedEpisodeCount": 4,
+        "currentEpisodeFileName": "2_forced_hard_4/L3/2_forced_hard_4_seed7_9520000_160.json",
+        "currentEpisodeLayoutName": "2_forced_hard_4",
+        "status": "completed",
+        "mainStartedAt": "2026-06-04T15:12:00.048Z",
+        "mainEndedAt": "2026-06-04T15:26:35.177Z",
+        "mainDurationSec": 875.13,
+        "currentEpisodeIndex": 4,
+        "tutorialDurationSec": 136.43,
+        "mapOrder": [
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed1_10000000_220.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed8_5020000_160.json",
+          "2_forced_hard/L3/2_forced_hard_seed7_6020000_160.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed7_9520000_160.json"
+        ],
+        "totalEpisodeCount": 4,
+        "updatedAt": "2026-06-04T15:26:36.006Z"
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 195,
+        "monitoringDifficultyReason": "They were moving pretty quickly and almost ramdom with no structure",
+        "fileName": "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed1_10000000_220.json",
+        "monitoringDifficulty": 2,
+        "playbackSpeedChanges": [],
+        "videoPauseCount": 3,
+        "episodeCount": 1,
+        "layoutName": "2_incentivized_hard_4",
+        "createdAt": "2026-06-04T15:15:14.636Z",
+        "feedbackItems": [
+          {
+            "docId": "mLZbzCkvQoimvylHcOFz",
+            "endFrame": 11,
+            "DidSpecifyRange": true,
+            "index": 2,
+            "baseFrame": 9,
+            "feedback": "",
+            "timeSpentWritingFeedBackSec": 0,
+            "sentiment": 3,
+            "reason": "",
+            "createdAt": "2026-06-04T15:15:15.259Z",
+            "startFrame": 7
+          },
+          {
+            "docId": "s42imD13bGV7LAfidGDO",
+            "timeSpentWritingFeedBackSec": 77.87,
+            "sentiment": 3,
+            "reason": "Something I noticed",
+            "feedback": "The chefs could have done a better job starting out more organized by having all of them starting out in front of the onions instead of spread out",
+            "createdAt": "2026-06-04T15:15:15.095Z",
+            "startFrame": 0,
+            "DidSpecifyRange": true,
+            "endFrame": 19,
+            "baseFrame": 99,
+            "index": 1
+          }
+        ]
+      },
+      {
+        "docId": "episode_2",
+        "createdAt": "2026-06-04T15:18:26.855Z",
+        "monitoringDifficulty": 2,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_incentivized_hard",
+        "videoPauseCount": 3,
+        "episodeCount": 2,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_incentivized_hard/L3/2_incentivized_hard_seed8_5020000_160.json",
+        "timeSpentOnPageSec": 191,
+        "collaborationRating": 2,
+        "feedbackItems": [
+          {
+            "docId": "hEnh45iXTzLMJkUkx2pW",
+            "timeSpentWritingFeedBackSec": 45.55,
+            "sentiment": 3,
+            "reason": "I noticed the hat green guy moving around for no reason ",
+            "feedback": "The guy in green is walking unnecessarily ",
+            "createdAt": "2026-06-04T15:18:27.409Z",
+            "startFrame": 32,
+            "endFrame": 55,
+            "DidSpecifyRange": true,
+            "index": 2,
+            "baseFrame": 53
+          },
+          {
+            "docId": "pfSs3ULk8dgUkiOBoS0u",
+            "baseFrame": 17,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 19,
+            "createdAt": "2026-06-04T15:18:27.276Z",
+            "startFrame": 0,
+            "reason": "I noticed a lack of efficiency",
+            "sentiment": 2,
+            "timeSpentWritingFeedBackSec": 54.52,
+            "feedback": "Why is the guy in green just standing around instead of picking up the onions after blue hat picked up the onions"
+          }
+        ]
+      },
+      {
+        "docId": "episode_3",
+        "createdAt": "2026-06-04T15:21:34.003Z",
+        "monitoringDifficulty": 4,
+        "playbackSpeedChanges": [],
+        "layoutName": "2_forced_hard",
+        "episodeCount": 3,
+        "videoPauseCount": 2,
+        "monitoringDifficultyReason": "",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed7_6020000_160.json",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 186,
+        "feedbackItems": [
+          {
+            "docId": "KZgyxtRTTNBM01GHGi5R",
+            "createdAt": "2026-06-04T15:21:34.678Z",
+            "startFrame": 48,
+            "reason": "",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 0,
+            "feedback": "",
+            "baseFrame": 50,
+            "index": 2,
+            "DidSpecifyRange": true,
+            "endFrame": 52
+          },
+          {
+            "docId": "TCaI6ygWvJYUJbz0H4G0",
+            "endFrame": 45,
+            "DidSpecifyRange": true,
+            "index": 1,
+            "baseFrame": 59,
+            "feedback": "Very good and efficient collaboration",
+            "timeSpentWritingFeedBackSec": 27.9,
+            "sentiment": 4,
+            "reason": "I noticed great efficiency ",
+            "createdAt": "2026-06-04T15:21:34.532Z",
+            "startFrame": 0
+          }
+        ]
+      },
+      {
+        "docId": "episode_4",
+        "fileName": "2_forced_hard_4/L3/2_forced_hard_4_seed7_9520000_160.json",
+        "monitoringDifficultyReason": "I am saying it in a neutral tone being objective",
+        "timeSpentOnPageSec": 300,
+        "collaborationRating": 5,
+        "createdAt": "2026-06-04T15:26:35.178Z",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 4,
+        "episodeCount": 4,
+        "videoPauseCount": 7,
+        "layoutName": "2_forced_hard_4",
+        "feedbackItems": [
+          {
+            "docId": "DD5y7MFJnYILmFbOq4SY",
+            "feedback": "",
+            "reason": "",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 0,
+            "createdAt": "2026-06-04T15:26:35.864Z",
+            "startFrame": 97,
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "baseFrame": 99,
+            "index": 3
+          },
+          {
+            "docId": "gNjbNLST0eGp7azMgQZx",
+            "baseFrame": 15,
+            "index": 1,
+            "DidSpecifyRange": true,
+            "endFrame": 17,
+            "createdAt": "2026-06-04T15:26:35.593Z",
+            "startFrame": 0,
+            "feedback": "The orange hat guy could have been holding a plate to be more time efficient instead of just standing around the first few frames",
+            "reason": "I noticed a lack of efficiency ",
+            "sentiment": 3,
+            "timeSpentWritingFeedBackSec": 55.36
+          },
+          {
+            "docId": "ssTuQ0Y7nABSCiIK292S",
+            "feedback": "The orange hat guy was very efficient the second half of the video",
+            "reason": "Giving positive feedback",
+            "sentiment": 4,
+            "timeSpentWritingFeedBackSec": 128.1,
+            "createdAt": "2026-06-04T15:26:35.740Z",
+            "startFrame": 62,
+            "DidSpecifyRange": true,
+            "endFrame": 99,
+            "baseFrame": 15,
+            "index": 2
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "mLZbzCkvQoimvylHcOFz",
+        "endFrame": 11,
+        "DidSpecifyRange": true,
+        "index": 2,
+        "baseFrame": 9,
+        "feedback": "",
+        "timeSpentWritingFeedBackSec": 0,
+        "sentiment": 3,
+        "reason": "",
+        "createdAt": "2026-06-04T15:15:15.259Z",
+        "startFrame": 7
+      },
+      {
+        "docId": "s42imD13bGV7LAfidGDO",
+        "timeSpentWritingFeedBackSec": 77.87,
+        "sentiment": 3,
+        "reason": "Something I noticed",
+        "feedback": "The chefs could have done a better job starting out more organized by having all of them starting out in front of the onions instead of spread out",
+        "createdAt": "2026-06-04T15:15:15.095Z",
+        "startFrame": 0,
+        "DidSpecifyRange": true,
+        "endFrame": 19,
+        "baseFrame": 99,
+        "index": 1
+      },
+      {
+        "docId": "hEnh45iXTzLMJkUkx2pW",
+        "timeSpentWritingFeedBackSec": 45.55,
+        "sentiment": 3,
+        "reason": "I noticed the hat green guy moving around for no reason ",
+        "feedback": "The guy in green is walking unnecessarily ",
+        "createdAt": "2026-06-04T15:18:27.409Z",
+        "startFrame": 32,
+        "endFrame": 55,
+        "DidSpecifyRange": true,
+        "index": 2,
+        "baseFrame": 53
+      },
+      {
+        "docId": "pfSs3ULk8dgUkiOBoS0u",
+        "baseFrame": 17,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 19,
+        "createdAt": "2026-06-04T15:18:27.276Z",
+        "startFrame": 0,
+        "reason": "I noticed a lack of efficiency",
+        "sentiment": 2,
+        "timeSpentWritingFeedBackSec": 54.52,
+        "feedback": "Why is the guy in green just standing around instead of picking up the onions after blue hat picked up the onions"
+      },
+      {
+        "docId": "KZgyxtRTTNBM01GHGi5R",
+        "createdAt": "2026-06-04T15:21:34.678Z",
+        "startFrame": 48,
+        "reason": "",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 0,
+        "feedback": "",
+        "baseFrame": 50,
+        "index": 2,
+        "DidSpecifyRange": true,
+        "endFrame": 52
+      },
+      {
+        "docId": "TCaI6ygWvJYUJbz0H4G0",
+        "endFrame": 45,
+        "DidSpecifyRange": true,
+        "index": 1,
+        "baseFrame": 59,
+        "feedback": "Very good and efficient collaboration",
+        "timeSpentWritingFeedBackSec": 27.9,
+        "sentiment": 4,
+        "reason": "I noticed great efficiency ",
+        "createdAt": "2026-06-04T15:21:34.532Z",
+        "startFrame": 0
+      },
+      {
+        "docId": "DD5y7MFJnYILmFbOq4SY",
+        "feedback": "",
+        "reason": "",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 0,
+        "createdAt": "2026-06-04T15:26:35.864Z",
+        "startFrame": 97,
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "baseFrame": 99,
+        "index": 3
+      },
+      {
+        "docId": "gNjbNLST0eGp7azMgQZx",
+        "baseFrame": 15,
+        "index": 1,
+        "DidSpecifyRange": true,
+        "endFrame": 17,
+        "createdAt": "2026-06-04T15:26:35.593Z",
+        "startFrame": 0,
+        "feedback": "The orange hat guy could have been holding a plate to be more time efficient instead of just standing around the first few frames",
+        "reason": "I noticed a lack of efficiency ",
+        "sentiment": 3,
+        "timeSpentWritingFeedBackSec": 55.36
+      },
+      {
+        "docId": "ssTuQ0Y7nABSCiIK292S",
+        "feedback": "The orange hat guy was very efficient the second half of the video",
+        "reason": "Giving positive feedback",
+        "sentiment": 4,
+        "timeSpentWritingFeedBackSec": 128.1,
+        "createdAt": "2026-06-04T15:26:35.740Z",
+        "startFrame": 62,
+        "DidSpecifyRange": true,
+        "endFrame": 99,
+        "baseFrame": 15,
+        "index": 2
+      }
+    ],
+    "postSurveys": [
+      {
+        "docId": "2e4715ae-eb7b-43f1-b810-8c413ff6a51b",
+        "surveyAnswers": {
+          "q3": "No, it was pretty straight forward",
+          "q2": "If they had a visual trace of their path maybe ",
+          "q1": "It was hard to track them because some of them had random movements with no clear intent "
+        },
+        "createdAt": "2026-06-04T15:27:44.687Z"
+      }
+    ],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  },
+  "F20D7FCDB2374DD293DD54C659A02DA1": {
+    "id": "F20D7FCDB2374DD293DD54C659A02DA1",
+    "sessions": [
+      {
+        "docId": "167c7e4a-05c2-4c60-8d47-9df4bd67ad16",
+        "mainDurationSec": 0,
+        "mainEndedAt": null,
+        "currentEpisodeIndex": null,
+        "status": "main_started",
+        "mainStartedAt": "2026-06-04T15:12:04.223Z",
+        "currentEpisodeFileName": null,
+        "currentEpisodeLayoutName": null,
+        "tutorialEndedAt": "2026-06-04T15:12:04.223Z",
+        "tutorialStartedAt": "2026-06-04T15:09:51.197Z",
+        "completedEpisodeCount": 0,
+        "updatedAt": "2026-06-04T15:12:04.224Z",
+        "mapOrder": [
+          "2_forced_hard/L3/2_forced_hard_seed1_5520000_160.json",
+          "2_incentivized_hard_4/L3/2_incentivized_hard_4_seed5_6520000_200.json",
+          "2_forced_hard_4/L3/2_forced_hard_4_seed9_9020000_160.json",
+          "2_incentivized_hard/L3/2_incentivized_hard_seed8_8520000_180.json"
+        ],
+        "totalEpisodeCount": 4,
+        "tutorialDurationSec": 133.03
+      }
+    ],
+    "episodes": [
+      {
+        "docId": "episode_1",
+        "createdAt": "2026-06-04T15:14:07.148Z",
+        "playbackSpeedChanges": [],
+        "monitoringDifficulty": 5,
+        "episodeCount": 1,
+        "videoPauseCount": 3,
+        "layoutName": "2_forced_hard",
+        "monitoringDifficultyReason": "It was easy to tell what was going on",
+        "fileName": "2_forced_hard/L3/2_forced_hard_seed1_5520000_160.json",
+        "collaborationRating": 5,
+        "timeSpentOnPageSec": 123,
+        "feedbackItems": [
+          {
+            "docId": "j6qCHEOzEiFhxhuS5uHC",
+            "index": 1,
+            "baseFrame": 49,
+            "endFrame": 47,
+            "DidSpecifyRange": true,
+            "startFrame": 31,
+            "createdAt": "2026-06-04T15:14:07.888Z",
+            "timeSpentWritingFeedBackSec": 80.99,
+            "sentiment": 4,
+            "reason": "He keeps walking back and forth without doing anything",
+            "feedback": "The green chef doesn't seem to know what to do here. He is pacing back and forth for a bit before blue chef gives him another onion"
+          }
+        ]
+      }
+    ],
+    "feedbackItems": [
+      {
+        "docId": "j6qCHEOzEiFhxhuS5uHC",
+        "index": 1,
+        "baseFrame": 49,
+        "endFrame": 47,
+        "DidSpecifyRange": true,
+        "startFrame": 31,
+        "createdAt": "2026-06-04T15:14:07.888Z",
+        "timeSpentWritingFeedBackSec": 80.99,
+        "sentiment": 4,
+        "reason": "He keeps walking back and forth without doing anything",
+        "feedback": "The green chef doesn't seem to know what to do here. He is pacing back and forth for a bit before blue chef gives him another onion"
+      }
+    ],
+    "postSurveys": [],
+    "pilotSetId": "pilot3",
+    "pilotDate": "2026-06-05"
+  }
+}

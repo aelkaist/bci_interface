@@ -7,17 +7,21 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load env vars from bci_interface/overcook_simulation/.env
-const envPath = path.resolve(__dirname, ".env");
+// Prefer local Vite settings, then fall back to the shared .env file.
+const envPaths = [
+  path.resolve(__dirname, ".env.local"),
+  path.resolve(__dirname, ".env"),
+];
+const envPath = envPaths.find(candidate => fs.existsSync(candidate));
 let env = {};
-if (fs.existsSync(envPath)) {
+if (envPath) {
   const envFile = fs.readFileSync(envPath, "utf8");
   envFile.split("\n").forEach(line => {
     const [key, ...value] = line.split("=");
     if (key) env[key.trim()] = value.join("=").trim();
   });
 } else {
-  console.error("Could not find .env file at", envPath);
+  console.error("Could not find .env.local or .env in", __dirname);
   process.exit(1);
 }
 

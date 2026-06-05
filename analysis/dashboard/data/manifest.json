@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-06-05T11:49:24.264Z",
+  "timeZone": "Asia/Seoul",
+  "pilots": [
+    {
+      "id": "pilot1",
+      "label": "Pilot 1 - 2026-05-24",
+      "date": "2026-05-24",
+      "file": "pilot1-2026-05-24.json",
+      "participantCount": 13,
+      "completedParticipantCount": 10
+    },
+    {
+      "id": "pilot2",
+      "label": "Pilot 2 - 2026-06-04",
+      "date": "2026-06-04",
+      "file": "pilot2-2026-06-04.json",
+      "participantCount": 11,
+      "completedParticipantCount": 10
+    },
+    {
+      "id": "pilot3",
+      "label": "Pilot 3 - 2026-06-05",
+      "date": "2026-06-05",
+      "file": "pilot3-2026-06-05.json",
+      "participantCount": 12,
+      "completedParticipantCount": 10
+    }
+  ]
+}
