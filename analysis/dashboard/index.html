@@ -844,6 +844,30 @@ async function adaptEpisode(raw, fileName) {
   return { staticInfo, frames };
 }
 
+function getReplayAssetUrls(fileName) {
+  const parts = String(fileName || '').replaceAll('\\', '/').split('/').filter(Boolean);
+  if (!parts.length || parts.includes('..')) {
+    throw new Error(`Invalid replay file path: ${fileName}`);
+  }
+
+  const encodedPath = parts.map(encodeURIComponent).join('/');
+  const preferredUrl = './seeds/' + encodedPath;
+  const legacyUrl = './seeds/' + encodeURIComponent(parts[parts.length - 1]);
+  return preferredUrl === legacyUrl ? [preferredUrl] : [preferredUrl, legacyUrl];
+}
+
+async function fetchReplayAsset(fileName) {
+  let lastError = null;
+
+  for (const url of getReplayAssetUrls(fileName)) {
+    const response = await fetch(url);
+    if (response.ok) return await response.json();
+    lastError = new Error(`Replay asset request failed (${response.status}): ${url}`);
+  }
+
+  throw lastError;
+}
+
 function renderReplayFrame() {
   if (!sceneRenderer || !replayState.frames.length) return;
   const { staticInfo, frames, currentFrame } = replayState;
@@ -932,10 +956,8 @@ document.addEventListener('click', async e => {
   `;
   
   try {
-    const shortFile = data.fileName.split('/').pop();
-    const res = await fetch('./seeds/' + shortFile);
-    const raw = await res.json();
-    const adapted = await adaptEpisode(raw, shortFile);
+    const raw = await fetchReplayAsset(data.fileName);
+    const adapted = await adaptEpisode(raw, data.fileName);
     
     replayState.staticInfo = adapted.staticInfo;
     replayState.frames = adapted.frames;
