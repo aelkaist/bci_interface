@@ -10,63 +10,34 @@ import {
   savePostSurveyToFirestore,
 } from "./firebase";
 
-const LAYOUT_NAMES = [
-  "2_forced_hard",
-  "2_forced_hard_4",
-  "2_incentivized_hard",
-  "2_incentivized_hard_4",
+// Fixed map files for agent selection testing
+const FIXED_MAP_PATHS = [
+  "./maps/2_forced_hard/L0/2_forced_hard_seed1_2520000_20.json",
+  "./maps/2_forced_hard_4/L0/2_forced_hard_4_seed1_8520000_20.json",
+  "./maps/2_incentivized_hard/L0/2_incentivized_hard_seed2_940000_20.json",
+  "./maps/2_incentivized_hard_4/L0/2_incentivized_hard_4_seed2_1920000_20.json",
 ];
-const SAMPLE_LEVEL = "L3";
 
-const mapModules = import.meta.glob("./maps/*/L3/*.json");
+const mapModules = import.meta.glob("./maps/**/*.json");
 
-function shuffle(items) {
-  const shuffled = [...items];
-
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-
-  return shuffled;
-}
-
-function getMapsForLayout(modules, layoutName, level) {
-  const prefix = `./maps/${layoutName}/${level}/`;
-
-  return Object.entries(modules)
-    .filter(([path]) => path.startsWith(prefix))
-    .map(([path, load]) => ({
-      name: path.replace("./maps/", ""),
-      layoutName,
-      sampleLevel: level,
-      load,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
-}
-
-function pickRandom(items) {
-  if (items.length === 0) return null;
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function buildRandomizedMapSet(modules) {
-  const sampledMaps = LAYOUT_NAMES.map((layoutName) => {
-    const candidates = getMapsForLayout(modules, layoutName, SAMPLE_LEVEL);
-    const picked = pickRandom(candidates);
-
-    if (!picked) {
-      console.warn(`[maps] Missing ${SAMPLE_LEVEL} maps for layout: ${layoutName}`);
+function buildFixedMapSet(modules) {
+  return FIXED_MAP_PATHS.map((filePath) => {
+    const load = modules[filePath];
+    if (!load) {
+      console.warn(`[maps] Fixed map not found: ${filePath}`);
       return null;
     }
-
-    return picked;
+    const layoutName = filePath.split("/")[2];
+    return {
+      name: filePath.replace("./maps/", ""),
+      layoutName,
+      sampleLevel: filePath.split("/")[3],
+      load,
+    };
   }).filter(Boolean);
-
-  return shuffle(sampledMaps);
 }
 
-const ALL_MAPS = buildRandomizedMapSet(mapModules);
+const ALL_MAPS = buildFixedMapSet(mapModules);
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
