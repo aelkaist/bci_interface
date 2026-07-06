@@ -265,6 +265,14 @@ export default function OvercookScene({
     return "SOUTH";
   };
 
+  // smartfactory 타일 스킨 매핑
+  const smartfactoryTileMap = useMemo(() => ({
+    "O": "/smartfactory/Assets-12.png",   // 양파 → Assets-12
+    "D": "/smartfactory/Assets-11.png",   // 접시 → Assets-11
+    "P": "/smartfactory/Assets-04.png",   // pot → Assets-04
+    "S": "/smartfactory/Assets-08.png",   // serving area → Assets-08
+  }), []);
+
   const backgroundTiles = useMemo(
     () => {
       if (!spritesData) return null;
@@ -275,18 +283,272 @@ export default function OvercookScene({
             frameName = "floor.png";
           }
           const isDispenser = ["P", "S", "O", "D"].includes(cell);
+          const smartfactoryImage = smartfactoryTileMap[cell];
+
+          // 맨 위 행 (y === 0): Assets-01로 교체
+          if (y === 0) {
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href="/smartfactory/Assets-01.png"
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+                {/* 디스펜서 타일이면 smartfactory 스킨 오버레이 */}
+                {smartfactoryImage && (
+                  <image
+                    href={smartfactoryImage}
+                    x={x * gridSize}
+                    y={y * gridSize}
+                    width={gridSize}
+                    height={gridSize}
+                    preserveAspectRatio="xMidYMid slice"
+                  />
+                )}
+              </g>
+            );
+          }
+
+          // 맨 아래 행: 디스펜서/팟 제외한 나머지를 Assets-05로 교체
+          if (y === grid.length - 1 && !smartfactoryImage) {
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href="/smartfactory/Assets-05.png"
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              </g>
+            );
+          }
+
+          // 맨 아래 행의 디스펜서/팟: Assets-05 배경 + smartfactory 오버레이
+          if (y === grid.length - 1 && smartfactoryImage) {
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href="/smartfactory/Assets-05.png"
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+                <image
+                  href={smartfactoryImage}
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              </g>
+            );
+          }
+
+          // 왼쪽/오른쪽 벽 (가장자리 카운터): Assets-01로 교체
+          if ((x === 0 || x === row.length - 1) && cell !== " ") {
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href="/smartfactory/Assets-01.png"
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+                {smartfactoryImage && (
+                  <image
+                    href={smartfactoryImage}
+                    x={x * gridSize}
+                    y={y * gridSize}
+                    width={gridSize}
+                    height={gridSize}
+                    preserveAspectRatio="xMidYMid slice"
+                  />
+                )}
+              </g>
+            );
+          }
+
+          // smartfactory 스킨이 있는 타일 (양파, 접시, pot)
+          if (smartfactoryImage) {
+            return (
+              <g key={`${x}-${y}`}>
+                {/* 카운터 바닥 먼저 깔기 */}
+                {renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
+                <image
+                  href={smartfactoryImage}
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              </g>
+            );
+          }
+
+          // 바닥 타일 (걸어다니는 공간): smartfactory 스킨 적용
+          if (cell === " ") {
+            const leftCell = row[x - 1];
+            const rightCell = row[x + 1];
+            const isLeftmostFloor = leftCell !== " ";
+            const isRightmostFloor = rightCell !== " " || x === row.length - 1;
+
+            if (isLeftmostFloor) {
+              // 맨 왼쪽 바닥 세로줄: 위치에 따라 다른 이미지
+              const aboveCell = grid[y - 1]?.[x];
+              const belowCell = grid[y + 1]?.[x];
+              const isTopFloor = aboveCell !== " ";
+              const isBottomFloor = belowCell !== " ";
+
+              let leftFloorImage = "/smartfactory/Assets-03.png"; // 중간: 직선 벽
+              let flipVertical = false;
+
+              if (isTopFloor) {
+                leftFloorImage = "/smartfactory/Assets-06.png"; // 맨 위: 코너
+              } else if (isBottomFloor) {
+                leftFloorImage = "/smartfactory/Assets-06.png"; // 맨 아래: 코너 상하반전
+                flipVertical = true;
+              }
+
+              return (
+                <g key={`${x}-${y}`}>
+                  <image
+                    href={leftFloorImage}
+                    x={x * gridSize}
+                    y={y * gridSize}
+                    width={gridSize}
+                    height={gridSize}
+                    preserveAspectRatio="xMidYMid slice"
+                    transform={flipVertical ? `translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)` : undefined}
+                  />
+                </g>
+              );
+            } else if (isRightmostFloor) {
+              // 맨 오른쪽 바닥 세로줄: 위치에 따라 다른 이미지 (좌우반전)
+              const aboveCell = grid[y - 1]?.[x];
+              const belowCell = grid[y + 1]?.[x];
+              const isTopFloor = aboveCell !== " ";
+              const isBottomFloor = belowCell !== " ";
+
+              let rightFloorImage = "/smartfactory/Assets-03.png"; // 중간: 직선 벽
+              let flipV = false;
+
+              if (isTopFloor) {
+                rightFloorImage = "/smartfactory/Assets-06.png"; // 맨 위: 코너
+              } else if (isBottomFloor) {
+                rightFloorImage = "/smartfactory/Assets-06.png"; // 맨 아래: 코너
+                flipV = true;
+              }
+
+              // transform 계산: 좌우반전 + 필요시 상하반전
+              let transformStr = `translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`;
+              if (flipV) {
+                transformStr = `translate(${x * gridSize * 2 + gridSize}, ${y * gridSize * 2 + gridSize}) scale(-1, -1)`;
+              }
+
+              return (
+                <g key={`${x}-${y}`}>
+                  <image
+                    href={rightFloorImage}
+                    x={x * gridSize}
+                    y={y * gridSize}
+                    width={gridSize}
+                    height={gridSize}
+                    preserveAspectRatio="xMidYMid slice"
+                    transform={transformStr}
+                  />
+                </g>
+              );
+            } else {
+              // 나머지 바닥: 위치에 따라 적용
+              const aboveCell = grid[y - 1]?.[x];
+              const belowCell = grid[y + 1]?.[x];
+              const isTopFloor = aboveCell !== " ";
+              const isBottomFloor = belowCell !== " ";
+
+              if (isTopFloor && !isBottomFloor) {
+                // 가로 맨 위줄 바닥 → Assets-02
+                return (
+                  <g key={`${x}-${y}`}>
+                    <image
+                      href="/smartfactory/Assets-02.png"
+                      x={x * gridSize}
+                      y={y * gridSize}
+                      width={gridSize}
+                      height={gridSize}
+                      preserveAspectRatio="xMidYMid slice"
+                    />
+                  </g>
+                );
+              }
+
+              if (isBottomFloor) {
+                // 가로 맨 아래줄 바닥 → Assets-02 상하반전
+                return (
+                  <g key={`${x}-${y}`}>
+                    <image
+                      href="/smartfactory/Assets-02.png"
+                      x={x * gridSize}
+                      y={y * gridSize}
+                      width={gridSize}
+                      height={gridSize}
+                      preserveAspectRatio="xMidYMid slice"
+                      transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
+                    />
+                  </g>
+                );
+              }
+
+              // 나머지 바닥 → Assets-07
+              return (
+                <g key={`${x}-${y}`}>
+                  <image
+                    href="/smartfactory/Assets-07.png"
+                    x={x * gridSize}
+                    y={y * gridSize}
+                    width={gridSize}
+                    height={gridSize}
+                    preserveAspectRatio="xMidYMid slice"
+                  />
+                </g>
+              );
+            }
+          }
 
           return (
             <g key={`${x}-${y}`}>
-              {/* 디스펜서 렌더링 전 카운터 바닥 깔아주기 */}
-              {isDispenser && renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
-              {renderSprite('terrain', frameName, x * gridSize, y * gridSize, gridSize)}
+              {/* 중간 갈색 카운터 타일 → Assets-01 */}
+              {cell === "X" ? (
+                <image
+                  href="/smartfactory/Assets-01.png"
+                  x={x * gridSize}
+                  y={y * gridSize}
+                  width={gridSize}
+                  height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              ) : (
+                <>
+                  {isDispenser && renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
+                  {renderSprite('terrain', frameName, x * gridSize, y * gridSize, gridSize)}
+                </>
+              )}
             </g>
           );
         })
       );
     },
-    [grid, spritesData, tileMap]
+    [grid, spritesData, tileMap, smartfactoryTileMap]
   );
 
   const isHeldByPlayer = (obj) => {
@@ -370,6 +632,101 @@ export default function OvercookScene({
 
     const ready = obj.isReady;
     const barY = y * gridSize + 20;
+
+    // pot 위의 soup인 경우 smartfactory 이미지로 교체
+    if (obj.name === "soup" && cell === "P") {
+      const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
+      const isReady = obj.isReady;
+      let smartfactorySoupImage;
+      if (isReady) {
+        smartfactorySoupImage = "/smartfactory/Assets-21.png"; // 완료
+      } else if (count >= 3) {
+        smartfactorySoupImage = "/smartfactory/Assets-24.png"; // 요리 중 (재료 3개)
+      } else if (count === 2) {
+        smartfactorySoupImage = "/smartfactory/Assets-23.png"; // 재료 2개
+      } else {
+        smartfactorySoupImage = "/smartfactory/Assets-22.png"; // 재료 1개
+      }
+
+      return (
+        <g key={objectKey}>
+          <image
+            href={smartfactorySoupImage}
+            x={x * gridSize}
+            y={y * gridSize}
+            width={gridSize}
+            height={gridSize}
+            preserveAspectRatio="xMidYMid slice"
+            opacity={ready ? 1 : 0.85}
+          />
+
+          {cooking && remainingTime !== null && (
+            <>
+              <rect
+                x={x * gridSize + 20}
+                y={barY}
+                width={40}
+                height={6}
+                rx={3}
+                fill="#ff5555"
+                opacity={0.85}
+              />
+              <rect
+                x={x * gridSize + 20}
+                y={barY}
+                width={40 * (1 - remainingTime / cookTotalForBar)}
+                height={6}
+                rx={3}
+                fill="#ffffff"
+                opacity={0.9}
+              />
+              <text
+                x={x * gridSize + gridSize / 2}
+                y={barY - 4}
+                textAnchor="middle"
+                fontSize="12"
+                fontFamily="monospace"
+                fill="#ffffff"
+              >
+                {Math.ceil(remainingTime)}
+              </text>
+            </>
+          )}
+        </g>
+      );
+    }
+
+    // 카운터 위 양파/토마토 → smartfactory Assets-13
+    // 카운터 위 접시(상자) → smartfactory Assets-11
+    if ((obj.name === "onion" || obj.name === "tomato") && cell !== "P") {
+      return (
+        <g key={objectKey}>
+          <image
+            href="/smartfactory/Assets-13.png"
+            x={x * gridSize}
+            y={y * gridSize}
+            width={gridSize}
+            height={gridSize}
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+      );
+    }
+
+    if (obj.name === "dish" && cell !== "P") {
+      return (
+        <g key={objectKey}>
+          <image
+            href="/smartfactory/Assets-11.png"
+            x={x * gridSize}
+            y={y * gridSize}
+            width={gridSize}
+            height={gridSize}
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+      );
+    }
 
     return (
       <g key={objectKey}>
@@ -484,6 +841,37 @@ export default function OvercookScene({
     } else if (heldLower === "tomato") {
        frameName = `${orientation}-tomato.png`;
     }
+    // 양파를 들고 있을 때 smartfactory 이미지로 교체
+    const heldOnionSmartfactory = heldLower === "onion";
+
+    // smartfactory 셰프 이미지 매핑
+    // 에이전트별 색상: 0=빨강(16,29), 1=주황(17,30), 2=초록(18,31), 3=파랑(19,32)
+    const sideColorAssets = [16, 17, 18, 19];
+    const frontColorAssets = [29, 30, 31, 32];
+    const colorIndex = index % sideColorAssets.length;
+
+    let chefImage = "/smartfactory/Assets-15.png"; // 기본: 아래
+    let chefFlip = "";
+    let colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+    let colorFlip = "";
+
+    if (orientation === "WEST") {
+      chefImage = "/smartfactory/Assets-09.png";
+      colorOverlay = `/smartfactory/Assets-${sideColorAssets[colorIndex]}.png`;
+    } else if (orientation === "EAST") {
+      chefImage = "/smartfactory/Assets-09.png";
+      chefFlip = `translate(${gridSize}, 0) scale(-1, 1)`;
+      colorOverlay = `/smartfactory/Assets-${sideColorAssets[colorIndex]}.png`;
+      colorFlip = `translate(${gridSize}, 0) scale(-1, 1)`;
+    } else if (orientation === "NORTH") {
+      chefImage = "/smartfactory/Assets-15.png";
+      colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+    } else if (orientation === "SOUTH") {
+      chefImage = "/smartfactory/Assets-15.png";
+      chefFlip = `translate(0, ${gridSize}) scale(1, -1)`;
+      colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+      colorFlip = `translate(0, ${gridSize}) scale(1, -1)`;
+    }
 
     return (
       <g
@@ -492,12 +880,55 @@ export default function OvercookScene({
           interpY * gridSize - offset
         }) scale(${scale})`}
       >
-        {/* 기본 셰프 몸체 */}
-        {renderSprite('chefs', `${orientation}.png`, 0, 0, gridSize)}
-        {/* 들고 있는 물건 (몸체 앞/뒤/양손) */}
-        {frameName && renderSprite('chefs', frameName, 0, 0, gridSize)}
-        {/* 셰프 모자 (반드시 마지막에 그려야 함) */}
-        {renderSprite('chefs', hatName, 0, 0, gridSize)}
+        {/* smartfactory 셰프 이미지 */}
+        <image
+          href={chefImage}
+          x={0}
+          y={0}
+          width={gridSize}
+          height={gridSize}
+          preserveAspectRatio="xMidYMid slice"
+          transform={chefFlip || undefined}
+        />
+        {/* 에이전트별 색상 오버레이 */}
+        <image
+          href={colorOverlay}
+          x={0}
+          y={0}
+          width={gridSize}
+          height={gridSize}
+          preserveAspectRatio="xMidYMid slice"
+          transform={colorFlip || undefined}
+        />
+        {/* 들고 있는 물건 - smartfactory 이미지 */}
+        {(() => {
+          // 재료 (onion, tomato): side=28, front/back=27
+          // 빈 박스 (dish): side=20, front/back=14
+          // 완성품 (soup): side=25, front/back=26
+          const isSideView = orientation === "WEST" || orientation === "EAST";
+          let heldAsset = null;
+
+          if (heldLower === "onion" || heldLower === "tomato") {
+            heldAsset = isSideView ? "/smartfactory/Assets-28.png" : "/smartfactory/Assets-27.png";
+          } else if (heldLower === "dish") {
+            heldAsset = isSideView ? "/smartfactory/Assets-20.png" : "/smartfactory/Assets-14.png";
+          } else if (heldLower.includes("soup")) {
+            heldAsset = isSideView ? "/smartfactory/Assets-25.png" : "/smartfactory/Assets-26.png";
+          }
+
+          if (!heldAsset) return null;
+          return (
+            <image
+              href={heldAsset}
+              x={0}
+              y={0}
+              width={gridSize}
+              height={gridSize}
+              preserveAspectRatio="xMidYMid slice"
+              transform={chefFlip || undefined}
+            />
+          );
+        })()}
       </g>
     );
   };
@@ -591,20 +1022,7 @@ export default function OvercookScene({
            );
         })}
 
-        {!isReplaying && serveLabelPositions.map((position, index) => (
-          <g key={`served-label-${index}`} transform={`translate(${position.x}, ${position.y})`}>
-            <text 
-              x={0} 
-              y={5} 
-              textAnchor="middle" 
-              fontSize="14" 
-              fontWeight="bold" 
-              fill="#ffffff"
-            >
-              Served: {deliveredCount}
-            </text>
-          </g>
-        ))}
+
 
         {/* 팝업 이펙트용 스타일 정의 */}
         <style>{`
