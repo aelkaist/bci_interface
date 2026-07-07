@@ -49,30 +49,30 @@ export default function OvercookScene({
   // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
   useEffect(() => {
     Promise.all([
-      fetch('/graphics/chefs.json').then(r=>r.json()),
-      fetch('/graphics/objects.json').then(r=>r.json()),
-      fetch('/graphics/terrain.json').then(r=>r.json()),
-      fetch('/graphics/soups.json').then(r=>r.json())
+      fetch('/graphics/chefs.json').then(r => r.json()),
+      fetch('/graphics/objects.json').then(r => r.json()),
+      fetch('/graphics/terrain.json').then(r => r.json()),
+      fetch('/graphics/soups.json').then(r => r.json())
     ]).then(([chefs, objects, terrain, soups]) => {
       const parsedSprites = { chefs: {}, objects: {}, terrain: {}, soups: {} };
-      
+
       const processFrames = (json, category) => {
         if (!json) return;
         if (json.frames && !Array.isArray(json.frames)) {
-           Object.keys(json.frames).forEach(k => {
-             parsedSprites[category][k] = json.frames[k];
-           });
+          Object.keys(json.frames).forEach(k => {
+            parsedSprites[category][k] = json.frames[k];
+          });
         }
       };
 
       processFrames(chefs, 'chefs');
       processFrames(objects, 'objects');
       processFrames(terrain, 'terrain');
-      
+
       if (soups.textures && soups.textures[0] && soups.textures[0].frames) {
-         soups.textures[0].frames.forEach(f => {
-           parsedSprites.soups[f.filename] = f;
-         });
+        soups.textures[0].frames.forEach(f => {
+          parsedSprites.soups[f.filename] = f;
+        });
       }
       setSpritesData(parsedSprites);
     }).catch(e => console.error("Sprite load error", e));
@@ -115,7 +115,7 @@ export default function OvercookScene({
 
       const objectsFound = f.objects ? f.objects : [];
       let mappedObjects = objectsFound;
-      
+
       const realObjects = Array.isArray(mappedObjects) ? mappedObjects : Object.values(mappedObjects || {});
 
       realObjects.forEach((obj) => {
@@ -163,7 +163,7 @@ export default function OvercookScene({
     if (steppedForwardOne && deliveredThisFrame > 0) {
       const effectId = Date.now() + Math.random();
       setDeliveryEffects(prev => [...prev, { id: effectId, count: deliveredThisFrame }]);
-      
+
       // 애니메이션 재생 후 클린업
       setTimeout(() => {
         setDeliveryEffects(prev => prev.filter(e => e.id !== effectId));
@@ -194,7 +194,7 @@ export default function OvercookScene({
     const tiles = [];
     grid.forEach((row, y) => {
       [...row].forEach((cell, x) => {
-         if (cell === 'S') tiles.push({ x, y });
+        if (cell === 'S') tiles.push({ x, y });
       });
     });
     return tiles;
@@ -227,7 +227,7 @@ export default function OvercookScene({
     }
 
     const f = data.frame;
-    const scale = size / 15; 
+    const scale = size / 15;
     const drawW = f.w * scale;
     const drawH = f.h * scale;
 
@@ -258,10 +258,10 @@ export default function OvercookScene({
     if (!dir) return "SOUTH";
     const s = String(dir).toUpperCase().trim();
     if (["NORTH", "SOUTH", "EAST", "WEST"].includes(s)) return s;
-    if (s === "UP" || s.includes("-1")) return "NORTH";     
-    if (s === "DOWN" || s.includes("1")) return "SOUTH";    
-    if (s === "RIGHT" || s.includes("1")) return "EAST";    
-    if (s === "LEFT" || s.includes("-1")) return "WEST";    
+    if (s === "UP" || s.includes("-1")) return "NORTH";
+    if (s === "DOWN" || s.includes("1")) return "SOUTH";
+    if (s === "RIGHT" || s.includes("1")) return "EAST";
+    if (s === "LEFT" || s.includes("-1")) return "WEST";
     return "SOUTH";
   };
 
@@ -276,6 +276,8 @@ export default function OvercookScene({
   const backgroundTiles = useMemo(
     () => {
       if (!spritesData) return null;
+      // 타일 간 서브픽셀 틈 제거용 (값 조절로 겹침 정도 변경)
+      const tb = 1;
       return grid.map((row, y) =>
         row.map((cell, x) => {
           let frameName = tileMap[cell];
@@ -291,20 +293,20 @@ export default function OvercookScene({
               <g key={`${x}-${y}`}>
                 <image
                   href="/smartfactory/Assets-01.png"
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
                 {/* 디스펜서 타일이면 smartfactory 스킨 오버레이 */}
                 {smartfactoryImage && (
                   <image
                     href={smartfactoryImage}
-                    x={x * gridSize}
-                    y={y * gridSize}
-                    width={gridSize}
-                    height={gridSize}
+                    x={x * gridSize - tb / 2}
+                    y={y * gridSize - tb / 2}
+                    width={gridSize + tb}
+                    height={gridSize + tb}
                     preserveAspectRatio="xMidYMid slice"
                   />
                 )}
@@ -318,10 +320,10 @@ export default function OvercookScene({
               <g key={`${x}-${y}`}>
                 <image
                   href="/smartfactory/Assets-05.png"
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
               </g>
@@ -334,18 +336,18 @@ export default function OvercookScene({
               <g key={`${x}-${y}`}>
                 <image
                   href="/smartfactory/Assets-05.png"
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
                 <image
                   href={smartfactoryImage}
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
               </g>
@@ -358,19 +360,19 @@ export default function OvercookScene({
               <g key={`${x}-${y}`}>
                 <image
                   href="/smartfactory/Assets-01.png"
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
                 {smartfactoryImage && (
                   <image
                     href={smartfactoryImage}
-                    x={x * gridSize}
-                    y={y * gridSize}
-                    width={gridSize}
-                    height={gridSize}
+                    x={x * gridSize - tb / 2}
+                    y={y * gridSize - tb / 2}
+                    width={gridSize + tb}
+                    height={gridSize + tb}
                     preserveAspectRatio="xMidYMid slice"
                   />
                 )}
@@ -386,10 +388,10 @@ export default function OvercookScene({
                 {renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
                 <image
                   href={smartfactoryImage}
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
               </g>
@@ -397,132 +399,135 @@ export default function OvercookScene({
           }
 
           // 바닥 타일 (걸어다니는 공간): smartfactory 스킨 적용
+          // 코너는 Assets-06, 단독 가장자리는 Assets-02/03 사용
           if (cell === " ") {
             const leftCell = row[x - 1];
             const rightCell = row[x + 1];
-            const isLeftmostFloor = leftCell !== " ";
-            const isRightmostFloor = rightCell !== " " || x === row.length - 1;
+            const aboveCell = grid[y - 1]?.[x];
+            const belowCell = grid[y + 1]?.[x];
 
-            if (isLeftmostFloor) {
-              // 맨 왼쪽 바닥 세로줄: 위치에 따라 다른 이미지
-              const aboveCell = grid[y - 1]?.[x];
-              const belowCell = grid[y + 1]?.[x];
-              const isTopFloor = aboveCell !== " ";
-              const isBottomFloor = belowCell !== " ";
+            const hasWallLeft = leftCell !== " ";
+            const hasWallRight = rightCell !== " " || x === row.length - 1;
+            const hasWallAbove = aboveCell !== " ";
+            const hasWallBelow = belowCell !== " ";
 
-              let leftFloorImage = "/smartfactory/Assets-03.png"; // 중간: 직선 벽
-              let flipVertical = false;
+            // 코너 감지 (인접한 두 벽이 만나는 곳)
+            const hasCornerTL = hasWallAbove && hasWallLeft;
+            const hasCornerTR = hasWallAbove && hasWallRight;
+            const hasCornerBL = hasWallBelow && hasWallLeft;
+            const hasCornerBR = hasWallBelow && hasWallRight;
 
-              if (isTopFloor) {
-                leftFloorImage = "/smartfactory/Assets-06.png"; // 맨 위: 코너
-              } else if (isBottomFloor) {
-                leftFloorImage = "/smartfactory/Assets-06.png"; // 맨 아래: 코너 상하반전
-                flipVertical = true;
-              }
+            // 코너에 포함되지 않은 단독 가장자리
+            const edgeTop = hasWallAbove && !hasCornerTL && !hasCornerTR;
+            const edgeBottom = hasWallBelow && !hasCornerBL && !hasCornerBR;
+            const edgeLeft = hasWallLeft && !hasCornerTL && !hasCornerBL;
+            const edgeRight = hasWallRight && !hasCornerTR && !hasCornerBR;
 
-              return (
-                <g key={`${x}-${y}`}>
-                  <image
-                    href={leftFloorImage}
-                    x={x * gridSize}
-                    y={y * gridSize}
-                    width={gridSize}
-                    height={gridSize}
-                    preserveAspectRatio="xMidYMid slice"
-                    transform={flipVertical ? `translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)` : undefined}
-                  />
-                </g>
-              );
-            } else if (isRightmostFloor) {
-              // 맨 오른쪽 바닥 세로줄: 위치에 따라 다른 이미지 (좌우반전)
-              const aboveCell = grid[y - 1]?.[x];
-              const belowCell = grid[y + 1]?.[x];
-              const isTopFloor = aboveCell !== " ";
-              const isBottomFloor = belowCell !== " ";
+            const edgeOpacity = 0.4;
+            const edgeOverlays = [];
 
-              let rightFloorImage = "/smartfactory/Assets-03.png"; // 중간: 직선 벽
-              let flipV = false;
-
-              if (isTopFloor) {
-                rightFloorImage = "/smartfactory/Assets-06.png"; // 맨 위: 코너
-              } else if (isBottomFloor) {
-                rightFloorImage = "/smartfactory/Assets-06.png"; // 맨 아래: 코너
-                flipV = true;
-              }
-
-              // transform 계산: 좌우반전 + 필요시 상하반전
-              let transformStr = `translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`;
-              if (flipV) {
-                transformStr = `translate(${x * gridSize * 2 + gridSize}, ${y * gridSize * 2 + gridSize}) scale(-1, -1)`;
-              }
-
-              return (
-                <g key={`${x}-${y}`}>
-                  <image
-                    href={rightFloorImage}
-                    x={x * gridSize}
-                    y={y * gridSize}
-                    width={gridSize}
-                    height={gridSize}
-                    preserveAspectRatio="xMidYMid slice"
-                    transform={transformStr}
-                  />
-                </g>
-              );
-            } else {
-              // 나머지 바닥: 위치에 따라 적용
-              const aboveCell = grid[y - 1]?.[x];
-              const belowCell = grid[y + 1]?.[x];
-              const isTopFloor = aboveCell !== " ";
-              const isBottomFloor = belowCell !== " ";
-
-              if (isTopFloor && !isBottomFloor) {
-                // 가로 맨 위줄 바닥 → Assets-02
-                return (
-                  <g key={`${x}-${y}`}>
-                    <image
-                      href="/smartfactory/Assets-02.png"
-                      x={x * gridSize}
-                      y={y * gridSize}
-                      width={gridSize}
-                      height={gridSize}
-                      preserveAspectRatio="xMidYMid slice"
-                    />
-                  </g>
-                );
-              }
-
-              if (isBottomFloor) {
-                // 가로 맨 아래줄 바닥 → Assets-02 상하반전
-                return (
-                  <g key={`${x}-${y}`}>
-                    <image
-                      href="/smartfactory/Assets-02.png"
-                      x={x * gridSize}
-                      y={y * gridSize}
-                      width={gridSize}
-                      height={gridSize}
-                      preserveAspectRatio="xMidYMid slice"
-                      transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
-                    />
-                  </g>
-                );
-              }
-
-              // 나머지 바닥 → Assets-07
-              return (
-                <g key={`${x}-${y}`}>
-                  <image
-                    href="/smartfactory/Assets-07.png"
-                    x={x * gridSize}
-                    y={y * gridSize}
-                    width={gridSize}
-                    height={gridSize}
-                    preserveAspectRatio="xMidYMid slice"
-                  />
-                </g>
+            // 코너 오버레이 (Assets-06 회전/반전)
+            if (hasCornerTL) {
+              edgeOverlays.push(
+                <image key="ctl" href="/smartfactory/Assets-06.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                />
               );
             }
+            if (hasCornerTR) {
+              edgeOverlays.push(
+                <image key="ctr" href="/smartfactory/Assets-06.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                  transform={`translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`}
+                />
+              );
+            }
+            if (hasCornerBL) {
+              edgeOverlays.push(
+                <image key="cbl" href="/smartfactory/Assets-06.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                  transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
+                />
+              );
+            }
+            if (hasCornerBR) {
+              edgeOverlays.push(
+                <image key="cbr" href="/smartfactory/Assets-06.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                  transform={`translate(${x * gridSize * 2 + gridSize}, ${y * gridSize * 2 + gridSize}) scale(-1, -1)`}
+                />
+              );
+            }
+
+            // 단독 가장자리 오버레이 (코너에 포함되지 않은 면만)
+            if (edgeTop) {
+              edgeOverlays.push(
+                <image key="top" href="/smartfactory/Assets-02.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                />
+              );
+            }
+            if (edgeBottom) {
+              edgeOverlays.push(
+                <image key="bottom" href="/smartfactory/Assets-02.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                  transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
+                />
+              );
+            }
+            if (edgeLeft) {
+              edgeOverlays.push(
+                <image key="left" href="/smartfactory/Assets-03.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                />
+              );
+            }
+            if (edgeRight) {
+              edgeOverlays.push(
+                <image key="right" href="/smartfactory/Assets-03.png"
+                  x={x * gridSize} y={y * gridSize}
+                  width={gridSize} height={gridSize}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={edgeOpacity}
+                  transform={`translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`}
+                />
+              );
+            }
+
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href="/smartfactory/Assets-07.png"
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+                {edgeOverlays}
+              </g>
+            );
           }
 
           return (
@@ -531,10 +536,10 @@ export default function OvercookScene({
               {cell === "X" ? (
                 <image
                   href="/smartfactory/Assets-01.png"
-                  x={x * gridSize}
-                  y={y * gridSize}
-                  width={gridSize}
-                  height={gridSize}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
               ) : (
@@ -584,10 +589,10 @@ export default function OvercookScene({
     }
 
     let category = "objects";
-    let frameName = `${obj.name}.png`; 
-    
+    let frameName = `${obj.name}.png`;
+
     if (obj.name === "tomato") {
-       frameName = "tomato.png";
+      frameName = "tomato.png";
     }
 
     let remainingTime = null;
@@ -827,19 +832,19 @@ export default function OvercookScene({
 
     const held = player.heldObject?.name;
     const heldLower = (held || "").toLowerCase();
-    
+
     let frameName = null;
     const hatVariant = CHEF_HAT_VARIANTS[index % CHEF_HAT_VARIANTS.length];
     const hatName = `${orientation}-${hatVariant}.png`;
-    
+
     if (heldLower === "onion") {
-       frameName = `${orientation}-onion.png`;
+      frameName = `${orientation}-onion.png`;
     } else if (heldLower === "dish") {
-       frameName = `${orientation}-dish.png`;
+      frameName = `${orientation}-dish.png`;
     } else if (heldLower.includes("soup")) {
-       frameName = heldLower.includes("tomato") ? `${orientation}-soup-tomato.png` : `${orientation}-soup-onion.png`;
+      frameName = heldLower.includes("tomato") ? `${orientation}-soup-tomato.png` : `${orientation}-soup-onion.png`;
     } else if (heldLower === "tomato") {
-       frameName = `${orientation}-tomato.png`;
+      frameName = `${orientation}-tomato.png`;
     }
     // 양파를 들고 있을 때 smartfactory 이미지로 교체
     const heldOnionSmartfactory = heldLower === "onion";
@@ -876,9 +881,7 @@ export default function OvercookScene({
     return (
       <g
         key={player.id || index}
-        transform={`translate(${interpX * gridSize - offset}, ${
-          interpY * gridSize - offset
-        }) scale(${scale})`}
+        transform={`translate(${interpX * gridSize - offset}, ${interpY * gridSize - offset}) scale(${scale})`}
       >
         {/* smartfactory 셰프 이미지 */}
         <image
@@ -889,6 +892,7 @@ export default function OvercookScene({
           height={gridSize}
           preserveAspectRatio="xMidYMid slice"
           transform={chefFlip || undefined}
+          style={{ imageRendering: "auto" }}
         />
         {/* 에이전트별 색상 오버레이 */}
         <image
@@ -899,6 +903,7 @@ export default function OvercookScene({
           height={gridSize}
           preserveAspectRatio="xMidYMid slice"
           transform={colorFlip || undefined}
+          style={{ imageRendering: "auto" }}
         />
         {/* 들고 있는 물건 - smartfactory 이미지 */}
         {(() => {
@@ -926,6 +931,7 @@ export default function OvercookScene({
               height={gridSize}
               preserveAspectRatio="xMidYMid slice"
               transform={chefFlip || undefined}
+              style={{ imageRendering: "auto" }}
             />
           );
         })()}
@@ -959,7 +965,7 @@ export default function OvercookScene({
           fontSize: "18px",
         }}
       >
-         Loading graphics assets...
+        Loading graphics assets...
       </div>
     );
   }
@@ -988,38 +994,57 @@ export default function OvercookScene({
           maxWidth: "100%",
           maxHeight: "100%",
           border: "2px solid #999",
-          background: "#d6c7a1",
+          background: "#ece7e1",
           borderRadius: "8px",
           imageRendering: "pixelated",
           overflow: "visible"
         }}
       >
-        {backgroundTiles}
-        {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
+        <g style={{ filter: "brightness(0.80) contrast(1.2)" }}>
+          {backgroundTiles}
+          {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
+        </g>
         {(playerFrame.players || []).map((p, i) => renderPlayer(p, i))}
 
         {/* 배달 팝업 이펙트 */}
         {deliveryEffects.map((eff, index) => {
-           const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
-           const mapH = staticInfo.height || (grid ? grid.length : 5);
-           
-           let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
-           if (!sTile) {
-              sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
-           }
-           
-           const tx = sTile.x * gridSize + gridSize / 2;
-           const ty = sTile.y * gridSize - 15;
+          const mapW = staticInfo.width || (grid && grid[0] ? grid[0].length : 5);
+          const mapH = staticInfo.height || (grid ? grid.length : 5);
 
-           return (
-              <g key={eff.id} transform={`translate(${tx}, ${ty})`}>
-                 <g style={{ animation: "popSlideUp 1.2s ease-out forwards" }}>
-                    <text textAnchor="middle" fill="#4ade80" fontSize="20" fontWeight="bold">
-                       +{eff.count}
-                    </text>
-                 </g>
-              </g>
-           );
+          let sTile = serveTiles.length > 0 ? serveTiles[index % serveTiles.length] : null;
+          if (!sTile) {
+            sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
+          }
+
+          const tx = sTile.x * gridSize + gridSize / 2;
+          const ty = sTile.y * gridSize - 15;
+
+          return (
+            <foreignObject
+              key={eff.id}
+              x={tx - 50}
+              y={ty - 40}
+              width={100}
+              height={50}
+              style={{ overflow: "visible", pointerEvents: "none" }}
+            >
+              <div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{
+                  animation: "popSlideUp 1.2s ease-out forwards",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "32px",
+                  fontWeight: "800",
+                  color: "#000",
+                  textAlign: "center",
+                  imageRendering: "auto",
+                  lineHeight: "50px",
+                }}
+              >
+                +{eff.count}
+              </div>
+            </foreignObject>
+          );
         })}
 
 
