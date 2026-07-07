@@ -883,58 +883,59 @@ export default function OvercookScene({
         key={player.id || index}
         transform={`translate(${interpX * gridSize - offset}, ${interpY * gridSize - offset}) scale(${scale})`}
       >
-        {/* smartfactory 셰프 이미지 */}
-        <image
-          href={chefImage}
-          x={0}
-          y={0}
-          width={gridSize}
-          height={gridSize}
-          preserveAspectRatio="xMidYMid slice"
-          transform={chefFlip || undefined}
-          style={{ imageRendering: "auto" }}
-        />
-        {/* 에이전트별 색상 오버레이 */}
-        <image
-          href={colorOverlay}
-          x={0}
-          y={0}
-          width={gridSize}
-          height={gridSize}
-          preserveAspectRatio="xMidYMid slice"
-          transform={colorFlip || undefined}
-          style={{ imageRendering: "auto" }}
-        />
-        {/* 들고 있는 물건 - smartfactory 이미지 */}
-        {(() => {
-          // 재료 (onion, tomato): side=28, front/back=27
-          // 빈 박스 (dish): side=20, front/back=14
-          // 완성품 (soup): side=25, front/back=26
-          const isSideView = orientation === "WEST" || orientation === "EAST";
-          let heldAsset = null;
 
-          if (heldLower === "onion" || heldLower === "tomato") {
-            heldAsset = isSideView ? "/smartfactory/Assets-28.png" : "/smartfactory/Assets-27.png";
-          } else if (heldLower === "dish") {
-            heldAsset = isSideView ? "/smartfactory/Assets-20.png" : "/smartfactory/Assets-14.png";
-          } else if (heldLower.includes("soup")) {
-            heldAsset = isSideView ? "/smartfactory/Assets-25.png" : "/smartfactory/Assets-26.png";
-          }
+          {/* smartfactory 셰프 이미지 */}
+          <image
+            href={chefImage}
+            x={0}
+            y={0}
+            width={gridSize}
+            height={gridSize}
+            preserveAspectRatio="xMidYMid slice"
+            transform={chefFlip || undefined}
+            style={{ imageRendering: "auto" }}
+          />
+          {/* 에이전트별 색상 오버레이 */}
+          <image
+            href={colorOverlay}
+            x={0}
+            y={0}
+            width={gridSize}
+            height={gridSize}
+            preserveAspectRatio="xMidYMid slice"
+            transform={colorFlip || undefined}
+            style={{ imageRendering: "auto" }}
+          />
+          {/* 들고 있는 물건 - smartfactory 이미지 */}
+          {(() => {
+            // 재료 (onion, tomato): side=28, front/back=27
+            // 빈 박스 (dish): side=20, front/back=14
+            // 완성품 (soup): side=25, front/back=26
+            const isSideView = orientation === "WEST" || orientation === "EAST";
+            let heldAsset = null;
 
-          if (!heldAsset) return null;
-          return (
-            <image
-              href={heldAsset}
-              x={0}
-              y={0}
-              width={gridSize}
-              height={gridSize}
-              preserveAspectRatio="xMidYMid slice"
-              transform={chefFlip || undefined}
-              style={{ imageRendering: "auto" }}
-            />
-          );
-        })()}
+            if (heldLower === "onion" || heldLower === "tomato") {
+              heldAsset = isSideView ? "/smartfactory/Assets-28.png" : "/smartfactory/Assets-27.png";
+            } else if (heldLower === "dish") {
+              heldAsset = isSideView ? "/smartfactory/Assets-20.png" : "/smartfactory/Assets-14.png";
+            } else if (heldLower.includes("soup")) {
+              heldAsset = isSideView ? "/smartfactory/Assets-25.png" : "/smartfactory/Assets-26.png";
+            }
+
+            if (!heldAsset) return null;
+            return (
+              <image
+                href={heldAsset}
+                x={0}
+                y={0}
+                width={gridSize}
+                height={gridSize}
+                preserveAspectRatio="xMidYMid slice"
+                transform={chefFlip || undefined}
+                style={{ imageRendering: "auto" }}
+              />
+            );
+          })()}
       </g>
     );
   };
@@ -987,14 +988,14 @@ export default function OvercookScene({
       <svg
         width={svgWidth}
         height={svgHeight}
-        viewBox={`0 0 ${boardWidth} ${boardHeight}`}
+        viewBox={`${-gridSize * 0.3} ${-gridSize * 0.3} ${boardWidth + gridSize * 0.6} ${boardHeight + gridSize * 0.6}`}
         preserveAspectRatio="xMidYMid meet"
         style={{
           flex: "0 0 auto",
           maxWidth: "100%",
           maxHeight: "100%",
           border: "2px solid #999",
-          background: "#ece7e1",
+          background: "#a09c98",
           borderRadius: "8px",
           imageRendering: "pixelated",
           overflow: "visible"
