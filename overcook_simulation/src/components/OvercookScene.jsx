@@ -16,18 +16,117 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-// Hold-then-snap easing: the agent stays at its current position
-// for the first HOLD_RATIO of the frame, then moves quickly to the
-// next position. This gives a deliberate, game-like "pause → move" feel.
-// HOLD_RATIO: 0.0 = move immediately, 0.6 = wait a long time then snap.
-const HOLD_RATIO = 0.4;
+
+const HOLD_RATIO = 0.0;
 
 function snapEase(t) {
   if (t < HOLD_RATIO) return 0;
   const moved = (t - HOLD_RATIO) / (1 - HOLD_RATIO);
-  // quick ease-out for the snap portion
-  return 1 - (1 - moved) * (1 - moved);
+  // linear (constant velocity): no per-cell accel/decel, so a
+  // multi-cell walk stays perfectly smooth across frame boundaries
+  return moved;
 }
+
+/*
+ * ──────────────────────────────────────────────────────────────────────────
+ * 맵 타일에 입혀지는 이미지를 여기서 한 번에 바꿉니다.
+ * 각 항목의 파일명("Assets-XX.png")만 원하는 이미지로 교체하면 됩니다.
+ *
+ *  - 이미지 파일은 모두  public/smartfactory/  폴더 안에 있어야 합니다.
+ *  - 파일명만 바꾸면 되고, 코드의 다른 부분은 건드릴 필요가 없습니다.
+ *  - 새 이미지를 넣을 땐 같은 폴더에 넣고 아래 파일명만 그 이름으로 바꾸세요.
+ * ════════════════════════════════════════════════════════════════════════ */
+const SKIN_DIR = "/smartfactory";
+
+const SKIN = {
+  // ── 벽 / 카운터 ──────────────────────────────────────────────
+  wall: "Assets-01.png",        // 위쪽 벽, 좌우 벽, 중앙 카운터
+  wallBottom: "Assets-05.png",  // 아래쪽 벽
+
+  // ── 바닥 (캐릭터가 걸어다니는 공간) ─────────────────────────
+  floor: "Assets-07.png",           // 바닥 기본 타일
+  floorEdgeTop: "Assets-02.png",    // 바닥 위쪽 가장자리(벽과 맞닿는 그림자)
+  floorEdgeBottom: "Assets-07.png", // 바닥 아래쪽 가장자리
+  floorEdgeSide: "Assets-03.png",   // 바닥 좌우 가장자리 그림자
+  floorCorner: "Assets-06.png",     // 바닥 코너 그림자
+  floorEdgeOpacity: 0.4,            // 가장자리 그림자 진하기 (0=투명, 1=불투명)
+
+  // ── 설비 (맵 기호 → 이미지) ─────────────────────────────────
+  station: {
+    O: "Assets-12.png",  // 양파 공급기
+    D: "Assets-11.png",  // 접시 공급기
+    P: "Assets-04.png",  // 냄비 (pot)
+    S: "Assets-08.png",  // 서빙대
+  },
+
+  // ── 냄비 조리 상태 (재료 개수/완료) ─────────────────────────
+  pot: {
+    cooking1: "Assets-22.png",  // 재료 1개
+    cooking2: "Assets-23.png",  // 재료 2개
+    cooking3: "Assets-24.png",  // 재료 3개 (조리 중)
+    ready: "Assets-21.png",     // 조리 완료
+  },
+
+  // ── 카운터 위에 놓인 물건 ───────────────────────────────────
+  itemOnCounter: {
+    ingredient: "Assets-13.png",  // 양파/토마토
+    dish: "Assets-11.png",        // 접시
+  },
+
+  // ── 셰프(에이전트) ──────────────────────────────────────────
+  chef: {
+    front: "Assets-15.png",  // 정면(위/아래를 볼 때)
+    side: "Assets-09.png",   // 측면(좌/우를 볼 때)
+    // 에이전트별 색상 오버레이  [0=빨강, 1=주황, 2=초록, 3=파랑]
+    frontColor: ["Assets-29.png", "Assets-30.png", "Assets-31.png", "Assets-32.png"],
+    sideColor: ["Assets-16.png", "Assets-17.png", "Assets-18.png", "Assets-19.png"],
+  },
+
+  // ── 셰프가 들고 있는 물건 (front=정면, side=측면) ────────────
+  held: {
+    ingredientFront: "Assets-27.png",  // 양파/토마토
+    ingredientSide: "Assets-28.png",
+    dishFront: "Assets-14.png",        // 빈 접시
+    dishSide: "Assets-20.png",
+    soupFront: "Assets-26.png",        // 완성 요리
+    soupSide: "Assets-25.png",
+  },
+};
+
+// SKIN 파일명을 실제 이미지 경로로 변환
+const skinUrl = (name) => `${SKIN_DIR}/${name}`;
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 📍 좌표별 스킨 오버라이드
+ * ──────────────────────────────────────────────────────────────────────────
+ * 특정 칸을 자동 스킨 대신 원하는 이미지로 "콕 집어" 바꾸고 싶을 때 사용합니다.
+ *
+ *   - 키는 맵(레이아웃) 이름, 그 안에서 "x,y": "파일명" 형식으로 지정합니다.
+ *   - x = 왼쪽에서부터(0시작), y = 위에서부터(0시작) 칸 번호입니다.
+ *   - 여기 적힌 칸만 이 이미지로 덮어쓰고, 나머지는 자동(오토타일) 그대로입니다.
+ *   - "_4" 버전 맵은 기본 맵과 격자가 같으므로 같은 표가 자동 적용됩니다.
+ *
+ * 예)  "2_forced_hard": { "6,3": "Assets-07.png" }
+ *      → 2_forced_hard 맵의 x=6, y=3 칸을 Assets-07 로 교체
+ * ════════════════════════════════════════════════════════════════════════ */
+const SKIN_OVERRIDE = {
+  "2_forced_hard": {
+    // "6,3": "Assets-01.png",
+  },
+  "2_incentivized_hard": {
+    "6,4": "Assets-05.png",
+  },
+};
+
+// layoutName에서 "_4" 꼬리표를 떼어 base/_4가 같은 오버라이드 표를 쓰게 함
+const overrideKey = (layoutName) => (layoutName || "").replace(/_4$/, "");
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * 🔢 좌표 보기 
+ *   true 로 바꾸면 맵의 모든 칸에 "x,y" 좌표가 표시됩니다.
+ *   위 SKIN_OVERRIDE 에 넣을 좌표를 눈으로 확인할 때 켜고, 확인 후 다시 false 로.
+ * ────────────────────────────────────────────────────────────────────────── */
+const SHOW_GRID_COORDS = false;
 
 export default function OvercookScene({
   staticInfo,
@@ -265,19 +364,22 @@ export default function OvercookScene({
     return "SOUTH";
   };
 
-  // smartfactory 타일 스킨 매핑
-  const smartfactoryTileMap = useMemo(() => ({
-    "O": "/smartfactory/Assets-12.png",   // 양파 → Assets-12
-    "D": "/smartfactory/Assets-11.png",   // 접시 → Assets-11
-    "P": "/smartfactory/Assets-04.png",   // pot → Assets-04
-    "S": "/smartfactory/Assets-08.png",   // serving area → Assets-08
-  }), []);
+  // 설비 스킨 매핑 (맵 기호 → 이미지 경로). 파일명은 위 SKIN.station에서 관리
+  const smartfactoryTileMap = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(SKIN.station).map(([cell, name]) => [cell, skinUrl(name)])
+      ),
+    []
+  );
 
   const backgroundTiles = useMemo(
     () => {
       if (!spritesData) return null;
       // 타일 간 서브픽셀 틈 제거용 (값 조절로 겹침 정도 변경)
       const tb = 1;
+      // 이 맵에 지정된 좌표별 스킨 오버라이드 표 (없으면 undefined)
+      const overrideTable = SKIN_OVERRIDE[overrideKey(staticInfo.layoutName)];
       return grid.map((row, y) =>
         row.map((cell, x) => {
           let frameName = tileMap[cell];
@@ -287,12 +389,29 @@ export default function OvercookScene({
           const isDispenser = ["P", "S", "O", "D"].includes(cell);
           const smartfactoryImage = smartfactoryTileMap[cell];
 
-          // 맨 위 행 (y === 0): Assets-01로 교체
+          // 좌표 오버라이드가 지정된 칸이면 자동 스킨 대신 그 이미지로 교체
+          const overrideName = overrideTable?.[`${x},${y}`];
+          if (overrideName) {
+            return (
+              <g key={`${x}-${y}`}>
+                <image
+                  href={skinUrl(overrideName)}
+                  x={x * gridSize - tb / 2}
+                  y={y * gridSize - tb / 2}
+                  width={gridSize + tb}
+                  height={gridSize + tb}
+                  preserveAspectRatio="xMidYMid slice"
+                />
+              </g>
+            );
+          }
+
+          // 맨 위 행 (y === 0): 벽 스킨으로 교체
           if (y === 0) {
             return (
               <g key={`${x}-${y}`}>
                 <image
-                  href="/smartfactory/Assets-01.png"
+                  href={skinUrl(SKIN.wall)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
@@ -314,12 +433,12 @@ export default function OvercookScene({
             );
           }
 
-          // 맨 아래 행: 디스펜서/팟 제외한 나머지를 Assets-05로 교체
+          // 맨 아래 행: 디스펜서/팟 제외한 나머지를 아래쪽 벽 스킨으로 교체
           if (y === grid.length - 1 && !smartfactoryImage) {
             return (
               <g key={`${x}-${y}`}>
                 <image
-                  href="/smartfactory/Assets-05.png"
+                  href={skinUrl(SKIN.wallBottom)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
@@ -330,12 +449,12 @@ export default function OvercookScene({
             );
           }
 
-          // 맨 아래 행의 디스펜서/팟: Assets-05 배경 + smartfactory 오버레이
+          // 맨 아래 행의 디스펜서/팟: 아래쪽 벽 배경 + 설비 오버레이
           if (y === grid.length - 1 && smartfactoryImage) {
             return (
               <g key={`${x}-${y}`}>
                 <image
-                  href="/smartfactory/Assets-05.png"
+                  href={skinUrl(SKIN.wallBottom)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
@@ -354,12 +473,12 @@ export default function OvercookScene({
             );
           }
 
-          // 왼쪽/오른쪽 벽 (가장자리 카운터): Assets-01로 교체
+          // 왼쪽/오른쪽 벽 (가장자리 카운터): 벽 스킨으로 교체
           if ((x === 0 || x === row.length - 1) && cell !== " ") {
             return (
               <g key={`${x}-${y}`}>
                 <image
-                  href="/smartfactory/Assets-01.png"
+                  href={skinUrl(SKIN.wall)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
@@ -401,15 +520,24 @@ export default function OvercookScene({
           // 바닥 타일 (걸어다니는 공간): smartfactory 스킨 적용
           // 코너는 Assets-06, 단독 가장자리는 Assets-02/03 사용
           if (cell === " ") {
-            const leftCell = row[x - 1];
-            const rightCell = row[x + 1];
-            const aboveCell = grid[y - 1]?.[x];
-            const belowCell = grid[y + 1]?.[x];
+            const W = row.length;
+            const H = grid.length;
 
-            const hasWallLeft = leftCell !== " ";
-            const hasWallRight = rightCell !== " " || x === row.length - 1;
-            const hasWallAbove = aboveCell !== " ";
-            const hasWallBelow = belowCell !== " ";
+            // 그림자를 만드는 것은 "외곽(테두리) 벽"뿐.
+            // 중앙 분리대 같은 내부 벽은 그림자를 만들지 않아 주위 바닥이 순수 바닥(Assets-07)으로 남는다.
+            const isShadowWall = (cx, cy) => {
+              // 격자 밖 = 맵 바깥 외곽 → 그림자 만듦
+              if (cx < 0 || cy < 0 || cx >= W || cy >= H) return true;
+              const c = grid[cy][cx];
+              if (c === " ") return false; // 바닥이면 벽 아님
+              // 벽/설비 칸: 테두리에 있을 때만 그림자를 만든다 (내부 벽은 제외)
+              return cx === 0 || cx === W - 1 || cy === 0 || cy === H - 1;
+            };
+
+            const hasWallLeft = isShadowWall(x - 1, y);
+            const hasWallRight = isShadowWall(x + 1, y);
+            const hasWallAbove = isShadowWall(x, y - 1);
+            const hasWallBelow = isShadowWall(x, y + 1);
 
             // 코너 감지 (인접한 두 벽이 만나는 곳)
             const hasCornerTL = hasWallAbove && hasWallLeft;
@@ -423,13 +551,13 @@ export default function OvercookScene({
             const edgeLeft = hasWallLeft && !hasCornerTL && !hasCornerBL;
             const edgeRight = hasWallRight && !hasCornerTR && !hasCornerBR;
 
-            const edgeOpacity = 0.4;
+            const edgeOpacity = SKIN.floorEdgeOpacity;
             const edgeOverlays = [];
 
-            // 코너 오버레이 (Assets-06 회전/반전)
+            // 코너 오버레이 (회전/반전으로 4방향 재사용)
             if (hasCornerTL) {
               edgeOverlays.push(
-                <image key="ctl" href="/smartfactory/Assets-06.png"
+                <image key="ctl" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -439,7 +567,7 @@ export default function OvercookScene({
             }
             if (hasCornerTR) {
               edgeOverlays.push(
-                <image key="ctr" href="/smartfactory/Assets-06.png"
+                <image key="ctr" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -450,7 +578,7 @@ export default function OvercookScene({
             }
             if (hasCornerBL) {
               edgeOverlays.push(
-                <image key="cbl" href="/smartfactory/Assets-06.png"
+                <image key="cbl" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -461,7 +589,7 @@ export default function OvercookScene({
             }
             if (hasCornerBR) {
               edgeOverlays.push(
-                <image key="cbr" href="/smartfactory/Assets-06.png"
+                <image key="cbr" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -474,7 +602,7 @@ export default function OvercookScene({
             // 단독 가장자리 오버레이 (코너에 포함되지 않은 면만)
             if (edgeTop) {
               edgeOverlays.push(
-                <image key="top" href="/smartfactory/Assets-02.png"
+                <image key="top" href={skinUrl(SKIN.floorEdgeTop)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -484,7 +612,7 @@ export default function OvercookScene({
             }
             if (edgeBottom) {
               edgeOverlays.push(
-                <image key="bottom" href="/smartfactory/Assets-02.png"
+                <image key="bottom" href={skinUrl(SKIN.floorEdgeBottom)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -495,7 +623,7 @@ export default function OvercookScene({
             }
             if (edgeLeft) {
               edgeOverlays.push(
-                <image key="left" href="/smartfactory/Assets-03.png"
+                <image key="left" href={skinUrl(SKIN.floorEdgeSide)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -505,7 +633,7 @@ export default function OvercookScene({
             }
             if (edgeRight) {
               edgeOverlays.push(
-                <image key="right" href="/smartfactory/Assets-03.png"
+                <image key="right" href={skinUrl(SKIN.floorEdgeSide)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
                   preserveAspectRatio="xMidYMid slice"
@@ -515,27 +643,43 @@ export default function OvercookScene({
               );
             }
 
+            const isBottomCornerL = hasCornerBL && y === grid.length - 2;
+            const isBottomCornerR = hasCornerBR && y === grid.length - 2;
+            const isBottomCorner = isBottomCornerL || isBottomCornerR;
+
+            const bottomCornerOverlay = isBottomCorner ? (
+              <image
+                key="bottomCorner"
+                href={skinUrl(SKIN.floorEdgeSide)}
+                x={x * gridSize} y={y * gridSize}
+                width={gridSize} height={gridSize}
+                preserveAspectRatio="xMidYMid slice"
+                opacity={edgeOpacity}
+                transform={isBottomCornerR ? `translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)` : undefined}
+              />
+            ) : null;
+
             return (
               <g key={`${x}-${y}`}>
                 <image
-                  href="/smartfactory/Assets-07.png"
+                  href={skinUrl(SKIN.floor)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
                   preserveAspectRatio="xMidYMid slice"
                 />
-                {edgeOverlays}
+                {isBottomCorner ? bottomCornerOverlay : edgeOverlays}
               </g>
             );
           }
 
           return (
             <g key={`${x}-${y}`}>
-              {/* 중간 갈색 카운터 타일 → Assets-01 */}
+              {/* 중간 카운터 타일 → 벽 스킨 */}
               {cell === "X" ? (
                 <image
-                  href="/smartfactory/Assets-01.png"
+                  href={skinUrl(SKIN.wall)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
@@ -553,7 +697,7 @@ export default function OvercookScene({
         })
       );
     },
-    [grid, spritesData, tileMap, smartfactoryTileMap]
+    [grid, spritesData, tileMap, smartfactoryTileMap, staticInfo.layoutName]
   );
 
   const isHeldByPlayer = (obj) => {
@@ -644,13 +788,13 @@ export default function OvercookScene({
       const isReady = obj.isReady;
       let smartfactorySoupImage;
       if (isReady) {
-        smartfactorySoupImage = "/smartfactory/Assets-21.png"; // 완료
+        smartfactorySoupImage = skinUrl(SKIN.pot.ready);
       } else if (count >= 3) {
-        smartfactorySoupImage = "/smartfactory/Assets-24.png"; // 요리 중 (재료 3개)
+        smartfactorySoupImage = skinUrl(SKIN.pot.cooking3);
       } else if (count === 2) {
-        smartfactorySoupImage = "/smartfactory/Assets-23.png"; // 재료 2개
+        smartfactorySoupImage = skinUrl(SKIN.pot.cooking2);
       } else {
-        smartfactorySoupImage = "/smartfactory/Assets-22.png"; // 재료 1개
+        smartfactorySoupImage = skinUrl(SKIN.pot.cooking1);
       }
 
       return (
@@ -664,6 +808,28 @@ export default function OvercookScene({
             preserveAspectRatio="xMidYMid slice"
             opacity={ready ? 1 : 0.85}
           />
+
+          {/* 조리 완료 → 냄비 위 체크 배지 */}
+          {isReady && (
+            <g>
+              <circle
+                cx={x * gridSize + gridSize / 2}
+                cy={y * gridSize + 14}
+                r={12}
+                fill="#22c55e"
+                stroke="#000000"
+                strokeWidth={2}
+              />
+              <path
+                d={`M ${x * gridSize + gridSize / 2 - 5} ${y * gridSize + 14} l 3.5 4 l 7 -8`}
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth={3}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
+          )}
 
           {cooking && remainingTime !== null && (
             <>
@@ -687,11 +853,16 @@ export default function OvercookScene({
               />
               <text
                 x={x * gridSize + gridSize / 2}
-                y={barY - 4}
+                y={barY - 6}
                 textAnchor="middle"
-                fontSize="12"
+                fontSize="18"
+                fontWeight="bold"
                 fontFamily="monospace"
                 fill="#ffffff"
+                stroke="#000000"
+                strokeWidth="3"
+                paintOrder="stroke"
+                style={{ strokeLinejoin: "round" }}
               >
                 {Math.ceil(remainingTime)}
               </text>
@@ -707,7 +878,7 @@ export default function OvercookScene({
       return (
         <g key={objectKey}>
           <image
-            href="/smartfactory/Assets-13.png"
+            href={skinUrl(SKIN.itemOnCounter.ingredient)}
             x={x * gridSize}
             y={y * gridSize}
             width={gridSize}
@@ -722,7 +893,7 @@ export default function OvercookScene({
       return (
         <g key={objectKey}>
           <image
-            href="/smartfactory/Assets-11.png"
+            href={skinUrl(SKIN.itemOnCounter.dish)}
             x={x * gridSize}
             y={y * gridSize}
             width={gridSize}
@@ -849,32 +1020,33 @@ export default function OvercookScene({
     // 양파를 들고 있을 때 smartfactory 이미지로 교체
     const heldOnionSmartfactory = heldLower === "onion";
 
-    // smartfactory 셰프 이미지 매핑
-    // 에이전트별 색상: 0=빨강(16,29), 1=주황(17,30), 2=초록(18,31), 3=파랑(19,32)
-    const sideColorAssets = [16, 17, 18, 19];
-    const frontColorAssets = [29, 30, 31, 32];
-    const colorIndex = index % sideColorAssets.length;
+    // smartfactory 셰프 이미지 매핑 (파일명은 위 SKIN.chef에서 관리)
+    const colorIndex = index % SKIN.chef.sideColor.length;
+    const frontColor = skinUrl(SKIN.chef.frontColor[colorIndex]);
+    const sideColor = skinUrl(SKIN.chef.sideColor[colorIndex]);
+    const chefFront = skinUrl(SKIN.chef.front);
+    const chefSide = skinUrl(SKIN.chef.side);
 
-    let chefImage = "/smartfactory/Assets-15.png"; // 기본: 아래
+    let chefImage = chefFront; // 기본: 아래
     let chefFlip = "";
-    let colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+    let colorOverlay = frontColor;
     let colorFlip = "";
 
     if (orientation === "WEST") {
-      chefImage = "/smartfactory/Assets-09.png";
-      colorOverlay = `/smartfactory/Assets-${sideColorAssets[colorIndex]}.png`;
+      chefImage = chefSide;
+      colorOverlay = sideColor;
     } else if (orientation === "EAST") {
-      chefImage = "/smartfactory/Assets-09.png";
+      chefImage = chefSide;
       chefFlip = `translate(${gridSize}, 0) scale(-1, 1)`;
-      colorOverlay = `/smartfactory/Assets-${sideColorAssets[colorIndex]}.png`;
+      colorOverlay = sideColor;
       colorFlip = `translate(${gridSize}, 0) scale(-1, 1)`;
     } else if (orientation === "NORTH") {
-      chefImage = "/smartfactory/Assets-15.png";
-      colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+      chefImage = chefFront;
+      colorOverlay = frontColor;
     } else if (orientation === "SOUTH") {
-      chefImage = "/smartfactory/Assets-15.png";
+      chefImage = chefFront;
       chefFlip = `translate(0, ${gridSize}) scale(1, -1)`;
-      colorOverlay = `/smartfactory/Assets-${frontColorAssets[colorIndex]}.png`;
+      colorOverlay = frontColor;
       colorFlip = `translate(0, ${gridSize}) scale(1, -1)`;
     }
 
@@ -884,58 +1056,58 @@ export default function OvercookScene({
         transform={`translate(${interpX * gridSize - offset}, ${interpY * gridSize - offset}) scale(${scale})`}
       >
 
-          {/* smartfactory 셰프 이미지 */}
-          <image
-            href={chefImage}
-            x={0}
-            y={0}
-            width={gridSize}
-            height={gridSize}
-            preserveAspectRatio="xMidYMid slice"
-            transform={chefFlip || undefined}
-            style={{ imageRendering: "auto" }}
-          />
-          {/* 에이전트별 색상 오버레이 */}
-          <image
-            href={colorOverlay}
-            x={0}
-            y={0}
-            width={gridSize}
-            height={gridSize}
-            preserveAspectRatio="xMidYMid slice"
-            transform={colorFlip || undefined}
-            style={{ imageRendering: "auto" }}
-          />
-          {/* 들고 있는 물건 - smartfactory 이미지 */}
-          {(() => {
-            // 재료 (onion, tomato): side=28, front/back=27
-            // 빈 박스 (dish): side=20, front/back=14
-            // 완성품 (soup): side=25, front/back=26
-            const isSideView = orientation === "WEST" || orientation === "EAST";
-            let heldAsset = null;
+        {/* smartfactory 셰프 이미지 */}
+        <image
+          href={chefImage}
+          x={0}
+          y={0}
+          width={gridSize}
+          height={gridSize}
+          preserveAspectRatio="xMidYMid slice"
+          transform={chefFlip || undefined}
+          style={{ imageRendering: "auto" }}
+        />
+        {/* 에이전트별 색상 오버레이 */}
+        <image
+          href={colorOverlay}
+          x={0}
+          y={0}
+          width={gridSize}
+          height={gridSize}
+          preserveAspectRatio="xMidYMid slice"
+          transform={colorFlip || undefined}
+          style={{ imageRendering: "auto" }}
+        />
+        {/* 들고 있는 물건 - smartfactory 이미지 */}
+        {(() => {
+          // 재료 (onion, tomato): side=28, front/back=27
+          // 빈 박스 (dish): side=20, front/back=14
+          // 완성품 (soup): side=25, front/back=26
+          const isSideView = orientation === "WEST" || orientation === "EAST";
+          let heldAsset = null;
 
-            if (heldLower === "onion" || heldLower === "tomato") {
-              heldAsset = isSideView ? "/smartfactory/Assets-28.png" : "/smartfactory/Assets-27.png";
-            } else if (heldLower === "dish") {
-              heldAsset = isSideView ? "/smartfactory/Assets-20.png" : "/smartfactory/Assets-14.png";
-            } else if (heldLower.includes("soup")) {
-              heldAsset = isSideView ? "/smartfactory/Assets-25.png" : "/smartfactory/Assets-26.png";
-            }
+          if (heldLower === "onion" || heldLower === "tomato") {
+            heldAsset = skinUrl(isSideView ? SKIN.held.ingredientSide : SKIN.held.ingredientFront);
+          } else if (heldLower === "dish") {
+            heldAsset = skinUrl(isSideView ? SKIN.held.dishSide : SKIN.held.dishFront);
+          } else if (heldLower.includes("soup")) {
+            heldAsset = skinUrl(isSideView ? SKIN.held.soupSide : SKIN.held.soupFront);
+          }
 
-            if (!heldAsset) return null;
-            return (
-              <image
-                href={heldAsset}
-                x={0}
-                y={0}
-                width={gridSize}
-                height={gridSize}
-                preserveAspectRatio="xMidYMid slice"
-                transform={chefFlip || undefined}
-                style={{ imageRendering: "auto" }}
-              />
-            );
-          })()}
+          if (!heldAsset) return null;
+          return (
+            <image
+              href={heldAsset}
+              x={0}
+              y={0}
+              width={gridSize}
+              height={gridSize}
+              preserveAspectRatio="xMidYMid slice"
+              transform={chefFlip || undefined}
+              style={{ imageRendering: "auto" }}
+            />
+          );
+        })()}
       </g>
     );
   };
@@ -1001,11 +1173,38 @@ export default function OvercookScene({
           overflow: "visible"
         }}
       >
+        {/* 정적 배경: 필터를 별도 그룹에 걸어 래스터 캐시를 유지 (매 프레임 재래스터화 방지) */}
         <g style={{ filter: "brightness(0.80) contrast(1.2)" }}>
           {backgroundTiles}
+        </g>
+        {/* 동적 오브젝트: 작은 그룹만 매 프레임 갱신 */}
+        <g style={{ filter: "brightness(0.80) contrast(1.2)" }}>
           {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
         </g>
         {(playerFrame.players || []).map((p, i) => renderPlayer(p, i))}
+
+        {/* 좌표 보기 오버레이 (SHOW_GRID_COORDS = true 일 때만) */}
+        {SHOW_GRID_COORDS &&
+          grid.map((row, y) =>
+            row.map((_, x) => (
+              <text
+                key={`coord-${x}-${y}`}
+                x={x * gridSize + gridSize / 2}
+                y={y * gridSize + gridSize / 2 + 5}
+                textAnchor="middle"
+                fontSize="16"
+                fontWeight="bold"
+                fontFamily="monospace"
+                fill="#ffff00"
+                stroke="#000000"
+                strokeWidth="3"
+                paintOrder="stroke"
+                style={{ strokeLinejoin: "round", pointerEvents: "none" }}
+              >
+                {x},{y}
+              </text>
+            ))
+          )}
 
         {/* 배달 팝업 이펙트 */}
         {deliveryEffects.map((eff, index) => {
@@ -1033,10 +1232,12 @@ export default function OvercookScene({
                 xmlns="http://www.w3.org/1999/xhtml"
                 style={{
                   animation: "popSlideUp 1.2s ease-out forwards",
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "monospace",
                   fontSize: "32px",
-                  fontWeight: "800",
-                  color: "#000",
+                  fontWeight: "bold",
+                  color: "#ffffff",
+                  WebkitTextStroke: "3px #000000",
+                  paintOrder: "stroke",
                   textAlign: "center",
                   imageRendering: "auto",
                   lineHeight: "50px",
