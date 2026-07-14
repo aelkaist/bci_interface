@@ -53,7 +53,7 @@ const SKIN = {
 
   // ── 설비 (맵 기호 → 이미지) ─────────────────────────────────
   station: {
-    O: "Assets-12.png",  // 양파 공급기
+    O: "Assets-55.png",  // 양파 공급기
     D: "Assets-11.png",  // 접시 공급기
     P: "Assets-04.png",  // 냄비 (pot)
     S: "Assets-08.png",  // 서빙대
@@ -61,35 +61,35 @@ const SKIN = {
 
   // ── 냄비 조리 상태 (재료 개수/완료) ─────────────────────────
   pot: {
-    cooking1: "Assets-22.png",  // 재료 1개
-    cooking2: "Assets-23.png",  // 재료 2개
-    cooking3: "Assets-24.png",  // 재료 3개 (조리 중)
-    ready: "Assets-21.png",     // 조리 완료
+    cooking1: "Assets-84.png",  // 재료 1개
+    cooking2: "Assets-85.png",  // 재료 2개
+    cooking3: "Assets-86.png",  // 재료 3개 (조리 중)
+    ready: "Assets-88.png",     // 조리 완료
   },
 
   // ── 카운터 위에 놓인 물건 ───────────────────────────────────
   itemOnCounter: {
     ingredient: "Assets-13.png",  // 양파/토마토
-    dish: "Assets-11.png",        // 접시
+    dish: "Assets-87.png",        // 접시
   },
 
   // ── 셰프(에이전트) ──────────────────────────────────────────
   chef: {
-    front: "Assets-15.png",  // 정면(위/아래를 볼 때)
-    side: "Assets-09.png",   // 측면(좌/우를 볼 때)
+    front: "Assets-78.png",  // 정면(위/아래를 볼 때)
+    side: "Assets-69.png",   // 측면(좌/우를 볼 때)
     // 에이전트별 색상 오버레이  [0=빨강, 1=주황, 2=초록, 3=파랑]
-    frontColor: ["Assets-29.png", "Assets-30.png", "Assets-31.png", "Assets-32.png"],
-    sideColor: ["Assets-16.png", "Assets-17.png", "Assets-18.png", "Assets-19.png"],
+    frontColor: ["Assets-93.png", "Assets-94.png", "Assets-95.png", "Assets-96.png"],
+    sideColor: ["Assets-89.png", "Assets-90.png", "Assets-91.png", "Assets-92.png"],
   },
 
   // ── 셰프가 들고 있는 물건 (front=정면, side=측면) ────────────
   held: {
-    ingredientFront: "Assets-27.png",  // 양파/토마토
-    ingredientSide: "Assets-28.png",
-    dishFront: "Assets-14.png",        // 빈 접시
-    dishSide: "Assets-20.png",
-    soupFront: "Assets-26.png",        // 완성 요리
-    soupSide: "Assets-25.png",
+    ingredientFront: "Assets-70.png",  // 양파/토마토
+    ingredientSide: "Assets-73.png",
+    dishFront: "Assets-71.png",        // 빈 접시
+    dishSide: "Assets-75.png",
+    soupFront: "Assets-72.png",        // 완성 요리
+    soupSide: "Assets-74.png",
   },
 };
 
@@ -112,6 +112,48 @@ const skinUrl = (name) => `${SKIN_DIR}/${name}`;
 const SKIN_OVERRIDE = {
   "2_forced_hard": {
     // "6,3": "Assets-01.png",
+    "5,6": "Assets-42.png",
+    "5,5": "Assets-65.png",
+    "0,6": "Assets-39.png",
+    "0,5": "Assets-38.png",
+    "0,4": "Assets-40.png",
+    "1,5": "Assets-46.png",
+    "6,6": "Assets-39.png",
+    "12,2": "Assets-80.png",
+    "12,3": "Assets-79.png",
+    "6,5": "Assets-38.png",
+    "6,4": "Assets-40.png",
+    "12,6": "Assets-39.png",
+    "12,5": "Assets-38.png",
+    "12,4": "Assets-40.png",
+    "1,5": "Assets-46.png",
+    "11,5": "Assets-77.png",
+    "11,4": "Assets-76.png",
+    "1,4": "Assets-44.png",
+    "1,6": "Assets-45.png",
+    "2,4": "Assets-50.png",
+    "3,4": "Assets-50.png",
+    "4,4": "Assets-50.png",
+    "8,4": "Assets-50.png",
+    "9,4": "Assets-50.png",
+    "10,4": "Assets-50.png",
+    "5,4": "Assets-50.png",
+    "2,5": "Assets-48.png",
+    "3,5": "Assets-48.png",
+    "4,5": "Assets-48.png",
+    "8,5": "Assets-48.png",
+    "9,5": "Assets-48.png",
+    "7,5": "Assets-82.png",
+    "7,4": "Assets-83.png",
+    "7,6": "Assets-81.png",
+    "10,5": "Assets-48.png",
+    "2,6": "Assets-45.png",
+    "3,6": "Assets-45.png",
+    "4,6": "Assets-45.png",
+    "8,6": "Assets-45.png",
+    "9,6": "Assets-45.png",
+    "10,6": "Assets-45.png",
+    "11,6": "Assets-45.png"
   },
   "2_incentivized_hard": {
     "6,4": "Assets-05.png",
