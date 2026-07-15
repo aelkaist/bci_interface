@@ -1007,6 +1007,31 @@ export default function App() {
                   onBlur={(e) => e.target.style.borderColor = "#333"}
                 />
               </div>
+
+              {/* ⚠️ 임시 개발용: 튜토리얼 건너뛰고 바로 첫 에피소드로 */}
+              <button
+                onClick={async () => {
+                  if (mapOrder.length === 0) return;
+                  const loaded = await loadMapByIndex(mapOrder[0]);
+                  if (!loaded) return;
+                  setCurrentMapIdx(0);
+                  setEpisodeCount(1);
+                  maybeMarkMainStart();
+                  setInstructionStep(4);
+                }}
+                style={{
+                  padding: "12px 28px",
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  background: "transparent",
+                  color: "#f87171",
+                  border: "1px dashed #f87171",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                }}
+              >
+                ⏭ DEV: Skip tutorial → first episode
+              </button>
             </div>
           )}
 

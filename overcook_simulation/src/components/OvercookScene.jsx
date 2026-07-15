@@ -38,18 +38,26 @@ function snapEase(t) {
  * ════════════════════════════════════════════════════════════════════════ */
 const SKIN_DIR = "/smartfactory";
 
+/* ── 바닥 타일 전체 투명도 ────────────────────────────────────────────────
+ * 1.0 = 원본 그대로, 0.0 = 완전 투명
+ * 0.85 ~ 0.95 정도로 낮추면 타일 경계선(그리드 선)이 부드러워집니다.
+ * ────────────────────────────────────────────────────────────────────────── */
+const FLOOR_TILE_OPACITY = 1.0;
+const SHADOW_OPACITY = 0.45;       // 가장자리 그림자 타일 투명도 (0=투명, 1=불투명)
+const FLOOR_BG_COLOR = "#b5a8a0";  // 바닥 타일 아래 깔리는 배경색 (타일 평균색에 맞추세요)
+
 const SKIN = {
   // ── 벽 / 카운터 ──────────────────────────────────────────────
-  wall: "Assets-01.png",        // 위쪽 벽, 좌우 벽, 중앙 카운터
-  wallBottom: "Assets-05.png",  // 아래쪽 벽
+  //wall: "Assets-01.png",        // 위쪽 벽, 좌우 벽, 중앙 카운터
+  //wallBottom: "Assets-05.png",  // 아래쪽 벽
 
   // ── 바닥 (캐릭터가 걸어다니는 공간) ─────────────────────────
-  floor: "Assets-07.png",           // 바닥 기본 타일
-  floorEdgeTop: "Assets-02.png",    // 바닥 위쪽 가장자리(벽과 맞닿는 그림자)
-  floorEdgeBottom: "Assets-07.png", // 바닥 아래쪽 가장자리
-  floorEdgeSide: "Assets-03.png",   // 바닥 좌우 가장자리 그림자
-  floorCorner: "Assets-06.png",     // 바닥 코너 그림자
-  floorEdgeOpacity: 0.4,            // 가장자리 그림자 진하기 (0=투명, 1=불투명)
+  //floor: "Assets-07.png",           // 바닥 기본 타일
+  //floorEdgeTop: "Assets-02.png",    // 바닥 위쪽 가장자리(벽과 맞닿는 그림자)
+  //floorEdgeBottom: "Assets-07.png", // 바닥 아래쪽 가장자리
+  //floorEdgeSide: "Assets-03.png",   // 바닥 좌우 가장자리 그림자
+  //floorCorner: "Assets-06.png",     // 바닥 코너 그림자
+  //floorEdgeOpacity: 0.4,            // 가장자리 그림자 진하기 (0=투명, 1=불투명)
 
   // ── 설비 (맵 기호 → 이미지) ─────────────────────────────────
   station: {
@@ -70,7 +78,7 @@ const SKIN = {
   // ── 카운터 위에 놓인 물건 ───────────────────────────────────
   itemOnCounter: {
     ingredient: "Assets-13.png",  // 양파/토마토
-    dish: "Assets-87.png",        // 접시
+    dish: "Assets(updated)-37.png",        // 접시
   },
 
   // ── 셰프(에이전트) ──────────────────────────────────────────
@@ -111,22 +119,120 @@ const skinUrl = (name) => `${SKIN_DIR}/${name}`;
  * ════════════════════════════════════════════════════════════════════════ */
 const SKIN_OVERRIDE = {
   "2_forced_hard": {
-    // "6,3": "Assets-01.png",
+    "0,0": "Assets-01.png",
+    "1,0": "Assets-01.png",
+    "2,0": "Assets-01.png",
+    "3,0": "Assets-01.png",
+    "4,0": "Assets-01.png",
+    "6,0": "Assets-01.png",
+    "7,0": "Assets-01.png",
+    "8,0": "Assets-01.png",
+    "9,0": "Assets-01.png",
+    "10,0": "Assets-01.png",
+    "11,0": "Assets-01.png",
+    "12,0": "Assets-01.png",
+    "1,1": { file: "Assets-06.png", opacity: SHADOW_OPACITY },
+    "2,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "3,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "4,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "5,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "6,1": "Assets-01.png",
+    "7,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "8,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "9,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "10,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "11,1": { file: "Assets-06.png", flipX: true, opacity: SHADOW_OPACITY },
+    "12,1": "Assets-01.png",
+    "0,2": "Assets-01.png",
+    "1,2": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,2": "Assets-07.png",
+    "3,2": "Assets-07.png",
+    "4,2": "Assets-07.png",
+    "5,2": "Assets-07.png",
+    "6,2": "Assets-01.png",
+    "7,2": "Assets-07.png",
+    "8,2": "Assets-07.png",
+    "9,2": "Assets-07.png",
+    "10,2": "Assets-07.png",
+    "11,2": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
+
+    "0,3": "Assets-01.png",
+    "1,3": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "12,2": "Assets-80.png",
+    "11,3": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
+    "2,3": "Assets-07.png",
+    "3,3": "Assets-07.png",
+    "4,3": "Assets-07.png",
+    "5,3": "Assets-07.png",
+    "7,3": "Assets-07.png",
+    "8,3": "Assets-07.png",
+    "9,3": "Assets-07.png",
+    "10,3": "Assets-07.png",
+
+    "0,6": "Assets-45.png",
+    "1,6": "Assets-45.png",
+    "2,6": "Assets-45.png",
+    "3,6": "Assets-45.png",
+    "4,6": "Assets-45.png",
+    "6,6": "Assets-45.png",
+    "8,6": "Assets-45.png",
+    "9,6": "Assets-45.png",
+    "10,6": "Assets-45.png",
+    "11,6": "Assets-45.png",
+    "12,6": "Assets-45.png",
+
+    "5,6": "Assets-42.png",
+    "5,5": "Assets-65.png",
+    "0,5": null,
+    "0,4": "Assets-40.png",
+    "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+
+    "12,3": "Assets-79.png",
+    "6,5": "Assets-38.png",
+    "6,4": "Assets-40.png",
+    "12,5": "Assets-38.png",
+    "12,4": "Assets-40.png",
+    "11,5": { file: "Assets-77.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+
+    "1,4": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,4": "Assets-07.png",
+    "3,4": "Assets-07.png",
+    "4,4": "Assets-07.png",
+    "5,4": "Assets-07.png",
+    "7,4": "Assets-07.png",
+    "8,4": "Assets-07.png",
+    "9,4": "Assets-07.png",
+    "10,4": "Assets-07.png",
+    "11,4": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
+    "2,5": "Assets-48.png",
+    "3,5": "Assets-48.png",
+    "4,5": "Assets-48.png",
+    "8,5": "Assets-48.png",
+    "9,5": "Assets-48.png",
+    "7,5": "Assets-82.png",
+
+    "7,6": "Assets-81.png",
+    "10,5": "Assets-48.png",
+
+  },
+  "2_incentivized_hard": {
     "5,6": "Assets-42.png",
     "5,5": "Assets-65.png",
     "0,6": "Assets-39.png",
-    "0,5": "Assets-38.png",
+    "0,5": "Assets-11.png",
     "0,4": "Assets-40.png",
     "1,5": "Assets-46.png",
     "6,6": "Assets-39.png",
     "12,2": "Assets-80.png",
     "12,3": "Assets-79.png",
     "6,5": "Assets-38.png",
-    "6,4": "Assets-40.png",
+    "6,4": "Assets-05.png",
     "12,6": "Assets-39.png",
     "12,5": "Assets-38.png",
     "12,4": "Assets-40.png",
-    "1,5": "Assets-46.png",
     "11,5": "Assets-77.png",
     "11,4": "Assets-76.png",
     "1,4": "Assets-44.png",
@@ -154,9 +260,6 @@ const SKIN_OVERRIDE = {
     "9,6": "Assets-45.png",
     "10,6": "Assets-45.png",
     "11,6": "Assets-45.png"
-  },
-  "2_incentivized_hard": {
-    "6,4": "Assets-05.png",
   },
 };
 
@@ -419,7 +522,7 @@ export default function OvercookScene({
     () => {
       if (!spritesData) return null;
       // 타일 간 서브픽셀 틈 제거용 (값 조절로 겹침 정도 변경)
-      const tb = 1;
+      const tb = 2;
       // 이 맵에 지정된 좌표별 스킨 오버라이드 표 (없으면 undefined)
       const overrideTable = SKIN_OVERRIDE[overrideKey(staticInfo.layoutName)];
       return grid.map((row, y) =>
@@ -432,18 +535,101 @@ export default function OvercookScene({
           const smartfactoryImage = smartfactoryTileMap[cell];
 
           // 좌표 오버라이드가 지정된 칸이면 자동 스킨 대신 그 이미지로 교체
-          const overrideName = overrideTable?.[`${x},${y}`];
-          if (overrideName) {
+          const overrideKey_ = `${x},${y}`;
+          const hasOverride = overrideTable && overrideKey_ in overrideTable;
+          if (hasOverride) {
+            const overrideEntry = overrideTable[overrideKey_];
+            // null이면 해당 칸을 비움 (렌더링 안 함)
+            if (overrideEntry === null) return <g key={`${x}-${y}`} />;
+            // 문자열이면 기존 방식, 객체이면 { file, flipX, flipY, rotate } 지원
+            const isObj = typeof overrideEntry === 'object';
+            const overrideName = isObj ? overrideEntry.file : overrideEntry;
+            const flipX = isObj && overrideEntry.flipX;
+            const flipY = isObj && overrideEntry.flipY;
+            const rotateDeg = (isObj && overrideEntry.rotate) || 0;
+            const entryOpacity = isObj && overrideEntry.opacity !== undefined
+              ? overrideEntry.opacity : FLOOR_TILE_OPACITY;
+            const blendMode = (isObj && overrideEntry.blend) || null;
+            const fullPart = isObj && overrideEntry.fullPart;
+
+            // transform 구성: 중심점 기준 회전/반전
+            const cx = x * gridSize - tb / 2 + (gridSize + tb) / 2;
+            const cy = y * gridSize - tb / 2 + (gridSize + tb) / 2;
+            const transforms = [];
+            if (flipX || flipY || rotateDeg) {
+              transforms.push(`translate(${cx}, ${cy})`);
+              if (rotateDeg) transforms.push(`rotate(${rotateDeg})`);
+              if (flipX) transforms.push('scale(-1, 1)');
+              if (flipY) transforms.push('scale(1, -1)');
+              transforms.push(`translate(${-cx}, ${-cy})`);
+            }
+
+            // opacity가 적용된 타일은 셀 경계로 클리핑 (블리드는 유지하되 겹침 방지)
+            const cellClipId = entryOpacity < 1 ? `cell-${x}-${y}` : null;
+
             return (
               <g key={`${x}-${y}`}>
+                {entryOpacity < 1 && (
+                  <>
+                    <defs>
+                      <clipPath id={cellClipId}>
+                        <rect x={x * gridSize} y={y * gridSize} width={gridSize} height={gridSize} />
+                      </clipPath>
+                    </defs>
+                    <image
+                      href={skinUrl("Assets-07.png")}
+                      x={x * gridSize - tb / 2}
+                      y={y * gridSize - tb / 2}
+                      width={gridSize + tb}
+                      height={gridSize + tb}
+                      preserveAspectRatio="none"
+                    />
+                  </>
+                )}
                 <image
                   href={skinUrl(overrideName)}
                   x={x * gridSize - tb / 2}
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
+                  opacity={entryOpacity}
+                  {...(cellClipId && { clipPath: `url(#${cellClipId})` })}
+                  {...(blendMode && { style: { mixBlendMode: blendMode } })}
+                  {...(transforms.length > 0 && { transform: transforms.join(' ') })}
                 />
+                {fullPart && (() => {
+                  const tileX = x * gridSize - tb / 2;
+                  const tileY = y * gridSize - tb / 2;
+                  const tileW = gridSize + tb;
+                  const tileH = gridSize + tb;
+                  const clipTop = (fullPart.top || 0) * tileH;
+                  const clipId = `fullpart-${x}-${y}`;
+                  return (
+                    <>
+                      <defs>
+                        <clipPath id={clipId}>
+                          <rect
+                            x={tileX}
+                            y={tileY + clipTop}
+                            width={tileW}
+                            height={tileH - clipTop}
+                          />
+                        </clipPath>
+                      </defs>
+                      <image
+                        href={skinUrl(overrideName)}
+                        x={tileX}
+                        y={tileY}
+                        width={tileW}
+                        height={tileH}
+                        preserveAspectRatio="none"
+                        clipPath={`url(#${clipId})`}
+                        {...(transforms.length > 0 && { transform: transforms.join(' ') })}
+                      />
+                    </>
+                  );
+                })()}
               </g>
             );
           }
@@ -458,7 +644,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
                 {/* 디스펜서 타일이면 smartfactory 스킨 오버레이 */}
                 {smartfactoryImage && (
@@ -468,7 +654,7 @@ export default function OvercookScene({
                     y={y * gridSize - tb / 2}
                     width={gridSize + tb}
                     height={gridSize + tb}
-                    preserveAspectRatio="xMidYMid slice"
+                    preserveAspectRatio="none"
                   />
                 )}
               </g>
@@ -485,7 +671,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
               </g>
             );
@@ -501,7 +687,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
                 <image
                   href={smartfactoryImage}
@@ -509,7 +695,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
               </g>
             );
@@ -525,7 +711,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
                 {smartfactoryImage && (
                   <image
@@ -534,7 +720,7 @@ export default function OvercookScene({
                     y={y * gridSize - tb / 2}
                     width={gridSize + tb}
                     height={gridSize + tb}
-                    preserveAspectRatio="xMidYMid slice"
+                    preserveAspectRatio="none"
                   />
                 )}
               </g>
@@ -553,7 +739,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
               </g>
             );
@@ -602,7 +788,7 @@ export default function OvercookScene({
                 <image key="ctl" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                 />
               );
@@ -612,7 +798,7 @@ export default function OvercookScene({
                 <image key="ctr" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                   transform={`translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`}
                 />
@@ -623,7 +809,7 @@ export default function OvercookScene({
                 <image key="cbl" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                   transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
                 />
@@ -634,7 +820,7 @@ export default function OvercookScene({
                 <image key="cbr" href={skinUrl(SKIN.floorCorner)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                   transform={`translate(${x * gridSize * 2 + gridSize}, ${y * gridSize * 2 + gridSize}) scale(-1, -1)`}
                 />
@@ -647,7 +833,7 @@ export default function OvercookScene({
                 <image key="top" href={skinUrl(SKIN.floorEdgeTop)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                 />
               );
@@ -657,7 +843,7 @@ export default function OvercookScene({
                 <image key="bottom" href={skinUrl(SKIN.floorEdgeBottom)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                   transform={`translate(0, ${y * gridSize * 2 + gridSize}) scale(1, -1)`}
                 />
@@ -668,7 +854,7 @@ export default function OvercookScene({
                 <image key="left" href={skinUrl(SKIN.floorEdgeSide)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                 />
               );
@@ -678,28 +864,12 @@ export default function OvercookScene({
                 <image key="right" href={skinUrl(SKIN.floorEdgeSide)}
                   x={x * gridSize} y={y * gridSize}
                   width={gridSize} height={gridSize}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                   opacity={edgeOpacity}
                   transform={`translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)`}
                 />
               );
             }
-
-            const isBottomCornerL = hasCornerBL && y === grid.length - 2;
-            const isBottomCornerR = hasCornerBR && y === grid.length - 2;
-            const isBottomCorner = isBottomCornerL || isBottomCornerR;
-
-            const bottomCornerOverlay = isBottomCorner ? (
-              <image
-                key="bottomCorner"
-                href={skinUrl(SKIN.floorEdgeSide)}
-                x={x * gridSize} y={y * gridSize}
-                width={gridSize} height={gridSize}
-                preserveAspectRatio="xMidYMid slice"
-                opacity={edgeOpacity}
-                transform={isBottomCornerR ? `translate(${x * gridSize * 2 + gridSize}, 0) scale(-1, 1)` : undefined}
-              />
-            ) : null;
 
             return (
               <g key={`${x}-${y}`}>
@@ -709,9 +879,9 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
-                {isBottomCorner ? bottomCornerOverlay : edgeOverlays}
+                {edgeOverlays}
               </g>
             );
           }
@@ -726,7 +896,7 @@ export default function OvercookScene({
                   y={y * gridSize - tb / 2}
                   width={gridSize + tb}
                   height={gridSize + tb}
-                  preserveAspectRatio="xMidYMid slice"
+                  preserveAspectRatio="none"
                 />
               ) : (
                 <>
@@ -1035,13 +1205,12 @@ export default function OvercookScene({
     const interpX = lerp(x, targetX, movementProgress);
     const interpY = lerp(y, targetY, movementProgress);
 
-    const scale = 1.0;
+    const scale = 1.25;
     const offset = (gridSize * (scale - 1)) / 2;
 
-    const isInitialFrame = frame.timestep === 0;
     const orientationPlayer = movementProgress > 0.15 ? targetPlayer : player;
     const rawOrientation = orientationPlayer.orientation || player.orientation || "south";
-    const orientation = isInitialFrame ? "SOUTH" : normalizeDir(rawOrientation);
+    const orientation = normalizeDir(rawOrientation);
 
     const held = player.heldObject?.name;
     const heldLower = (held || "").toLowerCase();
