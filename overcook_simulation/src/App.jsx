@@ -70,7 +70,7 @@ const ALL_MAPS = buildRandomizedMapSet(mapModules);
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
-const FRAME_DURATION = 0.45;
+const FRAME_DURATION = 0.50;
 
 // 시간 라벨 (필요하면 사용)
 function baseTimeLabel(frame) {
@@ -1080,9 +1080,9 @@ export default function App() {
                  }
                `}</style>
               <div>
-                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Watch AI Chefs Collaborate and Give Feedback 👋</h1>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Watch Factory Robots Collaborate and Give Feedback 🤖</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
-                  In this study, your task is to <strong style={{ color: "#fff" }}> watch 4 short videos </strong>  of AI chef characters work together and <strong style={{ color: "#fff" }}>give feedback</strong> on their collaboration.
+                  In this study, your task is to <strong style={{ color: "#fff" }}> watch 4 short videos </strong>  of AI robots collaborating in a factory and <strong style={{ color: "#fff" }}>give feedback</strong> on their teamwork.
                 </p>
               </div>
               <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -1106,8 +1106,8 @@ export default function App() {
                         </div>
                       </div>
                     </div>
-                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>1. Watch AI Chefs work together</h2>
-                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch short videos of AI chef characters making onion soup.</p>
+                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>1. Watch AI Robots Work Together</h2>
+                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch short videos of AI robots picking up, processing, and packaging items.</p>
                   </div>
 
                   {/* Card 2 */}
@@ -1184,55 +1184,55 @@ export default function App() {
 
           {instructionStep === 1 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
-              <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How the Kitchen Works</h1>
-              <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI chefs' main goal is to work together to cook and serve onion soup.</p>
+              <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How the Production Line Works</h1>
+              <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI robots’ main goal is to work together to move item parts through the production line and package them.</p>
 
               {/* To cook onion soup timeline */}
               <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
-                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To cook onion soup, </strong> AI chefs need:</p>
+                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To process and package items, </strong> the robots need to:</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
 
                   {/* Onions */}
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
                     <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-52px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Onions x 3</span>
+                    <span>Parts x 3</span>
                   </div>
                   <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
 
                   {/* Pot */}
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
                     <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-69px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Pot</span>
+                    <span>Processing Machine</span>
                   </div>
                   <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
 
                   {/* Wait */}
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333", color: "#fff" }}>
-                    <span>⏳ Wait</span>
+                    <span>⏳ Wait for Processing</span>
                   </div>
                   <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
 
                   {/* Dish */}
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
                     <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-18px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Bring Dish</span>
+                    <span>Bring a Box</span>
                   </div>
                   <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
 
                   {/* Serve */}
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
                     <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-86px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Serve!</span>
+                    <span>Deliver!</span>
                   </div>
                 </div>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                 {[
-                  { video: "/1.gif", title: "1. Pick up onions", desc: "Collect onions from the supply", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px", objPos: "center bottom" },
-                  { video: "/2.gif", title: "2. Add onions to the pot", desc: "Place 3 onions in the pot to start cooking", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px", objPos: "center top" },
-                  { video: "/3.gif", title: "3. Bring a dish to the pot", desc: "As the soup cooks, pick up a dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px", objPos: "center 25%" },
-                  { video: "/4.gif", title: "4. Serve the onion soup", desc: "Deliver the finished soup to the serving area (grey)", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px", objPos: "center" }
+                  { video: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px", objPos: "center bottom" },
+                  { video: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px", objPos: "center top" },
+                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up a box.", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px", objPos: "center 25%" },
+                  { video: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px", objPos: "center" }
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
                     <div style={{ width: "100%", height: "200px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
@@ -1886,8 +1886,8 @@ export default function App() {
       <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100, display: "flex", alignItems: "center", gap: "12px" }}>
         {hasEpisode && (
           <>
-            <div style={{ background: "rgba(239, 68, 68, 0.15)", color: "#ef4444", padding: "6px 12px", borderRadius: "6px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(239, 68, 68, 0.4)", display: "flex", alignItems: "center", gap: "6px", letterSpacing: "0.2px" }}>
-              <span>🚨</span> Do not refresh. You cannot go back after clicking Next.
+            <div style={{ background: "rgba(252, 211, 77, 0.15)", color: "#fcd34d", padding: "6px 12px", borderRadius: "6px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(252, 211, 77, 0.4)", display: "flex", alignItems: "center", gap: "6px", letterSpacing: "0.2px" }}>
+              <span>⚠️</span> Do not refresh. You cannot go back after clicking Next.
             </div>
           </>
         )}

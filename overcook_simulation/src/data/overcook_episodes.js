@@ -4,7 +4,7 @@
 // 지원 포맷
 // 1) { staticInfo, dynamicState: [...] }
 // 2) { staticInfo, frames: [...] }
-const MAX_PLAYBACK_FRAMES = 100;
+const MAX_PLAYBACK_FRAMES = 120;
 
 export function adaptEpisode(raw, fileName = "unknown") {
   const staticInfo = raw.staticInfo;

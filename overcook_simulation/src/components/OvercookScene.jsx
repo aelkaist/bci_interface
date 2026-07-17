@@ -46,6 +46,14 @@ const FLOOR_TILE_OPACITY = 1.0;
 const SHADOW_OPACITY = 0.45;       // 가장자리 그림자 타일 투명도 (0=투명, 1=불투명)
 const FLOOR_BG_COLOR = "#b5a8a0";  // 바닥 타일 아래 깔리는 배경색 (타일 평균색에 맞추세요)
 
+/* ── 타일 필터 설정 ─────────────────────────────────────────────────────────
+ * brightness: 밝기 (1.0=원본, 0.8=어둡게, 1.2=밝게)
+ * contrast:   대비 (1.0=원본, 1.3=높은 대비)
+ * saturate:   채도 (1.0=원본, 0.8=파스텔, 1.3=선명)
+ * ────────────────────────────────────────────────────────────────────────── */
+const TILE_FILTER = "brightness(0.75) contrast(1.35) saturate(0.9)";
+const OBJECT_FILTER = "brightness(0.80) contrast(1.2)";
+
 const SKIN = {
   // ── 벽 / 카운터 ──────────────────────────────────────────────
   //wall: "Assets-01.png",        // 위쪽 벽, 좌우 벽, 중앙 카운터
@@ -63,8 +71,8 @@ const SKIN = {
   station: {
     O: "Assets-55.png",  // 양파 공급기
     D: "Assets-11.png",  // 접시 공급기
-    P: "Assets-04.png",  // 냄비 (pot)
-    S: "Assets-08.png",  // 서빙대
+    P: "Assets-103.png",  // 냄비 (pot)
+    S: "drop6.png",  // 서빙대
   },
 
   // ── 냄비 조리 상태 (재료 개수/완료) ─────────────────────────
@@ -77,14 +85,14 @@ const SKIN = {
 
   // ── 카운터 위에 놓인 물건 ───────────────────────────────────
   itemOnCounter: {
-    ingredient: "Assets-13.png",  // 양파/토마토
-    dish: "Assets(updated)-37.png",        // 접시
+    ingredient: "material.png",  // 양파/토마토
+    dish: "box only.png",        // 접시
   },
 
   // ── 셰프(에이전트) ──────────────────────────────────────────
   chef: {
-    front: "Assets-78.png",  // 정면(위/아래를 볼 때)
-    side: "Assets-69.png",   // 측면(좌/우를 볼 때)
+    front: "agv2.png",  // 정면(위/아래를 볼 때)
+    side: "agv.png",   // 측면(좌/우를 볼 때)
     // 에이전트별 색상 오버레이  [0=빨강, 1=주황, 2=초록, 3=파랑]
     frontColor: ["Assets-93.png", "Assets-94.png", "Assets-95.png", "Assets-96.png"],
     sideColor: ["Assets-89.png", "Assets-90.png", "Assets-91.png", "Assets-92.png"],
@@ -92,12 +100,12 @@ const SKIN = {
 
   // ── 셰프가 들고 있는 물건 (front=정면, side=측면) ────────────
   held: {
-    ingredientFront: "Assets-70.png",  // 양파/토마토
-    ingredientSide: "Assets-73.png",
-    dishFront: "Assets-71.png",        // 빈 접시
-    dishSide: "Assets-75.png",
-    soupFront: "Assets-72.png",        // 완성 요리
-    soupSide: "Assets-74.png",
+    ingredientFront: "materialfront.png",  // 양파/토마토
+    ingredientSide: "materialside.png",
+    dishFront: "openboxfront.png",        // 빈 접시
+    dishSide: "openboxside.png",
+    soupFront: "boxfront.png",        // 완성 요리
+    soupSide: "boxside.png",
   },
 };
 
@@ -185,8 +193,8 @@ const SKIN_OVERRIDE = {
 
     "5,6": "Assets-42.png",
     "5,5": "Assets-65.png",
-    "0,5": null,
-    "0,4": "Assets-40.png",
+    "0,5": "Assets-100.png",
+    "0,4": "Assets-101.png",
     "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
 
     "12,3": "Assets-79.png",
@@ -214,52 +222,109 @@ const SKIN_OVERRIDE = {
     "9,5": "Assets-48.png",
     "7,5": "Assets-82.png",
 
-    "7,6": "Assets-81.png",
+    //"7,6": "Assets-81.png",
     "10,5": "Assets-48.png",
 
   },
   "2_incentivized_hard": {
+    "0,0": "Assets-01.png",
+    "1,0": "Assets-01.png",
+    "2,0": "Assets-01.png",
+    "3,0": "Assets-01.png",
+    "4,0": "Assets-01.png",
+    "6,0": "Assets-01.png",
+    "7,0": "Assets-01.png",
+    "8,0": "Assets-01.png",
+    "9,0": "Assets-01.png",
+    "10,0": "Assets-01.png",
+    "11,0": "Assets-01.png",
+    "12,0": "Assets-01.png",
+    "1,1": { file: "Assets-06.png", opacity: SHADOW_OPACITY },
+    "2,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "3,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "4,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "5,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "6,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "7,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "8,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "9,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "10,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "11,1": { file: "Assets-06.png", flipX: true, opacity: SHADOW_OPACITY },
+    "12,1": "Assets-01.png",
+    "0,2": "Assets-01.png",
+    "1,2": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,2": "Assets-07.png",
+    "3,2": "Assets-07.png",
+    "4,2": "Assets-07.png",
+    "5,2": "Assets-07.png",
+    "6,2": "Assets-01.png",
+    "7,2": "Assets-07.png",
+    "8,2": "Assets-07.png",
+    "9,2": "Assets-07.png",
+    "10,2": "Assets-07.png",
+    "11,2": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
+
+    "0,3": "Assets-01.png",
+    "1,3": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "12,2": "Assets-80.png",
+    "11,3": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
+    "2,3": "Assets-07.png",
+    "3,3": "Assets-07.png",
+    "4,3": "Assets-07.png",
+    "5,3": "Assets-07.png",
+    "7,3": "Assets-07.png",
+    "8,3": "Assets-07.png",
+    "9,3": "Assets-07.png",
+    "10,3": "Assets-07.png",
+
+    "0,6": "Assets-45.png",
+    "1,6": "Assets-45.png",
+    "2,6": "Assets-45.png",
+    "3,6": "Assets-45.png",
+    "4,6": "Assets-45.png",
+    "6,6": "Assets-45.png",
+    "8,6": "Assets-45.png",
+    "9,6": "Assets-45.png",
+    "10,6": "Assets-45.png",
+    "11,6": "Assets-45.png",
+    "12,6": "Assets-45.png",
+
     "5,6": "Assets-42.png",
     "5,5": "Assets-65.png",
-    "0,6": "Assets-39.png",
-    "0,5": "Assets-11.png",
-    "0,4": "Assets-40.png",
-    "1,5": "Assets-46.png",
-    "6,6": "Assets-39.png",
-    "12,2": "Assets-80.png",
+    "0,5": "Assets-100.png",
+    "0,4": "Assets-101.png",
+    "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+
     "12,3": "Assets-79.png",
-    "6,5": "Assets-38.png",
-    "6,4": "Assets-05.png",
-    "12,6": "Assets-39.png",
+    "6,5": "Assets-48.png",
+    "6,4": "Assets-45.png",
     "12,5": "Assets-38.png",
     "12,4": "Assets-40.png",
-    "11,5": "Assets-77.png",
-    "11,4": "Assets-76.png",
-    "1,4": "Assets-44.png",
-    "1,6": "Assets-45.png",
-    "2,4": "Assets-50.png",
-    "3,4": "Assets-50.png",
-    "4,4": "Assets-50.png",
-    "8,4": "Assets-50.png",
-    "9,4": "Assets-50.png",
-    "10,4": "Assets-50.png",
-    "5,4": "Assets-50.png",
+    "11,5": { file: "Assets-77.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+
+    "1,4": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,4": "Assets-07.png",
+    "3,4": "Assets-07.png",
+    "4,4": "Assets-07.png",
+    "5,4": "Assets-07.png",
+    "7,4": "Assets-07.png",
+    "8,4": "Assets-07.png",
+    "9,4": "Assets-07.png",
+    "10,4": "Assets-07.png",
+    "11,4": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+
     "2,5": "Assets-48.png",
     "3,5": "Assets-48.png",
     "4,5": "Assets-48.png",
     "8,5": "Assets-48.png",
     "9,5": "Assets-48.png",
     "7,5": "Assets-82.png",
-    "7,4": "Assets-83.png",
-    "7,6": "Assets-81.png",
+
+    //"7,6": "Assets-81.png",
     "10,5": "Assets-48.png",
-    "2,6": "Assets-45.png",
-    "3,6": "Assets-45.png",
-    "4,6": "Assets-45.png",
-    "8,6": "Assets-45.png",
-    "9,6": "Assets-45.png",
-    "10,6": "Assets-45.png",
-    "11,6": "Assets-45.png"
+
   },
 };
 
@@ -731,8 +796,8 @@ export default function OvercookScene({
           if (smartfactoryImage) {
             return (
               <g key={`${x}-${y}`}>
-                {/* 카운터 바닥 먼저 깔기 */}
-                {renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
+                {/* 카운터 바닥 먼저 깔기 (서빙대는 이미지가 전체를 덮으므로 제외) */}
+                {cell !== 'S' && renderSprite('terrain', 'counter.png', x * gridSize, y * gridSize, gridSize)}
                 <image
                   href={smartfactoryImage}
                   x={x * gridSize - tb / 2}
@@ -1021,65 +1086,62 @@ export default function OvercookScene({
             opacity={ready ? 1 : 0.85}
           />
 
-          {/* 조리 완료 → 냄비 위 체크 배지 */}
-          {isReady && (
-            <g>
-              <circle
-                cx={x * gridSize + gridSize / 2}
-                cy={y * gridSize + 14}
-                r={12}
-                fill="#22c55e"
-                stroke="#000000"
-                strokeWidth={2}
-              />
-              <path
-                d={`M ${x * gridSize + gridSize / 2 - 5} ${y * gridSize + 14} l 3.5 4 l 7 -8`}
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth={3}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </g>
-          )}
+          {/* 조리 완료 → 타이머와 동일한 원형 스타일 체크 배지 */}
+          {isReady && (() => {
+            const ccx = x * gridSize + gridSize / 2 + 2;
+            const ccy = y * gridSize + gridSize / 2;
+            return (
+              <g>
+                <circle cx={ccx} cy={ccy} r={19} fill="rgba(0,0,0,0.5)" />
+                <circle
+                  cx={ccx} cy={ccy} r={16}
+                  fill="none" stroke="#34c759" strokeWidth={4}
+                />
+                <path
+                  d={`M ${ccx - 7} ${ccy} l 5 6 l 10 -12`}
+                  fill="none" stroke="#fff" strokeWidth={3}
+                  strokeLinecap="round" strokeLinejoin="round"
+                />
+              </g>
+            );
+          })()}
 
-          {cooking && remainingTime !== null && (
-            <>
-              <rect
-                x={x * gridSize + 20}
-                y={barY}
-                width={40}
-                height={6}
-                rx={3}
-                fill="#ff5555"
-                opacity={0.85}
-              />
-              <rect
-                x={x * gridSize + 20}
-                y={barY}
-                width={40 * (1 - remainingTime / cookTotalForBar)}
-                height={6}
-                rx={3}
-                fill="#ffffff"
-                opacity={0.9}
-              />
-              <text
-                x={x * gridSize + gridSize / 2}
-                y={barY - 6}
-                textAnchor="middle"
-                fontSize="18"
-                fontWeight="bold"
-                fontFamily="monospace"
-                fill="#ffffff"
-                stroke="#000000"
-                strokeWidth="3"
-                paintOrder="stroke"
-                style={{ strokeLinejoin: "round" }}
-              >
-                {Math.ceil(remainingTime)}
-              </text>
-            </>
-          )}
+          {cooking && remainingTime !== null && (() => {
+            const r = 16;
+            const sw = 4;
+            const cx = x * gridSize + gridSize / 2 + 2;
+            const cy = y * gridSize + gridSize / 2;
+            const circumference = 2 * Math.PI * r;
+            const progress = 1 - remainingTime / cookTotalForBar;
+            const dashOffset = circumference * (1 - progress);
+
+            return (
+              <g>
+                <circle cx={cx} cy={cy} r={r + 3} fill="rgba(0,0,0,0.5)" />
+                <circle
+                  cx={cx} cy={cy} r={r}
+                  fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth={sw}
+                />
+                <circle
+                  cx={cx} cy={cy} r={r}
+                  fill="none"
+                  stroke={progress < 0.5 ? "#ff9500" : progress < 0.85 ? "#ffcc00" : "#34c759"}
+                  strokeWidth={sw} strokeLinecap="round"
+                  strokeDasharray={circumference} strokeDashoffset={dashOffset}
+                  transform={`rotate(-90 ${cx} ${cy})`}
+                />
+                <text
+                  x={cx} y={cy + 5}
+                  textAnchor="middle" fontSize="14" fontWeight="bold"
+                  fontFamily="monospace" fill="#fff"
+                  stroke="#000" strokeWidth="2" paintOrder="stroke"
+                  style={{ strokeLinejoin: "round" }}
+                >
+                  {Math.ceil(remainingTime)}
+                </text>
+              </g>
+            );
+          })()}
         </g>
       );
     }
@@ -1274,22 +1336,11 @@ export default function OvercookScene({
           y={0}
           width={gridSize}
           height={gridSize}
-          preserveAspectRatio="xMidYMid slice"
+          preserveAspectRatio="none"
           transform={chefFlip || undefined}
           style={{ imageRendering: "auto" }}
         />
-        {/* 에이전트별 색상 오버레이 */}
-        <image
-          href={colorOverlay}
-          x={0}
-          y={0}
-          width={gridSize}
-          height={gridSize}
-          preserveAspectRatio="xMidYMid slice"
-          transform={colorFlip || undefined}
-          style={{ imageRendering: "auto" }}
-        />
-        {/* 들고 있는 물건 - smartfactory 이미지 */}
+        {/* 들고 있는 물건 - smartfactory 이미지 (색상 오버레이 아래에 렌더) */}
         {(() => {
           // 재료 (onion, tomato): side=28, front/back=27
           // 빈 박스 (dish): side=20, front/back=14
@@ -1313,8 +1364,27 @@ export default function OvercookScene({
               y={0}
               width={gridSize}
               height={gridSize}
-              preserveAspectRatio="xMidYMid slice"
+              preserveAspectRatio="none"
               transform={chefFlip || undefined}
+              style={{ imageRendering: "auto" }}
+            />
+          );
+        })()}
+        {/* 에이전트별 색상 오버레이 (항상 맨 위에 렌더) */}
+        {(() => {
+          // front 이미지(agv2: 64×63)와 color overlay(Assets-93: 64×64)의
+          // 내부 컨텐츠 위치 차이를 보정하는 오프셋
+          const isFrontView = orientation === "NORTH" || orientation === "SOUTH";
+          const colorOffsetX = isFrontView ? -2 : 0;
+          return (
+            <image
+              href={colorOverlay}
+              x={colorOffsetX}
+              y={0}
+              width={gridSize}
+              height={gridSize}
+              preserveAspectRatio="none"
+              transform={colorFlip || undefined}
               style={{ imageRendering: "auto" }}
             />
           );
@@ -1377,19 +1447,19 @@ export default function OvercookScene({
           flex: "0 0 auto",
           maxWidth: "100%",
           maxHeight: "100%",
-          border: "2px solid #999",
-          background: "#a09c98",
+          border: "none",
+          background: "#787878",
           borderRadius: "8px",
           imageRendering: "pixelated",
           overflow: "visible"
         }}
       >
-        {/* 정적 배경: 필터를 별도 그룹에 걸어 래스터 캐시를 유지 (매 프레임 재래스터화 방지) */}
-        <g style={{ filter: "brightness(0.80) contrast(1.2)" }}>
+        {/* 정적 배경: 타일 필터 적용 */}
+        <g style={{ filter: TILE_FILTER }}>
           {backgroundTiles}
         </g>
-        {/* 동적 오브젝트: 작은 그룹만 매 프레임 갱신 */}
-        <g style={{ filter: "brightness(0.80) contrast(1.2)" }}>
+        {/* 동적 오브젝트 */}
+        <g style={{ filter: OBJECT_FILTER }}>
           {combinedObjects.map((obj, index) => renderObject(obj, getObjectKey(obj, index)))}
         </g>
         {(playerFrame.players || []).map((p, i) => renderPlayer(p, i))}
@@ -1427,48 +1497,48 @@ export default function OvercookScene({
             sTile = { x: mapW / 2 - 0.5, y: mapH / 2 - 0.5 };
           }
 
-          const tx = sTile.x * gridSize + gridSize / 2;
-          const ty = sTile.y * gridSize - 15;
+          const cx = sTile.x * gridSize + gridSize / 2;
+          const cy = sTile.y * gridSize + gridSize / 2;
 
           return (
-            <foreignObject
-              key={eff.id}
-              x={tx - 50}
-              y={ty - 40}
-              width={100}
-              height={50}
-              style={{ overflow: "visible", pointerEvents: "none" }}
-            >
-              <div
-                xmlns="http://www.w3.org/1999/xhtml"
-                style={{
-                  animation: "popSlideUp 1.2s ease-out forwards",
-                  fontFamily: "monospace",
-                  fontSize: "32px",
-                  fontWeight: "bold",
-                  color: "#ffffff",
-                  WebkitTextStroke: "3px #000000",
-                  paintOrder: "stroke",
-                  textAlign: "center",
-                  imageRendering: "auto",
-                  lineHeight: "50px",
-                }}
-              >
-                +{eff.count}
-              </div>
-            </foreignObject>
+            <g key={eff.id} style={{ pointerEvents: "none" }}>
+              <g style={{
+                animation: "deliveryFloat 1.4s ease-out forwards",
+                transformOrigin: `${cx}px ${cy}px`,
+              }}>
+                {/* 배경 pill */}
+                <rect
+                  x={cx - 38} y={cy - 16}
+                  width={76} height={28} rx={14}
+                  fill="rgba(0,0,0,0.6)"
+                />
+                {/* DONE 텍스트 */}
+                <text
+                  x={cx - 5} y={cy + 4}
+                  textAnchor="middle"
+                  fontSize="16" fontWeight="bold"
+                  fontFamily="monospace" fill="#34c759"
+                >
+                  DROP
+                </text>
+                {/* ✓ 체크 */}
+                <path
+                  d={`M ${cx + 20} ${cy - 2} l 4 5 l 8 -9`}
+                  fill="none" stroke="#34c759" strokeWidth={2.5}
+                  strokeLinecap="round" strokeLinejoin="round"
+                />
+              </g>
+            </g>
           );
         })}
 
-
-
         {/* 팝업 이펙트용 스타일 정의 */}
         <style>{`
-          @keyframes popSlideUp {
+          @keyframes deliveryFloat {
             0% { transform: translateY(0px); opacity: 0; }
-            20% { transform: translateY(-15px); opacity: 1; }
-            80% { transform: translateY(-25px); opacity: 1; }
-            100% { transform: translateY(-30px); opacity: 0; }
+            10% { transform: translateY(-8px); opacity: 1; }
+            65% { transform: translateY(-25px); opacity: 1; }
+            100% { transform: translateY(-35px); opacity: 0; }
           }
         `}</style>
       </svg>
