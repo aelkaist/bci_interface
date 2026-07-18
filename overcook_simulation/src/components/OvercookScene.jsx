@@ -355,6 +355,26 @@ export default function OvercookScene({
   const [deliveryEffects, setDeliveryEffects] = useState([]);
   const [sceneBounds, setSceneBounds] = useState({ width: 0, height: 0 });
 
+  // 스킨 이미지 전체 프리로드 (마운트 시 1회)
+  // SVG <image>는 처음 화면에 등장할 때에야 해당 PNG를 요청하므로,
+  // 배포 환경에서는 로봇이 처음 방향을 바꾸거나 물건을 드는 순간
+  // 오버레이 이미지가 아직 없어 흰색으로 보이는 현상이 생긴다.
+  // 여기서 SKIN / SKIN_OVERRIDE에 등장하는 모든 파일을 미리 받아 브라우저 캐시에 올려둔다.
+  useEffect(() => {
+    const names = new Set();
+    const collect = (v) => {
+      if (typeof v === "string" && v.endsWith(".png")) names.add(v);
+      else if (Array.isArray(v)) v.forEach(collect);
+      else if (v && typeof v === "object") Object.values(v).forEach(collect);
+    };
+    collect(SKIN);
+    collect(SKIN_OVERRIDE);
+    names.forEach((name) => {
+      const img = new Image();
+      img.src = skinUrl(name);
+    });
+  }, []);
+
   // 컴포넌트 마운트 시 스프라이트 시트 메타데이터 로드
   useEffect(() => {
     Promise.all([

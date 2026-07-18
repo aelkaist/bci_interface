@@ -179,6 +179,7 @@ export default function App() {
     q1: null,
     q2: null,
     q3: null,
+    q4: null,
   });
   const [isSurveySubmitting, setIsSurveySubmitting] = useState(false);
 
@@ -1163,7 +1164,7 @@ export default function App() {
                 {[
                   { video: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
                   { video: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
-                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up a box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
+                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
                   { video: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" }
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
@@ -1420,28 +1421,78 @@ export default function App() {
 
               <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
               <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
-                As you watch, pause whenever needed and follow these three steps to share your thoughts on the AI robots' behavior.
+                As you watch, pause whenever needed and follow these two steps to share your thoughts on the AI robots' behavior.
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
 
                 {/* Card 1 */}
                 <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                  <style>{`
+                    @keyframes demoCursorMove {
+                      0%, 20% { transform: translate(60px, 60px); opacity: 0; }
+                      25% { opacity: 1; }
+                      35%, 80% { transform: translate(12px, 16px); opacity: 1; }
+                      85%, 100% { transform: translate(60px, 60px); opacity: 0; }
+                    }
+                    @keyframes demoCursorClick {
+                      0%, 39% { transform: scale(1); }
+                      40%, 45% { transform: scale(0.85); }
+                      46%, 100% { transform: scale(1); }
+                    }
+                    @keyframes demoBtnClick {
+                      0%, 39% { transform: scale(1); }
+                      40%, 45% { transform: scale(0.9); }
+                      46%, 100% { transform: scale(1); }
+                    }
+                    @keyframes demoOverlayPause {
+                      0%, 39% { opacity: 0; }
+                      40%, 90% { opacity: 1; }
+                      91%, 100% { opacity: 0; }
+                    }
+                    @keyframes demoIconPauseSwap {
+                      0%, 39% { opacity: 1; }
+                      40%, 90% { opacity: 0; }
+                      91%, 100% { opacity: 1; }
+                    }
+                    @keyframes demoIconPlaySwap {
+                      0%, 39% { opacity: 0; }
+                      40%, 90% { opacity: 1; }
+                      91%, 100% { opacity: 0; }
+                    }
+                  `}</style>
                   <div>
-                    <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>1</div>
-                    <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Pause the Video</strong>
+                    <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                      <strong style={{ fontSize: "22px", color: "#fff", display: "block" }}>1. Pause the Video</strong>
+                    </div>
                     <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you want to comment on, then pause the video. Rewatch as needed.</p>
                   </div>
                   <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
-                    <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }} />
+                    
+                    {/* Background Video (GIF) */}
+                    <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, position: "absolute", inset: 0 }} />
+                    
+                    {/* Paused Frame Overlay */}
+                    <img src="/main_paused.png" alt="Paused simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, position: "absolute", inset: 0, animation: "demoOverlayPause 5s infinite" }} />
+                    
+                    {/* Pause Button Container */}
                     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ width: "48px", height: "48px", background: "#22c55e", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)" }}>
-                        <span style={{ color: "#000", fontSize: "18px", fontWeight: "900", letterSpacing: "1px" }}>II</span>
+                      
+                      {/* Animated Pause Button */}
+                      <div style={{ width: "48px", height: "48px", background: "rgba(255, 255, 255, 0.25)", backdropFilter: "blur(4px)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)", animation: "demoBtnClick 5s infinite", position: "relative" }}>
+                        <span style={{ color: "#fff", fontSize: "18px", fontWeight: "900", letterSpacing: "1px", position: "absolute", animation: "demoIconPauseSwap 5s infinite" }}>II</span>
+                        <span style={{ color: "#fff", fontSize: "20px", fontWeight: "900", marginLeft: "4px", position: "absolute", animation: "demoIconPlaySwap 5s infinite" }}>▶</span>
                       </div>
-                    </div>
-                    <div style={{ position: "absolute", bottom: "12px", left: "12px", right: "12px", height: "4px", background: "#333", borderRadius: "2px" }}>
-                      <div style={{ width: "25%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
-                      <div style={{ position: "absolute", left: "25%", top: "50%", transform: "translate(-50%, -50%)", width: "10px", height: "10px", background: "#fff", borderRadius: "50%", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
+
+                      {/* Fake Cursor SVG */}
+                      <div style={{ position: "absolute", zIndex: 10, animation: "demoCursorMove 5s infinite ease-in-out", pointerEvents: "none" }}>
+                        <div style={{ animation: "demoCursorClick 5s infinite" }}>
+                           <svg width="24" height="36" viewBox="0 0 24 36" fill="none" style={{ filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.6))" }}>
+                             <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" fill="white"/>
+                             <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
+                           </svg>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1449,61 +1500,34 @@ export default function App() {
                 {/* Card 2 */}
                 <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
                   <div>
-                    <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>2</div>
-                    <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Click "+ Add Feedback"</strong>
+                    <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                      <strong style={{ fontSize: "22px", color: "#fff", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                        2. Click
+                      <span style={{
+                        marginLeft: "6px",
+                        background: "#fcd34d",
+                        color: "#18181b",
+                        padding: "4px 12px",
+                        borderRadius: "6px",
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        whiteSpace: "nowrap",
+                      }}>
+                        + Add Feedback
+                      </span>
+                    </strong>
+                    </div>
                     <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>
                       Use the yellow button on the right panel to add a new entry.<br />
-                      Choose whether your feedback is positive or negative.
+                      Choose the start and end frames to give feedback.
                     </p>
                   </div>
-                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px" }}>
-                    <div style={{
-                      background: "#fcd34d",
-                      color: "#18181b",
-                      padding: "12px 28px",
-                      borderRadius: "8px",
-                      fontSize: "14px",
-                      fontWeight: "700",
-                    }}>
-                      + Add Feedback
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card 3 */}
-                <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
-                  <div>
-                    <div style={{ width: "32px", height: "32px", background: "#1c3e23", color: "#4ade80", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "800", fontSize: "16px", marginBottom: "20px" }}>3</div>
-                    <strong style={{ fontSize: "18px", color: "#fff", display: "block", marginBottom: "12px" }}>Choose the start and end frames to give feedback.</strong>
-                    <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Pick a range by dragging the start and end points, then write your feedback.</p>
-                  </div>
-                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px", flexDirection: "column" }}>
-                    <div style={{ width: "200px", height: "80px", position: "relative" }}>
-                      {/* Timeline Track */}
-                      <div style={{ position: "absolute", top: "15px", left: "0", right: "0", height: "20px", background: "#000", border: "1px solid #333", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "flex-end", padding: "0 2px" }}>
-                        {[...Array(20)].map((_, i) => (
-                          <div key={i} style={{ flex: 1, borderRight: "1px solid #222", height: (i + 1) % 5 === 0 ? "10px" : "4px" }} />
-                        ))}
-                      </div>
-
-                      {/* Yellow Block */}
-                      <div style={{ position: "absolute", top: "13px", height: "24px", background: "rgba(252, 211, 77, 0.35)", borderRadius: "2px", animation: "feedbackRangeAdjust 7s infinite ease-in-out" }}>
-                        {/* Left Handle */}
-                        <div style={{ position: "absolute", left: "-2px", top: "4px", width: "4px", height: "16px", background: "#fff", borderRadius: "2px", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
-                        {/* Right Handle */}
-                        <div style={{ position: "absolute", right: "-2px", top: "4px", width: "4px", height: "16px", background: "#fff", borderRadius: "2px", boxShadow: "0 0 4px rgba(0,0,0,0.5)" }} />
-                      </div>
-
-                      {/* Text */}
-                      <p style={{ position: "absolute", top: "45px", width: "100%", margin: 0, color: "#ddd", fontSize: "14px", fontWeight: "600", textAlign: "center", letterSpacing: "0.5px", zIndex: 1 }}>Feedback Range</p>
-
-                      {/* Mouse Cursor */}
-                      <div style={{ position: "absolute", pointerEvents: "none", zIndex: 10, animation: "mouseDragTimeline 7s infinite ease-in-out", left: 0, top: 0 }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
-                          <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
+                  <div style={{ boxSizing: "border-box", width: "100%", aspectRatio: "2.5/1", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", overflow: "hidden", marginTop: "30px" }}>
+                    <img
+                      src="/feedback.gif"
+                      alt="Feedback panel"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
                   </div>
                 </div>
 
@@ -1511,9 +1535,53 @@ export default function App() {
 
 
 
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", background: hasReadInstructions ? "rgba(34,197,94,0.1)" : "#1a1a1a", padding: "16px 20px", borderRadius: "12px", border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333", marginTop: "20px" }}>
-                <input type="checkbox" checked={hasReadInstructions} onChange={e => setHasReadInstructions(e.target.checked)} id="terms" style={{ width: "20px", height: "20px", accentColor: "#22c55e" }} />
-                <label htmlFor="terms" style={{ fontSize: "16px", cursor: "pointer", color: hasReadInstructions ? "#22c55e" : "#fff", fontWeight: "500" }}>I have carefully read and understand the instructions.</label>
+              <div
+                onClick={() => setHasReadInstructions(v => !v)}
+                role="checkbox"
+                aria-checked={hasReadInstructions}
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setHasReadInstructions(v => !v); } }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "14px",
+                  background: hasReadInstructions ? "rgba(34,197,94,0.08)" : "#161616",
+                  padding: "18px 24px",
+                  borderRadius: "14px",
+                  border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333",
+                  marginTop: "20px",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  transition: "all 0.2s ease",
+                  boxShadow: hasReadInstructions ? "0 0 16px rgba(34,197,94,0.15)" : "none",
+                }}
+              >
+                {/* 커스텀 체크 서클 */}
+                <div style={{
+                  width: "26px",
+                  height: "26px",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: hasReadInstructions ? "#22c55e" : "transparent",
+                  border: hasReadInstructions ? "2px solid #22c55e" : "2px solid #fcd34d",
+                  transition: "all 0.2s ease",
+                }}>
+                  <svg width="14" height="14" viewBox="0 0 14 14" style={{ opacity: hasReadInstructions ? 1 : 0, transition: "opacity 0.15s ease" }}>
+                    <path d="M2.5 7.5L5.5 10.5L11.5 3.5" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <span style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  color: hasReadInstructions ? "#22c55e" : "#fff",
+                  transition: "color 0.2s ease",
+                }}>
+                  I have carefully read and understand the instructions.
+                </span>
               </div>
             </div>
           )}
@@ -1528,17 +1596,23 @@ export default function App() {
       {
         id: "q1",
         type: "text",
-        text: "Across all episodes, what challenges did you experience while monitoring the AI agents?",
+        text: "Overall, what was your strategy for monitoring the AI robot's behavior?",
         placeholder: "Type your response here...",
       },
       {
         id: "q2",
         type: "text",
-        text: "What, if anything, would have helped you monitor the AI agents more easily?",
+        text: "Across all episodes, what challenges did you experience while monitoring the AI agents?",
         placeholder: "Type your response here...",
       },
       {
         id: "q3",
+        type: "text",
+        text: "What, if anything, would have helped you monitor the AI agents more easily?",
+        placeholder: "Type your response here...",
+      },
+      {
+        id: "q4",
         type: "text",
         text: "Is there anything else you would like to share about your experience in this study?",
         placeholder: "Type your response here...",
