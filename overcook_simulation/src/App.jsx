@@ -20,6 +20,24 @@ const SAMPLE_LEVEL = "L3";
 
 const mapModules = import.meta.glob("./maps/*/L3/*.json");
 
+const TUTORIAL_PRELOAD_ASSETS = [
+  { href: "/7.gif", type: "image" },
+  { href: "/feedback.gif", type: "image" },
+  { href: "/1.mov", type: "video" },
+  { href: "/2.mov", type: "video" },
+  { href: "/3.mov", type: "video" },
+  { href: "/4.mov", type: "video" },
+  { href: "/main.gif", type: "image" },
+  { href: "/main_paused.png", type: "image" },
+];
+
+const PRODUCTION_LINE_STEPS = [
+  { video: "/1.mov", fallback: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
+  { video: "/2.mov", fallback: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
+  { video: "/3.mov", fallback: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
+  { video: "/4.mov", fallback: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" },
+];
+
 function shuffle(items) {
   const shuffled = [...items];
 
@@ -91,6 +109,29 @@ function createExperimentSessionId() {
   }
 
   return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function TutorialMedia({ src, fallbackSrc, alt, objectFit = "cover", opacity = 0.9 }) {
+  const [useFallback, setUseFallback] = useState(false);
+  const sharedStyle = { width: "100%", height: "100%", objectFit, opacity };
+
+  if (useFallback) {
+    return <img src={fallbackSrc} alt={alt} style={sharedStyle} />;
+  }
+
+  return (
+    <video
+      src={src}
+      aria-label={alt}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      onError={() => setUseFallback(true)}
+      style={sharedStyle}
+    />
+  );
 }
 
 // ── Mini Replay Player for Episode Survey ──
@@ -173,6 +214,30 @@ export default function App() {
   const [prolificId, setProlificId] = useState("");
   const [hasReadInstructions, setHasReadInstructions] = useState(false);
   const [testSliderValue, setTestSliderValue] = useState([0]);
+
+  useEffect(() => {
+    const preloaders = TUTORIAL_PRELOAD_ASSETS.map((asset) => {
+      if (asset.type === "video") {
+        const video = document.createElement("video");
+        video.preload = "auto";
+        video.muted = true;
+        video.playsInline = true;
+        video.src = asset.href;
+        video.load();
+        return video;
+      }
+
+      const image = new Image();
+      image.src = asset.href;
+      return image;
+    });
+
+    return () => {
+      preloaders.forEach((preloader) => {
+        preloader.src = "";
+      });
+    };
+  }, []);
 
   // Post-episode survey states
   const [surveyAnswers, setSurveyAnswers] = useState({
@@ -1161,15 +1226,10 @@ export default function App() {
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
-                {[
-                  { video: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
-                  { video: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
-                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
-                  { video: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" }
-                ].map((item, i) => (
+                {PRODUCTION_LINE_STEPS.map((item, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
                     <div style={{ width: "100%", height: "200px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                      <img src={item.video} alt="Gameplay sequence preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
+                      <TutorialMedia src={item.video} fallbackSrc={item.fallback} alt="Gameplay sequence preview" objectFit="contain" opacity={0.9} />
                     </div>
                     <div style={{ padding: "20px 24px" }}>
                       <strong style={{ fontSize: "16px", display: "block", marginBottom: item.desc ? "10px" : 0 }}>{item.title}</strong>

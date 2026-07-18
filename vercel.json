@@ -2,5 +2,16 @@
   "installCommand": "cd overcook_simulation && npm install",
   "buildCommand": "cd overcook_simulation && npm run build",
   "outputDirectory": "overcook_simulation/dist",
-  "framework": "vite"
+  "framework": "vite",
+  "headers": [
+    {
+      "source": "/(.*)\\.(gif|mov|png|jpg|jpeg|webp)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ]
 }
