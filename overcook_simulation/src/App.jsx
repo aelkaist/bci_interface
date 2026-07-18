@@ -193,7 +193,7 @@ export default function App() {
   const [quiz1Answer, setQuiz1Answer] = useState(null);
   const [quiz2Matches, setQuiz2Matches] = useState({});
   const [quiz2Words] = useState(() => {
-    let words = ["Onion", "Pot", "Dish", "AI Chef", "Serving Area"];
+    let words = ["Parts", "Machine", "Box", "AI Robot", "Drop Zone"];
     for (let i = words.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [words[i], words[j]] = [words[j], words[i]];
@@ -891,11 +891,11 @@ export default function App() {
     } else if (instructionStep === 2) {
       const q1Correct = quiz1Answer === 2;
       const q2Correct = Object.keys(quiz2Matches).length === 5 &&
-        quiz2Matches.onion === "Onion" &&
-        quiz2Matches.pot === "Pot" &&
-        quiz2Matches.dish === "Dish" &&
-        quiz2Matches.chef === "AI Chef" &&
-        quiz2Matches.serve === "Serving Area";
+        quiz2Matches.onion === "Parts" &&
+        quiz2Matches.pot === "Machine" &&
+        quiz2Matches.dish === "Box" &&
+        quiz2Matches.chef === "AI Robot" &&
+        quiz2Matches.serve === "Drop Zone";
       const q3Correct = quiz3Order.join("") === "1234";
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
@@ -979,59 +979,40 @@ export default function App() {
         {/* 메인 콘텐츠 영역 (maxWidth 제한 해제) */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
           {instructionStep === -1 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%", alignItems: "center", justifyContent: "flex-start", flex: 1, marginTop: "10vh" }}>
-              <div style={{ textAlign: "center", marginBottom: "20px" }}>
-                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Welcome! 👋</h1>
-                <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>Please enter your Participant ID to begin.</p>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%", maxWidth: "400px", background: "#111", padding: "30px", borderRadius: "16px", border: "1px solid #222" }}>
-                <label style={{ fontSize: "14px", fontWeight: "600", color: "#888", textTransform: "uppercase", letterSpacing: "1px" }}>Participant ID</label>
-                <input
-                  type="text"
-                  placeholder="Enter your Participant ID"
-                  value={prolificId}
-                  onChange={(e) => setProlificId(e.target.value)}
-                  style={{
-                    padding: "16px 20px",
-                    borderRadius: "8px",
-                    border: "1px solid #333",
-                    background: "#0a0a0c",
-                    color: "#fff",
-                    fontSize: "18px",
-                    outline: "none",
-                    width: "100%",
-                    boxSizing: "border-box",
-                    transition: "border-color 0.2s"
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = "#fcd34d"}
-                  onBlur={(e) => e.target.style.borderColor = "#333"}
-                />
-              </div>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", flex: 1, width: "100%", marginTop: "15vh" }}>
+              <div style={{ width: "100%", maxWidth: "420px", display: "flex", flexDirection: "column", gap: "32px" }}>
+                {/* Header */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <h1 style={{ fontSize: "32px", fontWeight: "700", margin: 0, color: "#fff", letterSpacing: "-0.5px" }}>Participant Login</h1>
+                  <p style={{ fontSize: "16px", color: "#666", margin: 0, lineHeight: 1.5 }}>Enter your ID to get started.</p>
+                </div>
 
-              {/* ⚠️ 임시 개발용: 튜토리얼 건너뛰고 바로 첫 에피소드로 */}
-              <button
-                onClick={async () => {
-                  if (mapOrder.length === 0) return;
-                  const loaded = await loadMapByIndex(mapOrder[0]);
-                  if (!loaded) return;
-                  setCurrentMapIdx(0);
-                  setEpisodeCount(1);
-                  maybeMarkMainStart();
-                  setInstructionStep(4);
-                }}
-                style={{
-                  padding: "12px 28px",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  background: "transparent",
-                  color: "#f87171",
-                  border: "1px dashed #f87171",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                }}
-              >
-                ⏭ DEV: Skip tutorial → first episode
-              </button>
+                {/* Input */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <label style={{ fontSize: "13px", fontWeight: "500", color: "#555" }}>Participant ID</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your Participant ID"
+                    value={prolificId}
+                    onChange={(e) => setProlificId(e.target.value)}
+                    style={{
+                      padding: "14px 16px",
+                      borderRadius: "10px",
+                      border: "1px solid #2a2a2a",
+                      background: "#111",
+                      color: "#fff",
+                      fontSize: "16px",
+                      outline: "none",
+                      width: "100%",
+                      boxSizing: "border-box",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => { e.target.style.borderColor = "#fcd34d"; e.target.style.boxShadow = "0 0 0 3px rgba(252,211,77,0.1)"; }}
+                    onBlur={(e) => { e.target.style.borderColor = "#2a2a2a"; e.target.style.boxShadow = "none"; }}
+                  />
+                  <p style={{ fontSize: "13px", color: "#555", margin: 0, lineHeight: 1.4 }}>⚠️ Please double-check your ID before proceeding.</p>
+                </div>
+              </div>
             </div>
           )}
 
@@ -1082,14 +1063,14 @@ export default function App() {
               <div>
                 <h1 style={{ fontSize: "40px", fontWeight: "800", margin: "0 0 12px 0" }}>Watch Factory Robots Collaborate and Give Feedback 🤖</h1>
                 <p style={{ fontSize: "20px", color: "#aaa", margin: 0, lineHeight: 1.5 }}>
-                  In this study, your task is to <strong style={{ color: "#fff" }}> watch 4 short videos </strong>  of AI robots collaborating in a factory and <strong style={{ color: "#fff" }}>give feedback</strong> on their teamwork.
+                  In this study, your task is to <strong style={{ color: "#fff" }}> watch 4 short videos </strong>  of AI robots collaborating in a factory setting and <strong style={{ color: "#fff" }}>give feedback</strong> on their teamwork.
                 </p>
               </div>
               <div style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "20px" }}>
                 <p style={{ fontSize: "18px", fontWeight: "700", color: "#fff", margin: 0 }}>Here is what you will do:</p>
                 <div style={{ display: "flex", gap: "24px", alignItems: "stretch" }}>
                   {/* Card 1 */}
-                  <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "center" }}>
+                  <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "flex-end" }}>
 
                     {/* Video GIF Mockup Container */}
                     <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
@@ -1097,85 +1078,23 @@ export default function App() {
                       <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
                       </div>
-
-                      {/* Fake Progress Bar */}
-                      <div style={{ display: "flex", alignItems: "center", width: "100%", height: "16px" }}>
-                        <div style={{ flex: 1, height: "4px", background: "#333", borderRadius: "2px", position: "relative" }}>
-                          <div style={{ position: "absolute", left: 0, top: 0, width: "35%", height: "100%", background: "#22c55e", borderRadius: "2px" }} />
-                          <div style={{ position: "absolute", left: "35%", top: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", background: "#fff", boxShadow: "0 0 6px rgba(0,0,0,0.6)" }} />
-                        </div>
-                      </div>
                     </div>
-                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>1. Watch AI Robots Work Together</h2>
+                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", marginTop: "auto", marginBottom: "16px", letterSpacing: "0.2px" }}>1. Watch AI Robots Work Together</h2>
                     <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>You’ll watch short videos of AI robots picking up, processing, and packaging items.</p>
                   </div>
 
                   {/* Card 2 */}
-                  <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "center" }}>
+                  <div style={{ flex: 1, background: "#111", border: "1px solid #222", borderRadius: "16px", padding: "40px 32px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "flex-end" }}>
 
-                    {/* Feedback UI Mockup Container */}
+                    {/* Feedback Image Container */}
                     <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                      {/* Sleek Dark Card */}
-                      <div style={{ position: "relative", width: "100%", borderRadius: "8px", border: "1px solid #222", background: "#0a0a0c", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
-
-                        {/* Fake Mouse Cursor Overlay - shared across phases */}
-                        <div style={{
-                          position: "absolute",
-                          top: "50%", left: "50%",
-                          marginLeft: "-10px", marginTop: "-30px",
-                          width: "20px", height: "20px",
-                          pointerEvents: "none", zIndex: 20,
-                          animation: "mouseMoveCombined 12s ease-in-out infinite"
-                        }}>
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
-                            <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
-                          </svg>
-                        </div>
-
-                        {/* Phase 1: Feedback */}
-                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", animation: "feedbackStep 12s ease-in-out infinite" }}>
-                          <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", width: "85%", maxWidth: "320px", display: "flex", flexDirection: "column", gap: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-                            <div style={{ fontSize: "14px", fontWeight: "700", color: "#fff", textAlign: "left" }}>Add Feedback</div>
-                            <div style={{ width: "100%", height: "60px", background: "#111", border: "1px solid #333", borderRadius: "8px", padding: "10px 12px", display: "flex", alignItems: "flex-start" }}>
-                              <div style={{ display: "flex", alignItems: "center", height: "14px", width: "100%" }}>
-                                <span style={{ color: "#777", fontSize: "13px" }}>Write your feedback here...</span>
-                              </div>
-                            </div>
-                            <div style={{ padding: "4px 12px", background: "#fcd34d", color: "#000", fontSize: "11px", fontWeight: "bold", borderRadius: "6px", alignSelf: "flex-end" }}>Submit</div>
-                          </div>
-                        </div>
-
-                        {/* Phase 2: Survey */}
-                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", animation: "surveyStep 12s ease-in-out infinite" }}>
-                          <div style={{ background: "#18181b", padding: "20px 30px", borderRadius: "16px", border: "1px solid #27272a", width: "85%", maxWidth: "320px", display: "flex", flexDirection: "column", gap: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.8)" }}>
-                            <div style={{ fontSize: "14px", fontWeight: "700", color: "#fff", textAlign: "left" }}>Survey</div>
-                            <div style={{ fontSize: "13px", color: "#aaa", textAlign: "left", lineHeight: 1.4 }}>Overall, how would you rate the collaboration in this episode?</div>
-
-                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "4px" }}>
-                              <span style={{ fontSize: "14px", filter: "grayscale(100%)", opacity: 0.6 }}>👎</span>
-                              {[1, 2, 3, 4, 5].map(num => (
-                                <div key={num} style={{
-                                  width: "22px", height: "22px",
-                                  borderRadius: "50%",
-                                  background: "#3f3f46",
-                                  boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5)",
-                                  animation: num === 4 ? "surveyLikertClick 12s ease-in-out infinite" : "none",
-                                  boxSizing: "border-box"
-                                }} />
-                              ))}
-                              <span style={{ fontSize: "14px" }}>👍</span>
-                            </div>
-                          </div>
-                        </div>
-
+                      <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <img src="/feedback.gif" alt="Feedback panel preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
                       </div>
-
-                      {/* Spacer to match Card 1's progress bar height */}
-                      <div style={{ height: "16px", width: "100%" }} />
                     </div>
 
-                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: "0 0 16px 0", letterSpacing: "0.2px" }}>2. Give Feedback and Complete the Survey</h2>
-                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Pause the video to give feedback on effective teamwork or possible mistakes. Afterward, complete a short survey.</p>
+                    <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", marginTop: "auto", marginBottom: "16px", letterSpacing: "0.2px" }}>2. Give Feedback</h2>
+                    <p style={{ fontSize: "15px", color: "#999", margin: 0, lineHeight: 1.6 }}>Pause the video to give feedback on effective teamwork or possible mistakes.</p>
                   </div>
                 </div>
               </div>
@@ -1188,40 +1107,53 @@ export default function App() {
               <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI robots’ main goal is to work together to move item parts through the production line and package them.</p>
 
               {/* To cook onion soup timeline */}
-              <div style={{ padding: "20px 24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333", display: "flex", flexDirection: "column", gap: "16px" }}>
-                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To process and package items, </strong> the robots need to:</p>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", fontSize: "15px", fontWeight: "600" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "28px", width: "100%", background: "#1c1c1c", padding: "28px 32px", borderRadius: "14px", border: "1px solid #333", boxSizing: "border-box" }}>
+                <p style={{ fontSize: "16px", color: "#aaa", margin: 0 }}><strong style={{ color: "#fff" }}>To process and package items, </strong> the robots need:</p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "16px", fontSize: "15px", fontWeight: "600", width: "100%" }}>
 
-                  {/* Onions */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
-                    <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-52px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
+                  {/* Parts (material) */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444" }}>
+                    <img src="/smartfactory/items.png" alt="Parts" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
                     <span>Parts x 3</span>
                   </div>
-                  <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-
-                  {/* Pot */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
-                    <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-69px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Processing Machine</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px", opacity: 0.5 }}>
+                    <div style={{ width: "20px", height: "3px", background: "linear-gradient(90deg, transparent 0%, transparent 50%, #888 50%, #888 100%)", backgroundSize: "6px 3px" }} />
+                    <svg width="12" height="18" viewBox="0 0 10 16" fill="none"><path d="M2 2L8 8L2 14" stroke="#888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </div>
-                  <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
+
+                  {/* Processing Machine (pot) */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444" }}>
+                    <img src="/smartfactory/Assets-04.png" alt="Processing Machine" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
+                    <span>Machine</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px", opacity: 0.5 }}>
+                    <div style={{ width: "20px", height: "3px", background: "linear-gradient(90deg, transparent 0%, transparent 50%, #888 50%, #888 100%)", backgroundSize: "6px 3px" }} />
+                    <svg width="12" height="18" viewBox="0 0 10 16" fill="none"><path d="M2 2L8 8L2 14" stroke="#888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  </div>
 
                   {/* Wait */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333", color: "#fff" }}>
-                    <span>⏳ Wait for Processing</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444", color: "#fff" }}>
+                    <span style={{ fontSize: "24px" }}>⏳</span>
+                    <span>Wait for Processing</span>
                   </div>
-                  <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
-
-                  {/* Dish */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
-                    <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-18px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
-                    <span>Bring a Box</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px", opacity: 0.5 }}>
+                    <div style={{ width: "20px", height: "3px", background: "linear-gradient(90deg, transparent 0%, transparent 50%, #888 50%, #888 100%)", backgroundSize: "6px 3px" }} />
+                    <svg width="12" height="18" viewBox="0 0 10 16" fill="none"><path d="M2 2L8 8L2 14" stroke="#888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </div>
-                  <span style={{ color: "#666", fontSize: "20px", transform: "translateY(1px)" }}>&rarr;</span>
 
-                  {/* Serve */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0a0a0c", padding: "10px 16px", borderRadius: "8px", border: "1px solid #333" }}>
-                    <div style={{ width: "15px", height: "15px", background: "url('/graphics/terrain.png')", backgroundPosition: "-86px -1px", transform: "scale(1.8)", imageRendering: "pixelated", margin: "0 4px" }} />
+                  {/* Box */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444" }}>
+                    <img src="/smartfactory/Assets-11.png" alt="Box" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
+                    <span>Box</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px", opacity: 0.5 }}>
+                    <div style={{ width: "20px", height: "3px", background: "linear-gradient(90deg, transparent 0%, transparent 50%, #888 50%, #888 100%)", backgroundSize: "6px 3px" }} />
+                    <svg width="12" height="18" viewBox="0 0 10 16" fill="none"><path d="M2 2L8 8L2 14" stroke="#888" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  </div>
+
+                  {/* Deliver */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444" }}>
+                    <img src="/smartfactory/tile9.png" alt="Deliver" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
                     <span>Deliver!</span>
                   </div>
                 </div>
@@ -1229,10 +1161,10 @@ export default function App() {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", width: "100%", marginTop: "12px" }}>
                 {[
-                  { video: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px", objPos: "center bottom" },
-                  { video: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px", objPos: "center top" },
-                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up a box.", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px", objPos: "center 25%" },
-                  { video: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px", objPos: "center" }
+                  { video: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
+                  { video: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
+                  { video: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up a box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
+                  { video: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" }
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column", background: "#1c1c1c", borderRadius: "14px", overflow: "hidden", border: "1px solid #333" }}>
                     <div style={{ width: "100%", height: "200px", background: "#000", borderBottom: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
@@ -1249,34 +1181,36 @@ export default function App() {
           )}
 
           {instructionStep === 2 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
-              <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Let's Check Your Understanding</h1>
-              <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>Watch the gameplay video below and answer all questions correctly to proceed.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "32px", width: "100%" }}>
+              <div>
+                <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0, marginBottom: "8px" }}>Let's Check Your Understanding</h1>
+                <p style={{ fontSize: "18px", color: "#888", margin: 0 }}>Watch the gameplay video below and answer all questions correctly to proceed.</p>
+              </div>
 
-              {/* Reference Video Area (Responsive GIF) */}
-              <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555", position: "relative", aspectRatio: "2.5/1", boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
+              {/* Reference Video Area */}
+              <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", aspectRatio: "2.5/1", boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
                 <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
                 {/* Quiz 1 */}
-                <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-                    <p style={{ fontSize: "16px", fontWeight: "600", margin: 0, color: "#fff" }}>1. How many AI chefs do you see in the game?</p>
+                <div style={{ padding: "28px 32px", background: "#1c1c1c", borderRadius: "14px", border: "1px solid #333" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+                    <p style={{ fontSize: "17px", fontWeight: "700", margin: 0, color: "#fff" }}>1. How many AI robots do you see in the game?</p>
                     {quiz1Answer !== null && quiz1Answer !== 2 && (
-                      <span style={{ fontSize: "14px", color: "#ef4444", fontWeight: "600" }}>❌ Incorrect. Please try again.</span>
+                      <span style={{ fontSize: "13px", color: "#ef4444", fontWeight: "600" }}>❌ Incorrect</span>
                     )}
                     {quiz1Answer === 2 && (
-                      <span style={{ fontSize: "14px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
+                      <span style={{ fontSize: "13px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
                     )}
                   </div>
-                  <div style={{ display: "flex", gap: "12px" }}>
+                  <div style={{ display: "flex", gap: "10px" }}>
                     {[1, 2, 3, 4].map(num => (
                       <button
                         key={num}
                         onClick={() => setQuiz1Answer(num)}
-                        style={{ padding: "10px 24px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: "1px solid #444", background: quiz1Answer === num ? (num === 2 ? "#22c55e" : "#ef4444") : "#2a2a2a", color: quiz1Answer === num ? (num === 2 ? "#000" : "#fff") : "#fff", cursor: "pointer", transition: "all 0.2s" }}
+                        style={{ padding: "10px 28px", fontSize: "16px", fontWeight: "700", borderRadius: "8px", border: quiz1Answer === num ? (num === 2 ? "2px solid #22c55e" : "2px solid #ef4444") : "1px solid #444", background: quiz1Answer === num ? (num === 2 ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)") : "#2a2a2a", color: quiz1Answer === num ? (num === 2 ? "#22c55e" : "#ef4444") : "#fff", cursor: "pointer", transition: "all 0.2s" }}
                       >
                         {num}
                       </button>
@@ -1285,29 +1219,29 @@ export default function App() {
                 </div>
 
                 {/* Quiz 2 */}
-                <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: (Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Serve") ? "1px solid #22c55e" : "1px solid #333" }}>
-                  <div style={{ marginBottom: "20px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
-                    <div>
+                <div style={{ padding: "28px 32px", background: "#1c1c1c", borderRadius: "14px", border: "1px solid #333" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
+                    <div style={{ flex: 1 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
-                        <p style={{ fontSize: "16px", fontWeight: "600", margin: 0, color: "#fff" }}>2. Identify the names of the items</p>
+                        <p style={{ fontSize: "17px", fontWeight: "700", margin: 0, color: "#fff" }}>2. Identify the names of the items</p>
                         {Object.entries(quiz2Matches).some(([id, match]) => {
-                          return !((id === "onion" && match === "Onion") ||
-                            (id === "pot" && match === "Pot") ||
-                            (id === "dish" && match === "Dish") ||
-                            (id === "chef" && match === "AI Chef") ||
-                            (id === "serve" && match === "Serving Area"));
+                          return !((id === "onion" && match === "Parts") ||
+                            (id === "pot" && match === "Machine") ||
+                            (id === "dish" && match === "Box") ||
+                            (id === "chef" && match === "AI Robot") ||
+                            (id === "serve" && match === "Drop Zone"));
                         }) && (
-                            <span style={{ fontSize: "14px", color: "#ef4444", fontWeight: "600" }}>❌ Incorrect. Please try again.</span>
+                            <span style={{ fontSize: "13px", color: "#ef4444", fontWeight: "600" }}>❌ Incorrect</span>
                           )}
-                        {(Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Onion" && quiz2Matches.pot === "Pot" && quiz2Matches.dish === "Dish" && quiz2Matches.chef === "AI Chef" && quiz2Matches.serve === "Serving Area") && (
-                          <span style={{ fontSize: "14px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
+                        {(Object.keys(quiz2Matches).length === 5 && quiz2Matches.onion === "Parts" && quiz2Matches.pot === "Machine" && quiz2Matches.dish === "Box" && quiz2Matches.chef === "AI Robot" && quiz2Matches.serve === "Drop Zone") && (
+                          <span style={{ fontSize: "13px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
                         )}
                       </div>
-                      <p style={{ fontSize: "14px", color: "#999", margin: 0 }}>Drag the property blocks below and drop them into the matching dashed boxes.</p>
+                      <p style={{ fontSize: "14px", color: "#777", margin: 0 }}>Drag the property blocks below and drop them into the matching dashed boxes.</p>
                     </div>
                     <button
                       onClick={() => setQuiz2Matches({})}
-                      style={{ background: "transparent", border: "1px solid #444", color: "#aaa", padding: "6px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px", transition: "all 0.2s" }}
+                      style={{ background: "transparent", border: "1px solid #444", color: "#aaa", padding: "6px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px", transition: "all 0.2s", flexShrink: 0 }}
                       onMouseOver={(e) => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#888"; }}
                       onMouseOut={(e) => { e.currentTarget.style.color = "#aaa"; e.currentTarget.style.borderColor = "#444"; }}
                       title="Reset matching answers"
@@ -1317,7 +1251,7 @@ export default function App() {
                     </button>
                   </div>
 
-                  <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", minHeight: "40px" }}>
+                  <div style={{ display: "flex", gap: "10px", marginBottom: "24px", flexWrap: "wrap", minHeight: "40px" }}>
                     {quiz2Words.filter(word => !Object.values(quiz2Matches).includes(word)).map(word => (
                       <div
                         key={word} draggable
@@ -1330,25 +1264,26 @@ export default function App() {
                     ))}
                   </div>
 
-                  <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "flex-start" }}>
                     {[
-                      { id: "onion", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
-                      { id: "pot", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
-                      { id: "dish", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
-                      { id: "chef", sprite: "url('/graphics/chefs.png')", pos: "-69px -52px" },
-                      { id: "serve", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
+                      { id: "onion", img: "/smartfactory/items.png" },
+                      { id: "pot", img: "/smartfactory/Assets-04.png" },
+                      { id: "dish", img: "/smartfactory/Assets-11.png" },
+                      { id: "chef", img: "/smartfactory/agv.png", overlay: "/smartfactory/Assets-89.png" },
+                      { id: "serve", img: "/smartfactory/tile9.png" }
                     ].map(item => {
                       const match = quiz2Matches[item.id];
-                      const isCorrect = (item.id === "onion" && match === "Onion") ||
-                        (item.id === "pot" && match === "Pot") ||
-                        (item.id === "dish" && match === "Dish") ||
-                        (item.id === "chef" && match === "AI Chef") ||
-                        (item.id === "serve" && match === "Serving Area");
+                      const isCorrect = (item.id === "onion" && match === "Parts") ||
+                        (item.id === "pot" && match === "Machine") ||
+                        (item.id === "dish" && match === "Box") ||
+                        (item.id === "chef" && match === "AI Robot") ||
+                        (item.id === "serve" && match === "Drop Zone");
 
                       return (
-                        <div key={item.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                          <div style={{ width: "60px", height: "60px", background: "#2a2a2a", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444", boxShadow: "inset 0 4px 10px rgba(0,0,0,0.5)" }}>
-                            <div style={{ width: "15px", height: "15px", background: item.sprite, backgroundPosition: item.pos, transform: "scale(2.5)", imageRendering: "pixelated" }} />
+                        <div key={item.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+                          <div style={{ width: "80px", height: "80px", background: "#2a2a2a", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444", boxShadow: "inset 0 4px 10px rgba(0,0,0,0.5)", position: "relative" }}>
+                            <img src={item.img} alt={item.id} style={{ width: item.overlay ? "70px" : "52px", height: item.overlay ? "70px" : "52px", objectFit: "contain", position: item.overlay ? "absolute" : "static", left: item.overlay ? "12px" : undefined }} />
+                            {item.overlay && <img src={item.overlay} alt="" style={{ width: "70px", height: "70px", objectFit: "contain", position: "absolute", left: "12px" }} />}
                           </div>
                           <div
                             onDragOver={(e) => e.preventDefault()}
@@ -1366,27 +1301,29 @@ export default function App() {
                 </div>
 
                 {/* Quiz 3 */}
-                <div style={{ padding: "24px", background: "#1c1c1c", borderRadius: "12px", border: "1px solid #333" }}>
-                  <div style={{ marginBottom: "20px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
-                      <p style={{ fontSize: "16px", fontWeight: "600", margin: 0, color: "#fff" }}>3. Arrange the cooking steps</p>
-                      {quiz3Order.join("") !== "1234" && (
-                        <span style={{ fontSize: "14px", color: "#ef4444", fontWeight: "600", opacity: 0.8 }}>❌ Incorrect order. Please try again.</span>
-                      )}
-                      {quiz3Order.join("") === "1234" && (
-                        <span style={{ fontSize: "14px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
-                      )}
+                <div style={{ padding: "28px 32px", background: "#1c1c1c", borderRadius: "14px", border: "1px solid #333" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
+                        <p style={{ fontSize: "17px", fontWeight: "700", margin: 0, color: "#fff" }}>3. Arrange the production steps</p>
+                        {quiz3Order.join("") !== "1234" && (
+                          <span style={{ fontSize: "13px", color: "#ef4444", fontWeight: "600", opacity: 0.8 }}>❌ Incorrect order</span>
+                        )}
+                        {quiz3Order.join("") === "1234" && (
+                          <span style={{ fontSize: "13px", color: "#22c55e", fontWeight: "600" }}>✅ Correct!</span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: "14px", color: "#777", margin: 0 }}>Drag the items up or down to place them in the correct sequential order.</p>
                     </div>
-                    <p style={{ fontSize: "14px", color: "#999", margin: 0 }}>Drag the items up or down to place them in the correct sequential order.</p>
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                     {quiz3Order.map((stepId, index) => {
                       const stepsMap = {
-                        1: { text: "Pick up onions", sprite: "url('/graphics/terrain.png')", pos: "-52px -1px" },
-                        2: { text: "Add onions to the pot", sprite: "url('/graphics/terrain.png')", pos: "-69px -1px" },
-                        3: { text: "Bring a dish to the pot", sprite: "url('/graphics/terrain.png')", pos: "-18px -1px" },
-                        4: { text: "Serve the onion soup", sprite: "url('/graphics/terrain.png')", pos: "-86px -1px" }
+                        1: { text: "Pick up parts", img: "/smartfactory/items.png" },
+                        2: { text: "Load parts into the machine", img: "/smartfactory/Assets-04.png" },
+                        3: { text: "Bring an empty box to the machine", img: "/smartfactory/Assets-11.png" },
+                        4: { text: "Deliver to the Drop Zone", img: "/smartfactory/tile9.png" }
                       };
                       return (
                         <div
@@ -1410,11 +1347,11 @@ export default function App() {
                               return newOrder;
                             });
                           }}
-                          style={{ padding: "12px 16px", background: "#2a2a2a", borderRadius: "8px", border: "1px solid #444", color: "#fff", display: "flex", alignItems: "center", gap: "16px", cursor: "grab", fontWeight: "500", fontSize: "15px", boxShadow: "0 2px 6px rgba(0,0,0,0.4)", transition: "transform 0.2s" }}
+                          style={{ padding: "14px 18px", background: "#2a2a2a", borderRadius: "10px", border: "1px solid #444", color: "#fff", display: "flex", alignItems: "center", gap: "16px", cursor: "grab", fontWeight: "500", fontSize: "15px", boxShadow: "0 2px 6px rgba(0,0,0,0.4)", transition: "transform 0.2s" }}
                         >
-                          <span style={{ fontSize: "18px", color: "#666", display: "flex", alignItems: "center", letterSpacing: "2px" }}>⋮⋮</span>
-                          <div style={{ width: "24px", height: "24px", background: "#1c1c1c", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444" }}>
-                            <div style={{ width: "15px", height: "15px", background: stepsMap[stepId].sprite, backgroundPosition: stepsMap[stepId].pos, transform: "scale(1.2)", imageRendering: "pixelated" }} />
+                          <span style={{ fontSize: "18px", color: "#555", display: "flex", alignItems: "center", letterSpacing: "2px" }}>⋮⋮</span>
+                          <div style={{ width: "28px", height: "28px", background: "#1c1c1c", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #444" }}>
+                            <img src={stepsMap[stepId].img} alt="" style={{ width: "20px", height: "20px", objectFit: "contain" }} />
                           </div>
                           {stepsMap[stepId].text}
                         </div>
@@ -1425,6 +1362,7 @@ export default function App() {
               </div>
             </div>
           )}
+
 
           {instructionStep === 3 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
@@ -1482,7 +1420,7 @@ export default function App() {
 
               <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
               <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
-                As you watch, pause whenever needed and follow these three steps to share your thoughts on the AI chefs' behavior.
+                As you watch, pause whenever needed and follow these three steps to share your thoughts on the AI robots' behavior.
               </p>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
@@ -1518,69 +1456,16 @@ export default function App() {
                       Choose whether your feedback is positive or negative.
                     </p>
                   </div>
-                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginTop: "30px", overflow: "visible", position: "relative" }}>
-                    <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", width: "100%", transform: "translateY(-15px)" }}>
-                      <div style={{
-                        background: "#fcd34d",
-                        color: "#18181b",
-                        padding: "10px 24px",
-                        borderRadius: "8px",
-                        fontSize: "13px",
-                        fontWeight: "700",
-                        position: "relative",
-                        zIndex: 2,
-                        animation: "buttonClickMock 6s ease-in-out infinite"
-                      }}>
-                        + Add Feedback
-                      </div>
-
-                      {/* Likert Scale Container */}
-                      <div style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: "6px",
-                        background: "#222",
-                        padding: "8px 12px",
-                        borderRadius: "12px",
-                        border: "1px solid #333",
-                        position: "absolute",
-                        top: "100%",
-                        marginTop: "8px",
-                        width: "max-content",
-                        zIndex: 1,
-                        animation: "likertFadeIn 6s ease-in-out infinite",
-                        boxShadow: "0 8px 24px rgba(0,0,0,0.6)"
-                      }}>
-                        <span style={{ fontSize: "10px", color: "#aaa", fontWeight: "600", letterSpacing: "0.2px", textTransform: "uppercase" }}>RATE THIS BEHAVIOR</span>
-                        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                          <span style={{ fontSize: "12px", filter: "grayscale(100%)", opacity: 0.6 }}>👎</span>
-                          {[1, 2, 3, 4, 5].map(num => (
-                            <div key={num} style={{
-                              width: "14px", height: "14px",
-                              borderRadius: "50%",
-                              background: "#3f3f46",
-                              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5)",
-                              animation: num === 5 ? "likertPointClick 6s ease-in-out infinite" : "none"
-                            }} />
-                          ))}
-                          <span style={{ fontSize: "12px" }}>👍</span>
-                        </div>
-                      </div>
-
-                      {/* Fake Mouse Cursor Overlay */}
-                      <div style={{
-                        position: "absolute",
-                        top: "8px", left: "50%",
-                        marginLeft: "-6px",
-                        width: "20px", height: "20px",
-                        pointerEvents: "none", zIndex: 10,
-                        animation: "mouseMoveClick3 6s ease-in-out infinite"
-                      }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.5))" }}>
-                          <path d="M5.5 3.5L18.5 10.5L12 13L15 20.5L11.5 22L8.5 14.5L3 17.5L5.5 3.5Z" fill="white" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
-                        </svg>
-                      </div>
+                  <div style={{ boxSizing: "border-box", width: "100%", height: "120px", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "30px" }}>
+                    <div style={{
+                      background: "#fcd34d",
+                      color: "#18181b",
+                      padding: "12px 28px",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      fontWeight: "700",
+                    }}>
+                      + Add Feedback
                     </div>
                   </div>
                 </div>
@@ -1895,31 +1780,39 @@ export default function App() {
 
       {/* Absolute Top Right Controls (Export & Next Episode) */}
       <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
-        <button
-          onClick={handleNextEpisodeClick}
-          disabled={isSaving}
-          style={{ background: "#111", color: "#fff", border: "1px solid #333", padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "wait" : "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", opacity: isSaving ? 0.7 : 1 }}
-          onMouseOver={e => {
-            if (!isSaving) {
-              e.currentTarget.style.background = "#fcd34d";
-              e.currentTarget.style.color = "#000";
-              e.currentTarget.style.borderColor = "#fcd34d";
-            }
-          }}
-          onMouseOut={e => {
-            if (!isSaving) {
-              e.currentTarget.style.background = "#111";
-              e.currentTarget.style.color = "#fff";
-              e.currentTarget.style.borderColor = "#333";
-            }
-          }}
-        >
-          {isSaving
-            ? "Saving..."
-            : episodeCount >= ALL_MAPS.length
-              ? "Finish Experiment"
-              : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
-        </button>
+        {(() => {
+          const surveyIncomplete = hasEpisode && (episodeSurveyAnswers.eq1 === null || episodeSurveyAnswers.eq4 === null);
+          const btnDisabled = isSaving || surveyIncomplete;
+          return (
+            <button
+              onClick={handleNextEpisodeClick}
+              disabled={btnDisabled}
+              style={{ background: btnDisabled ? "#222" : "#111", color: btnDisabled ? "#666" : "#fff", border: `1px solid ${btnDisabled ? "#222" : "#333"}`, padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: btnDisabled ? "not-allowed" : "pointer", transition: "all 0.2s ease", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", opacity: btnDisabled ? 0.7 : 1 }}
+              onMouseOver={e => {
+                if (!btnDisabled) {
+                  e.currentTarget.style.background = "#fcd34d";
+                  e.currentTarget.style.color = "#000";
+                  e.currentTarget.style.borderColor = "#fcd34d";
+                }
+              }}
+              onMouseOut={e => {
+                if (!btnDisabled) {
+                  e.currentTarget.style.background = "#111";
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.borderColor = "#333";
+                }
+              }}
+            >
+              {isSaving
+                ? "Saving..."
+                : surveyIncomplete
+                  ? "Complete survey below ↓"
+                  : episodeCount >= ALL_MAPS.length
+                    ? "Finish Experiment"
+                    : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
+            </button>
+          );
+        })()}
       </div>
 
 

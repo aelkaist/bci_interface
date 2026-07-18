@@ -191,10 +191,10 @@ const SKIN_OVERRIDE = {
     "11,6": "Assets-45.png",
     "12,6": "Assets-45.png",
 
-    "5,6": "Assets-42.png",
-    "5,5": "Assets-65.png",
-    "0,5": "Assets-100.png",
-    "0,4": "Assets-101.png",
+    "5,6": { file: "Assets-45.png", overlay: "box_new.png" },
+    "5,5": "Assets-48.png",
+    "0,5": { file: "Assets-38.png", overlay: "box_new.png" },
+    "0,4": "Assets-01.png",
     "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
 
     "12,3": "Assets-79.png",
@@ -291,10 +291,10 @@ const SKIN_OVERRIDE = {
     "11,6": "Assets-45.png",
     "12,6": "Assets-45.png",
 
-    "5,6": "Assets-42.png",
-    "5,5": "Assets-65.png",
-    "0,5": "Assets-100.png",
-    "0,4": "Assets-101.png",
+    "5,6": { file: "Assets-45.png", overlay: "box_new.png" },
+    "5,5": "Assets-48.png",
+    "0,5": { file: "Assets-38.png", overlay: "box_new.png" },
+    "0,4": "Assets-01.png",
     "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
 
     "12,3": "Assets-79.png",
@@ -695,6 +695,17 @@ export default function OvercookScene({
                     </>
                   );
                 })()}
+                {/* 오버레이 이미지 (타일 위에 띄우기) */}
+                {isObj && overrideEntry.overlay && (
+                  <image
+                    href={skinUrl(overrideEntry.overlay)}
+                    x={x * gridSize + gridSize * 0.025}
+                    y={y * gridSize - 14 + gridSize * 0.025}
+                    width={gridSize * 0.95}
+                    height={gridSize * 0.95}
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+                )}
               </g>
             );
           }
