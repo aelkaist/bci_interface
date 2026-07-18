@@ -23,19 +23,19 @@ const mapModules = import.meta.glob("./maps/*/L3/*.json");
 const TUTORIAL_PRELOAD_ASSETS = [
   { href: "/7.gif", type: "image" },
   { href: "/feedback.gif", type: "image" },
-  { href: "/1.mov", type: "video" },
-  { href: "/2.mov", type: "video" },
-  { href: "/3.mov", type: "video" },
-  { href: "/4.mov", type: "video" },
+  { href: "/gif/pickup.mov", type: "video" },
+  { href: "/gif/load.mov", type: "video" },
+  { href: "/gif/box.mov", type: "video" },
+  { href: "/gif/deliver.mov", type: "video" },
   { href: "/main.gif", type: "image" },
   { href: "/main_paused.png", type: "image" },
 ];
 
 const PRODUCTION_LINE_STEPS = [
-  { video: "/1.mov", fallback: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
-  { video: "/2.mov", fallback: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
-  { video: "/3.mov", fallback: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
-  { video: "/4.mov", fallback: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" },
+  { video: "/gif/pickup.mov", fallback: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
+  { video: "/gif/load.mov", fallback: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
+  { video: "/gif/box.mov", fallback: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
+  { video: "/gif/deliver.mov", fallback: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" },
 ];
 
 function shuffle(items) {
