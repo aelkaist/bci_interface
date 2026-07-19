@@ -1839,13 +1839,13 @@ export default function App() {
           }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
               <span style={{ color: "#71717a", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "700" }}>Completion Code</span>
-              <strong style={{ color: "#fcd34d", fontSize: "28px", letterSpacing: "4px", fontFamily: "monospace", textShadow: "0 0 20px rgba(252, 211, 77, 0.3)" }}>B24239977D</strong>
+              <strong style={{ color: "#fcd34d", fontSize: "28px", letterSpacing: "4px", fontFamily: "monospace", textShadow: "0 0 20px rgba(252, 211, 77, 0.3)" }}>438F396241</strong>
             </div>
           </div>
 
           <div style={{ width: "100%", marginTop: "32px", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <a
-              href="https://connect.cloudresearch.com/participant/project/B24239977D/complete"
+              href="https://connect.cloudresearch.com/participant/project/438F396241/complete"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -1869,7 +1869,7 @@ export default function App() {
               </svg>
             </a>
             <p style={{ marginTop: "16px", fontSize: "13px", color: "#52525b", textAlign: "center", margin: "16px 0 0 0" }}>
-              Or use this redirect URL: <a href="https://connect.cloudresearch.com/participant/project/B24239977D/complete" style={{ color: "#71717a", textDecoration: "underline", wordBreak: "break-all" }}>https://connect.cloudresearch.com/participant/project/B24239977D/complete</a>
+              Or use this redirect URL: <a href="https://connect.cloudresearch.com/participant/project/438F396241/complete" style={{ color: "#71717a", textDecoration: "underline", wordBreak: "break-all" }}>https://connect.cloudresearch.com/participant/project/438F396241/complete</a>
             </p>
           </div>
         </div>
