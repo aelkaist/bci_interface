@@ -10,6 +10,7 @@ const PILOTS = [
   { id: "pilot1", label: "Pilot 1 - 2026-05-24", date: "2026-05-24" },
   { id: "pilot2", label: "Pilot 2 - 2026-06-04", date: "2026-06-04" },
   { id: "pilot3", label: "Pilot 3 - 2026-06-05", date: "2026-06-05" },
+  { id: "pilot4", label: "Pilot 4 - 2026-07-19", date: "2026-07-19" },
 ];
 
 const dashboardDir = path.resolve(__dirname, "../analysis/dashboard");
@@ -227,12 +228,25 @@ const manifest = {
 for (const { pilot, pilotData } of pilotOutputs) {
   const file = `${pilot.id}-${pilot.date}.json`;
   const outputPath = path.join(outputDir, file);
-  const participants = Object.values(pilotData);
+  let finalPilotData = pilotData;
+
+  let participants = Object.values(finalPilotData);
+  if (participants.length === 0 && fs.existsSync(outputPath)) {
+    console.log(`Keeping existing ${file} (0 participants in fresh fetch)`);
+    try {
+      finalPilotData = JSON.parse(fs.readFileSync(outputPath, "utf8"));
+      participants = Object.values(finalPilotData);
+    } catch (e) {
+      console.warn(`Failed to read existing ${file}:`, e.message);
+    }
+  } else {
+    fs.writeFileSync(outputPath, JSON.stringify(finalPilotData, null, 2));
+  }
+
   const completedParticipants = participants.filter((participant) =>
-    participant.sessions.some((session) => session.status === "completed"),
+    (participant.sessions || []).some((session) => session.status === "completed"),
   ).length;
 
-  fs.writeFileSync(outputPath, JSON.stringify(pilotData, null, 2));
   manifest.pilots.push({
     ...pilot,
     file,

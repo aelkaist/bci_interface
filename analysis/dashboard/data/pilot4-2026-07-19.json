@@ -255,7 +255,9 @@
           "q1": "I was following a robot picking up-moving-dropping off sequence of events"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "4ED469461807434EA6CB248466634402": {
     "id": "4ED469461807434EA6CB248466634402",
@@ -462,7 +464,9 @@
           "q4": "Study was interesting, instructions easy to follow."
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "6DFEEE5D622B4162A92B4CAD7B698007": {
     "id": "6DFEEE5D622B4162A92B4CAD7B698007",
@@ -584,7 +588,9 @@
           "q4": "no"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "757A0F561B334FA1880A22D268D6861B": {
     "id": "757A0F561B334FA1880A22D268D6861B",
@@ -657,7 +663,9 @@
         "feedback": "The AI robots completed steps in order, there were not errors in following the steps from what I saw. "
       }
     ],
-    "postSurveys": []
+    "postSurveys": [],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "76555D591C8B42DEA182443FD845CD8D": {
     "id": "76555D591C8B42DEA182443FD845CD8D",
@@ -864,7 +872,9 @@
           "q3": "I did not find it difficult to monitor the AI agents"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "7DC3A3BF45704F2CBFCD81EE0709FAA3": {
     "id": "7DC3A3BF45704F2CBFCD81EE0709FAA3",
@@ -1071,7 +1081,9 @@
           "q4": "no"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "8B842E5D3129486ABC804CA02E8F84B3": {
     "id": "8B842E5D3129486ABC804CA02E8F84B3",
@@ -1276,7 +1288,9 @@
           "q4": "The robots were doing the same thing over and over again, it was hard to notice any differences"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "C08F920D05DC4369B38827A0B70EBC4F": {
     "id": "C08F920D05DC4369B38827A0B70EBC4F",
@@ -1306,7 +1320,9 @@
     ],
     "episodes": [],
     "feedbackItems": [],
-    "postSurveys": []
+    "postSurveys": [],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "C55562B9C9CC46768E9D61FBE7E6D3C6": {
     "id": "C55562B9C9CC46768E9D61FBE7E6D3C6",
@@ -1955,7 +1971,9 @@
           "q4": "No."
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "D1574A2790D44655BDE8A54C87518AD5": {
     "id": "D1574A2790D44655BDE8A54C87518AD5",
@@ -2213,7 +2231,9 @@
           "q4": "I can't think of anything"
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "EF8ADA1DD96D45ECB81A2E6825203E68": {
     "id": "EF8ADA1DD96D45ECB81A2E6825203E68",
@@ -3018,7 +3038,9 @@
           "q1": "My strategy was to break each action down into sections, going back and re-watching when needed so that I could analyze each robot's actions at all times throughout each video. I considered a section to be a block of behavior (trading parts, filling up the machine, standing around and doing nothing, preparing, etc.) which was usually through coordinated behavior but sometimes it was also just when steps either were or were not being actively completed as well."
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   },
   "FF71ED55D59041448DBE02AE5E73E5F8": {
     "id": "FF71ED55D59041448DBE02AE5E73E5F8",
@@ -3251,6 +3273,8 @@
           "q4": "It was a great experience to see AI robots behaved like they did, it shows how technology is fast growing and I believe a tech like this is useful in production lines and a great step to have an efficient and fast production."
         }
       }
-    ]
+    ],
+    "pilotSetId": "pilot4",
+    "pilotDate": "2026-07-19"
   }
 }

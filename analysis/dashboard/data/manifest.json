@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T08:14:30.100Z",
+  "generatedAt": "2026-07-20T13:07:14.727Z",
   "timeZone": "Asia/Seoul",
   "pilots": [
     {
@@ -23,6 +23,14 @@
       "label": "Pilot 3 - 2026-06-05",
       "date": "2026-06-05",
       "file": "pilot3-2026-06-05.json",
+      "participantCount": 12,
+      "completedParticipantCount": 10
+    },
+    {
+      "id": "pilot4",
+      "label": "Pilot 4 - 2026-07-19",
+      "date": "2026-07-19",
+      "file": "pilot4-2026-07-19.json",
       "participantCount": 12,
       "completedParticipantCount": 10
     }
