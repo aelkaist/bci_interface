@@ -21,9 +21,9 @@ const FLOOR_TILE_OPACITY = 1.0;
 const SHADOW_OPACITY = 0.45;
 const TILE_FILTER = "brightness(0.75) contrast(1.35) saturate(0.9)";
 const OBJECT_FILTER = "brightness(0.80) contrast(1.2)";
-const INGREDIENT_FILTER = "brightness(0.95) contrast(1.05)";
-const POT_INGREDIENT_FILTER = "brightness(0.75) contrast(1.15)";
-const HELD_INGREDIENT_FILTER = "brightness(0.83) contrast(1.10)";
+const INGREDIENT_FILTER = "brightness(0.91) contrast(1.05)";
+const POT_INGREDIENT_FILTER = "brightness(0.80) contrast(1.15)";
+const HELD_INGREDIENT_FILTER = "brightness(0.85) contrast(1.10)";
 
 const SKIN = {
   wall: "Assets-01.png",
