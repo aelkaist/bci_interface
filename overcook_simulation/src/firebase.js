@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDocs, setDoc, writeBatch } from "firebase/firestore";
 
 // .env 파일에 정의된 환경 변수 사용
 const firebaseConfig = {
@@ -32,20 +32,28 @@ export const saveFeedbackToFirestore = async (payload) => {
       createdAt: new Date().toISOString()
     });
 
-    // participants/{prolificId}/episodes/episode_N/feedback_items/{itemId}
-    if (feedbackDetails && feedbackDetails.length > 0) {
-      const itemsCol = collection(
-        db,
-        `participants/${prolificId}/episodes/${episodeId}/feedback_items`
-      );
-      for (const [index, detail] of feedbackDetails.entries()) {
-        await addDoc(itemsCol, {
-          index: index + 1,
-          ...detail,
-          createdAt: new Date().toISOString()
-        });
-      }
-    }
+    // Keep this subcollection in sync so revisiting an episode never creates duplicates.
+    const itemsCol = collection(db, `participants/${prolificId}/episodes/${episodeId}/feedback_items`);
+    const existingItems = await getDocs(itemsCol);
+    const currentItemIds = new Set((feedbackDetails || []).map((detail) => detail.feedbackId));
+    const batch = writeBatch(db);
+
+    existingItems.forEach((itemDoc) => {
+      if (!currentItemIds.has(itemDoc.id)) batch.delete(itemDoc.ref);
+    });
+
+    (feedbackDetails || []).forEach((detail, index) => {
+      const { feedbackId, ...feedbackData } = detail;
+      if (!feedbackId) throw new Error("feedbackId is required");
+      const itemRef = doc(itemsCol, feedbackId);
+      batch.set(itemRef, {
+        index: index + 1,
+        ...feedbackData,
+        updatedAt: new Date().toISOString()
+      });
+    });
+
+    await batch.commit();
 
     console.log("Episode saved:", episodeId);
     return episodeId;

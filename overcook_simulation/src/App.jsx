@@ -27,6 +27,7 @@ const TUTORIAL_PRELOAD_ASSETS = [
   { href: "/gif/load.mov", type: "video" },
   { href: "/gif/box.mov", type: "video" },
   { href: "/gif/deliver.mov", type: "video" },
+  { href: "/gif/example.mov", type: "video" },
   { href: "/main.gif", type: "image" },
   { href: "/main_paused.png", type: "image" },
 ];
@@ -34,7 +35,7 @@ const TUTORIAL_PRELOAD_ASSETS = [
 const PRODUCTION_LINE_STEPS = [
   { video: "/gif/pickup.mov", fallback: "/1.gif", title: "1. Pick up parts", desc: "Collect parts from the supply area.", icon: "/smartfactory/items.png", objPos: "center bottom" },
   { video: "/gif/load.mov", fallback: "/2.gif", title: "2. Load parts into the machine", desc: "Place 3 parts in the processing machine to start production.", icon: "/smartfactory/Assets-04.png", objPos: "center top" },
-  { video: "/gif/box.mov", fallback: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/Assets-11.png", objPos: "center 25%" },
+  { video: "/gif/box.mov", fallback: "/3.gif", title: "3. Bring a box to the machine", desc: "While the parts are being processed, pick up an empty box.", icon: "/smartfactory/box_new.png", objPos: "center 25%" },
   { video: "/gif/deliver.mov", fallback: "/4.gif", title: "4. Deliver the product", desc: "Place the finished product in the box and deliver it to the delivery area", icon: "/smartfactory/tile9.png", objPos: "center" },
 ];
 
@@ -111,9 +112,24 @@ function createExperimentSessionId() {
   return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
-function TutorialMedia({ src, fallbackSrc, alt, objectFit = "cover", opacity = 0.9 }) {
+function createFeedbackId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+
+  return `feedback-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function TutorialMedia({ src, fallbackSrc, alt, objectFit = "cover", opacity = 0.9, playbackRate = 1.35 }) {
   const [useFallback, setUseFallback] = useState(false);
+  const videoRef = useRef(null);
   const sharedStyle = { width: "100%", height: "100%", objectFit, opacity };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = playbackRate;
+    }
+  }, [src, playbackRate]);
 
   if (useFallback) {
     return <img src={fallbackSrc} alt={alt} style={sharedStyle} />;
@@ -121,6 +137,7 @@ function TutorialMedia({ src, fallbackSrc, alt, objectFit = "cover", opacity = 0
 
   return (
     <video
+      ref={videoRef}
       src={src}
       aria-label={alt}
       autoPlay
@@ -128,6 +145,12 @@ function TutorialMedia({ src, fallbackSrc, alt, objectFit = "cover", opacity = 0
       loop
       playsInline
       preload="auto"
+      onLoadedMetadata={() => {
+        if (videoRef.current) videoRef.current.playbackRate = playbackRate;
+      }}
+      onPlay={() => {
+        if (videoRef.current) videoRef.current.playbackRate = playbackRate;
+      }}
       onError={() => setUseFallback(true)}
       style={sharedStyle}
     />
@@ -275,8 +298,9 @@ export default function App() {
 
   const [mapOrder] = useState(() => ALL_MAPS.map((_, index) => index));
   const [currentMapIdx, setCurrentMapIdx] = useState(0);
+  const [episodeDrafts, setEpisodeDrafts] = useState({});
 
-  const loadMapByIndex = async (index) => {
+  const loadMapByIndex = async (index, draft = episodeDrafts[index]) => {
     const mapObj = ALL_MAPS[index];
     if (!mapObj) return false;
 
@@ -298,16 +322,18 @@ export default function App() {
       setPlayMode("full");
       segmentEndFrameRef.current = null;
 
-      setElapsed(0);
-      setFrameIndex(0);
-      setRawMarkers([]);
-      setIntervals([]);
+      setElapsed(draft?.elapsed ?? 0);
+      setFrameIndex(draft?.frameIndex ?? 0);
+      setRawMarkers(draft?.rawMarkers ?? []);
+      setIntervals(draft?.intervals ?? []);
       setSelectedInterval(null);
 
+      accumulatedEpisodeDurationMsRef.current = draft?.accumulatedDurationMs ?? 0;
       sessionStartRef.current = Date.now();
-      pauseCountRef.current = 0;
-      playbackSpeedChangesRef.current = [];
-      setPlaybackRate(1);
+      pauseCountRef.current = draft?.pauseCount ?? 0;
+      playbackSpeedChangesRef.current = draft?.playbackSpeedChanges ?? [];
+      setPlaybackRate(draft?.playbackRate ?? 1);
+      setEpisodeSurveyAnswers(draft?.surveyAnswers ?? { eq1: null, eq4: null, eq5: "" });
 
       return true;
     } catch (err) {
@@ -339,6 +365,7 @@ export default function App() {
   const [rawMarkers, setRawMarkers] = useState([]); // [frameIndex, ...]
   const [intervals, setIntervals] = useState([]); // [{ baseFrame, startOffset, endOffset, reason }, ...]
   const [selectedInterval, setSelectedInterval] = useState(null);
+  const incompleteFeedbackCount = intervals.filter((interval) => !interval.reason?.trim()).length;
 
   const [episodeCount, setEpisodeCount] = useState(1); // 현재 에피소드 진행 상황
 
@@ -352,6 +379,7 @@ export default function App() {
   const prevIntervalsLen = useRef(0);
 
   const sessionStartRef = useRef(Date.now());
+  const accumulatedEpisodeDurationMsRef = useRef(0);
   const pauseCountRef = useRef(0);
   const playbackSpeedChangesRef = useRef([]);
   const elapsedRef = useRef(0);
@@ -359,15 +387,45 @@ export default function App() {
   const experimentSessionIdRef = useRef(null);
   const tutorialStartRef = useRef(Date.now());
   const tutorialEndRef = useRef(null);
+  const accumulatedTutorialDurationMsRef = useRef(0);
+  const tutorialSegmentStartRef = useRef(Date.now());
   const mainStartRef = useRef(null);
+
+  const getEpisodeDurationMs = (endAt = Date.now()) => (
+    accumulatedEpisodeDurationMsRef.current + Math.max(0, endAt - sessionStartRef.current)
+  );
+
+  const captureEpisodeDraft = (capturedAt = Date.now()) => ({
+    elapsed,
+    frameIndex,
+    rawMarkers,
+    intervals,
+    playbackRate,
+    surveyAnswers: episodeSurveyAnswers,
+    pauseCount: pauseCountRef.current,
+    playbackSpeedChanges: playbackSpeedChangesRef.current,
+    accumulatedDurationMs: getEpisodeDurationMs(capturedAt),
+  });
 
   if (!experimentSessionIdRef.current) {
     experimentSessionIdRef.current = createExperimentSessionId();
   }
 
+  const getTutorialDurationMs = (endAt = null) => {
+    let currentSegmentMs = 0;
+    if (tutorialSegmentStartRef.current !== null) {
+      const targetEndMs = (typeof endAt === "number" && endAt > 0) ? endAt : Date.now();
+      currentSegmentMs = Math.max(0, targetEndMs - tutorialSegmentStartRef.current);
+    }
+    return accumulatedTutorialDurationMsRef.current + currentSegmentMs;
+  };
+
   const getTutorialDurationSec = (endAt = tutorialEndRef.current) => {
-    if (!endAt) return null;
-    return durationMsToSec(endAt - tutorialStartRef.current);
+    if (!tutorialEndRef.current && tutorialSegmentStartRef.current === null && accumulatedTutorialDurationMsRef.current === 0) {
+      return null;
+    }
+    const endMs = (typeof endAt === "number" && endAt > 0) ? endAt : null;
+    return durationMsToSec(getTutorialDurationMs(endMs));
   };
 
   const getMainDurationSec = (endAt = Date.now()) => {
@@ -398,15 +456,23 @@ export default function App() {
     mapOrder: mapOrder.map((index) => ALL_MAPS[index]?.name).filter(Boolean),
   });
 
-  const maybeMarkMainStart = () => {
-    if (mainStartRef.current) return;
-
+  const maybeMarkMainStart = (overrideProlificId = null) => {
     const startedAt = Date.now();
-    mainStartRef.current = startedAt;
+
+    if (tutorialSegmentStartRef.current !== null) {
+      accumulatedTutorialDurationMsRef.current += Math.max(0, startedAt - tutorialSegmentStartRef.current);
+      tutorialSegmentStartRef.current = null;
+    }
     tutorialEndRef.current = startedAt;
 
+    if (mainStartRef.current) return;
+
+    mainStartRef.current = startedAt;
+
+    const targetId = (overrideProlificId !== null && overrideProlificId !== undefined) ? overrideProlificId : prolificId;
+
     void upsertExperimentSessionToFirestore(
-      prolificId,
+      targetId,
       experimentSessionIdRef.current,
       buildExperimentSessionPayload({
         status: "main_started",
@@ -509,6 +575,7 @@ export default function App() {
         setSelectedInterval(null);
 
         sessionStartRef.current = Date.now();
+        accumulatedEpisodeDurationMsRef.current = 0;
         pauseCountRef.current = 0;
         playbackSpeedChangesRef.current = [];
         setPlaybackRate(1);
@@ -618,6 +685,7 @@ export default function App() {
           return [
             ...prev,
             {
+              feedbackId: createFeedbackId(),
               baseFrame: frameIndex,
               startOffset: -2,
               endOffset: 2,
@@ -700,6 +768,7 @@ export default function App() {
       return [
         ...prev,
         {
+          feedbackId: createFeedbackId(),
           baseFrame: frameIndex,
           startOffset: -2,
           endOffset: 2,
@@ -795,11 +864,11 @@ export default function App() {
     URL.revokeObjectURL(url);
   };
 
-  const generatePayload = ({ isFinalEpisode = false, mainEndedAt = null } = {}) => {
+  const generatePayload = ({ isFinalEpisode = false, mainEndedAt = null, episodeEndedAt = null } = {}) => {
     if (!episode || totalFrames === 0) return null;
 
-    const measuredAt = mainEndedAt ?? Date.now();
-    const sessionDurationSec = Math.round((measuredAt - sessionStartRef.current) / 1000);
+    const measuredAt = episodeEndedAt ?? mainEndedAt ?? Date.now();
+    const sessionDurationSec = Math.round(getEpisodeDurationMs(measuredAt) / 1000);
     const tutorialDurationSec = getTutorialDurationSec();
     const mainDurationSec = getMainDurationSec(measuredAt);
 
@@ -819,6 +888,7 @@ export default function App() {
 
       const isDidSpecify = !intv.isFullRange;
       return {
+        feedbackId: intv.feedbackId,
         startFrame: isDidSpecify ? startFrame : null,
         endFrame: isDidSpecify ? endFrame : null,
         baseFrame: baseFrame,
@@ -848,6 +918,10 @@ export default function App() {
 
   // 최종 export
   const handleExport = async () => {
+    if (incompleteFeedbackCount > 0) {
+      alert("Complete or delete each feedback item before saving.");
+      return;
+    }
     const payload = generatePayload();
     if (!payload) return;
 
@@ -865,13 +939,20 @@ export default function App() {
   };
 
   const handleNextEpisodeClick = async () => {
+    if (incompleteFeedbackCount > 0) {
+      alert("Complete or delete each feedback item before continuing.");
+      return;
+    }
+
     const isFinalEpisode = currentMapIdx >= mapOrder.length - 1;
-    const finalMainEndedAt = isFinalEpisode ? Date.now() : null;
+    const transitionAt = Date.now();
+    const finalMainEndedAt = isFinalEpisode ? transitionAt : null;
 
     if (hasEpisode) {
       const payload = generatePayload({
         isFinalEpisode,
         mainEndedAt: finalMainEndedAt,
+        episodeEndedAt: transitionAt,
       });
       if (payload) {
         try {
@@ -893,12 +974,14 @@ export default function App() {
     cancelAnimationFrame(rafRef.current);
     setIsPlaying(false);
 
+    setEpisodeDrafts((previous) => ({
+      ...previous,
+      [currentMapIdx]: captureEpisodeDraft(transitionAt),
+    }));
+
     const nextIdx = currentMapIdx + 1;
     const completedEpisodeIndex = currentMapIdx + 1;
     const completedEpisodeFileName = episode?.fileName || fileName || null;
-
-    // Reset survey for next episode
-    setEpisodeSurveyAnswers({ eq1: null, eq4: null, eq5: "" });
 
     // Execute the transition
     if (!isFinalEpisode && nextIdx < mapOrder.length) {
@@ -926,6 +1009,40 @@ export default function App() {
         console.error(err);
       }
     }
+  };
+
+  const handlePreviousEpisodeClick = async () => {
+    if (isSaving) return;
+
+    if (currentMapIdx === 0) {
+      cancelAnimationFrame(rafRef.current);
+      setIsPlaying(false);
+      const draftsWithCurrent = {
+        ...episodeDrafts,
+        [currentMapIdx]: captureEpisodeDraft(),
+      };
+      setEpisodeDrafts(draftsWithCurrent);
+
+      tutorialSegmentStartRef.current = Date.now();
+
+      setInstructionStep(3);
+      return;
+    }
+
+    cancelAnimationFrame(rafRef.current);
+    setIsPlaying(false);
+    const previousIdx = currentMapIdx - 1;
+    const draftsWithCurrent = {
+      ...episodeDrafts,
+      [currentMapIdx]: captureEpisodeDraft(),
+    };
+    setEpisodeDrafts(draftsWithCurrent);
+
+    const loaded = await loadMapByIndex(previousIdx, draftsWithCurrent[previousIdx]);
+    if (!loaded) return;
+
+    setCurrentMapIdx(previousIdx);
+    setEpisodeCount(previousIdx + 1);
   };
 
   // 업로드 버튼 기준 pill 스타일
@@ -1142,7 +1259,7 @@ export default function App() {
                     <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
                       {/* Video Frame */}
                       <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: "1px solid #333", background: "#000", aspectRatio: "2.5/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                        <TutorialMedia src="/gif/example.mov" fallbackSrc="/7.gif" alt="Gameplay preview" objectFit="cover" opacity={0.85} />
                       </div>
                     </div>
                     <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", marginTop: "auto", marginBottom: "16px", letterSpacing: "0.2px" }}>1. Watch AI Robots Work Together</h2>
@@ -1169,8 +1286,8 @@ export default function App() {
 
           {instructionStep === 1 && (
             <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "100%" }}>
-              <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How the Production Line Works</h1>
-              <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI robots’ main goal is to work together to move item parts through the production line and package them.</p>
+              <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>Understanding How AI Robots Work</h1>
+              <p style={{ fontSize: "20px", color: "#aaa", margin: 0, marginBottom: "20px" }}>The AI robots’ main goal is to work together to move and package item parts.</p>
 
               {/* To cook onion soup timeline */}
               <div style={{ display: "flex", flexDirection: "column", gap: "28px", width: "100%", background: "#1c1c1c", padding: "28px 32px", borderRadius: "14px", border: "1px solid #333", boxSizing: "border-box" }}>
@@ -1209,7 +1326,7 @@ export default function App() {
 
                   {/* Box */}
                   <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#0a0a0c", padding: "12px 18px", borderRadius: "10px", border: "1px solid #444" }}>
-                    <img src="/smartfactory/Assets-11.png" alt="Box" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
+                    <img src="/smartfactory/box_new.png" alt="Box" style={{ width: "36px", height: "36px", objectFit: "contain" }} />
                     <span>Box</span>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "4px", opacity: 0.5 }}>
@@ -1250,7 +1367,7 @@ export default function App() {
 
               {/* Reference Video Area */}
               <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", backgroundColor: "#000", borderRadius: "14px", overflow: "hidden", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", aspectRatio: "2.5/1", boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
-                <img src="/7.gif" alt="Gameplay preview" style={{ width: "100%", height: "100%", objectFit: "contain", opacity: 0.9 }} />
+                <TutorialMedia src="/gif/example.mov" fallbackSrc="/7.gif" alt="Gameplay preview" objectFit="contain" opacity={0.9} />
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -1329,7 +1446,7 @@ export default function App() {
                     {[
                       { id: "onion", img: "/smartfactory/items.png" },
                       { id: "pot", img: "/smartfactory/Assets-04.png" },
-                      { id: "dish", img: "/smartfactory/Assets-11.png" },
+                      { id: "dish", img: "/smartfactory/box_new.png" },
                       { id: "chef", img: "/smartfactory/agv.png", overlay: "/smartfactory/Assets-89.png" },
                       { id: "serve", img: "/smartfactory/tile9.png" }
                     ].map(item => {
@@ -1383,7 +1500,7 @@ export default function App() {
                       const stepsMap = {
                         1: { text: "Pick up parts", img: "/smartfactory/items.png" },
                         2: { text: "Load parts into the machine", img: "/smartfactory/Assets-04.png" },
-                        3: { text: "Bring an empty box to the machine", img: "/smartfactory/Assets-11.png" },
+                        3: { text: "Bring an empty box to the machine", img: "/smartfactory/box_new.png" },
                         4: { text: "Deliver to the Drop Zone", img: "/smartfactory/tile9.png" }
                       };
                       return (
@@ -1481,13 +1598,13 @@ export default function App() {
 
               <h1 style={{ fontSize: "40px", fontWeight: "800", margin: 0 }}>How to Add Feedback</h1>
               <p style={{ fontSize: "20px", color: "#aaa", margin: 0 }}>
-                As you watch, pause whenever needed and follow these two steps to share your thoughts on the AI robots' behavior.
+                You can add feedback at any time while watching. Pause or rewatch any part whenever you need to, then follow these two steps.
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", minHeight: "420px", marginTop: "12px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", marginTop: "12px" }}>
 
                 {/* Card 1 */}
-                <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", border: "1px solid #222" }}>
                   <style>{`
                     @keyframes demoCursorMove {
                       0%, 20% { transform: translate(60px, 60px); opacity: 0; }
@@ -1527,17 +1644,17 @@ export default function App() {
                     </div>
                     <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>Spot a behavior you want to comment on, then pause the video. Rewatch as needed.</p>
                   </div>
-                  <div style={{ width: "100%", height: "120px", borderRadius: "10px", marginTop: "30px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
-                    
+                  <div style={{ width: "100%", aspectRatio: "2.5/1", borderRadius: "10px", marginTop: "24px", overflow: "hidden", background: "#000", position: "relative", border: "1px solid #333" }}>
+
                     {/* Background Video (GIF) */}
                     <img src="/main.gif" alt="Pause video simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, position: "absolute", inset: 0 }} />
-                    
+
                     {/* Paused Frame Overlay */}
                     <img src="/main_paused.png" alt="Paused simulation" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, position: "absolute", inset: 0, animation: "demoOverlayPause 5s infinite" }} />
-                    
+
                     {/* Pause Button Container */}
                     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      
+
                       {/* Animated Pause Button */}
                       <div style={{ width: "48px", height: "48px", background: "rgba(255, 255, 255, 0.25)", backdropFilter: "blur(4px)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.5)", animation: "demoBtnClick 5s infinite", position: "relative" }}>
                         <span style={{ color: "#fff", fontSize: "18px", fontWeight: "900", letterSpacing: "1px", position: "absolute", animation: "demoIconPauseSwap 5s infinite" }}>II</span>
@@ -1547,10 +1664,10 @@ export default function App() {
                       {/* Fake Cursor SVG */}
                       <div style={{ position: "absolute", zIndex: 10, animation: "demoCursorMove 5s infinite ease-in-out", pointerEvents: "none" }}>
                         <div style={{ animation: "demoCursorClick 5s infinite" }}>
-                           <svg width="24" height="36" viewBox="0 0 24 36" fill="none" style={{ filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.6))" }}>
-                             <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" fill="white"/>
-                             <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" stroke="black" strokeWidth="1.5" strokeLinejoin="round"/>
-                           </svg>
+                          <svg width="24" height="36" viewBox="0 0 24 36" fill="none" style={{ filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.6))" }}>
+                            <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" fill="white" />
+                            <path d="M5.5 3L18.4419 26.6853L12.3551 27.2721L14.7735 34.0261L9.12053 36L6.50059 28.7909L0.5 32.5L5.5 3Z" stroke="black" strokeWidth="1.5" strokeLinejoin="round" />
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -1558,36 +1675,28 @@ export default function App() {
                 </div>
 
                 {/* Card 2 */}
-                <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", border: "1px solid #222" }}>
+                <div style={{ background: "#151515", borderRadius: "16px", padding: "24px", display: "flex", flexDirection: "column", border: "1px solid #222" }}>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
                       <strong style={{ fontSize: "22px", color: "#fff", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                         2. Click
-                      <span style={{
-                        marginLeft: "6px",
-                        background: "#fcd34d",
-                        color: "#18181b",
-                        padding: "4px 12px",
-                        borderRadius: "6px",
-                        fontSize: "14px",
-                        fontWeight: "700",
-                        whiteSpace: "nowrap",
-                      }}>
-                        + Add Feedback
-                      </span>
-                    </strong>
+                        <span style={{
+                          marginLeft: "6px",
+                          background: "#fcd34d",
+                          color: "#18181b",
+                          padding: "4px 12px",
+                          borderRadius: "6px",
+                          fontSize: "14px",
+                          fontWeight: "700",
+                          whiteSpace: "nowrap",
+                        }}>
+                          + Add Feedback
+                        </span>
+                      </strong>
                     </div>
                     <p style={{ color: "#aaa", fontSize: "15px", lineHeight: "1.6", margin: 0 }}>
-                      Use the yellow button on the right panel to add a new entry.<br />
-                      Choose the start and end frames to give feedback.
+                      Add as many feedback entries as you want using the yellow button on the right panel. Choose the start and end frames for each feedback range, then complete every entry before continuing.
                     </p>
-                  </div>
-                  <div style={{ boxSizing: "border-box", width: "100%", aspectRatio: "2.5/1", borderRadius: "10px", background: "#1c1c1c", border: "1px solid #2a2a2a", overflow: "hidden", marginTop: "30px" }}>
-                    <img
-                      src="/feedback.gif"
-                      alt="Feedback panel"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
                   </div>
                 </div>
 
@@ -1595,54 +1704,38 @@ export default function App() {
 
 
 
-              <div
-                onClick={() => setHasReadInstructions(v => !v)}
-                role="checkbox"
-                aria-checked={hasReadInstructions}
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setHasReadInstructions(v => !v); } }}
+              <label
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   gap: "14px",
-                  background: hasReadInstructions ? "rgba(34,197,94,0.08)" : "#161616",
+                  background: "#161616",
                   padding: "18px 24px",
                   borderRadius: "14px",
-                  border: hasReadInstructions ? "1px solid #22c55e" : "1px solid #333",
+                  border: "1px solid #333",
                   marginTop: "20px",
                   cursor: "pointer",
                   userSelect: "none",
                   transition: "all 0.2s ease",
-                  boxShadow: hasReadInstructions ? "0 0 16px rgba(34,197,94,0.15)" : "none",
                 }}
               >
-                {/* 커스텀 체크 서클 */}
-                <div style={{
-                  width: "26px",
-                  height: "26px",
-                  borderRadius: "50%",
-                  flexShrink: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: hasReadInstructions ? "#22c55e" : "transparent",
-                  border: hasReadInstructions ? "2px solid #22c55e" : "2px solid #fcd34d",
-                  transition: "all 0.2s ease",
-                }}>
-                  <svg width="14" height="14" viewBox="0 0 14 14" style={{ opacity: hasReadInstructions ? 1 : 0, transition: "opacity 0.15s ease" }}>
-                    <path d="M2.5 7.5L5.5 10.5L11.5 3.5" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <input
+                  type="checkbox"
+                  checked={hasReadInstructions}
+                  onChange={(e) => setHasReadInstructions(e.target.checked)}
+                  aria-label="I understand the refresh warning"
+                  style={{ width: "20px", height: "20px", margin: 0, accentColor: "#fcd34d", cursor: "pointer", flexShrink: 0 }}
+                />
                 <span style={{
                   fontSize: "16px",
                   fontWeight: "600",
-                  color: hasReadInstructions ? "#22c55e" : "#fff",
-                  transition: "color 0.2s ease",
+                  color: "#fff",
                 }}>
-                  I have carefully read and understand the instructions.
+                  Do not refresh the page during the experiment. Your data will not be saved ⚠️
                 </span>
-              </div>
+
+              </label>
             </div>
           )}
         </div>
@@ -1674,22 +1767,16 @@ export default function App() {
       {
         id: "q4",
         type: "text",
-        text: "Is there anything else you would like to share about your experience in this study?",
+        text: "Final message for the AI robots you watched across all the episodes?",
         placeholder: "Type your response here...",
       },
     ];
 
-    const totalQuestions = SURVEY_QUESTIONS.length;
     const allAnswered = SURVEY_QUESTIONS.every((q) => {
       const val = surveyAnswers[q.id];
       if (q.type === "text") return val !== null && val.trim().length > 0;
       return val !== null;
     });
-    const answeredCount = SURVEY_QUESTIONS.filter((q) => {
-      const val = surveyAnswers[q.id];
-      if (q.type === "text") return val !== null && val.trim().length > 0;
-      return val !== null;
-    }).length;
 
     const handleSurveySubmit = async () => {
       if (!allAnswered) return;
@@ -1714,63 +1801,57 @@ export default function App() {
     };
 
     return (
-      <div style={{ zoom: 1.1, minHeight: "100vh", width: "100%", background: "#0d0d0d", color: "#f0f0f0", display: "flex", flexDirection: "column", padding: "40px 60px", boxSizing: "border-box", fontFamily: "Inter, sans-serif", overflowX: "hidden", overflowY: "auto" }}>
-        {/* Top header bar — matches onboarding/episode survey nav */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: "16px" }}>
-          {/* Right: submit button */}
-          <button
-            disabled={!allAnswered || isSurveySubmitting}
-            onClick={handleSurveySubmit}
-            style={{
-              padding: "14px 40px", fontSize: "16px", fontWeight: "700",
-              background: !allAnswered || isSurveySubmitting ? "#333" : "#fcd34d",
-              color: !allAnswered || isSurveySubmitting ? "#888" : "#000",
-              border: "none", borderRadius: "8px",
-              cursor: !allAnswered || isSurveySubmitting ? "not-allowed" : "pointer",
-              boxShadow: "none", flexShrink: 0, transition: "all 0.2s",
-              pointerEvents: !allAnswered || isSurveySubmitting ? "none" : "auto",
-              opacity: !allAnswered || isSurveySubmitting ? 0.8 : 1,
-            }}
-          >
-            {isSurveySubmitting ? "Submitting..." : "Submit Survey →"}
-          </button>
-        </div>
+      <main className="post-survey-page">
+        <div className="post-survey-shell">
+          <header className="post-survey-topline">
+            <button className="post-survey-submit-button" disabled={!allAnswered || isSurveySubmitting} onClick={handleSurveySubmit}>
+              {isSurveySubmitting ? "Submitting..." : "Submit Survey →"}
+            </button>
+          </header>
 
-        {/* Content area — matches onboarding */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
-          <h1 style={{ fontSize: "32px", fontWeight: "800", margin: "0 0 8px 0" }}>Post-Experiment Survey</h1>
-          <p style={{ fontSize: "16px", color: "#aaa", margin: "0 0 28px 0", lineHeight: 1.5 }}>You've completed all episodes. Please answer the following questions.</p>
+          <section className="post-survey-heading">
+            <h1 style={{ color: "#ffffff", fontSize: "34px", fontWeight: "700", lineHeight: "1.25", margin: "0 0 16px" }}>
+              Post-Monitoring Survey
+            </h1>
+            <p style={{
+              color: "#e4e4e7",
+              fontSize: "15px",
+              lineHeight: "1.5",
+              margin: 0,
+              padding: "12px 18px",
+              background: "rgba(255, 255, 255, 0.03)",
+              borderLeft: "3px solid #fcd34d",
+              borderRadius: "0 8px 8px 0"
+            }}>
+              <strong style={{ color: "#fcd34d", fontWeight: "700" }}>We hope you enjoyed participating in our experiment!</strong>{" "}
+              Your responses are valuable to our research and will help us better understand how people perceive and interpret AI robot collaboration. Please take some time to complete the survey below.
+            </p>
+          </section>
 
-          {/* Questions */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+          <section className="post-survey-grid" aria-label="Post-experiment questions">
             {SURVEY_QUESTIONS.map((q, idx) => {
               const currentVal = surveyAnswers[q.id];
+              const characterCount = (currentVal || "").length;
               return (
-                <div key={q.id} style={{ padding: "32px 36px", background: "#111", borderRadius: "16px", border: "1px solid #1a1a1a" }}>
-                  <p style={{ fontSize: "16px", fontWeight: "600", margin: "0 0 16px 0", color: "#fff", lineHeight: 1.6 }}>
-                    {idx + 1}. {q.text}
-                  </p>
+                <article className="post-survey-question" key={q.id}>
+                  <div className="post-survey-question-head">
+                    <span className="post-survey-number">{idx + 1}</span>
+                    <p className="post-survey-question-text">{q.text}</p>
+                    <span className="post-survey-character-count">{characterCount} characters</span>
+                  </div>
                   <textarea
+                    className="post-survey-textarea"
                     value={currentVal || ""}
                     onChange={(e) => setSurveyAnswers((prev) => ({ ...prev, [q.id]: e.target.value }))}
                     placeholder={q.placeholder}
-                    rows={4}
-                    style={{
-                      width: "100%", padding: "14px 16px", background: "#1a1a1a",
-                      border: "1px solid #333", borderRadius: "10px", color: "#f0f0f0",
-                      fontSize: "15px", fontFamily: "Inter, sans-serif", lineHeight: 1.6,
-                      resize: "vertical", outline: "none", boxSizing: "border-box",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "#fcd34d"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = "#333"; }}
+                    aria-label={`Question ${idx + 1}: ${q.text}`}
                   />
-                </div>
+                </article>
               );
             })}
-          </div>
+          </section>
         </div>
-      </div>
+      </main>
     );
   }
 
@@ -1823,7 +1904,10 @@ export default function App() {
           </div>
 
           <h1 style={{ fontSize: "36px", fontWeight: "800", color: "#fff", margin: "0 0 12px 0", textAlign: "center", letterSpacing: "-0.5px" }}>Thank You!</h1>
-          <p style={{ fontSize: "16px", color: "#a1a1aa", margin: "0 0 40px 0", textAlign: "center", lineHeight: "1.6" }}>Your feedback has been successfully recorded. We appreciate your time and effort in helping our research.</p>
+          <p style={{ fontSize: "16px", color: "#a1a1aa", margin: "0 0 40px 0", textAlign: "center", lineHeight: "1.6" }}>
+            <strong style={{ color: "#fcd34d", fontWeight: "700" }}>We hope you enjoyed participating in our experiment!</strong>{" "}
+            Your feedback has been successfully recorded, and we greatly appreciate your time and effort in helping our research.
+          </p>
 
           <div style={{
             background: "#121214",
@@ -1904,11 +1988,13 @@ export default function App() {
       {/* Absolute Top Level Controls */}
       <div style={{ position: "absolute", top: "24px", left: "30px", zIndex: 100, display: "flex", alignItems: "center", gap: "12px" }}>
         {hasEpisode && (
-          <>
-            <div style={{ background: "rgba(252, 211, 77, 0.15)", color: "#fcd34d", padding: "6px 12px", borderRadius: "6px", fontSize: "13px", fontWeight: "700", border: "1px solid rgba(252, 211, 77, 0.4)", display: "flex", alignItems: "center", gap: "6px", letterSpacing: "0.2px" }}>
-              <span>⚠️</span> Do not refresh. You cannot go back after clicking Next.
-            </div>
-          </>
+          <button
+            onClick={handlePreviousEpisodeClick}
+            disabled={isSaving}
+            style={{ background: isSaving ? "#111" : "#1a1a1a", color: isSaving ? "#555" : "#f0f0f0", border: "1px solid #333", padding: "10px 16px", borderRadius: "8px", fontSize: "14px", fontWeight: "700", cursor: isSaving ? "not-allowed" : "pointer", opacity: isSaving ? 0.55 : 1 }}
+          >
+            {currentMapIdx === 0 ? "← Back to Tutorial" : "← Back"}
+          </button>
         )}
       </div>
 
@@ -1916,7 +2002,8 @@ export default function App() {
       <div style={{ position: "absolute", top: "24px", right: "30px", zIndex: 100, display: "flex", gap: "10px" }}>
         {(() => {
           const surveyIncomplete = hasEpisode && (episodeSurveyAnswers.eq1 === null || episodeSurveyAnswers.eq4 === null);
-          const btnDisabled = isSaving || surveyIncomplete;
+          const feedbackIncomplete = hasEpisode && incompleteFeedbackCount > 0;
+          const btnDisabled = isSaving || surveyIncomplete || feedbackIncomplete;
           return (
             <button
               onClick={handleNextEpisodeClick}
@@ -1941,9 +2028,11 @@ export default function App() {
                 ? "Saving..."
                 : surveyIncomplete
                   ? "Complete survey below ↓"
-                  : episodeCount >= ALL_MAPS.length
-                    ? "Finish Experiment"
-                    : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
+                  : feedbackIncomplete
+                    ? "Complete feedback to proceed ↓"
+                    : episodeCount >= ALL_MAPS.length
+                      ? "Finish"
+                      : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
             </button>
           );
         })()}
@@ -2304,6 +2393,7 @@ export default function App() {
               setRawMarkers((prev) => [...prev, targetFrame]);
 
               const newInterval = {
+                feedbackId: createFeedbackId(),
                 baseFrame: targetFrame,
                 startOffset: -2,
                 endOffset: 2,
@@ -2368,6 +2458,7 @@ export default function App() {
           >
             {intervals.map((intv, i) => {
               const isSelected = selectedInterval?.index === i;
+              const isFeedbackMissing = Boolean(intv.feedbackTouched && !intv.reason?.trim());
 
               const baseFrame = intv.baseFrame;
               let startFrame = intv.isFullRange ? baseFrame : baseFrame + intv.startOffset;
@@ -2411,6 +2502,13 @@ export default function App() {
                     onClick={(e) => {
                       if (isSelected) {
                         e.stopPropagation();
+                        if (!intv.reason?.trim()) {
+                          setIntervals(prev => {
+                            const next = [...prev];
+                            next[i] = { ...next[i], feedbackTouched: true };
+                            return next;
+                          });
+                        }
                         setSelectedInterval(null);
                       }
                     }}
@@ -2419,7 +2517,7 @@ export default function App() {
                       <div style={{ background: "#2a2a2a", padding: "4px 10px", borderRadius: "4px", fontSize: "12px", fontWeight: "700", color: "#ddd", flexShrink: 0 }}>
                         Feedback #{i + 1}
                       </div>
-
+                      {!isSelected && isFeedbackMissing && <span style={{ color: "#f87171", fontSize: "12px", fontWeight: "600" }}>Feedback incomplete</span>}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                       <span style={{ fontSize: "14px", color: "#666" }}>{isSelected ? "▲" : "▼"}</span>

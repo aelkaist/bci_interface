@@ -6,91 +6,108 @@
 <title>Research Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root {
-  --bg: #09090b;
-  --surface: #111114;
-  --surface-2: #18181c;
-  --surface-3: #1f1f24;
-  --border: rgba(255,255,255,0.06);
-  --border-hover: rgba(255,255,255,0.12);
-  --accent: #818cf8;
-  --accent-glow: rgba(129,140,248,0.15);
-  --green: #34d399;
-  --green-glow: rgba(52,211,153,0.15);
-  --pink: #f472b6;
-  --pink-glow: rgba(244,114,182,0.15);
-  --amber: #fbbf24;
-  --amber-glow: rgba(251,191,36,0.15);
-  --text-1: #f0f0f5;
-  --text-2: #8888a0;
-  --text-3: #55556a;
+  --bg: #0b0c10;
+  --surface: #12131a;
+  --surface-2: #181924;
+  --surface-3: #222332;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.16);
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-glow: rgba(99,102,241,0.16);
+  --green: #10b981;
+  --green-glow: rgba(16,185,129,0.16);
+  --pink: #f43f5e;
+  --pink-glow: rgba(244,63,94,0.16);
+  --amber: #f59e0b;
+  --amber-glow: rgba(245,158,11,0.16);
+  --sky: #0ea5e9;
+  --text-1: #f8fafc;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --font-title: 'Outfit', -apple-system, sans-serif;
   --font: 'Inter', system-ui, -apple-system, sans-serif;
-  --mono: 'DM Mono', ui-monospace, Menlo, monospace;
+  --mono: 'DM Mono', ui-monospace, monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{height:100%}
 body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--font);font-size:13px;-webkit-font-smoothing:antialiased}
 
 /* Nav */
-.nav{height:52px;background:rgba(9,9,11,0.92);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100}
-.nav-logo{font-size:15px;font-weight:800;color:var(--text-1);margin-right:auto;user-select:none;letter-spacing:-0.3px}
+.nav{height:54px;background:rgba(11,12,16,0.85);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:var(--font-title);font-size:16px;font-weight:800;color:var(--text-1);margin-right:auto;user-select:none;letter-spacing:-0.4px;display:flex;align-items:center;gap:8px}
 .nav-controls{display:flex;align-items:center;gap:16px}
 .pilot-filter{display:flex;align-items:center;gap:8px}
-.pilot-filter label{font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.5px}
-.pilot-select{min-width:210px;background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);font:600 11px var(--font);padding:7px 30px 7px 10px;border-radius:6px;cursor:pointer}
-.pilot-select:focus{outline:2px solid var(--accent-glow);border-color:var(--accent)}
+.pilot-filter label{font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.6px}
+.pilot-select{min-width:210px;background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);font:600 11px var(--font);padding:7px 30px 7px 12px;border-radius:8px;cursor:pointer;transition:border-color .15s}
+.pilot-select:focus{outline:none;border-color:var(--accent)}
 .pilot-select:disabled{cursor:wait;opacity:.6}
-.nav-status{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:8px}
-.nav-status .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green-glow);animation:pulse 2s ease-in-out infinite}
+.nav-status{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:8px;background:var(--surface-2);padding:4px 10px;border-radius:20px;border:1px solid var(--border)}
+.nav-status .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-.wrap{padding:24px 28px 40px;max-width:1280px;margin:0 auto}
+.wrap{padding:24px 28px 40px;max-width:1320px;margin:0 auto}
 
 /* Loading */
 .loading-overlay{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:140px 40px;gap:20px}
 .loading-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:14px;color:var(--text-2)}
+.loading-text{font-size:14px;color:var(--text-2);font-weight:500}
 
 /* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
-.kpi:hover{transform:translateY(-2px);border-color:var(--border-hover);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:14px 14px 0 0}
-.kpi:nth-child(1)::before{background:var(--accent)}
-.kpi:nth-child(2)::before{background:var(--green)}
-.kpi:nth-child(3)::before{background:var(--amber)}
-.kpi:nth-child(4)::before{background:var(--pink)}
-.kpi:nth-child(5)::before{background:var(--accent)}
-.kv{font-size:28px;font-weight:700;color:var(--text-1);font-family:var(--mono);letter-spacing:-1px}
-.kl{font-size:11px;color:var(--text-2);margin-top:6px;line-height:1.3;font-weight:500}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s;display:flex;flex-direction:column;justify-content:space-between}
+.kpi:hover{transform:translateY(-2px);border-color:var(--border-hover)}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.kpi:nth-child(1)::before{background:var(--green)}
+.kpi:nth-child(2)::before{background:var(--pink)}
+.kpi:nth-child(3)::before{background:#2dd4bf}
+.kpi:nth-child(4)::before{background:var(--accent)}
+.kpi:nth-child(5)::before{background:var(--amber)}
+.kpi:nth-child(6)::before{background:#a78bfa}
+.kv{font-size:28px;font-weight:800;color:var(--text-1);font-family:var(--font-title);letter-spacing:-1px}
+.kl{font-size:10px;color:var(--text-2);margin-top:6px;line-height:1.3;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.kpi-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.kpi-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:var(--mono);text-transform:uppercase}
+.kpi-badge.green{background:rgba(16,185,129,0.15);color:var(--green)}
+.kpi-badge.pink{background:rgba(244,63,94,0.15);color:var(--pink)}
+.completion-progress{height:5px;background:rgba(244,63,94,0.2);border-radius:3px;overflow:hidden;margin-top:8px;width:100%}
+.completion-bar-fill{height:100%;background:var(--green);border-radius:3px;transition:width 0.4s ease}
+
+/* Controls & Search */
+.psearch-box{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.psearch-input{background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);padding:8px 14px;border-radius:8px;font-size:12px;font-family:var(--font);outline:none;transition:border-color .2s;width:260px}
+.psearch-input:focus{border-color:var(--accent)}
+.scale-toggle{font:600 11px var(--font);padding:6px 10px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);cursor:pointer;white-space:nowrap}
+.scale-toggle:hover{border-color:var(--accent);color:var(--accent-light)}
 
 /* Tabs */
-.tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;overflow-x:auto}
-.tb{font-size:12px;font-weight:600;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;background:transparent;color:var(--text-2);transition:all .15s;white-space:nowrap;flex:1;text-align:center}
-.tb.on{background:var(--surface-2);color:var(--text-1);box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.tb:hover:not(.on){color:var(--text-1);background:rgba(255,255,255,.03)}
+.tabs{display:flex;gap:6px;margin-bottom:20px;background:#14151e;border:1px solid var(--border);border-radius:12px;padding:5px;overflow-x:auto}
+.tb{font-size:12px;font-weight:600;padding:9px 16px;border-radius:8px;border:none;cursor:pointer;background:transparent;color:var(--text-2);transition:all .15s;white-space:nowrap;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
+.tb.on{background:var(--accent);color:#ffffff;font-weight:700;box-shadow:0 4px 14px rgba(99,102,241,0.3)}
+.tb:hover:not(.on){color:var(--text-1);background:rgba(255,255,255,.05)}
 .pn{display:none}.pn.on{display:block}
 
 /* Cards */
-.cw{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;transition:transform .15s,border-color .15s}
+.cw{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px;transition:transform .15s,border-color .15s}
 .cw:hover{border-color:var(--border-hover)}
-.ct{font-size:14px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.ct{font-family:var(--font-title);font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-0.3px}
 .cs{font-size:11px;color:var(--text-2);margin-bottom:14px;font-weight:500}
 .chart-frame{position:relative}
 .chart-frame.sm{height:200px}
 .chart-frame.md{height:240px}
 .chart-frame.lg{height:280px}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
 /* Stats */
-.sr{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.sr{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:16px}
 .sb{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 8px;text-align:center}
-.sv{font-size:14px;font-weight:600;color:var(--text-1);font-family:var(--mono)}
-.sl{font-size:9px;color:var(--text-2);margin-top:3px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.sv{font-size:14px;font-weight:700;color:var(--text-1);font-family:var(--mono)}
+.sl{font-size:9px;color:var(--text-2);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 
 /* Detail panels */
 .detail-panel{margin-top:14px;background:var(--surface);border-radius:14px;border:1px solid var(--border);display:none;overflow:hidden}
@@ -114,7 +131,7 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 .ep-header{padding:12px 16px;background:var(--surface-2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s;user-select:none}
 .ep-header:hover{background:var(--surface-3)}
 .ep-header-left{display:flex;align-items:center;gap:12px}
-.ep-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:var(--mono);background:var(--accent-glow);color:var(--accent)}
+.ep-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:var(--mono);background:var(--accent-glow);color:var(--accent-light)}
 .ep-filename{font-size:11px;color:var(--text-2);font-family:var(--mono)}
 .ep-stats{display:flex;gap:12px;font-size:11px;color:var(--text-2)}
 .ep-stats .val{color:var(--text-1);font-weight:600;font-family:var(--mono)}
@@ -130,45 +147,149 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 /* Tone Columns */
 .tone-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
 .tone-col{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
-.tone-col-head{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tone-col-head{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05);font-family:var(--font-title)}
 .tone-item{background:var(--surface);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:12px;font-size:12px;color:var(--text-1);line-height:1.5}
 .tone-item-meta{font-size:10px;color:var(--text-3);margin-top:8px;font-family:var(--mono)}
+.tone-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 20px}
+.tone-stat{padding:12px 14px;background:var(--surface-2);border-top:2px solid var(--tone-color,var(--border-hover))}
+.tone-stat-value{font:700 20px var(--mono);color:var(--text-1)}
+.tone-stat-label{font-size:9px;color:var(--text-2);text-transform:uppercase;font-weight:700;letter-spacing:.5px;margin-top:3px}
+.tone-stat-share{font:500 10px var(--mono);color:var(--tone-color,var(--text-3));margin-top:4px}
+.tone-browser-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.tone-filter-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tone-filter-btn{font:600 10px var(--font);padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);cursor:pointer}
+.tone-filter-btn:hover{color:var(--text-1);border-color:var(--border-hover)}
+.tone-filter-btn.on{color:var(--text-1);border-color:var(--tone-color,var(--accent));background:color-mix(in srgb,var(--tone-color,var(--accent)) 14%,transparent)}
+.tone-list{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
+.tone-response{padding:14px 0;border-bottom:1px solid var(--border);min-width:0}
+.tone-response-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.tone-score{font:700 9px var(--mono);padding:3px 7px;border-radius:4px;background:color-mix(in srgb,var(--tone-color) 14%,transparent);color:var(--tone-color)}
+.tone-response-text{font-size:12px;line-height:1.6;color:var(--text-1);overflow-wrap:anywhere}
+
+/* Post-study survey */
+.survey-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:20px}
+.survey-counts{display:flex;gap:8px;flex-shrink:0}
+.survey-count{padding:8px 12px;border-left:2px solid var(--accent);background:var(--surface-2)}
+.survey-count strong{display:block;font:700 16px var(--mono);color:var(--text-1)}
+.survey-count span{font-size:9px;color:var(--text-2);text-transform:uppercase;font-weight:700;letter-spacing:.5px}
+.survey-question-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.survey-question-btn{min-height:116px;text-align:left;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text-2);cursor:pointer;font:500 11px/1.5 var(--font);transition:border-color .15s,background .15s,color .15s}
+.survey-question-btn:hover{border-color:var(--border-hover);color:var(--text-1)}
+.survey-question-btn.on{background:var(--accent-glow);border-color:var(--accent);color:var(--text-1)}
+.survey-question-number{display:block;color:var(--accent-light);font:700 10px var(--mono);margin-bottom:7px;text-transform:uppercase}
+.survey-active-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:4px}
+.survey-active-question{font:700 16px/1.4 var(--font-title);color:var(--text-1);max-width:820px}
+.survey-response-count{font:600 10px var(--mono);color:var(--green);white-space:nowrap;padding-top:4px}
+.survey-response-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+.survey-response{padding:16px 0;border-bottom:1px solid var(--border);min-width:0}
+.survey-response-pid{font:600 10px var(--mono);color:var(--accent-light);margin-bottom:7px}
+.survey-response-text{font-size:12px;line-height:1.65;color:var(--text-1);overflow-wrap:anywhere}
 
 /* Replay Modal */
-.replay-modal-backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center}
+.replay-modal-backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center}
 .replay-modal-backdrop.show{display:flex;animation:fadeIn 0.2s}
-.replay-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:90%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.4)}
-.replay-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.replay-modal{background:var(--surface);border:1px solid var(--border-hover);border-radius:16px;width:90%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,0.6)}
+.replay-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:700;font-family:var(--font-title)}
 .replay-close{background:none;border:none;color:var(--text-2);cursor:pointer;font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%}
 .replay-close:hover{background:var(--surface-3);color:var(--text-1)}
 .replay-body{padding:20px;display:flex;flex-direction:column;gap:16px;overflow-y:auto;flex:1}
 .replay-scene-container{width:100%;aspect-ratio:16/9;background:var(--surface-2);border-radius:8px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .replay-controls{display:flex;align-items:center;gap:16px;background:var(--surface-2);padding:12px 16px;border-radius:8px}
 .replay-btn{background:var(--surface-3);border:1px solid var(--border);color:var(--text-1);padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
-.replay-btn:hover{background:var(--accent-glow);color:var(--accent);border-color:var(--accent)}
+.replay-btn:hover{background:var(--accent-glow);color:var(--accent-light);border-color:var(--accent)}
 .replay-slider-container{flex:1;position:relative;height:32px;display:flex;align-items:center}
 .replay-slider{width:100%;cursor:pointer;position:relative;z-index:2}
-.replay-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:4px;height:20px;background:var(--pink);pointer-events:none;border-radius:2px;z-index:3;box-shadow:0 0 6px var(--pink-glow)}
+.replay-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:4px;height:20px;background:var(--pink);pointer-events:none;border-radius:2px;z-index:3}
 .replay-range{position:absolute;top:50%;transform:translateY(-50%);height:16px;background:rgba(99,102,241,0.3);pointer-events:none;border-radius:2px;z-index:1}
 .replay-feedback-box{padding:16px;background:var(--surface-2);border-radius:8px;border-left:4px solid var(--accent)}
 
 /* Participant table */
 .ptable{width:100%;border-collapse:collapse;font-size:12px}
-.ptable th{text-align:left;padding:10px 12px;color:var(--text-2);font-weight:600;border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
-.ptable td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-1)}
+.ptable th{background:#161722;text-align:left;padding:12px 14px;color:var(--text-2);font-weight:700;border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.6px}
+.ptable td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-1)}
 .ptable tr{cursor:pointer;transition:background .15s}
 .ptable tr:hover td{background:var(--surface-2)}
-.pid-mono{font-family:var(--mono);font-size:11px}
-.status-chip{font-size:10px;font-weight:600;padding:3px 10px;border-radius:8px;display:inline-block}
-.status-completed{background:var(--green-glow);color:var(--green)}
-.status-started{background:var(--amber-glow);color:var(--amber)}
+.pid-mono{font-family:var(--mono);font-size:11px;font-weight:500}
+.status-chip{font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;display:inline-block;font-family:var(--mono)}
+.status-completed{background:rgba(16,185,129,0.15);color:var(--green)}
+.status-started{background:rgba(245,158,11,0.15);color:var(--amber)}
 
-/* Participant detail panel */
-.participant-detail{margin-top:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:none}
-.participant-detail.show{display:block;animation:slideDown .25s ease}
+/* Seed Timeline Heatmap - Premiere Pro Ref Image Style */
+.heatmap-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.heatmap-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(280px,2fr) auto;gap:10px;align-items:end;padding:12px;background:var(--surface-2);border:1px solid var(--border);margin-bottom:14px}
+.heatmap-filter{display:flex;flex-direction:column;gap:6px;min-width:0}
+.heatmap-filter label{font-size:9px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.6px}
+.heatmap-filter .pilot-select{width:100%;min-width:0;border-radius:6px}
+.heatmap-seed-meta{font:600 10px/1.4 var(--mono);color:var(--text-2);padding:8px 10px;border-left:2px solid var(--green);white-space:nowrap}
+.heatmap-legend{display:flex;align-items:center;gap:12px;font:600 9px var(--mono);color:var(--text-2);flex-wrap:wrap}
+.heatmap-legend span{display:flex;align-items:center;gap:5px}
+.heatmap-legend i{width:8px;height:8px;border-radius:2px;display:block}
+.pr-workspace{display:grid;grid-template-columns:minmax(0,3fr) minmax(260px,2fr);gap:14px;align-items:start}
+.pr-monitor-card,.pr-inspector-card{background:#0d0e14;border:1px solid var(--border-hover);overflow:hidden;min-width:0}
+.pr-inspector-card{display:flex;flex-direction:column;min-height:420px;max-height:720px}
+.pr-card-header{height:40px;padding:0 12px;background:#151620;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pr-card-kicker{font:800 10px var(--font-title);color:var(--text-2);letter-spacing:.7px;text-transform:uppercase}
+.pr-selected-seed{font:600 9px var(--mono);color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:65%}
+.pr-header-controls{display:flex;align-items:center;gap:8px;margin-left:auto;min-width:0}
+.pr-scene-viewport{position:relative;width:100%;aspect-ratio:16/9;min-height:300px;background-color:#08090d;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:24px 24px;overflow:hidden}
+#pr-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#pr-scene svg{display:block;width:100%!important;height:100%!important;max-width:100%;max-height:100%}
+.pr-preview-status{position:absolute;top:10px;left:10px;z-index:5;font:700 9px var(--mono);color:#dbeafe;background:rgba(11,12,16,.78);border:1px solid rgba(255,255,255,.16);padding:4px 7px;border-radius:4px;backdrop-filter:blur(8px)}
+.pr-preview-play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(11,12,16,.82);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.pr-preview-play:hover{background:var(--accent);border-color:var(--accent-light)}
+.pr-preview-play.playing{opacity:0;pointer-events:none}
+.pr-scene-loading{display:flex;align-items:center;gap:9px;color:var(--text-2);font:600 11px var(--font)}
+.pr-scene-loading::before{content:'';width:14px;height:14px;border:2px solid var(--border-hover);border-top-color:var(--accent-light);border-radius:50%;animation:spin .7s linear infinite}
+.pr-transport-bar{min-height:52px;display:grid;grid-template-columns:75px minmax(0,1fr);align-items:center;background:#151620;border-top:1px solid var(--border)}
+.pr-transport-control-cell{height:100%;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border)}
+.pr-control-btn{width:32px;height:32px;flex:0 0 32px;border:1px solid var(--border-hover);border-radius:6px;background:var(--surface-3);color:var(--text-1);font:700 11px var(--mono);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pr-control-btn:hover{border-color:var(--accent);color:var(--accent-light)}
+.pr-btn-play{background:var(--accent);border-color:var(--accent-light);color:#fff;font-size:14px}
+.pr-scrubber-wrap{min-width:0;display:flex;align-items:center;padding:0 10px}
+.pr-scrubber{width:100%;accent-color:var(--accent-light);cursor:pointer}
+.pr-timecode{font:600 9px var(--mono);color:#fcd34d;white-space:nowrap;min-width:112px;text-align:center}
+.pr-speed-select{background:var(--surface-2);border:1px solid var(--border-hover);color:var(--text-1);font:600 10px var(--mono);padding:6px;border-radius:6px}
+
+.pr-timeline-container { position: relative; background: #0b0c10; border: 1px solid #20212d; overflow: hidden; display: flex; flex-direction: column; }
+.pr-timeline-header { height: 28px; background: #13141f; border-bottom: 1px solid #20212d; display: flex; align-items: center; position: relative; user-select: none; cursor: pointer; }
+.pr-timeline-header-track-space { width: 75px; padding: 0 10px; font-size: 10px; font-weight: 700; color: #94a3b8; font-family: var(--mono); border-right: 1px solid #20212d; display: flex; align-items: center; text-transform: uppercase; letter-spacing: 0.5px; }
+.pr-ruler-area { flex: 1; height: 100%; position: relative; }
+.pr-ruler-ticks { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 8px; font-family: var(--mono); font-size: 10px; color: #94a3b8; }
+
+.pr-playhead-line { position: absolute; top: 0; bottom: 0; width: 1.5px; background: #ffffff; z-index: 50; pointer-events: none; }
+.pr-playhead-line::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 3px; background: rgba(255,255,255,0.4); }
+
+.pr-track-row { display: flex; align-items: center; min-height: 28px; border-bottom: 1px solid #181924; background: #0b0c10; position: relative; }
+.pr-track-row:hover { background: #13141e; }
+.pr-track-head { width: 75px; height: 100%; padding: 0 10px; background: #13141f; border-right: 1px solid #20212d; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+.pr-track-title { font-size: 11px; font-family: var(--mono); font-weight: 700; color: #f8fafc; }
+
+.pr-track-lane { flex: 1; height: 100%; position: relative; cursor: pointer; background: repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px); }
+
+/* Translucent range blocks with sharp click pin line */
+.pr-clip { position: absolute; top: 7px; height: 14px; border-radius: 3px; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; transition: transform 0.1s, opacity 0.1s; z-index: 10; opacity: 0.85; }
+.pr-clip:hover { transform: scaleY(1.15); opacity: 1; z-index: 20; }
+.pr-clip.active-clip { outline: 2px solid #38bdf8; opacity: 1; z-index: 30; }
+.pr-clip.selected-clip { outline: 2px solid #ffffff; box-shadow:0 0 0 2px rgba(56,189,248,.6); opacity:1; z-index:35; }
+
+.pr-clip.neg { background: rgba(244, 63, 94, 0.25); border: 1px solid rgba(244, 63, 94, 0.5); }
+.pr-clip.neu { background: rgba(245, 158, 11, 0.25); border: 1px solid rgba(245, 158, 11, 0.5); }
+.pr-clip.pos { background: rgba(16, 185, 129, 0.25); border: 1px solid rgba(16, 185, 129, 0.5); }
+
+/* Sharp white vertical pin marker at exact baseFrame click point */
+.pr-pin-marker { position: absolute; top: -2px; bottom: -2px; width: 2px; background: #ffffff; transform: translateX(-50%); z-index: 25; border-radius: 1px; }
+.pr-active-comment{width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--comment-color,var(--accent));border-radius:6px;padding:12px;font:inherit;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.pr-active-comment:hover{border-color:var(--accent-light);background:var(--surface-3)}
+.pr-active-comment:focus-visible{outline:2px solid var(--accent-light);outline-offset:2px}
+.heatmap-sentiment-filter{display:flex;align-items:flex-end;gap:4px}
+.heatmap-sentiment-filter button{height:30px;padding:0 9px;border:1px solid var(--border);border-radius:5px;background:var(--surface-2);color:var(--text-2);font:700 10px var(--mono);cursor:pointer}
+.heatmap-sentiment-filter button:hover{border-color:var(--border-hover);color:var(--text-1)}
+.heatmap-sentiment-filter button.active{background:var(--surface-3);color:var(--text-1)}
+.heatmap-sentiment-filter button[data-sentiment-filter="positive"].active{border-color:var(--green);color:var(--green)}
+.heatmap-sentiment-filter button[data-sentiment-filter="negative"].active{border-color:var(--pink);color:var(--pink)}
 
 @media(max-width:900px){
-  .nav{height:auto;min-height:52px;padding:10px 16px;gap:8px;align-items:stretch;flex-direction:column}
+  .nav{height:auto;min-height:54px;padding:10px 16px;gap:8px;align-items:stretch;flex-direction:column}
   .nav-logo{margin-right:0}
   .nav-controls{width:100%;align-items:center;justify-content:space-between;gap:10px}
   .pilot-filter{min-width:0}
@@ -178,24 +299,32 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
   .sr{grid-template-columns:repeat(3,1fr)}
   .tabs{flex-wrap:nowrap;overflow-x:auto}
   .tb{flex:none}
+  .survey-head{flex-direction:column}
+  .survey-question-nav{display:flex;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+  .survey-question-btn{flex:0 0 min(300px,82vw);scroll-snap-align:start}
+  .survey-response-grid{grid-template-columns:1fr}
+  .tone-summary{grid-template-columns:1fr 1fr}
+  .tone-browser-head{align-items:flex-start;flex-direction:column}
+  .tone-list{grid-template-columns:1fr}
+  .heatmap-head{align-items:flex-start;flex-direction:column}
+  .heatmap-toolbar{grid-template-columns:1fr}
+  .heatmap-seed-meta{white-space:normal}
+  .pr-workspace{grid-template-columns:1fr}
+  .pr-scene-viewport{min-height:220px}
+  .pr-inspector-card{min-height:300px;max-height:520px}
+  .pr-timecode{display:none}
+  .pr-selected-seed{display:none}
 }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <span class="nav-logo" id="nav-logo">Pilot Dashboard</span>
-  <div class="nav-controls">
-    <div class="pilot-filter">
-      <label for="pilot-select">Pilot</label>
-      <select class="pilot-select" id="pilot-select" disabled>
-        <option>Loading...</option>
-      </select>
-    </div>
-    <div class="nav-status">
-      <span class="dot"></span>
-      <span id="nav-status-text">Loading local data...</span>
-    </div>
+  <div class="pilot-filter" style="display:flex;align-items:center;gap:10px">
+    <label for="pilot-select" style="font-size:12px;color:var(--text-2);font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Select Pilot:</label>
+    <select class="pilot-select" id="pilot-select" disabled style="padding:6px 14px;font-size:13px;font-weight:600;border-radius:8px;background:var(--surface-2);color:var(--text-1);border:1px solid var(--border)">
+      <option>Loading...</option>
+    </select>
   </div>
 </nav>
 
@@ -206,26 +335,58 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
   </div>
 
   <div id="content" style="display:none">
-    <div class="kpi-row">
-      <div class="kpi"><div class="kv" id="kpi-participants">—</div><div class="kl">Completed Participants</div></div>
-      <div class="kpi"><div class="kv" id="kpi-time">—</div><div class="kl">Avg Total Time (min)</div></div>
-      <div class="kpi"><div class="kv" id="kpi-items">—</div><div class="kl">Total Feedback Items</div></div>
-      <div class="kpi"><div class="kv" id="kpi-avg-items">—</div><div class="kl">Avg Items / Participant</div></div>
-      <div class="kpi"><div class="kv" id="kpi-avg-ep-items">—</div><div class="kl">Avg Items / Episode</div></div>
-    </div>
-
     <div class="tabs">
-      <button class="tb on" data-panel="p5">① Participants</button>
-      <button class="tb" data-panel="p1">② Time Overview</button>
-      <button class="tb" data-panel="p2">③ Episode Time</button>
-      <button class="tb" data-panel="p3">④ Items / Participant</button>
-      <button class="tb" data-panel="p4">⑤ Ratings</button>
-      <button class="tb" data-panel="p6">⑥ Post Surveys</button>
-      <button class="tb" data-panel="p7">⑦ Feedback Tone</button>
+      <button class="tb on" data-panel="p5">Participants</button>
+      <button class="tb" data-panel="p1">Time Overview</button>
+      <button class="tb" data-panel="p2">Episode Time</button>
+      <button class="tb" data-panel="p3">Feedback Items</button>
+      <button class="tb" data-panel="p4">Ratings</button>
+      <button class="tb" data-panel="p6">Surveys</button>
+      <button class="tb" data-panel="p7">Tone Analysis</button>
+      <button class="tb" data-panel="p8">Seed Heatmap</button>
     </div>
 
-    <!-- Tab 1 -->
+    <!-- Tab 1: Time Overview -->
     <div class="pn" id="p1">
+      <!-- Top Time Metric Callouts -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+          <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Avg Total Time</div>
+          <div style="font-size:22px;font-weight:800;color:var(--text-1);font-family:var(--font-mono)" id="time-summary-total">—</div>
+          <div style="font-size:10px;color:var(--text-3);margin-top:2px" id="time-sd-total">Mean ± SD</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+          <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Avg Tutorial Time</div>
+          <div style="font-size:22px;font-weight:800;color:var(--accent);font-family:var(--font-mono)" id="time-summary-tut">—</div>
+          <div style="font-size:10px;color:var(--text-3);margin-top:2px" id="time-sd-tut">Mean ± SD</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+          <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Avg Main Time</div>
+          <div style="font-size:22px;font-weight:800;color:var(--green);font-family:var(--font-mono)" id="time-summary-main">—</div>
+          <div style="font-size:10px;color:var(--text-3);margin-top:2px" id="time-sd-main">Mean ± SD</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+          <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Tutorial Share</div>
+          <div style="font-size:22px;font-weight:800;color:var(--amber);font-family:var(--font-mono)" id="time-summary-ratio">—</div>
+          <div style="font-size:10px;color:var(--text-3);margin-top:2px">% of total duration</div>
+        </div>
+      </div>
+
+      <!-- Combined Stacked Time Breakdown Card -->
+      <div class="cw" style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div>
+            <div class="ct">Total Time Breakdown per Participant</div>
+            <div class="cs" style="margin-bottom:0">Stacked view of Tutorial (Indigo) vs Main Experiment (Emerald) duration in minutes</div>
+          </div>
+          <button id="toggle-yscale" style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-1);cursor:pointer;display:flex;align-items:center;gap:6px">
+            <span style="color:var(--accent)">🔍</span> <span id="yscale-btn-label">Auto Scale Y (Max 50m)</span>
+          </button>
+        </div>
+        <div class="chart-frame md"><canvas id="chart-combined-time"></canvas></div>
+      </div>
+
+      <!-- Tutorial vs Main Individual Breakdown -->
       <div class="g2">
         <div class="cw">
           <div class="ct">Tutorial Duration</div>
@@ -235,20 +396,22 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
         </div>
         <div class="cw">
           <div class="ct">Main Experiment Duration</div>
-          <div class="cs">Per participant — total across all episodes (minutes)</div>
+          <div class="cs">Per participant — total across all 4 episodes (minutes)</div>
           <div class="chart-frame sm"><canvas id="chart-main"></canvas></div>
           <div class="sr" id="stats-main"></div>
         </div>
       </div>
+
+      <!-- Time Distribution Histograms -->
       <div class="g2" style="margin-top:20px">
         <div class="cw">
           <div class="ct">Tutorial Time Distribution</div>
-          <div class="cs">Histogram of completion times</div>
+          <div class="cs">Histogram of completion times (2-min bins)</div>
           <div class="chart-frame sm"><canvas id="chart-tutorial-dist"></canvas></div>
         </div>
         <div class="cw">
-          <div class="ct">Main Time Distribution</div>
-          <div class="cs">Histogram of completion times</div>
+          <div class="ct">Main Experiment Time Distribution</div>
+          <div class="cs">Histogram of completion times (10-min bins)</div>
           <div class="chart-frame sm"><canvas id="chart-main-dist"></canvas></div>
         </div>
       </div>
@@ -257,10 +420,16 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
     <!-- Tab 2 -->
     <div class="pn" id="p2">
       <div class="cw">
-        <div class="ct">Time Spent per Episode</div>
-        <div class="cs">Each bar = one episode · Click for details · Unit: minutes</div>
+        <div class="ct">Episode Time by Map</div>
+        <div class="cs">Mean time spent on each map · Error bars show ±1 SD · Unit: minutes</div>
         <div class="chart-frame lg"><canvas id="chart-eptime"></canvas></div>
-        <div class="sr" id="stats-eptime"></div>
+        <div class="sr" id="stats-eptime" style="grid-template-columns:repeat(4,1fr)"></div>
+      </div>
+      <div class="cw">
+        <div class="ct">Feedback Writing Time by Map</div>
+        <div class="cs">Mean total writing time per episode, summed across feedback items · Zero-second records included · Unit: seconds</div>
+        <div class="chart-frame lg"><canvas id="chart-feedbacktime"></canvas></div>
+        <div class="sr" id="stats-feedbacktime" style="grid-template-columns:repeat(4,1fr)"></div>
       </div>
       <div class="detail-panel" id="dp-eptime">
         <div class="dp-head"><span id="dp-eptime-title"></span><button class="dp-close" data-close="dp-eptime">✕</button></div>
@@ -270,16 +439,41 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
 
     <!-- Tab 3 -->
     <div class="pn" id="p3">
-      <div class="cw">
-        <div class="ct">Total Feedback Items per Participant</div>
-        <div class="cs">Summed across all episodes · Click a bar for details</div>
+      <div class="g2">
+        <div class="cw">
+          <div class="ct">Total Feedback Items / User</div>
+          <div class="cs">Number of feedback items submitted across all 4 episodes</div>
+          <div class="chart-frame sm"><canvas id="chart-totalfb"></canvas></div>
+          <div class="sr" id="stats-totalfb"></div>
+        </div>
+        <div class="cw">
+          <div class="ct">Feedback Items per Episode (Avg)</div>
+          <div class="cs">Average feedback items per episode per participant</div>
+          <div class="chart-frame sm"><canvas id="chart-epfbuser"></canvas></div>
+          <div class="sr" id="stats-epfbuser"></div>
+        </div>
+      </div>
+      <div class="cw" style="margin-top:20px">
+        <div class="ct">Feedback Items Count per Individual Episode</div>
+        <div class="cs">Each bar = one episode · Click for details</div>
         <div class="chart-frame md"><canvas id="chart-pititems"></canvas></div>
         <div class="sr" id="stats-pititems"></div>
       </div>
-      <div class="cw" style="margin-top:20px;">
-        <div class="ct">Feedback Items Distribution</div>
-        <div class="cs">Histogram of total feedback items per participant</div>
-        <div class="chart-frame sm"><canvas id="chart-pititems-dist"></canvas></div>
+      <div class="cw" style="margin-top:20px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div><div class="ct">Total Feedback Text by Participant</div><div class="cs">Focused scale: median + 1.5×IQR · Total words across feedback, reason, and correction fields</div></div>
+          <button class="scale-toggle" id="toggle-feedbacktext-scale">Show full range</button>
+        </div>
+        <div class="chart-frame md"><canvas id="chart-feedbacktext"></canvas></div>
+        <div class="sr" id="stats-feedbacktext"></div>
+      </div>
+      <div class="cw" style="margin-top:20px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div><div class="ct">Feedback Text per Episode</div><div class="cs">Focused scale: median + 1.5×IQR · Grouped by completed participant · Dashed line = overall episode median</div></div>
+          <button class="scale-toggle" id="toggle-episodefeedbacktext-scale">Show full range</button>
+        </div>
+        <div class="chart-frame lg"><canvas id="chart-episodefeedbacktext"></canvas></div>
+        <div class="sr" id="stats-episodefeedbacktext"></div>
       </div>
       <div class="detail-panel" id="dp-pititems">
         <div class="dp-head"><span id="dp-pititems-title"></span><button class="dp-close" data-close="dp-pititems">✕</button></div>
@@ -292,33 +486,75 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
       <div class="g2">
         <div class="cw">
           <div class="ct">Collaboration Rating</div>
-          <div class="cs">1 = Poor → 5 = Excellent</div>
+          <div class="cs">Distribution (1 = Very Low, 5 = Very High)</div>
           <div class="chart-frame sm"><canvas id="chart-collab"></canvas></div>
           <div class="sr" id="stats-collab"></div>
         </div>
         <div class="cw">
           <div class="ct">Monitoring Difficulty</div>
-          <div class="cs">1 = Very Difficult → 5 = Very Easy</div>
+          <div class="cs">Distribution (1 = Very Easy, 5 = Very Difficult)</div>
           <div class="chart-frame sm"><canvas id="chart-difficulty"></canvas></div>
           <div class="sr" id="stats-difficulty"></div>
         </div>
       </div>
-      <div class="cw">
-        <div class="ct">Average Ratings by Map Layout</div>
-        <div class="cs">Collaboration vs Monitoring Ease per map</div>
-        <div class="chart-frame md"><canvas id="chart-bymap"></canvas></div>
+      <div class="g2" style="margin-top:20px">
+        <div class="cw">
+          <div class="ct">Collaboration Rating by Map</div>
+          <div class="cs">Mean ±1 SD · 1 = Very Low, 5 = Very High</div>
+          <div class="chart-frame md"><canvas id="chart-bymap-collab"></canvas></div>
+        </div>
+        <div class="cw">
+          <div class="ct">Monitoring Difficulty by Map</div>
+          <div class="cs">Mean ±1 SD · 1 = Very Easy, 5 = Very Difficult</div>
+          <div class="chart-frame md"><canvas id="chart-bymap-difficulty"></canvas></div>
+        </div>
       </div>
     </div>
 
-    <!-- Tab 5: Participants with episode drill-down -->
+    <!-- Tab 5: Participants with episode drill-down & Dropout Summary -->
     <div class="pn on" id="p5">
+      <!-- Dropout & Completion Summary Header -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px">Completed</div>
+            <div style="font-size:24px;font-weight:800;color:var(--green);font-family:var(--font-title)" id="p5-stat-completed">0</div>
+          </div>
+          <span class="status-chip status-completed" style="font-size:11px">✓ Finish</span>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px">Dropped Out</div>
+            <div style="font-size:24px;font-weight:800;color:var(--pink);font-family:var(--font-title)" id="p5-stat-dropouts">0</div>
+          </div>
+          <span class="status-chip" style="font-size:11px;background:rgba(244,63,94,0.15);color:var(--pink)">✕ Dropout</span>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px">Completion Rate</div>
+            <div style="font-size:24px;font-weight:800;color:var(--sky);font-family:var(--font-title)" id="p5-stat-rate">0%</div>
+          </div>
+          <span class="status-chip" style="font-size:11px;background:rgba(14,165,233,0.15);color:var(--sky)">Rate</span>
+        </div>
+      </div>
+
       <div class="cw">
-        <div class="ct">All Participants</div>
-        <div class="cs">Click a row to expand episode-level feedback</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+          <!-- Status Filter Toggle Buttons -->
+          <div style="display:flex;align-items:center;gap:6px;background:var(--surface-2);padding:4px;border-radius:8px;border:1px solid var(--border)">
+            <button class="pfilter-btn active" id="pfilter-comp" style="font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer">Completed (<span id="pfilter-comp-count">0</span>)</button>
+            <button class="pfilter-btn" id="pfilter-drop" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Dropped Out (<span id="pfilter-drop-count">0</span>)</button>
+            <button class="pfilter-btn" id="pfilter-all" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">All (<span id="pfilter-all-count">0</span>)</button>
+          </div>
+
+          <div class="psearch-box" style="margin-bottom:0">
+            <input type="text" id="participant-search" placeholder="Search Participant ID..." class="psearch-input" />
+          </div>
+        </div>
         <div style="overflow-x:auto">
           <table class="ptable" id="participant-table">
             <thead><tr>
-              <th>#</th><th>Participant ID</th><th>Status</th><th>Episodes</th><th>Items</th><th>Tutorial</th><th>Main</th><th>Collab</th><th>Difficulty</th>
+              <th>#</th><th>Participant ID</th><th>Status</th><th>Total Items</th><th>Avg FB / Ep</th><th>Total Time</th><th>Collab</th><th>Difficulty</th>
             </tr></thead>
             <tbody id="participant-tbody"></tbody>
           </table>
@@ -333,33 +569,123 @@ body{min-height:100%;background:var(--bg);color:var(--text-1);font-family:var(--
     <!-- Tab 6: Post Surveys -->
     <div class="pn" id="p6">
       <div class="cw">
-        <div class="ct">Post-Experiment Surveys</div>
-        <div class="cs">Feedback and answers provided by participants at the end of the study</div>
-        <div id="post-surveys-container" style="display:flex;flex-direction:column;gap:16px;margin-top:16px;"></div>
+        <div class="survey-head">
+          <div><div class="ct">Post-Experiment Surveys</div><div class="cs" style="margin-bottom:0">Select a question to compare completed participants' responses</div></div>
+          <div class="survey-counts">
+            <div class="survey-count"><strong id="survey-respondent-count">0</strong><span>Respondents</span></div>
+            <div class="survey-count"><strong>4</strong><span>Questions</span></div>
+          </div>
+        </div>
+        <div class="survey-question-nav" id="survey-question-nav"></div>
+        <div class="survey-active-head">
+          <div class="survey-active-question" id="survey-active-question"></div>
+          <div class="survey-response-count" id="survey-response-count"></div>
+        </div>
+        <div class="survey-response-grid" id="post-surveys-container"></div>
       </div>
     </div>
 
     <!-- Tab 7: Feedback Tone -->
     <div class="pn" id="p7">
       <div class="cw">
-        <div class="ct">Participant Feedback Tone</div>
-        <div class="cs">Distribution of sentiment (Negative vs Neutral vs Positive) per participant</div>
-        <div class="chart-frame md"><canvas id="chart-tone"></canvas></div>
+        <div class="ct">Feedback Tone Distribution</div>
+        <div class="cs">Each bar shows the actual feedback volume per completed participant · Negative = 1–2, Neutral = 3, Positive = 4–5</div>
+        <div class="tone-summary">
+          <div class="tone-stat" style="--tone-color:#94a3b8"><div class="tone-stat-value" id="tone-stat-total">0</div><div class="tone-stat-label">Total items</div><div class="tone-stat-share" id="tone-stat-participants"></div></div>
+          <div class="tone-stat" style="--tone-color:#f472b6"><div class="tone-stat-value" id="tone-stat-neg">0</div><div class="tone-stat-label">Negative</div><div class="tone-stat-share" id="tone-share-neg">0%</div></div>
+          <div class="tone-stat" style="--tone-color:#fbbf24"><div class="tone-stat-value" id="tone-stat-neu">0</div><div class="tone-stat-label">Neutral</div><div class="tone-stat-share" id="tone-share-neu">0%</div></div>
+          <div class="tone-stat" style="--tone-color:#34d399"><div class="tone-stat-value" id="tone-stat-pos">0</div><div class="tone-stat-label">Positive</div><div class="tone-stat-share" id="tone-share-pos">0%</div></div>
+        </div>
+        <div class="chart-frame lg"><canvas id="chart-tone"></canvas></div>
       </div>
-      <div class="tone-cols" id="tone-container">
-        <div class="tone-col">
-          <div class="tone-col-head" style="color:#f472b6">Negative (1-2)</div>
-          <div id="tone-neg" style="display:flex;flex-direction:column;gap:12px"></div>
+      <div class="cw">
+        <div class="tone-browser-head">
+          <div><div class="ct">Feedback Browser</div><div class="cs" style="margin-bottom:0" id="tone-browser-summary">Browse all scored feedback items</div></div>
+          <div class="tone-filter-tabs" id="tone-filter-tabs">
+            <button class="tone-filter-btn on" style="--tone-color:#818cf8" data-tone="all">All</button>
+            <button class="tone-filter-btn" style="--tone-color:#f472b6" data-tone="negative">Negative</button>
+            <button class="tone-filter-btn" style="--tone-color:#fbbf24" data-tone="neutral">Neutral</button>
+            <button class="tone-filter-btn" style="--tone-color:#34d399" data-tone="positive">Positive</button>
+          </div>
         </div>
-        <div class="tone-col">
-          <div class="tone-col-head" style="color:#fbbf24">Neutral (3)</div>
-          <div id="tone-neu" style="display:flex;flex-direction:column;gap:12px"></div>
+        <div class="tone-list" id="tone-list"></div>
+      </div>
+    </div>
+
+    <!-- Tab 8: Seed Timeline Heatmap (Premiere Pro Studio Style) -->
+    <div class="pn" id="p8">
+      <div class="cw">
+        <div class="heatmap-head">
+          <div><div class="ct">Seed Feedback Replay</div><div class="cs" style="margin-bottom:0">Compare participant feedback ranges against the shared episode timeline</div></div>
+          <div class="heatmap-legend"><span><i style="background:var(--pink)"></i>Negative</span><span><i style="background:var(--amber)"></i>Neutral</span><span><i style="background:var(--green)"></i>Positive</span><span><i style="background:#fff;width:2px"></i>Exact frame</span></div>
         </div>
-        <div class="tone-col">
-          <div class="tone-col-head" style="color:#34d399">Positive (4-5)</div>
-          <div id="tone-pos" style="display:flex;flex-direction:column;gap:12px"></div>
+        <div class="heatmap-toolbar">
+          <div class="heatmap-filter">
+            <label for="heatmap-map-select">Map layout</label>
+            <select class="pilot-select" id="heatmap-map-select">
+              <option value="all">All Map Layouts</option>
+            </select>
+          </div>
+          <div class="heatmap-filter">
+            <label for="heatmap-seed-select">Episode seed</label>
+            <select class="pilot-select" id="heatmap-seed-select">
+              <option value="">Select an episode seed...</option>
+            </select>
+          </div>
+          <div class="heatmap-filter">
+            <label>Feedback tone</label>
+            <div class="heatmap-sentiment-filter" role="group" aria-label="Feedback tone filter">
+              <button type="button" class="active" data-sentiment-filter="all">All</button>
+              <button type="button" data-sentiment-filter="positive">Positive</button>
+              <button type="button" data-sentiment-filter="neutral">Neutral</button>
+              <button type="button" data-sentiment-filter="negative">Negative</button>
+            </div>
+          </div>
+          <div class="heatmap-seed-meta" id="heatmap-seed-meta">Loading preview…</div>
+        </div>
+
+        <div class="pr-workspace" id="pr-workspace">
+          <div class="pr-monitor-card">
+            <div class="pr-card-header">
+              <span class="pr-card-kicker">Episode preview</span>
+              <span class="pr-selected-seed" id="pr-selected-seed">Preparing first frame…</span>
+              <div class="pr-header-controls">
+                <span class="pr-timecode" id="pr-timecode">Frame 0 / 100</span>
+                <select class="pr-speed-select" id="pr-speed-select" aria-label="Playback speed">
+                  <option value="0.5">0.5x</option>
+                  <option value="1" selected>1.0x</option>
+                  <option value="1.5">1.5x</option>
+                  <option value="2">2.0x</option>
+                </select>
+              </div>
+            </div>
+            <div class="pr-scene-viewport" id="pr-scene-viewport">
+              <div id="pr-scene"><div class="pr-scene-loading">Building first-frame preview</div></div>
+              <span class="pr-preview-status" id="pr-preview-status">First-frame preview</span>
+              <button class="pr-preview-play" id="pr-preview-play" title="Play episode preview">▶</button>
+            </div>
+            <div class="pr-transport-bar">
+              <div class="pr-transport-control-cell"><button class="pr-control-btn pr-btn-play" id="pr-btn-play" title="Play or pause">▶</button></div>
+              <div class="pr-scrubber-wrap"><input class="pr-scrubber" type="range" id="pr-scrubber" min="0" max="100" value="0" aria-label="Episode frame"></div>
+            </div>
+
+            <div id="heatmap-body" class="pr-timeline-container" style="border-left:none;border-right:none;border-bottom:none">
+              <div class="no-items">Please select an episode seed above to render the timeline heatmap.</div>
+            </div>
+          </div>
+
+          <div class="pr-inspector-card">
+            <div class="pr-card-header">
+              <span class="pr-card-kicker" style="color:var(--pink)">Comments at playhead</span>
+              <span id="pr-active-count" style="font-size:11px;color:var(--text-2);font-family:var(--mono)">0 active</span>
+            </div>
+            <div id="pr-active-comments" style="padding:14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:12px;color:var(--text-3);text-align:center;margin:auto">Scrub timeline or play video to inspect active feedback items at current frame.</div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
     </div>
     </div>
   </div>
@@ -414,22 +740,30 @@ let pilotManifest = null;
 
 // ── Helpers ──
 const shortId = id => id.length > 12 ? id.slice(0,8)+'…' : id;
+const shortEp = fn => (fn || '').split('/').pop()?.replace('.json','') || 'ep';
 const r = (v,d=1) => v==null?'—':Number(v.toFixed(d));
 const toMin = sec => sec==null?null:sec/60;
+const escapeHtml = value => String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 
 function calcStats(arr){
   const s=[...arr].filter(v=>v!=null&&!isNaN(v)).sort((a,b)=>a-b);
-  if(!s.length)return{mean:0,median:0,min:0,max:0,q1:0,q3:0};
+  if(!s.length)return{mean:0,sd:0,median:0,min:0,max:0,q1:0,q3:0};
   const mean=s.reduce((a,b)=>a+b,0)/s.length;
+  const variance=s.length>1 ? s.reduce((a,b)=>a+Math.pow(b-mean,2),0)/(s.length-1) : 0;
+  const sd=Math.sqrt(variance);
   const median=s.length%2===0?(s[s.length/2-1]+s[s.length/2])/2:s[Math.floor(s.length/2)];
-  return{mean,median,min:s[0],max:s[s.length-1],q1:s[Math.floor(s.length*.25)],q3:s[Math.floor(s.length*.75)]};
+  return{mean,sd,median,min:s[0],max:s[s.length-1],q1:s[Math.floor(s.length*.25)],q3:s[Math.floor(s.length*.75)]};
 }
 
 function renderStats(id,stats,suffix=''){
   document.getElementById(id).innerHTML=[
-    ['Mean',r(stats.mean)],['Median',r(stats.median)],['Min',r(stats.min)],
-    ['Max',r(stats.max)],['Q1',r(stats.q1)],['Q3',r(stats.q3)]
-  ].map(([l,v])=>`<div class="sb"><div class="sv">${v}${suffix}</div><div class="sl">${l}</div></div>`).join('');
+    ['Mean',r(stats.mean)+suffix],
+    ['SD (±)',r(stats.sd)+suffix],
+    ['Median',r(stats.median)+suffix],
+    ['Min',r(stats.min)+suffix],
+    ['Max',r(stats.max)+suffix],
+    ['IQR',r(stats.q3-stats.q1)+suffix]
+  ].map(([l,v])=>`<div class="sb"><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('');
 }
 
 function baseOpts(xT,yT){
@@ -450,6 +784,71 @@ function createChart(canvasId, config){
   charts.push(chart);
   return chart;
 }
+
+const errorBarPlugin={
+  id:'errorBars',
+  afterDatasetsDraw(chart,args,options){
+    const values=options?.values||[];
+    const dataset=chart.data.datasets[0];
+    const meta=chart.getDatasetMeta(0);
+    const yScale=chart.scales.y;
+    const ctx=chart.ctx;
+    ctx.save();
+    ctx.strokeStyle=options?.color||'#f8fafc';
+    ctx.lineWidth=options?.lineWidth||1.5;
+    meta.data.forEach((bar,index)=>{
+      const mean=Number(dataset.data[index]);
+      const error=Number(values[index]);
+      if(!Number.isFinite(mean)||!Number.isFinite(error)) return;
+      const top=yScale.getPixelForValue(mean+error);
+      const bottom=yScale.getPixelForValue(Math.max(0,mean-error));
+      const cap=options?.capWidth||8;
+      ctx.beginPath();
+      ctx.moveTo(bar.x,top);
+      ctx.lineTo(bar.x,bottom);
+      ctx.moveTo(bar.x-cap,top);
+      ctx.lineTo(bar.x+cap,top);
+      ctx.moveTo(bar.x-cap,bottom);
+      ctx.lineTo(bar.x+cap,bottom);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+};
+const clippedValuePlugin={
+  id:'clippedValues',
+  afterDatasetsDraw(chart,args,options){
+    if(!options?.enabled) return;
+    const max=Number(options.max);
+    const ctx=chart.ctx;
+    const clippedByIndex=new Map();
+    chart.data.datasets.forEach((dataset,datasetIndex)=>{
+      if(dataset.type==='line') return;
+      const meta=chart.getDatasetMeta(datasetIndex);
+      dataset.data.forEach((value,index)=>{
+        if(!Number.isFinite(Number(value))||Number(value)<=max||!meta.data[index]) return;
+        const entry=clippedByIndex.get(index)||{values:[],positions:[]};
+        entry.values.push(Number(value));
+        entry.positions.push(meta.data[index].x);
+        clippedByIndex.set(index,entry);
+      });
+    });
+    ctx.save();
+    ctx.fillStyle='#f8fafc';
+    ctx.font='700 9px DM Mono';
+    ctx.textAlign='center';
+    clippedByIndex.forEach(entry=>{
+      const maxValue=Math.max(...entry.values);
+      const label=entry.values.length>1?`↑ max ${r(maxValue,0)} · ${entry.values.length} clipped`:`↑ ${r(maxValue,0)}`;
+      const naturalX=entry.positions.reduce((sum,value)=>sum+value,0)/entry.positions.length;
+      const halfWidth=ctx.measureText(label).width/2;
+      const x=Math.max(chart.chartArea.left+halfWidth,Math.min(chart.chartArea.right-halfWidth,naturalX));
+      ctx.fillText(label,x,chart.chartArea.top+11);
+    });
+    ctx.restore();
+  }
+};
+Chart.register(errorBarPlugin,clippedValuePlugin);
 
 function bindCanvasClick(canvasId, handler){
   const canvas = document.getElementById(canvasId);
@@ -506,8 +905,13 @@ async function loadPilot(pilotId){
   try{
     const data = await fetchPilotData(pilot);
     render(data);
-    document.getElementById('nav-logo').textContent=pilot.label;
-    document.getElementById('nav-status-text').textContent=`Local · ${Object.keys(data).length} participants`;
+    if(document.getElementById('nav-logo')) document.getElementById('nav-logo').textContent=pilot.label;
+    if(document.getElementById('nav-status-text')) {
+      const allP=Object.values(data);
+      const compP=allP.filter(p=>p.sessions.some(s=>s.status==='completed'));
+      const dropP=allP.filter(p=>!p.sessions.some(s=>s.status==='completed'));
+      document.getElementById('nav-status-text').textContent=`Local · ${compP.length} completed (${dropP.length} dropped out)`;
+    }
     document.getElementById('loading').style.display='none';
     document.getElementById('content').style.display='block';
   }finally{
@@ -520,8 +924,9 @@ function render(pm){
   DATA=pm;
   const all=Object.values(pm);
   const completed=all.filter(p=>p.sessions.some(s=>s.status==='completed'));
-  const totalEp=all.reduce((s,p)=>s+p.episodes.length,0);
-  const totalItems=all.reduce((s,p)=>s+p.feedbackItems.length,0);
+  const dropouts=all.filter(p=>!p.sessions.some(s=>s.status==='completed'));
+  const totalEp=completed.reduce((s,p)=>s+p.episodes.length,0);
+  const totalItems=completed.reduce((s,p)=>s+p.feedbackItems.length,0);
 
   const kpiTimeVals=completed.map(p=>{
     const s=p.sessions[0]||{};
@@ -529,30 +934,173 @@ function render(pm){
   }).filter(v=>v!=null&&v>0);
   const avgTime = kpiTimeVals.length ? kpiTimeVals.reduce((a,b)=>a+b,0)/kpiTimeVals.length : 0;
 
-  document.getElementById('kpi-participants').textContent=completed.length;
-  document.getElementById('kpi-time').textContent=avgTime ? r(avgTime) : '—';
-  document.getElementById('kpi-items').textContent=totalItems;
-  document.getElementById('kpi-avg-items').textContent=completed.length?r(totalItems/completed.length):'—';
-  document.getElementById('kpi-avg-ep-items').textContent=totalEp?r(totalItems/totalEp):'—';
+  const totalPart = all.length;
+  const compRate = totalPart > 0 ? (completed.length / totalPart * 100) : 0;
 
-  // ── Tab 1: Tutorial / Main ──
-  const tutVals=completed.map(p=>toMin(p.sessions[0]?.tutorialDurationSec));
-  const mainVals=completed.map(p=>toMin(p.sessions[0]?.mainDurationSec));
-  const labels=completed.map(p=>shortId(p.id));
+  if(document.getElementById('kpi-participants')) document.getElementById('kpi-participants').textContent=completed.length;
+  if(document.getElementById('kpi-dropouts')) document.getElementById('kpi-dropouts').textContent=dropouts.length;
+  if(document.getElementById('kpi-completion-rate')) document.getElementById('kpi-completion-rate').textContent=r(compRate,1)+'%';
+  if(document.getElementById('kpi-bar-fill')) document.getElementById('kpi-bar-fill').style.width=r(compRate,1)+'%';
+  if(document.getElementById('kpi-time')) document.getElementById('kpi-time').textContent=avgTime ? (r(avgTime,1) + 'm') : '—';
+  if(document.getElementById('kpi-items')) document.getElementById('kpi-items').textContent=totalItems;
+  if(document.getElementById('kpi-avg-items')) document.getElementById('kpi-avg-items').textContent=completed.length?r(totalItems/completed.length,1):'—';
 
-  createChart('chart-tutorial',{type:'bar',
-    data:{labels,datasets:[{data:tutVals.map(v=>v??0),backgroundColor:tutVals.map(v=>v==null||v===0?'#f472b6':'#818cf8'),borderRadius:4,borderSkipped:false}]},
-    options:{...baseOpts('','min'),plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>r(tutVals[ctx.dataIndex],2)+' min'}}}}
+  // Tab 5 Header Stats Update
+  if (document.getElementById('p5-stat-completed')) document.getElementById('p5-stat-completed').textContent = completed.length;
+  if (document.getElementById('p5-stat-dropouts')) document.getElementById('p5-stat-dropouts').textContent = dropouts.length;
+  if (document.getElementById('p5-stat-rate')) document.getElementById('p5-stat-rate').textContent = r(compRate, 1) + '%';
+
+  if (document.getElementById('pfilter-comp-count')) document.getElementById('pfilter-comp-count').textContent = completed.length;
+  if (document.getElementById('pfilter-drop-count')) document.getElementById('pfilter-drop-count').textContent = dropouts.length;
+  if (document.getElementById('pfilter-all-count')) document.getElementById('pfilter-all-count').textContent = all.length;
+
+  // ── Tab 1: Time Overview ──
+  const tutVals = completed.map(p => toMin(p.sessions[0]?.tutorialDurationSec) || 0);
+  const mainVals = completed.map(p => toMin(p.sessions[0]?.mainDurationSec) || 0);
+  const totalVals = completed.map((p, i) => tutVals[i] + mainVals[i]);
+  const labels = completed.map(p => shortId(p.id));
+
+  const tutStats = calcStats(tutVals.filter(v => v > 0));
+  const mainStats = calcStats(mainVals.filter(v => v > 0));
+  const totalStats = calcStats(totalVals.filter(v => v > 0));
+
+  const tutShare = totalStats.mean > 0 ? ((tutStats.mean / totalStats.mean) * 100) : 0;
+
+  if (document.getElementById('time-summary-total')) document.getElementById('time-summary-total').textContent = `${r(totalStats.mean, 1)} min`;
+  if (document.getElementById('time-sd-total')) document.getElementById('time-sd-total').textContent = `± ${r(totalStats.sd, 1)} min`;
+
+  if (document.getElementById('time-summary-tut')) document.getElementById('time-summary-tut').textContent = `${r(tutStats.mean, 1)} min`;
+  if (document.getElementById('time-sd-tut')) document.getElementById('time-sd-tut').textContent = `± ${r(tutStats.sd, 1)} min`;
+
+  if (document.getElementById('time-summary-main')) document.getElementById('time-summary-main').textContent = `${r(mainStats.mean, 1)} min`;
+  if (document.getElementById('time-sd-main')) document.getElementById('time-sd-main').textContent = `± ${r(mainStats.sd, 1)} min`;
+
+  if (document.getElementById('time-summary-ratio')) document.getElementById('time-summary-ratio').textContent = `${r(tutShare, 1)}%`;
+
+  // Smart Y-Axis Scale Calculation for Outliers
+  const sortedTotals = [...totalVals].sort((a, b) => a - b);
+  const q1 = sortedTotals[Math.floor(sortedTotals.length * 0.25)] || 0;
+  const q3 = sortedTotals[Math.floor(sortedTotals.length * 0.75)] || 0;
+  const iqr = q3 - q1;
+  const upperCutoff = q3 + 1.5 * iqr; // Outlier cutoff threshold
+
+  const nonOutliers = totalVals.filter(v => v <= Math.max(upperCutoff, 45));
+  const maxNormalTime = Math.max(...nonOutliers, 30);
+  const smartYMax = Math.ceil((maxNormalTime * 1.15) / 5) * 5; // e.g. 50 min
+  const maxTotalOverall = Math.ceil((Math.max(...totalVals) * 1.05) / 10) * 10; // e.g. 120 min
+
+  let isAutoYScale = true;
+
+  if (document.getElementById('yscale-btn-label')) {
+    document.getElementById('yscale-btn-label').textContent = `Auto Scale Y (Max ${smartYMax}m)`;
+  }
+
+  // Stacked Combined Chart
+  const combinedChart = createChart('chart-combined-time', {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Tutorial Duration',
+          data: tutVals,
+          backgroundColor: '#818cf8',
+          borderRadius: 4,
+          stack: 'time'
+        },
+        {
+          label: 'Main Experiment Duration',
+          data: mainVals,
+          backgroundColor: '#34d399',
+          borderRadius: 4,
+          stack: 'time'
+        }
+      ]
+    },
+    options: {
+      ...baseOpts('', 'Minutes'),
+      plugins: {
+        legend: {
+          display: true,
+          labels: { color: '#8888a0', font: { size: 11, family: 'Inter' }, padding: 14 }
+        },
+        tooltip: {
+          ...baseOpts().plugins.tooltip,
+          callbacks: {
+            footer: (ctxItems) => {
+              let total = 0;
+              ctxItems.forEach(item => total += item.parsed.y);
+              return `Total Time: ${r(total, 2)} min${total > smartYMax ? ' (Outlier)' : ''}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, ticks: { font: { size: 9, family: 'Inter' }, color: '#8888a0' }, grid: { display: false } },
+        y: { 
+          stacked: true, 
+          max: isAutoYScale ? smartYMax : maxTotalOverall,
+          ticks: { font: { size: 9, family: 'Inter' }, color: '#8888a0' }, 
+          grid: { color: 'rgba(255,255,255,0.04)' } 
+        }
+      }
+    }
   });
-  renderStats('stats-tutorial',calcStats(tutVals.filter(v=>v!=null&&v>0)),' min');
 
-  createChart('chart-main',{type:'bar',
-    data:{labels,datasets:[{data:mainVals.map(v=>v??0),backgroundColor:mainVals.map(v=>v==null||v===0?'#f472b6':v>60?'#fbbf24':'#34d399'),borderRadius:4,borderSkipped:false}]},
-    options:{...baseOpts('','min'),plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>r(mainVals[ctx.dataIndex],2)+' min'}}}}
+  // Toggle Y-Scale Event Listener
+  const toggleBtn = document.getElementById('toggle-yscale');
+  if (toggleBtn) {
+    toggleBtn.onclick = () => {
+      isAutoYScale = !isAutoYScale;
+      combinedChart.options.scales.y.max = isAutoYScale ? smartYMax : maxTotalOverall;
+      combinedChart.update();
+      if (document.getElementById('yscale-btn-label')) {
+        document.getElementById('yscale-btn-label').textContent = isAutoYScale 
+          ? `Auto Scale Y (Max ${smartYMax}m)` 
+          : `Full Range Y (Max ${maxTotalOverall}m)`;
+      }
+    };
+  }
+
+  // Smart Y-Axis Scale for Main Experiment Chart
+  const sortedMain = [...mainVals].sort((a, b) => a - b);
+  const mainQ1 = sortedMain[Math.floor(sortedMain.length * 0.25)] || 0;
+  const mainQ3 = sortedMain[Math.floor(sortedMain.length * 0.75)] || 0;
+  const mainIqr = mainQ3 - mainQ1;
+  const mainCutoff = mainQ3 + 1.5 * mainIqr;
+  const mainNonOutliers = mainVals.filter(v => v <= Math.max(mainCutoff, 40));
+  const maxNormalMain = Math.max(...mainNonOutliers, 25);
+  const smartMainYMax = Math.ceil((maxNormalMain * 1.15) / 5) * 5; // e.g. 40m or 45m
+
+  // Individual Tutorial & Main Charts
+  createChart('chart-tutorial', {
+    type: 'bar',
+    data: { labels, datasets: [{ data: tutVals, backgroundColor: '#818cf8', borderRadius: 4 }] },
+    options: { ...baseOpts('', 'min'), plugins: { ...baseOpts().plugins, tooltip: { ...baseOpts().plugins.tooltip, callbacks: { label: ctx => r(tutVals[ctx.dataIndex], 2) + ' min' } } } }
   });
-  renderStats('stats-main',calcStats(mainVals.filter(v=>v!=null&&v>0)),' min');
+  renderStats('stats-tutorial', tutStats, ' min');
 
-  // Histograms
+  createChart('chart-main', {
+    type: 'bar',
+    data: { labels, datasets: [{ data: mainVals, backgroundColor: '#34d399', borderRadius: 4 }] },
+    options: {
+      ...baseOpts('', 'min'),
+      plugins: {
+        ...baseOpts().plugins,
+        tooltip: {
+          ...baseOpts().plugins.tooltip,
+          callbacks: { label: ctx => r(mainVals[ctx.dataIndex], 2) + ' min' + (mainVals[ctx.dataIndex] > smartMainYMax ? ' (Outlier)' : '') }
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 9, family: 'Inter' }, color: '#8888a0' }, grid: { display: false } },
+        y: { max: smartMainYMax, ticks: { font: { size: 9, family: 'Inter' }, color: '#8888a0' }, grid: { color: 'rgba(255,255,255,0.04)' } }
+      }
+    }
+  });
+  renderStats('stats-main', mainStats, ' min');
+
+  // Histograms Helper & Setup
   function buildHist(data, ranges) {
     const counts = ranges.map(() => 0);
     data.forEach(v => {
@@ -567,76 +1115,357 @@ function render(pm){
     });
     return counts;
   }
+
+  function histOpts(xT, yT, maxVal = 5) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 350 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1f1f24',
+          titleColor: '#f0f0f5',
+          bodyColor: '#8888a0',
+          borderColor: 'rgba(255,255,255,0.08)',
+          borderWidth: 1,
+          padding: 10,
+          cornerRadius: 8,
+          titleFont: { weight: 600 },
+          callbacks: {
+            label: (ctx) => `${ctx.parsed.y} participant${ctx.parsed.y !== 1 ? 's' : ''}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          categoryPercentage: 1.0,
+          barPercentage: 0.96,
+          ticks: { font: { size: 9, family: 'Inter' }, color: '#8888a0' },
+          grid: { display: false },
+          title: { display: !!xT, text: xT || '', color: '#8888a0', font: { size: 10, family: 'Inter' } }
+        },
+        y: {
+          suggestedMax: maxVal,
+          ticks: {
+            precision: 0,
+            stepSize: 1,
+            font: { size: 9, family: 'Inter' },
+            color: '#8888a0'
+          },
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          title: { display: !!yT, text: yT || '', color: '#8888a0', font: { size: 10, family: 'Inter' } }
+        }
+      }
+    };
+  }
   
+  function computeSmoothTrendline(counts) {
+    const n = counts.length;
+    if (n <= 1) return [...counts];
+    return counts.map((v, i) => {
+      const prev = i > 0 ? counts[i - 1] : v;
+      const next = i < n - 1 ? counts[i + 1] : v;
+      return Number((0.25 * prev + 0.5 * v + 0.25 * next).toFixed(2));
+    });
+  }
+
   const tutBinLabels = ['0–2','2–4','4–6','6–8','8–10','10+'];
   const tutBinR = [[0,2],[2,4],[4,6],[6,8],[8,10],[10,Infinity]];
   const tutCounts = buildHist(tutVals, tutBinR);
+  const tutTrend = computeSmoothTrendline(tutCounts);
 
   const mainBinLabels = ['0–10','10–20','20–30','30–40','40–50','50+'];
   const mainBinR = [[0,10],[10,20],[20,30],[30,40],[40,50],[50,Infinity]];
   const mainCounts = buildHist(mainVals, mainBinR);
+  const mainTrend = computeSmoothTrendline(mainCounts);
 
-  createChart('chart-tutorial-dist',{type:'bar',
-    data:{labels:tutBinLabels,datasets:[{data:tutCounts,backgroundColor:'#818cf8',borderRadius:4}]},
-    options:baseOpts('Time Range (min)','Participants')
+  createChart('chart-tutorial-dist', {
+    type: 'bar',
+    data: {
+      labels: tutBinLabels,
+      datasets: [
+        {
+          type: 'line',
+          label: 'Trend Curve',
+          data: tutTrend,
+          borderColor: '#c084fc',
+          borderWidth: 2.5,
+          tension: 0.45,
+          pointRadius: 3,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#c084fc',
+          pointBorderWidth: 1.5,
+          order: 1
+        },
+        {
+          type: 'bar',
+          label: 'Participants',
+          data: tutCounts,
+          backgroundColor: 'rgba(129, 140, 248, 0.4)',
+          borderColor: 'rgba(129, 140, 248, 0.85)',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          order: 2
+        }
+      ]
+    },
+    options: histOpts('Time Range (min)', 'Participants Count', 4)
   });
 
-  createChart('chart-main-dist',{type:'bar',
-    data:{labels:mainBinLabels,datasets:[{data:mainCounts,backgroundColor:'#34d399',borderRadius:4}]},
-    options:baseOpts('Time Range (min)','Participants')
+  createChart('chart-main-dist', {
+    type: 'bar',
+    data: {
+      labels: mainBinLabels,
+      datasets: [
+        {
+          type: 'line',
+          label: 'Trend Curve',
+          data: mainTrend,
+          borderColor: '#2dd4bf',
+          borderWidth: 2.5,
+          tension: 0.45,
+          pointRadius: 3,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#2dd4bf',
+          pointBorderWidth: 1.5,
+          order: 1
+        },
+        {
+          type: 'bar',
+          label: 'Participants',
+          data: mainCounts,
+          backgroundColor: 'rgba(52, 211, 153, 0.4)',
+          borderColor: 'rgba(52, 211, 153, 0.85)',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          order: 2
+        }
+      ]
+    },
+    options: histOpts('Time Range (min)', 'Participants Count', 5)
   });
 
-  // ── Tab 2: Episode time ──
-  const allEp=[];
+  // ── Tab 2: Episode Time ──
+  const mapOrder=['2_forced_hard','2_forced_hard_4','2_incentivized_hard','2_incentivized_hard_4'];
+  const mapLabels={
+    '2_forced_hard':'Forced Hard',
+    '2_forced_hard_4':'Forced Hard 4',
+    '2_incentivized_hard':'Incentivized Hard',
+    '2_incentivized_hard_4':'Incentivized Hard 4'
+  };
+  const mapColors=['#818cf8','#38bdf8','#34d399','#fbbf24'];
+  const epTimeData=[];
   completed.forEach(p=>p.episodes.forEach(ep=>{
-    const fn=ep.fileName||'';
-    const seedName=fn.split('/').pop()?.replace('.json','') || ep.docId;
-    allEp.push({pid:p.id,ep:ep.docId,min:toMin(ep.timeSpentOnPageSec)||0,fileName:fn,seedName});
+    epTimeData.push({
+      pid:p.id,
+      fileName:ep.fileName,
+      layoutName:ep.layoutName,
+      min:toMin(ep.timeSpentOnPageSec),
+      rawSec:ep.timeSpentOnPageSec,
+      ep:ep
+    });
   }));
-  const bins=['0','0–1','1–2','2–3','3–5','5–10','10+'];
-  const binR=[[0,0],[0.001,1],[1,2],[2,3],[3,5],[5,10],[10,Infinity]];
-  const binC=bins.map(()=>0);const binI=bins.map(()=>[]);
-  allEp.forEach(item=>{for(let i=0;i<binR.length;i++){const[lo,hi]=binR[i];
-    if((i===0&&item.min===0)||(i>0&&item.min>lo&&item.min<=hi)||(i===binR.length-1&&item.min>10)){binC[i]++;binI[i].push(item);break;}}});
-
-  const epChart=createChart('chart-eptime',{type:'bar',
-    data:{labels:bins.map(b=>b+' min'),datasets:[{data:binC,backgroundColor:binC.map((_,i)=>i===0?'#f472b6':'#818cf8'),borderRadius:5,barThickness:32}]},
-    options:baseOpts('Time spent (min)','Episode count')});
-  renderStats('stats-eptime',calcStats(allEp.map(e=>e.min)),' min');
-
-  bindCanvasClick('chart-eptime',e=>{
-    const pts=epChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-    if(!pts.length)return;const i=pts[0].index;const items=binI[i];
-    document.getElementById('dp-eptime-title').textContent=bins[i]+' min — '+items.length+' episodes';
-    document.getElementById('dp-eptime-body').innerHTML=items.length===0?'<div class="no-items">None</div>'
-      :items.map(it=>`<div class="dp-item-simple"><span>${shortId(it.pid)}</span> · ${it.ep} · <span style="color:var(--accent)">${it.seedName}</span> · ${r(it.min,2)} min</div>`).join('');
-    document.getElementById('dp-eptime').classList.add('show');
+  const mapEpisodeStats=mapOrder.map(layoutName=>{
+    const episodes=epTimeData.filter(d=>d.layoutName===layoutName&&d.min!=null&&d.min>0);
+    return {layoutName,episodes,stats:calcStats(episodes.map(d=>d.min))};
   });
+  const episodeErrorBarMax=Math.max(...mapEpisodeStats.map(d=>d.stats.mean+d.stats.sd),0)*1.1;
 
-  // ── Tab 3: Items per participant ──
-  const pitVals=completed.map(p=>p.feedbackItems.length);
-  const pitChart=createChart('chart-pititems',{type:'bar',
-    data:{labels,datasets:[{data:pitVals,backgroundColor:pitVals.map(v=>v<=2?'#f472b6':v>=10?'#34d399':'#818cf8'),borderRadius:4,borderSkipped:false}]},
-    options:baseOpts('','Items')});
-  renderStats('stats-pititems',calcStats(pitVals),'');
-
-  const pitMax = Math.max(0, ...pitVals);
-  const pitBinLabels = Array.from({length: pitMax+1}, (_, i) => i.toString());
-  const pitBinR = Array.from({length: pitMax+1}, (_, i) => [i, i]);
-  const pitCounts = buildHist(pitVals, pitBinR);
-  createChart('chart-pititems-dist',{type:'bar',
-    data:{labels:pitBinLabels,datasets:[{data:pitCounts,backgroundColor:'#818cf8',borderRadius:4}]},
-    options:baseOpts('Feedback Items Count','Participants')
+  createChart('chart-eptime',{type:'bar',
+    data:{labels:mapEpisodeStats.map(d=>mapLabels[d.layoutName]),datasets:[{label:'Mean episode time',data:mapEpisodeStats.map(d=>d.stats.mean),backgroundColor:mapColors,borderRadius:4,borderSkipped:false}]},
+    options:{...baseOpts('','min'),
+      scales:{...baseOpts('','min').scales,y:{...baseOpts('','min').scales.y,suggestedMax:episodeErrorBarMax}},
+      onClick:(e,els)=>{
+        if(!els.length) return;
+        const mapData = mapEpisodeStats[els[0].index];
+        const detail=document.getElementById('dp-eptime');
+        document.getElementById('dp-eptime-title').textContent=mapLabels[mapData.layoutName]+' — participant episodes';
+        document.getElementById('dp-eptime-body').innerHTML=mapData.episodes
+          .sort((a,b)=>b.min-a.min)
+          .map(item=>`<div class="fb-card" style="grid-template-columns:1fr auto"><div><div class="fb-main">${shortId(item.pid)}</div><div class="fb-meta">${shortEp(item.fileName)}</div></div><strong style="font-family:var(--mono)">${r(item.min,2)} min</strong></div>`).join('')||'<div class="no-items">No episode timing data</div>';
+        detail.classList.add('show');
+        setTimeout(()=>detail.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+      },
+      plugins:{...baseOpts().plugins,errorBars:{values:mapEpisodeStats.map(d=>d.stats.sd)},tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>{
+        const d=mapEpisodeStats[ctx.dataIndex];
+        return `Mean ${r(d.stats.mean,2)} min · SD ${r(d.stats.sd,2)} · n=${d.episodes.length}`;
+      }}}}
+    }
   });
+  document.getElementById('stats-eptime').innerHTML=mapEpisodeStats.map(d=>`<div class="sb"><div class="sv">${r(d.stats.mean,2)} min</div><div class="sl">${mapLabels[d.layoutName]}<br>Completed episodes n=${d.episodes.length} · SD ${r(d.stats.sd,2)} min</div></div>`).join('');
 
-  bindCanvasClick('chart-pititems',e=>{
-    const pts=pitChart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
-    if(!pts.length)return;const p=completed[pts[0].index];
-    document.getElementById('dp-pititems-title').textContent=shortId(p.id)+' — '+p.feedbackItems.length+' items';
-    document.getElementById('dp-pititems-body').innerHTML=renderParticipantEpisodes(p);
-    document.getElementById('dp-pititems').classList.add('show');
-    bindAccordions('dp-pititems');
+  const mapFeedbackStats=mapOrder.map(layoutName=>{
+    const episodes=completed.flatMap(p=>p.episodes.filter(ep=>ep.layoutName===layoutName).map(ep=>({
+      pid:p.id,
+      totalSec:(ep.feedbackItems||[]).reduce((sum,item)=>sum+(Number(item.timeSpentWritingFeedBackSec)||0),0),
+      items:(ep.feedbackItems||[]).map(item=>Number(item.timeSpentWritingFeedBackSec)).filter(Number.isFinite)
+    })));
+    const itemTimes=episodes.flatMap(ep=>ep.items);
+    return {layoutName,episodes,stats:calcStats(episodes.map(ep=>ep.totalSec)),itemStats:calcStats(itemTimes),itemCount:itemTimes.length};
   });
+  const feedbackErrorBarMax=Math.max(...mapFeedbackStats.map(d=>d.stats.mean+d.stats.sd),0)*1.1;
+  createChart('chart-feedbacktime',{type:'bar',
+    data:{labels:mapFeedbackStats.map(d=>mapLabels[d.layoutName]),datasets:[{label:'Mean feedback writing time',data:mapFeedbackStats.map(d=>d.stats.mean),backgroundColor:mapColors,borderRadius:4,borderSkipped:false}]},
+    options:{...baseOpts('','seconds'),
+      scales:{...baseOpts('','seconds').scales,y:{...baseOpts('','seconds').scales.y,suggestedMax:feedbackErrorBarMax}},
+      plugins:{...baseOpts().plugins,errorBars:{values:mapFeedbackStats.map(d=>d.stats.sd)},tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>{
+      const d=mapFeedbackStats[ctx.dataIndex];
+      return [`Episode total mean ${r(d.stats.mean,1)}s · SD ${r(d.stats.sd,1)}s`,`Item mean ${r(d.itemStats.mean,1)}s · ${d.itemCount} items · ${d.episodes.length} episodes`];
+    }}}}}
+  });
+  document.getElementById('stats-feedbacktime').innerHTML=mapFeedbackStats.map(d=>`<div class="sb"><div class="sv">${r(d.stats.mean,1)} sec</div><div class="sl">${mapLabels[d.layoutName]} · episode mean<br>Completed episodes n=${d.episodes.length} · Feedback items n=${d.itemCount}<br>Item mean ${r(d.itemStats.mean,1)}s</div></div>`).join('');
+
+  // ── Tab 3: Feedback Items ──
+  const totalFbVals=completed.map(p=>p.feedbackItems.length);
+  createChart('chart-totalfb',{type:'bar',
+    data:{labels,datasets:[{data:totalFbVals,backgroundColor:'#fbbf24',borderRadius:4}]},
+    options:baseOpts('','items')
+  });
+  renderStats('stats-totalfb',calcStats(totalFbVals),' items');
+
+  const epFbUserVals=completed.map(p=>p.episodes.length?p.feedbackItems.length/p.episodes.length:0);
+  createChart('chart-epfbuser',{type:'bar',
+    data:{labels,datasets:[{data:epFbUserVals.map(v=>r(v,2)),backgroundColor:'#818cf8',borderRadius:4}]},
+    options:baseOpts('','items / ep')
+  });
+  renderStats('stats-epfbuser',calcStats(epFbUserVals),' / ep');
+
+  const measureFeedbackText=items=>{
+    const texts=items.map(item=>[item.feedback,item.reason,item.correction]
+      .filter(value=>typeof value==='string'&&value.trim())
+      .join(' '));
+    const combined=texts.join(' ').trim();
+    return {words:combined?combined.split(/\s+/).length:0,characters:combined.replace(/\s/g,'').length};
+  };
+  const feedbackTextData=completed.map(p=>{
+    const textMeasure=measureFeedbackText(p.feedbackItems);
+    return {
+      pid:p.id,
+      ...textMeasure,
+      items:p.feedbackItems.length
+    };
+  });
+  const feedbackWordStats=calcStats(feedbackTextData.map(d=>d.words));
+  const feedbackTextRobustMax=Math.ceil(Math.max(feedbackWordStats.median+1.5*(feedbackWordStats.q3-feedbackWordStats.q1),10)*1.1/10)*10;
+  const feedbackTextFullMax=Math.ceil(Math.max(...feedbackTextData.map(d=>d.words),10)*1.1/100)*100;
+  const feedbackTextChart=createChart('chart-feedbacktext',{type:'bar',
+    data:{labels:feedbackTextData.map(d=>shortId(d.pid)),datasets:[{data:feedbackTextData.map(d=>d.words),backgroundColor:'#2dd4bf',borderRadius:4,borderSkipped:false}]},
+    options:{...baseOpts('Participant','words'),
+      scales:{...baseOpts('Participant','words').scales,y:{...baseOpts('Participant','words').scales.y,max:feedbackTextRobustMax}},
+      plugins:{...baseOpts().plugins,clippedValues:{enabled:feedbackTextRobustMax<feedbackTextFullMax,max:feedbackTextRobustMax},tooltip:{...baseOpts().plugins.tooltip,callbacks:{
+      label:ctx=>{
+        const d=feedbackTextData[ctx.dataIndex];
+        return [`${d.words} words`,`${d.characters} characters (excluding spaces)`,`${d.items} feedback items`];
+      }
+    }}}}
+  });
+  renderStats('stats-feedbacktext',feedbackWordStats,' words');
+  let feedbackTextFullRange=false;
+  document.getElementById('toggle-feedbacktext-scale').onclick=event=>{
+    feedbackTextFullRange=!feedbackTextFullRange;
+    feedbackTextChart.options.scales.y.max=feedbackTextFullRange?feedbackTextFullMax:feedbackTextRobustMax;
+    feedbackTextChart.options.plugins.clippedValues.enabled=!feedbackTextFullRange&&feedbackTextRobustMax<feedbackTextFullMax;
+    event.currentTarget.textContent=feedbackTextFullRange?'Show robust range':'Show full range';
+    feedbackTextChart.update();
+  };
+
+  const episodeFeedbackTextData=completed.flatMap(p=>p.episodes.map(ep=>{
+    const items=ep.feedbackItems||[];
+    return {
+      pid:p.id,
+      episodeCount:ep.episodeCount,
+      layoutName:ep.layoutName,
+      fileName:ep.fileName,
+      ...measureFeedbackText(items),
+      items:items.length
+    };
+  }));
+  const episodeTextStats=calcStats(episodeFeedbackTextData.map(d=>d.words));
+  const episodeTextRobustMax=Math.ceil(Math.max(episodeTextStats.median+1.5*(episodeTextStats.q3-episodeTextStats.q1),10)*1.1/10)*10;
+  const episodeTextFullMax=Math.ceil(Math.max(...episodeFeedbackTextData.map(d=>d.words),10)*1.1/100)*100;
+  const episodeNumbers=[1,2,3,4];
+  const participantLabels=completed.map(p=>shortId(p.id));
+  const episodeFeedbackTextChart=createChart('chart-episodefeedbacktext',{type:'bar',
+    data:{
+      labels:participantLabels,
+      datasets:[
+        ...episodeNumbers.map((episodeNumber,index)=>({
+          label:`Episode ${episodeNumber}`,
+          data:completed.map(p=>episodeFeedbackTextData.find(d=>d.pid===p.id&&d.episodeCount===episodeNumber)?.words??null),
+          backgroundColor:mapColors[index],
+          borderRadius:3,
+          borderSkipped:false
+        })),
+        {
+          type:'line',
+          label:`Overall median (${r(episodeTextStats.median,1)} words)`,
+          data:participantLabels.map(()=>episodeTextStats.median),
+          borderColor:'#f8fafc',
+          borderWidth:1.5,
+          borderDash:[6,5],
+          pointRadius:0,
+          tension:0,
+          order:0
+        }
+      ]
+    },
+    options:{...baseOpts('Completed participant','words'),
+      scales:{...baseOpts('Completed participant','words').scales,y:{...baseOpts('Completed participant','words').scales.y,max:episodeTextRobustMax}},
+      plugins:{...baseOpts().plugins,
+        clippedValues:{enabled:episodeTextRobustMax<episodeTextFullMax,max:episodeTextRobustMax},
+        legend:{display:true,labels:{color:'#94a3b8',font:{size:10,family:'Inter'},usePointStyle:true,pointStyle:'rectRounded'}},
+        tooltip:{...baseOpts().plugins.tooltip,filter:item=>item.dataset.type!=='line',callbacks:{
+      title:items=>participantLabels[items[0].dataIndex],
+      label:ctx=>{
+        const episodeNumber=ctx.datasetIndex+1;
+        const participant=completed[ctx.dataIndex];
+        const d=episodeFeedbackTextData.find(item=>item.pid===participant.id&&item.episodeCount===episodeNumber);
+        if(!d) return 'No episode data';
+        return [`Episode ${episodeNumber} · ${mapLabels[d.layoutName]||d.layoutName}`,`${d.words} words`,`${d.characters} characters (excluding spaces)`,`${d.items} feedback items`];
+      },
+    }}}}
+  });
+  renderStats('stats-episodefeedbacktext',episodeTextStats,' words');
+  let episodeTextFullRange=false;
+  document.getElementById('toggle-episodefeedbacktext-scale').onclick=event=>{
+    episodeTextFullRange=!episodeTextFullRange;
+    episodeFeedbackTextChart.options.scales.y.max=episodeTextFullRange?episodeTextFullMax:episodeTextRobustMax;
+    episodeFeedbackTextChart.options.plugins.clippedValues.enabled=!episodeTextFullRange&&episodeTextRobustMax<episodeTextFullMax;
+    event.currentTarget.textContent=episodeTextFullRange?'Show robust range':'Show full range';
+    episodeFeedbackTextChart.update();
+  };
+
+  // Individual Episode Feedback Items (Bar Chart)
+  const pitItemData=[];
+  completed.forEach(p=>p.episodes.forEach(ep=>{
+    pitItemData.push({
+      pid:p.id,
+      fileName:ep.fileName,
+      count:ep.feedbackItems?ep.feedbackItems.length:0,
+      ep:ep
+    });
+  }));
+  const pitItemLabels=pitItemData.map(d=>shortId(d.pid)+' ('+shortEp(d.fileName)+')');
+  const pitItemVals=pitItemData.map(d=>d.count);
+
+  createChart('chart-pititems',{type:'bar',
+    data:{labels:pitItemLabels,datasets:[{data:pitItemVals,backgroundColor:'#2dd4bf',borderRadius:4}]},
+    options:{...baseOpts('','items'),
+      onClick:(e,els)=>{
+        if(!els.length) return;
+        const item = pitItemData[els[0].index];
+        const detail=document.getElementById('dp-pititems');
+        document.getElementById('dp-pititems-title').textContent=item.pid+' — '+item.fileName;
+        document.getElementById('dp-pititems-body').innerHTML=renderEpisodeDetail(item.ep, item.pid);
+        detail.classList.add('show');
+        setTimeout(()=>detail.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+      },
+      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>ctx.parsed.y+' items'}}}
+    }
+  });
+  renderStats('stats-pititems',calcStats(pitItemVals),' items');
+  bindAccordions('dp-pititems');
 
   // ── Tab 4: Ratings ──
   const collabR=[],diffR=[];const mapR={};
@@ -663,68 +1492,156 @@ function render(pm){
     options:baseOpts('Rating','Count')});
   renderStats('stats-difficulty',calcStats(diffR),'');
 
-  const mLabels=Object.keys(mapR);
-  createChart('chart-bymap',{type:'bar',
-    data:{labels:mLabels.map(l=>l.length>22?l.slice(0,20)+'…':l),
-      datasets:[
-        {label:'Collaboration',data:mLabels.map(k=>{const a=mapR[k].collab;return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}),backgroundColor:'rgba(129,140,248,0.7)',borderRadius:4},
-        {label:'Monitoring Ease',data:mLabels.map(k=>{const a=mapR[k].diff;return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}),backgroundColor:'rgba(52,211,153,0.7)',borderRadius:4}
-      ]},
-    options:{...baseOpts('','Avg Rating'),plugins:{legend:{display:true,labels:{color:'#8888a0',font:{size:11,family:'Inter'},padding:16}},tooltip:{enabled:true}}}
+  const mLabels=mapOrder.filter(layout=>mapR[layout]);
+  const mapRatingStats=mLabels.map(layoutName=>({
+    layoutName,
+    collab:calcStats(mapR[layoutName].collab),
+    difficulty:calcStats(mapR[layoutName].diff),
+    collabCount:mapR[layoutName].collab.length,
+    difficultyCount:mapR[layoutName].diff.length
+  }));
+  const ratingMapLabels=mLabels.map(layout=>mapLabels[layout]||layout);
+  const mapRatingOptions=(metric,countKey)=>({
+    ...baseOpts('Map layout','Rating'),
+    scales:{...baseOpts('Map layout','Rating').scales,y:{...baseOpts('Map layout','Rating').scales.y,min:0,max:5.5,ticks:{...baseOpts().scales.y.ticks,stepSize:1}}},
+    plugins:{...baseOpts().plugins,errorBars:{values:mapRatingStats.map(d=>d[metric].sd)},tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>{
+      const d=mapRatingStats[ctx.dataIndex];
+      return `Mean ${r(d[metric].mean,2)} · SD ${r(d[metric].sd,2)} · n=${d[countKey]}`;
+    }}}}
+  });
+  createChart('chart-bymap-collab',{type:'bar',
+    data:{labels:ratingMapLabels,datasets:[{data:mapRatingStats.map(d=>d.collab.mean),backgroundColor:'rgba(129,140,248,0.75)',borderRadius:4,borderSkipped:false}]},
+    options:mapRatingOptions('collab','collabCount')
+  });
+  createChart('chart-bymap-difficulty',{type:'bar',
+    data:{labels:ratingMapLabels,datasets:[{data:mapRatingStats.map(d=>d.difficulty.mean),backgroundColor:'rgba(52,211,153,0.75)',borderRadius:4,borderSkipped:false}]},
+    options:mapRatingOptions('difficulty','difficultyCount')
   });
 
-  // ── Tab 5: Participants table ──
-  const tbody=document.getElementById('participant-tbody');tbody.innerHTML='';
-  all.sort((a,b)=>{
-    const ac=a.sessions.some(s=>s.status==='completed')?0:1;
-    const bc=b.sessions.some(s=>s.status==='completed')?0:1;
-    return ac-bc;
-  });
+  // ── Tab 5: Participants table & Dropout Filter ──
+  let currentPFilter = 'comp'; // 'comp', 'drop', 'all'
 
-  all.forEach((p,idx)=>{
-    const s=p.sessions[0]||{};
-    const isComp=s.status==='completed';
-    const avgC=p.episodes.length?p.episodes.reduce((sum,ep)=>sum+(ep.collaborationRating||0),0)/p.episodes.length:null;
-    const avgD=p.episodes.length?p.episodes.reduce((sum,ep)=>sum+(ep.monitoringDifficulty||0),0)/p.episodes.length:null;
+  function renderParticipantTable() {
+    const tbody = document.getElementById('participant-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
 
-    const tr=document.createElement('tr');
-    tr.dataset.pid=p.id;
-    tr.innerHTML=`<td>${idx+1}</td><td class="pid-mono">${p.id}</td>
-      <td><span class="status-chip ${isComp?'status-completed':'status-started'}">${s.status||'?'}</span></td>
-      <td>${p.episodes.length}</td><td>${p.feedbackItems.length}</td>
-      <td>${r(toMin(s.tutorialDurationSec),2)??'—'} min</td>
-      <td>${r(toMin(s.mainDurationSec),2)??'—'} min</td>
-      <td>${avgC!=null?r(avgC):'—'}</td><td>${avgD!=null?r(avgD):'—'}</td>`;
+    let listToRender = [];
+    if (currentPFilter === 'comp') listToRender = completed;
+    else if (currentPFilter === 'drop') listToRender = dropouts;
+    else listToRender = [...completed, ...dropouts];
 
-    tr.addEventListener('click',()=>{
-      const detail=document.getElementById('participant-detail');
-      document.getElementById('pd-title').textContent=p.id+' — '+p.episodes.length+' episodes, '+p.feedbackItems.length+' items';
-      document.getElementById('pd-body').innerHTML=renderParticipantEpisodes(p);
-      detail.classList.add('show');
-      bindAccordions('pd-body');
-      setTimeout(()=>detail.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+    listToRender.forEach((p, idx) => {
+      const s = p.sessions[0] || {};
+      const isCompleted = p.sessions.some(ses => ses.status === 'completed');
+      const tutMin = toMin(s.tutorialDurationSec) || 0;
+      const mainMin = toMin(s.mainDurationSec) || 0;
+      const totalMin = tutMin + mainMin;
+
+      const totalItems = p.feedbackItems ? p.feedbackItems.length : 0;
+      const epCount = p.episodes ? p.episodes.length : 0;
+      const avgFbPerEp = epCount > 0 ? (totalItems / 4) : 0;
+
+      const avgC = epCount ? p.episodes.reduce((sum, ep) => sum + (ep.collaborationRating || 0), 0) / epCount : null;
+      const avgD = epCount ? p.episodes.reduce((sum, ep) => sum + (ep.monitoringDifficulty || 0), 0) / epCount : null;
+
+      const tr = document.createElement('tr');
+      tr.dataset.pid = p.id;
+
+      const statusChip = isCompleted 
+        ? `<span class="status-chip status-completed">✓ completed</span>`
+        : `<span class="status-chip" style="background:rgba(244,63,94,0.15);color:var(--pink);border:1px solid rgba(244,63,94,0.3)">✕ dropped out (${epCount}/4 ep)</span>`;
+
+      tr.innerHTML = `<td>${idx + 1}</td>
+        <td class="pid-mono" style="font-weight:600">${p.id}</td>
+        <td>${statusChip}</td>
+        <td><strong style="color:var(--accent)">${totalItems}</strong></td>
+        <td><strong style="color:var(--amber)">${r(avgFbPerEp, 1)}</strong> / ep</td>
+        <td><strong>${totalMin > 0 ? r(totalMin, 2) + ' min' : '—'}</strong></td>
+        <td>${avgC != null ? r(avgC) : '—'}</td>
+        <td>${avgD != null ? r(avgD) : '—'}</td>`;
+
+      tr.addEventListener('click', () => {
+        const detail = document.getElementById('participant-detail');
+        document.getElementById('pd-title').textContent = p.id + ' — ' + (isCompleted ? 'Completed' : 'Dropped Out') + ' (' + epCount + ' episodes, ' + totalItems + ' items)';
+        document.getElementById('pd-body').innerHTML = renderParticipantEpisodes(p);
+        detail.classList.add('show');
+        bindAccordions('pd-body');
+        setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      });
+      tbody.appendChild(tr);
     });
-    tbody.appendChild(tr);
+  }
+
+  renderParticipantTable();
+
+  // Filter Button Event Handlers
+  ['comp', 'drop', 'all'].forEach(type => {
+    const btn = document.getElementById('pfilter-' + type);
+    if (btn) {
+      btn.onclick = () => {
+        ['comp', 'drop', 'all'].forEach(t => {
+          const b = document.getElementById('pfilter-' + t);
+          if (b) {
+            b.style.background = 'transparent';
+            b.style.color = 'var(--text-2)';
+            b.style.fontWeight = '600';
+          }
+        });
+        btn.style.background = 'var(--accent)';
+        btn.style.color = '#fff';
+        btn.style.fontWeight = '700';
+        currentPFilter = type;
+        renderParticipantTable();
+      };
+    }
   });
+
+  // Participant search filter listener
+  const searchInput = document.getElementById('participant-search');
+  if (searchInput) {
+    searchInput.oninput = (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      const tbody = document.getElementById('participant-tbody');
+      if (!tbody) return;
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach(r => {
+        const pid = r.dataset.pid ? r.dataset.pid.toLowerCase() : '';
+        r.style.display = pid.includes(q) ? '' : 'none';
+      });
+    };
+  }
 
   // ── Tab 6: Post Surveys ──
   const psContainer=document.getElementById('post-surveys-container');
-  const psHtml = completed.map(p=>{
-    if(!p.postSurveys || !p.postSurveys.length) return '';
-    const ans = p.postSurveys[0].surveyAnswers || {};
-    return `<div class="ep-group" style="background:var(--surface);padding:16px;border-radius:12px;border:1px solid var(--border)">
-      <div style="font-weight:600;font-size:14px;color:var(--text-1);margin-bottom:12px">${shortId(p.id)}</div>
-      ${ans.q1 ? `<div style="margin-bottom:12px;line-height:1.5"><strong style="color:var(--accent)">Q1:</strong> ${ans.q1}</div>` : ''}
-      ${ans.q2 ? `<div style="margin-bottom:12px;line-height:1.5"><strong style="color:var(--accent)">Q2:</strong> ${ans.q2}</div>` : ''}
-      ${ans.q3 ? `<div style="margin-bottom:12px;line-height:1.5"><strong style="color:var(--accent)">Q3:</strong> ${ans.q3}</div>` : ''}
-      ${ans.q4 ? `<div style="line-height:1.5"><strong style="color:var(--accent)">Q4:</strong> ${ans.q4}</div>` : ''}
-    </div>`;
-  }).filter(Boolean).join('');
-  if (psContainer) psContainer.innerHTML = psHtml || '<div class="no-items">No post surveys submitted yet.</div>';
+  const surveyQuestions=[
+    {id:'q1',label:'Monitoring strategy',text:"Overall, what was your strategy for monitoring the AI robot's behavior?"},
+    {id:'q2',label:'Challenges',text:'Across all episodes, what challenges did you experience while monitoring the AI agents?'},
+    {id:'q3',label:'What would help',text:'What, if anything, would have helped you monitor the AI agents more easily?'},
+    {id:'q4',label:'Message for AI robots',text:'Final message for the AI robots you watched across all the episodes?'}
+  ];
+  const surveyRespondents=completed.filter(p=>p.postSurveys?.length).map(p=>({
+    pid:p.id,
+    answers:p.postSurveys[0].surveyAnswers||{}
+  }));
+  document.getElementById('survey-respondent-count').textContent=surveyRespondents.length;
+  const surveyNav=document.getElementById('survey-question-nav');
+  surveyNav.innerHTML=surveyQuestions.map((question,index)=>`<button class="survey-question-btn${index===0?' on':''}" data-question="${question.id}"><span class="survey-question-number">${question.id.toUpperCase()} · ${question.label}</span>${question.text}</button>`).join('');
+
+  const renderSurveyQuestion=questionId=>{
+    const question=surveyQuestions.find(item=>item.id===questionId)||surveyQuestions[0];
+    const responses=surveyRespondents.filter(item=>typeof item.answers[question.id]==='string'&&item.answers[question.id].trim());
+    document.getElementById('survey-active-question').textContent=question.text;
+    document.getElementById('survey-response-count').textContent=`${responses.length} of ${completed.length} completed participants answered`;
+    psContainer.innerHTML=responses.length?responses.map(item=>`<article class="survey-response"><div class="survey-response-pid">${escapeHtml(shortId(item.pid))}</div><div class="survey-response-text">${escapeHtml(item.answers[question.id])}</div></article>`).join(''):'<div class="no-items">No responses for this question.</div>';
+    surveyNav.querySelectorAll('.survey-question-btn').forEach(button=>button.classList.toggle('on',button.dataset.question===question.id));
+  };
+  surveyNav.querySelectorAll('.survey-question-btn').forEach(button=>button.onclick=()=>renderSurveyQuestion(button.dataset.question));
+  renderSurveyQuestion('q1');
 
   // ── Tab 7: Feedback Tone ──
   const negCounts=[], neuCounts=[], posCounts=[];
-  const allNeg=[], allNeu=[], allPos=[];
+  const allNeg=[], allNeu=[], allPos=[], allTone=[];
   completed.forEach(p=>{
     let n1=0,n2=0,n3=0;
     p.feedbackItems.forEach(it=>{
@@ -741,33 +1658,512 @@ function render(pm){
         startFrame: it.startFrame,
         endFrame: it.endFrame
       };
-      if (s <= 2) { n1++; allNeg.push(obj); }
-      else if (s === 3) { n2++; allNeu.push(obj); }
-      else { n3++; allPos.push(obj); }
+      if (s <= 2) { n1++; obj.tone='negative'; allNeg.push(obj); }
+      else if (s === 3) { n2++; obj.tone='neutral'; allNeu.push(obj); }
+      else { n3++; obj.tone='positive'; allPos.push(obj); }
+      allTone.push(obj);
     });
     negCounts.push(n1); neuCounts.push(n2); posCounts.push(n3);
   });
 
+  const toneRows=completed.map((participant,index)=>({
+    participant,
+    negative:negCounts[index],
+    neutral:neuCounts[index],
+    positive:posCounts[index],
+    total:negCounts[index]+neuCounts[index]+posCounts[index]
+  })).sort((a,b)=>b.total-a.total||a.participant.id.localeCompare(b.participant.id));
+  const totalToneItems=allTone.length;
+  const toneShare=count=>totalToneItems?count/totalToneItems*100:0;
+  document.getElementById('tone-stat-total').textContent=totalToneItems;
+  document.getElementById('tone-stat-participants').textContent=`${completed.length} completed participants`;
+  document.getElementById('tone-stat-neg').textContent=allNeg.length;
+  document.getElementById('tone-stat-neu').textContent=allNeu.length;
+  document.getElementById('tone-stat-pos').textContent=allPos.length;
+  document.getElementById('tone-share-neg').textContent=`${r(toneShare(allNeg.length),1)}% of items`;
+  document.getElementById('tone-share-neu').textContent=`${r(toneShare(allNeu.length),1)}% of items`;
+  document.getElementById('tone-share-pos').textContent=`${r(toneShare(allPos.length),1)}% of items`;
+
   createChart('chart-tone',{type:'bar',
-    data:{labels:completed.map(p=>shortId(p.id)), datasets:[
-      {label:'Negative (1-2)', data:negCounts, backgroundColor:'#f472b6', borderRadius:4},
-      {label:'Neutral (3)', data:neuCounts, backgroundColor:'#fbbf24', borderRadius:4},
-      {label:'Positive (4-5)', data:posCounts, backgroundColor:'#34d399', borderRadius:4}
+    data:{labels:toneRows.map(row=>`${shortId(row.participant.id)} · ${row.total} items`), datasets:[
+      {label:'Negative (1-2)', data:toneRows.map(row=>row.negative), backgroundColor:'#f472b6', borderRadius:3},
+      {label:'Neutral (3)', data:toneRows.map(row=>row.neutral), backgroundColor:'#fbbf24', borderRadius:3},
+      {label:'Positive (4-5)', data:toneRows.map(row=>row.positive), backgroundColor:'#34d399', borderRadius:3}
     ]},
-    options:{...baseOpts('','Feedback Items'), scales:{x:{stacked:true,...baseOpts().scales.x}, y:{stacked:true,...baseOpts().scales.y}}, plugins:{legend:{display:true,labels:{color:'#8888a0',font:{family:'Inter'}}}}}
+    options:{...baseOpts('Feedback items','Completed participant'),indexAxis:'y',
+      scales:{x:{stacked:true,beginAtZero:true,ticks:{color:'#8888a0',precision:0},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Feedback items',color:'#8888a0'}},y:{stacked:true,ticks:{color:'#8888a0',font:{size:9,family:'Inter'}},grid:{display:false}}},
+      plugins:{legend:{display:true,labels:{color:'#8888a0',font:{family:'Inter'}}},tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:ctx=>{const total=toneRows[ctx.dataIndex].total; return `${ctx.dataset.label}: ${ctx.parsed.x} items (${total?r(ctx.parsed.x/total*100,1):0}%)`;}}}}}
   });
 
-  const renderToneCard = it => `<div class="tone-item">
-    <div style="margin-bottom:6px">${it.text}</div>
-    <div style="display:flex; justify-content:space-between; align-items:center">
-      <div class="tone-item-meta">${shortId(it.pid)} · Score: ${it.s}</div>
-      <button class="replay-btn" style="padding:4px 8px; font-size:11px" data-replay='${encodeURIComponent(JSON.stringify({fileName: it.fileName, baseFrame: it.baseFrame, startFrame: it.startFrame, endFrame: it.endFrame, text: it.text, reason: "", score: it.s, pid: it.pid, epId: it.ep})).replace(/'/g, "%27")}'>▶ Replay</button>
-    </div>
-  </div>`;
-  
-  document.getElementById('tone-neg').innerHTML = allNeg.length ? allNeg.map(renderToneCard).join('') : '<div class="no-items">None</div>';
-  document.getElementById('tone-neu').innerHTML = allNeu.length ? allNeu.map(renderToneCard).join('') : '<div class="no-items">None</div>';
-  document.getElementById('tone-pos').innerHTML = allPos.length ? allPos.map(renderToneCard).join('') : '<div class="no-items">None</div>';
+  const toneConfig={negative:{label:'Negative',color:'#f472b6'},neutral:{label:'Neutral',color:'#fbbf24'},positive:{label:'Positive',color:'#34d399'}};
+  const toneList=document.getElementById('tone-list');
+  const renderToneBrowser=filter=>{
+    const items=filter==='all'?allTone:allTone.filter(item=>item.tone===filter);
+    document.getElementById('tone-browser-summary').textContent=`${items.length} feedback item${items.length===1?'':'s'} shown`;
+    toneList.innerHTML=items.length?items.map(item=>{
+      const config=toneConfig[item.tone];
+      return `<article class="tone-response"><div class="tone-response-top"><div class="tone-item-meta">${escapeHtml(shortId(item.pid))}</div><span class="tone-score" style="--tone-color:${config.color}">${config.label} · ${item.s}/5</span></div><div class="tone-response-text">${escapeHtml(item.text)}</div><div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="replay-btn" style="padding:4px 8px;font-size:11px" data-replay='${encodeURIComponent(JSON.stringify({fileName:item.fileName,baseFrame:item.baseFrame,startFrame:item.startFrame,endFrame:item.endFrame,text:item.text,reason:'',score:item.s,pid:item.pid,epId:item.ep})).replace(/'/g,'%27')}'>▶ Replay</button></div></article>`;
+    }).join(''):'<div class="no-items">No feedback items in this tone.</div>';
+    document.querySelectorAll('.tone-filter-btn').forEach(button=>button.classList.toggle('on',button.dataset.tone===filter));
+  };
+  document.querySelectorAll('.tone-filter-btn').forEach(button=>button.onclick=()=>renderToneBrowser(button.dataset.tone));
+  renderToneBrowser('all');
+
+  // ── Tab 8: Seed Timeline Heatmap Logic (Premiere Pro Studio Style) ──
+  const heatmapMapSelect = document.getElementById('heatmap-map-select');
+  const heatmapSeedSelect = document.getElementById('heatmap-seed-select');
+  const heatmapBody = document.getElementById('heatmap-body');
+
+  function getMapNameFromEp(ep) {
+    if (ep.layoutName) return ep.layoutName;
+    if (ep.mapName) return ep.mapName;
+    const fn = (ep.fileName || '').toLowerCase();
+    if (fn.includes('cramped') || fn.includes('forced_cramped')) return 'Cramped Room';
+    if (fn.includes('asymmetric') || fn.includes('incentivized')) return 'Asymmetric Advantages';
+    if (fn.includes('ring') || fn.includes('coordination')) return 'Coordination Ring';
+    if (fn.includes('circuit') || fn.includes('counter')) return 'Counter Circuit';
+    if (ep.fileName && ep.fileName.includes('/')) return ep.fileName.split('/')[0];
+    return 'General Layout';
+  }
+
+  const seedParticipantsMap = {};
+  const mapSeedsMap = {};
+
+  completed.forEach(p => {
+    p.episodes.forEach(ep => {
+      const fn = ep.fileName || '';
+      const seedName = fn.split('/').pop()?.replace('.json', '') || ep.docId;
+      const mName = getMapNameFromEp(ep);
+
+      if (!seedParticipantsMap[seedName]) seedParticipantsMap[seedName] = [];
+      seedParticipantsMap[seedName].push({ p, ep, items: ep.feedbackItems || [] });
+
+      if (!mapSeedsMap[mName]) mapSeedsMap[mName] = {};
+      if (!mapSeedsMap[mName][seedName]) mapSeedsMap[mName][seedName] = [];
+      mapSeedsMap[mName][seedName].push({ p, ep, items: ep.feedbackItems || [] });
+    });
+  });
+
+  let prStudioRenderer = null;
+  let prStudioState = {
+    targetSeed: '',
+    pList: [],
+    maxFrame: 100,
+    currentFrame: 0,
+    playing: false,
+    speed: 1,
+    selectedFeedbackId: null,
+    sentimentFilter: 'all',
+    animationId: null,
+    lastTime: 0,
+    staticInfo: null,
+    frames: []
+  };
+
+  function setStudioPlaying(playing) {
+    prStudioState.playing = playing;
+    const playBtn = document.getElementById('pr-btn-play');
+    const previewPlayBtn = document.getElementById('pr-preview-play');
+    if (playBtn) playBtn.textContent = playing ? 'Ⅱ' : '▶';
+    if (previewPlayBtn) {
+      previewPlayBtn.textContent = playing ? 'Ⅱ' : '▶';
+      previewPlayBtn.classList.toggle('playing', playing);
+    }
+  }
+
+  function toggleStudioPlayback() {
+    const shouldPlay = !prStudioState.playing;
+    setStudioPlaying(shouldPlay);
+    if (!shouldPlay) return;
+    prStudioState.lastTime = 0;
+    if (prStudioState.currentFrame >= prStudioState.maxFrame) prStudioState.currentFrame = 0;
+    prStudioState.animationId = requestAnimationFrame(studioAnimationLoop);
+  }
+
+  function updateStudioFrame() {
+    if (!prStudioState.frames.length) return;
+    const { staticInfo, frames, currentFrame, maxFrame } = prStudioState;
+    const fIdx = Math.min(frames.length - 1, Math.max(0, Math.floor(currentFrame)));
+    
+    if (prStudioRenderer) {
+      prStudioRenderer.render(staticInfo, frames[fIdx], frames, fIdx, currentFrame * 0.45, 0.45);
+    }
+
+    const totalSec = Math.floor(fIdx * 0.45);
+    const mm = String(Math.floor(totalSec / 60)).padStart(2, '0');
+    const ss = String(totalSec % 60).padStart(2, '0');
+    const ff = String(fIdx % 30).padStart(2, '0');
+    const timecodeStr = `00:${mm}:${ss}:${ff} | Frame ${fIdx} / ${maxFrame}`;
+
+    const timecodeElem = document.getElementById('pr-timecode');
+    if (timecodeElem) timecodeElem.textContent = timecodeStr;
+    const previewStatus = document.getElementById('pr-preview-status');
+    if (previewStatus) previewStatus.textContent = prStudioState.playing ? 'Playing preview' : (fIdx === 0 ? 'First-frame preview' : `Frame ${fIdx} preview`);
+
+    const scrubber = document.getElementById('pr-scrubber');
+    if (scrubber) scrubber.value = Math.floor(currentFrame);
+
+    const pct = Math.min(100, Math.max(0, (currentFrame / maxFrame) * 100));
+    const playheadLine = document.getElementById('pr-playhead-line');
+    if (playheadLine) playheadLine.style.left = `calc(75px + ${pct}% * ((100% - 75px) / 100))`;
+
+    const activeCommentsContainer = document.getElementById('pr-active-comments');
+    const activeCountElem = document.getElementById('pr-active-count');
+    
+    const activeItems = [];
+    document.querySelectorAll('.pr-clip').forEach(clip => {
+      const startF = parseFloat(clip.dataset.start);
+      const endF = parseFloat(clip.dataset.end);
+      const isAct = fIdx >= startF && fIdx <= endF;
+      if (isAct) {
+        clip.classList.add('active-clip');
+        clip.classList.toggle('selected-clip',clip.dataset.feedbackId===prStudioState.selectedFeedbackId);
+        activeItems.push(JSON.parse(decodeURIComponent(clip.dataset.info)));
+      } else {
+        clip.classList.remove('active-clip');
+        clip.classList.remove('selected-clip');
+      }
+    });
+
+    if (activeCountElem) activeCountElem.textContent = `${activeItems.length} active comment${activeItems.length !== 1 ? 's' : ''}`;
+    
+    if (activeCommentsContainer) {
+      if (activeItems.length === 0) {
+        activeCommentsContainer.innerHTML = `<div style="font-size:12px;color:var(--text-3);text-align:center;margin:auto">No active comments at Frame ${fIdx}.<br><span style="font-size:10px;color:var(--text-3)">Scrub playhead or click any clip bar below.</span></div>`;
+      } else {
+        activeCommentsContainer.innerHTML = activeItems.map(item => {
+          const s = item.score ?? 3;
+          const sTag = s <= 2 ? 'Negative' : s === 3 ? 'Neutral' : 'Positive';
+          const sColor = s <= 2 ? 'var(--pink)' : s === 3 ? 'var(--amber)' : 'var(--green)';
+          return `
+            <button class="pr-active-comment" style="--comment-color:${sColor}" data-feedback-id="${item.feedbackId}" data-base-frame="${item.baseFrame}" title="Go to Frame ${item.baseFrame}">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-weight:700;color:var(--text-1);font-family:var(--mono)">${item.pTag} (${shortId(item.pid)})</span>
+                <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.06);color:${sColor};font-weight:700;font-family:var(--mono)">${sTag} (${s}/5)</span>
+              </div>
+              <div style="color:var(--text-1);margin-bottom:4px;line-height:1.4;font-weight:500">${item.text || '(No comment)'}</div>
+              ${item.reason ? `<div style="color:var(--text-2);font-size:11px;line-height:1.3">Reason: ${item.reason}</div>` : ''}
+              <div style="font-size:10px;color:var(--text-3);margin-top:6px;font-family:var(--mono)">Go to Frame ${item.baseFrame} | Range ${item.startFrame}–${item.endFrame}</div>
+            </button>
+          `;
+        }).join('');
+      }
+    }
+  }
+
+  function studioAnimationLoop(timestamp) {
+    if (!prStudioState.playing) return;
+    if (!prStudioState.lastTime) prStudioState.lastTime = timestamp;
+
+    const deltaMs = timestamp - prStudioState.lastTime;
+    const frameDurationMs = 450 / prStudioState.speed;
+    const framesToAdvance = deltaMs / frameDurationMs;
+
+    prStudioState.currentFrame += framesToAdvance;
+    if (prStudioState.currentFrame >= prStudioState.maxFrame) {
+      prStudioState.currentFrame = prStudioState.maxFrame;
+      setStudioPlaying(false);
+    }
+
+    prStudioState.lastTime = timestamp;
+    updateStudioFrame();
+
+    if (prStudioState.playing) {
+      prStudioState.animationId = requestAnimationFrame(studioAnimationLoop);
+    }
+  }
+
+  const drawHeatmap = async (targetSeed) => {
+    if (!targetSeed || !seedParticipantsMap[targetSeed]) {
+      if (heatmapBody) heatmapBody.innerHTML = '<div class="no-items">Please select an episode seed above to render the timeline heatmap.</div>';
+      return;
+    }
+
+    prStudioState.playing = false;
+    if (prStudioState.animationId) cancelAnimationFrame(prStudioState.animationId);
+
+    const pList = seedParticipantsMap[targetSeed];
+    
+    let maxFeedbackFrame = 20;
+    pList.forEach(entry => {
+      entry.items.forEach(it => {
+        if (it.endFrame != null && it.endFrame > maxFeedbackFrame) maxFeedbackFrame = it.endFrame;
+        if (it.baseFrame != null && it.baseFrame > maxFeedbackFrame) maxFeedbackFrame = it.baseFrame;
+        if (it.startFrame != null && it.startFrame > maxFeedbackFrame) maxFeedbackFrame = it.startFrame;
+      });
+    });
+    let maxFrame = Math.min(120, Math.max(40, Math.ceil((maxFeedbackFrame + 15) / 10) * 10));
+
+    prStudioState.targetSeed = targetSeed;
+    prStudioState.pList = pList;
+    prStudioState.maxFrame = maxFrame;
+    prStudioState.currentFrame = 0;
+    prStudioState.selectedFeedbackId = null;
+    setStudioPlaying(false);
+
+    const totalSeedItems = pList.reduce((sum,entry)=>sum+(entry.items?.length||0),0);
+    const selectedSeedLabel = document.getElementById('pr-selected-seed');
+    const seedMeta = document.getElementById('heatmap-seed-meta');
+    if (selectedSeedLabel) selectedSeedLabel.textContent = targetSeed;
+    if (seedMeta) seedMeta.textContent = `${pList.length} participant${pList.length===1?'':'s'} · ${totalSeedItems} feedback item${totalSeedItems===1?'':'s'}`;
+
+    const firstEntry = pList.find(e => e.ep && e.ep.fileName);
+    const sceneElem = document.getElementById('pr-scene');
+
+    if (firstEntry && sceneElem) {
+      sceneElem.innerHTML = '<div class="pr-scene-loading">Building first-frame preview</div>';
+      try {
+        const raw = await fetchReplayAsset(firstEntry.ep.fileName);
+        const adapted = await adaptEpisode(raw, firstEntry.ep.fileName);
+        prStudioState.staticInfo = adapted.staticInfo;
+        prStudioState.frames = adapted.frames;
+        
+        const fitMaxFrame = Math.min(120, Math.min(adapted.frames.length - 1, Math.max(40, Math.ceil((maxFeedbackFrame + 15) / 10) * 10)));
+        prStudioState.maxFrame = fitMaxFrame;
+        maxFrame = fitMaxFrame;
+
+        sceneElem.innerHTML = '';
+        prStudioRenderer = new SceneRenderer(sceneElem);
+        await prStudioRenderer.loadSprites();
+      } catch (err) {
+        console.error("Failed to load trajectory for studio monitor", err);
+        sceneElem.innerHTML = '<div style="color:#ef4444;font-size:12px">Trajectory replay unavailable</div>';
+      }
+    }
+
+    const numTicks = 6;
+    const ticksHtml = Array.from({ length: numTicks }, (_, i) => {
+      const stepRatio = i / (numTicks - 1);
+      const fVal = Math.round(stepRatio * maxFrame);
+      return `<span>Frame ${fVal}</span>`;
+    }).join('');
+
+    const rulerHeaderHtml = `
+      <div class="pr-timeline-header" id="pr-ruler-header">
+        <div class="pr-timeline-header-track-space">HEATMAP</div>
+        <div class="pr-ruler-area">
+          <div class="pr-ruler-ticks">${ticksHtml}</div>
+        </div>
+        <div class="pr-playhead-line" id="pr-playhead-line"></div>
+      </div>
+    `;
+
+    const tracksHtml = pList.map((entry, trackIdx) => {
+      const { p, ep, items } = entry;
+      const fn = ep.fileName || '';
+      const pLabel = `P${String(trackIdx + 1).padStart(2, '0')}`;
+      const filteredItems = prStudioState.sentimentFilter === 'all' ? items : items.filter(item => {
+        const score = item.sentiment ?? 3;
+        const tone = score <= 2 ? 'negative' : score >= 4 ? 'positive' : 'neutral';
+        return tone === prStudioState.sentimentFilter;
+      });
+
+      const laneEnds=[];
+      const clipEntries=filteredItems.map(it=>{
+        const baseFrame=it.baseFrame != null ? it.baseFrame : (it.startFrame != null ? it.startFrame : 0);
+        const startFrame=it.startFrame != null ? it.startFrame : Math.max(0,baseFrame-5);
+        const endFrame=Math.max(startFrame+5,it.endFrame != null ? it.endFrame : baseFrame+10);
+        return {it,baseFrame,startFrame,endFrame};
+      }).sort((a,b)=>a.startFrame-b.startFrame||a.endFrame-b.endFrame).map(entry=>{
+        let lane=laneEnds.findIndex(endFrame=>entry.startFrame>endFrame);
+        if(lane===-1) lane=laneEnds.length;
+        laneEnds[lane]=entry.endFrame;
+        return {...entry,lane};
+      });
+      const trackHeight=Math.max(28,laneEnds.length*20+10);
+
+      const clipsHtml = clipEntries.map(({it,baseFrame:startBaseFrame,startFrame:startFrameValue,endFrame:endFrameValue,lane}) => {
+        const s = it.sentiment ?? 3;
+        const sClass = s <= 2 ? 'neg' : s === 3 ? 'neu' : 'pos';
+        const sLabel = s <= 2 ? 'Neg' : s === 3 ? 'Neu' : 'Pos';
+
+        const baseF=startBaseFrame;
+        const startF=startFrameValue;
+        const endF=endFrameValue;
+
+        const startPct = Math.min(96, Math.max(0, (startF / maxFrame) * 100));
+        const endPct = Math.min(100, Math.max(startPct + 1, (endF / maxFrame) * 100));
+        const widthPct = Math.max(1.8, endPct - startPct);
+        const basePinPct = Math.min(100, Math.max(0, ((baseF - startF) / (endF - startF || 1)) * 100));
+
+        const text = (it.feedback || it.reason || '(no comment)').replace(/'/g, "&apos;");
+        const reason = (it.reason || '').replace(/'/g, "&apos;");
+
+        const infoObj = {
+          pTag: pLabel,
+          pid: p.id,
+          epId: ep.docId,
+          feedbackId: it.docId,
+          startFrame: startF,
+          endFrame: endF,
+          baseFrame: baseF,
+          score: s,
+          text,
+          reason
+        };
+        const dataInfo = encodeURIComponent(JSON.stringify(infoObj)).replace(/'/g, "%27");
+        const tooltipStr = `[${pLabel}] Participant: ${p.id}\nExact Click Point: Frame ${baseF}\nRange: Frame ${startF} ~ ${endF}\nSentiment: ${sLabel} (${s}/5)\nFeedback: ${text}\nReason: ${reason}`;
+
+        return `
+          <div class="pr-clip ${sClass}"
+            style="left:${r(startPct, 2)}%;width:${r(widthPct, 2)}%;top:${5+lane*20}px"
+               title="${tooltipStr}"
+               data-start="${startF}"
+               data-end="${endF}"
+               data-base="${baseF}"
+               data-feedback-id="${it.docId}"
+               data-sentiment="${s <= 2 ? 'negative' : s >= 4 ? 'positive' : 'neutral'}"
+               data-info='${dataInfo}'>
+            <div class="pr-pin-marker" style="left:${r(basePinPct, 1)}%" title="Exact Click Point (Frame ${baseF})"></div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="pr-track-row" style="height:${trackHeight}px">
+          <div class="pr-track-head">
+            <span class="pr-track-title" title="${p.id}">${pLabel}</span>
+          </div>
+          <div class="pr-track-lane" data-maxframe="${maxFrame}">
+            ${clipsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (heatmapBody) heatmapBody.innerHTML = rulerHeaderHtml + tracksHtml;
+
+    const playBtn = document.getElementById('pr-btn-play');
+    const previewPlayBtn = document.getElementById('pr-preview-play');
+    const speedSelect = document.getElementById('pr-speed-select');
+    const scrubber = document.getElementById('pr-scrubber');
+
+    if (scrubber) {
+      scrubber.max = maxFrame;
+      scrubber.value = 0;
+      scrubber.oninput = (e) => {
+        setStudioPlaying(false);
+        prStudioState.currentFrame = parseFloat(e.target.value);
+        updateStudioFrame();
+      };
+    }
+
+    if (playBtn) playBtn.onclick = toggleStudioPlayback;
+    if (previewPlayBtn) previewPlayBtn.onclick = toggleStudioPlayback;
+
+    if (speedSelect) {
+      speedSelect.onchange = (e) => {
+        prStudioState.speed = parseFloat(e.target.value);
+      };
+    }
+    updateStudioFrame();
+  };
+
+  // Populate Map dropdown
+  if (heatmapMapSelect) {
+    const mapList = Object.keys(mapSeedsMap).sort();
+    heatmapMapSelect.innerHTML = '<option value="all">All Map Layouts (' + mapList.length + ')</option>';
+    mapList.forEach(mName => {
+      const opt = document.createElement('option');
+      opt.value = mName;
+      opt.textContent = mName;
+      heatmapMapSelect.appendChild(opt);
+    });
+  }
+
+  function updateSeedDropdown(selectedMap = 'all') {
+    if (!heatmapSeedSelect) return;
+
+    const mapList = selectedMap === 'all' ? Object.keys(mapSeedsMap).sort() : (mapSeedsMap[selectedMap] ? [selectedMap] : []);
+    let html = '<option value="">Select an episode seed...</option>';
+
+    mapList.forEach(mName => {
+      const seedsObj = mapSeedsMap[mName] || {};
+      const seedKeys = Object.keys(seedsObj)
+        .sort((a,b) => seedsObj[b].length - seedsObj[a].length);
+
+      if (seedKeys.length > 0) {
+        html += `<optgroup label="${mName}">`;
+        seedKeys.forEach(sKey => {
+          const count = seedsObj[sKey].length;
+          html += `<option value="${sKey}">${sKey} (${count} user${count > 1 ? 's' : ''})</option>`;
+        });
+        html += `</optgroup>`;
+      }
+    });
+
+    heatmapSeedSelect.innerHTML = html;
+
+    const firstOpt = heatmapSeedSelect.querySelector('option[value]:not([value=""])');
+    if (firstOpt) {
+      heatmapSeedSelect.value = firstOpt.value;
+      drawHeatmap(firstOpt.value);
+    } else {
+      if (heatmapBody) heatmapBody.innerHTML = '<div class="no-items">No seeds found in this map layout.</div>';
+    }
+  }
+
+  if (heatmapMapSelect) {
+    heatmapMapSelect.onchange = (e) => {
+      updateSeedDropdown(e.target.value);
+    };
+  }
+
+  if (heatmapSeedSelect) {
+    heatmapSeedSelect.onchange = (e) => {
+      drawHeatmap(e.target.value);
+    };
+  }
+
+  document.querySelectorAll('[data-sentiment-filter]').forEach(button => {
+    button.onclick = () => {
+      prStudioState.sentimentFilter = button.dataset.sentimentFilter;
+      prStudioState.selectedFeedbackId = null;
+      document.querySelectorAll('[data-sentiment-filter]').forEach(control => {
+        control.classList.toggle('active', control === button);
+      });
+      drawHeatmap(prStudioState.targetSeed);
+    };
+  });
+
+  if (heatmapBody) {
+    heatmapBody.onclick = (e) => {
+      const clip = e.target.closest('.pr-clip');
+      if (clip) {
+        const startF = parseFloat(clip.dataset.start);
+        const baseF = parseFloat(clip.dataset.base);
+        setStudioPlaying(false);
+        prStudioState.selectedFeedbackId=clip.dataset.feedbackId;
+        prStudioState.currentFrame = startF != null ? startF : baseF;
+        updateStudioFrame();
+        return;
+      }
+
+      const lane = e.target.closest('.pr-track-lane, .pr-ruler-area, .pr-timeline-header');
+      if (lane) {
+        const rect = lane.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const pct = Math.max(0, Math.min(1, clickX / rect.width));
+        setStudioPlaying(false);
+        prStudioState.currentFrame = Math.round(pct * prStudioState.maxFrame);
+        updateStudioFrame();
+      }
+    };
+  }
+
+  const activeCommentsContainer=document.getElementById('pr-active-comments');
+  if(activeCommentsContainer){
+    activeCommentsContainer.onclick=e=>{
+      const comment=e.target.closest('.pr-active-comment');
+      if(!comment) return;
+      setStudioPlaying(false);
+      prStudioState.selectedFeedbackId=comment.dataset.feedbackId;
+      prStudioState.currentFrame=Number(comment.dataset.baseFrame)||0;
+      updateStudioFrame();
+    };
+  }
+
+  updateSeedDropdown('all');
 }
 
 function renderParticipantEpisodes(p){

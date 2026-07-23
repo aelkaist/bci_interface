@@ -53,6 +53,9 @@ const FLOOR_BG_COLOR = "#b5a8a0";  // 바닥 타일 아래 깔리는 배경색 (
  * ────────────────────────────────────────────────────────────────────────── */
 const TILE_FILTER = "brightness(0.75) contrast(1.35) saturate(0.9)";
 const OBJECT_FILTER = "brightness(0.80) contrast(1.2)";
+const INGREDIENT_FILTER = "brightness(0.95) contrast(1.05)";
+const POT_INGREDIENT_FILTER = "brightness(0.75) contrast(1.15)";
+const HELD_INGREDIENT_FILTER = "brightness(0.83) contrast(1.10)";
 
 const SKIN = {
   // ── 벽 / 카운터 ──────────────────────────────────────────────
@@ -77,16 +80,16 @@ const SKIN = {
 
   // ── 냄비 조리 상태 (재료 개수/완료) ─────────────────────────
   pot: {
-    cooking1: "Assets-84.png",  // 재료 1개
-    cooking2: "Assets-85.png",  // 재료 2개
-    cooking3: "Assets-86.png",  // 재료 3개 (조리 중)
-    ready: "Assets-88.png",     // 조리 완료
+    mat1: "1mat.png",  // 재료 1개 오버레이
+    mat2: "2mat.png",  // 재료 2개 오버레이
+    mat3: "3mat.png",  // 재료 3개 오버레이 (조리 중)
+    ready: "Assets-88.png", // 조리 완료
   },
 
   // ── 카운터 위에 놓인 물건 ───────────────────────────────────
   itemOnCounter: {
     ingredient: "material.png",  // 양파/토마토
-    dish: "box only.png",        // 접시
+    dish: "box only.png",         // 접시 (box_new)
   },
 
   // ── 셰프(에이전트) ──────────────────────────────────────────
@@ -1090,7 +1093,7 @@ export default function OvercookScene({
     const ready = obj.isReady;
     const barY = y * gridSize + 20;
 
-    // pot 위의 soup인 경우 smartfactory 이미지로 교체
+    // pot 위의 soup인 경우 1mat / 2mat / 3mat / ready(Assets-88) 이미지 적용
     if (obj.name === "soup" && cell === "P") {
       const count = obj.numIngredients ?? obj.ingredients?.length ?? 0;
       const isReady = obj.isReady;
@@ -1098,24 +1101,28 @@ export default function OvercookScene({
       if (isReady) {
         smartfactorySoupImage = skinUrl(SKIN.pot.ready);
       } else if (count >= 3) {
-        smartfactorySoupImage = skinUrl(SKIN.pot.cooking3);
+        smartfactorySoupImage = skinUrl(SKIN.pot.mat3);
       } else if (count === 2) {
-        smartfactorySoupImage = skinUrl(SKIN.pot.cooking2);
-      } else {
-        smartfactorySoupImage = skinUrl(SKIN.pot.cooking1);
+        smartfactorySoupImage = skinUrl(SKIN.pot.mat2);
+      } else if (count === 1) {
+        smartfactorySoupImage = skinUrl(SKIN.pot.mat1);
       }
 
       return (
         <g key={objectKey}>
-          <image
-            href={smartfactorySoupImage}
-            x={x * gridSize}
-            y={y * gridSize}
-            width={gridSize}
-            height={gridSize}
-            preserveAspectRatio="xMidYMid slice"
-            opacity={ready ? 1 : 0.85}
-          />
+          {smartfactorySoupImage && (
+            <image
+              href={smartfactorySoupImage}
+              x={x * gridSize}
+              y={y * gridSize}
+              width={gridSize}
+              height={gridSize}
+              preserveAspectRatio="xMidYMid slice"
+              opacity={1}
+              style={!isReady ? { filter: POT_INGREDIENT_FILTER } : undefined}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          )}
 
           {/* 조리 완료 → 타이머와 동일한 원형 스타일 체크 배지 */}
           {isReady && (() => {
@@ -1189,6 +1196,7 @@ export default function OvercookScene({
             width={gridSize}
             height={gridSize}
             preserveAspectRatio="xMidYMid slice"
+            style={{ filter: INGREDIENT_FILTER }}
           />
         </g>
       );
@@ -1387,6 +1395,7 @@ export default function OvercookScene({
             heldAsset = skinUrl(isSideView ? SKIN.held.soupSide : SKIN.held.soupFront);
           }
 
+          const isIngredient = heldLower === "onion" || heldLower === "tomato";
           if (!heldAsset) return null;
           return (
             <image
@@ -1397,7 +1406,10 @@ export default function OvercookScene({
               height={gridSize}
               preserveAspectRatio="none"
               transform={chefFlip || undefined}
-              style={{ imageRendering: "auto" }}
+              style={{
+                imageRendering: "auto",
+                ...(isIngredient ? { filter: HELD_INGREDIENT_FILTER } : {})
+              }}
             />
           );
         })()}

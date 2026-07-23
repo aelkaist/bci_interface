@@ -21,6 +21,9 @@ const FLOOR_TILE_OPACITY = 1.0;
 const SHADOW_OPACITY = 0.45;
 const TILE_FILTER = "brightness(0.75) contrast(1.35) saturate(0.9)";
 const OBJECT_FILTER = "brightness(0.80) contrast(1.2)";
+const INGREDIENT_FILTER = "brightness(0.95) contrast(1.05)";
+const POT_INGREDIENT_FILTER = "brightness(0.75) contrast(1.15)";
+const HELD_INGREDIENT_FILTER = "brightness(0.83) contrast(1.10)";
 
 const SKIN = {
   wall: "Assets-01.png",
@@ -39,14 +42,14 @@ const SKIN = {
     S: "drop6.png",
   },
   pot: {
-    cooking1: "Assets-84.png",
-    cooking2: "Assets-85.png",
-    cooking3: "Assets-86.png",
+    mat1: "1mat.png",
+    mat2: "2mat.png",
+    mat3: "3mat.png",
     ready: "Assets-88.png",
   },
   itemOnCounter: {
     ingredient: "material.png",
-    dish: "box only.png",
+    dish: "box_new.png",
   },
   chef: {
     front: "agv2.png",
@@ -133,8 +136,97 @@ const SKIN_OVERRIDE = {
     "0,4": "Assets-01.png",
     "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
     "12,3": "Assets-79.png",
-    "6,5": "Assets-48.png",
-    "6,4": "Assets-45.png",
+    "6,5": "Assets-38.png",
+    "6,4": "Assets-40.png",
+    "12,5": "Assets-38.png",
+    "12,4": "Assets-40.png",
+    "11,5": { file: "Assets-77.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+    "1,4": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,4": "Assets-07.png",
+    "3,4": "Assets-07.png",
+    "4,4": "Assets-07.png",
+    "5,4": "Assets-07.png",
+    "7,4": "Assets-07.png",
+    "8,4": "Assets-07.png",
+    "9,4": "Assets-07.png",
+    "10,4": "Assets-07.png",
+    "11,4": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+    "2,5": "Assets-48.png",
+    "3,5": "Assets-48.png",
+    "4,5": "Assets-48.png",
+    "8,5": "Assets-48.png",
+    "9,5": "Assets-48.png",
+    "7,5": "Assets-82.png",
+    "10,5": "Assets-48.png",
+  },
+  "2_incentivized_hard": {
+    "0,0": "Assets-01.png",
+    "1,0": "Assets-01.png",
+    "2,0": "Assets-01.png",
+    "3,0": "Assets-01.png",
+    "4,0": "Assets-01.png",
+    "6,0": "Assets-01.png",
+    "7,0": "Assets-01.png",
+    "8,0": "Assets-01.png",
+    "9,0": "Assets-01.png",
+    "10,0": "Assets-01.png",
+    "11,0": "Assets-01.png",
+    "12,0": "Assets-01.png",
+    "1,1": { file: "Assets-06.png", opacity: SHADOW_OPACITY },
+    "2,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "3,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "4,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "5,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "6,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "7,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "8,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "9,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "10,1": { file: "Assets-02.png", opacity: SHADOW_OPACITY },
+    "11,1": { file: "Assets-06.png", flipX: true, opacity: SHADOW_OPACITY },
+    "12,1": "Assets-01.png",
+    "0,2": "Assets-01.png",
+    "1,2": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "2,2": "Assets-07.png",
+    "3,2": "Assets-07.png",
+    "4,2": "Assets-07.png",
+    "5,2": "Assets-07.png",
+    "6,2": "Assets-01.png",
+    "7,2": "Assets-07.png",
+    "8,2": "Assets-07.png",
+    "9,2": "Assets-07.png",
+    "10,2": "Assets-07.png",
+    "11,2": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+    "0,3": "Assets-01.png",
+    "1,3": { file: "Assets-03.png", opacity: SHADOW_OPACITY },
+    "12,2": "Assets-80.png",
+    "11,3": { file: "Assets-03.png", flipX: true, opacity: SHADOW_OPACITY },
+    "2,3": "Assets-07.png",
+    "3,3": "Assets-07.png",
+    "4,3": "Assets-07.png",
+    "5,3": "Assets-07.png",
+    "7,3": "Assets-07.png",
+    "8,3": "Assets-07.png",
+    "9,3": "Assets-07.png",
+    "10,3": "Assets-07.png",
+    "0,6": "Assets-45.png",
+    "1,6": "Assets-45.png",
+    "2,6": "Assets-45.png",
+    "3,6": "Assets-45.png",
+    "4,6": "Assets-45.png",
+    "6,6": "Assets-45.png",
+    "8,6": "Assets-45.png",
+    "9,6": "Assets-45.png",
+    "10,6": "Assets-45.png",
+    "11,6": "Assets-45.png",
+    "12,6": "Assets-45.png",
+    "5,6": { file: "Assets-45.png", overlay: "box_new.png" },
+    "5,5": "Assets-48.png",
+    "0,5": { file: "Assets-38.png", overlay: "box_new.png" },
+    "0,4": "Assets-01.png",
+    "1,5": { file: "Assets-46.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
+    "12,3": "Assets-79.png",
+    "6,5": "Assets-38.png",
+    "6,4": "Assets-40.png",
     "12,5": "Assets-38.png",
     "12,4": "Assets-40.png",
     "11,5": { file: "Assets-77.png", opacity: SHADOW_OPACITY, fullPart: { top: 0.85 } },
@@ -414,7 +506,7 @@ export class SceneRenderer {
     return `obj-${obj?.name || "unknown"}-${pos.x}-${pos.y}`;
   }
 
-  createImageNode(href, x, y, width, height, preserveRatio = "none", opacity = 1, transform = null) {
+  createImageNode(href, x, y, width, height, preserveRatio = "none", opacity = 1, transform = null, filter = null) {
     const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
     img.setAttribute('href', href);
     img.setAttribute('x', x);
@@ -424,6 +516,8 @@ export class SceneRenderer {
     img.setAttribute('preserveAspectRatio', preserveRatio);
     if (opacity !== 1) img.setAttribute('opacity', opacity);
     if (transform) img.setAttribute('transform', transform);
+    if (filter) img.style.filter = filter;
+    img.onerror = () => { img.setAttribute('display', 'none'); };
     return img;
   }
 
@@ -637,11 +731,13 @@ export class SceneRenderer {
       const isReady = obj.isReady;
       let smartfactorySoupImage;
       if (isReady) smartfactorySoupImage = skinUrl(SKIN.pot.ready);
-      else if (count >= 3) smartfactorySoupImage = skinUrl(SKIN.pot.cooking3);
-      else if (count === 2) smartfactorySoupImage = skinUrl(SKIN.pot.cooking2);
-      else smartfactorySoupImage = skinUrl(SKIN.pot.cooking1);
+      else if (count >= 3) smartfactorySoupImage = skinUrl(SKIN.pot.mat3);
+      else if (count === 2) smartfactorySoupImage = skinUrl(SKIN.pot.mat2);
+      else if (count === 1) smartfactorySoupImage = skinUrl(SKIN.pot.mat1);
 
-      g.appendChild(this.createImageNode(smartfactorySoupImage, x * gridSize, y * gridSize, gridSize, gridSize, "xMidYMid slice", isReady ? 1 : 0.85));
+      if (smartfactorySoupImage) {
+        g.appendChild(this.createImageNode(smartfactorySoupImage, x * gridSize, y * gridSize, gridSize, gridSize, "xMidYMid slice", 1, null, !isReady ? POT_INGREDIENT_FILTER : null));
+      }
 
       const key = `${x} ${y}`;
       const rem = remainingByKey[key];
@@ -720,7 +816,7 @@ export class SceneRenderer {
     }
 
     if ((obj.name === "onion" || obj.name === "tomato") && cell !== "P") {
-      g.appendChild(this.createImageNode(skinUrl(SKIN.itemOnCounter.ingredient), x * gridSize, y * gridSize, gridSize, gridSize, "xMidYMid slice"));
+      g.appendChild(this.createImageNode(skinUrl(SKIN.itemOnCounter.ingredient), x * gridSize, y * gridSize, gridSize, gridSize, "xMidYMid slice", 1, null, INGREDIENT_FILTER));
       return g;
     }
 
@@ -806,7 +902,8 @@ export class SceneRenderer {
     }
 
     if (heldAsset) {
-      const imgHeld = this.createImageNode(heldAsset, 0, 0, gridSize, gridSize, "none", 1, chefFlip || null);
+      const isIngredient = heldLower.includes("onion") || heldLower.includes("tomato");
+      const imgHeld = this.createImageNode(heldAsset, 0, 0, gridSize, gridSize, "none", 1, chefFlip || null, isIngredient ? HELD_INGREDIENT_FILTER : null);
       imgHeld.style.imageRendering = "auto";
       g.appendChild(imgHeld);
     }
