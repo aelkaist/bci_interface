@@ -21,6 +21,10 @@ const SAMPLE_LEVEL = "L3";
 const mapModules = import.meta.glob("./maps/*/L3/*.json");
 
 const TUTORIAL_PRELOAD_ASSETS = [
+  { href: "/smartfactory/items.png", type: "image" },
+  { href: "/smartfactory/Assets-04.png", type: "image" },
+  { href: "/smartfactory/box_new.png", type: "image" },
+  { href: "/smartfactory/tile9.png", type: "image" },
   { href: "/7.gif", type: "image" },
   { href: "/feedback.gif", type: "image" },
   { href: "/gif/pickup.mov", type: "video" },
