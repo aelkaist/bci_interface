@@ -11,6 +11,7 @@ const PILOTS = [
   { id: "pilot2", label: "Pilot 2 - 2026-06-04", date: "2026-06-04" },
   { id: "pilot3", label: "Pilot 3 - 2026-06-05", date: "2026-06-05" },
   { id: "pilot4", label: "Pilot 4 - 2026-07-19", date: "2026-07-19" },
+  { id: "pilot5", label: "Pilot 5 - 2026-07-24", date: "2026-07-24" },
 ];
 
 const dashboardDir = path.resolve(__dirname, "../analysis/dashboard");
@@ -61,7 +62,7 @@ function filterParticipantForDate(participant, pilot) {
     .map((episode) => ({
       ...episode,
       feedbackItems: (episode.feedbackItems || []).filter(
-        (item) => getFirstDate(item, ["createdAt"]) === pilot.date,
+        (item) => getFirstDate(item, ["createdAt", "updatedAt"]) === pilot.date,
       ),
     }));
 
@@ -194,13 +195,13 @@ function syncReplayAssets(replayPaths) {
   if (missingSources.length > 0) {
     throw new Error(
       `Missing ${missingSources.length} replay source file(s):\n` +
-        missingSources.map((fileName) => `- ${fileName}`).join("\n"),
+      missingSources.map((fileName) => `- ${fileName}`).join("\n"),
     );
   }
 
   console.log(
     `Replay assets: ${replayPaths.length} referenced, ${copied} copied, ` +
-      `${updated} updated, ${reusedLegacy} reused from legacy flat files`,
+    `${updated} updated, ${reusedLegacy} reused from legacy flat files`,
   );
 }
 

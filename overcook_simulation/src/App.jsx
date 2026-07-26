@@ -20,6 +20,36 @@ const SAMPLE_LEVEL = "L3";
 
 const mapModules = import.meta.glob("./maps/*/L3/*.json");
 
+// Dev Mode: build a catalog of ALL available maps across all layouts & levels
+const allMapModules = import.meta.glob("./maps/*/**/*.json");
+function buildDevMapCatalog(modules) {
+  const catalog = {}; // { layoutName: { level: [{ name, path, load }] } }
+  Object.entries(modules).forEach(([path, load]) => {
+    // path like "./maps/2_forced_hard/L3/2_forced_hard_seed1_4020000_140.json"
+    const match = path.match(/^\.?\/maps\/([^/]+)\/([^/]+)\/(.+\.json)$/);
+    if (!match) return;
+    const [, layoutName, level, fileName] = match;
+    if (!catalog[layoutName]) catalog[layoutName] = {};
+    if (!catalog[layoutName][level]) catalog[layoutName][level] = [];
+    catalog[layoutName][level].push({
+      name: `${layoutName}/${level}/${fileName}`,
+      fileName,
+      layoutName,
+      level,
+      path,
+      load,
+    });
+  });
+  // Sort files within each level
+  Object.values(catalog).forEach((levels) => {
+    Object.values(levels).forEach((files) => {
+      files.sort((a, b) => a.fileName.localeCompare(b.fileName));
+    });
+  });
+  return catalog;
+}
+const DEV_MAP_CATALOG = buildDevMapCatalog(allMapModules);
+
 const TUTORIAL_PRELOAD_ASSETS = [
   { href: "/smartfactory/items.png", type: "image" },
   { href: "/smartfactory/Assets-04.png", type: "image" },
@@ -241,6 +271,17 @@ export default function App() {
   const [prolificId, setProlificId] = useState("");
   const [hasReadInstructions, setHasReadInstructions] = useState(false);
   const [testSliderValue, setTestSliderValue] = useState([0]);
+
+  // ── Dev Mode states ──
+  const [devModeOpen, setDevModeOpen] = useState(false);
+  const [devLayout, setDevLayout] = useState("");
+  const [devLevel, setDevLevel] = useState("");
+  const [devMapFile, setDevMapFile] = useState("");
+  const [devLoading, setDevLoading] = useState(false);
+
+  const devLayouts = Object.keys(DEV_MAP_CATALOG).sort();
+  const devLevels = devLayout ? Object.keys(DEV_MAP_CATALOG[devLayout] || {}).sort() : [];
+  const devFiles = (devLayout && devLevel) ? (DEV_MAP_CATALOG[devLayout]?.[devLevel] || []) : [];
 
   useEffect(() => {
     const preloaders = TUTORIAL_PRELOAD_ASSETS.map((asset) => {
@@ -1198,6 +1239,176 @@ export default function App() {
                     onBlur={(e) => { e.target.style.borderColor = "#2a2a2a"; e.target.style.boxShadow = "none"; }}
                   />
                   <p style={{ fontSize: "13px", color: "#555", margin: 0, lineHeight: 1.4 }}>⚠️ Please double-check your ID before proceeding.</p>
+                </div>
+
+                {/* ── Dev Mode Button ── */}
+                <div style={{ borderTop: "1px solid #1a1a1a", paddingTop: "24px" }}>
+                  <button
+                    onClick={() => setDevModeOpen((v) => !v)}
+                    style={{
+                      background: devModeOpen ? "#1a1a2e" : "transparent",
+                      border: devModeOpen ? "1px solid #6366f1" : "1px solid #333",
+                      borderRadius: "10px",
+                      padding: "10px 18px",
+                      color: devModeOpen ? "#a5b4fc" : "#666",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      transition: "all 0.2s",
+                      width: "100%",
+                      justifyContent: "center",
+                    }}
+                    onMouseOver={(e) => { if (!devModeOpen) { e.currentTarget.style.borderColor = "#555"; e.currentTarget.style.color = "#999"; } }}
+                    onMouseOut={(e) => { if (!devModeOpen) { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#666"; } }}
+                  >
+                    🛠 Dev Mode {devModeOpen ? "▲" : "▼"}
+                  </button>
+
+                  {devModeOpen && (
+                    <div style={{
+                      marginTop: "16px",
+                      background: "#0f0f1a",
+                      border: "1px solid #2a2a4a",
+                      borderRadius: "12px",
+                      padding: "20px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "14px",
+                    }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+                        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#6366f1", boxShadow: "0 0 8px #6366f1" }} />
+                        <span style={{ fontSize: "13px", fontWeight: "700", color: "#a5b4fc", letterSpacing: "0.5px", textTransform: "uppercase" }}>Developer Mode</span>
+                      </div>
+                      <p style={{ fontSize: "12px", color: "#555", margin: 0, lineHeight: 1.4 }}>Skip tutorial and jump directly to a specific seed/map.</p>
+
+                      {/* Layout Selector */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                        <label style={{ fontSize: "12px", fontWeight: "600", color: "#888" }}>Layout</label>
+                        <select
+                          value={devLayout}
+                          onChange={(e) => { setDevLayout(e.target.value); setDevLevel(""); setDevMapFile(""); }}
+                          style={{
+                            padding: "10px 12px", borderRadius: "8px", border: "1px solid #2a2a4a",
+                            background: "#111", color: "#e0e0e0", fontSize: "13px", outline: "none",
+                            cursor: "pointer", appearance: "auto",
+                          }}
+                        >
+                          <option value="">-- Select Layout --</option>
+                          {devLayouts.map((l) => <option key={l} value={l}>{l}</option>)}
+                        </select>
+                      </div>
+
+                      {/* Level Selector */}
+                      {devLayout && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                          <label style={{ fontSize: "12px", fontWeight: "600", color: "#888" }}>Level</label>
+                          <select
+                            value={devLevel}
+                            onChange={(e) => { setDevLevel(e.target.value); setDevMapFile(""); }}
+                            style={{
+                              padding: "10px 12px", borderRadius: "8px", border: "1px solid #2a2a4a",
+                              background: "#111", color: "#e0e0e0", fontSize: "13px", outline: "none",
+                              cursor: "pointer", appearance: "auto",
+                            }}
+                          >
+                            <option value="">-- Select Level --</option>
+                            {devLevels.map((l) => <option key={l} value={l}>{l}</option>)}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Map File Selector */}
+                      {devLayout && devLevel && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                          <label style={{ fontSize: "12px", fontWeight: "600", color: "#888" }}>Map File <span style={{ color: "#555" }}>({devFiles.length} available)</span></label>
+                          <select
+                            value={devMapFile}
+                            onChange={(e) => setDevMapFile(e.target.value)}
+                            style={{
+                              padding: "10px 12px", borderRadius: "8px", border: "1px solid #2a2a4a",
+                              background: "#111", color: "#e0e0e0", fontSize: "13px", outline: "none",
+                              cursor: "pointer", appearance: "auto",
+                              maxWidth: "100%",
+                            }}
+                          >
+                            <option value="">-- Select Map --</option>
+                            {devFiles.map((f) => <option key={f.path} value={f.path}>{f.fileName}</option>)}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Play Button */}
+                      <button
+                        disabled={!devMapFile || devLoading}
+                        onClick={async () => {
+                          if (!devMapFile) return;
+                          setDevLoading(true);
+                          try {
+                            const mapEntry = devFiles.find((f) => f.path === devMapFile);
+                            if (!mapEntry) return;
+                            const module = await mapEntry.load();
+                            const rawMap = module.default ?? module;
+                            const adapted = adaptEpisode(rawMap, mapEntry.name);
+
+                            cancelAnimationFrame(rafRef.current);
+
+                            setProlificId(prolificId.trim() || "__dev__");
+
+                            setEpisode({
+                              fileName: mapEntry.name,
+                              layoutName: mapEntry.layoutName,
+                              ...adapted,
+                            });
+                            setFileName(mapEntry.name);
+
+                            setIsPlaying(false);
+                            setPlayMode("full");
+                            segmentEndFrameRef.current = null;
+                            setElapsed(0);
+                            setFrameIndex(0);
+                            setRawMarkers([]);
+                            setIntervals([]);
+                            setSelectedInterval(null);
+
+                            accumulatedEpisodeDurationMsRef.current = 0;
+                            sessionStartRef.current = Date.now();
+                            pauseCountRef.current = 0;
+                            playbackSpeedChangesRef.current = [];
+                            setPlaybackRate(1);
+                            setEpisodeSurveyAnswers({ eq1: null, eq4: null, eq5: "" });
+
+                            setCurrentMapIdx(0);
+                            setEpisodeCount(1);
+                            setInstructionStep(4);
+                          } catch (err) {
+                            console.error("[DevMode] Failed to load map", err);
+                            alert("Failed to load map: " + err.message);
+                          } finally {
+                            setDevLoading(false);
+                          }
+                        }}
+                        style={{
+                          marginTop: "4px",
+                          padding: "12px 20px",
+                          borderRadius: "10px",
+                          border: "none",
+                          background: (!devMapFile || devLoading) ? "#222" : "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                          color: (!devMapFile || devLoading) ? "#555" : "#fff",
+                          fontSize: "14px",
+                          fontWeight: "700",
+                          cursor: (!devMapFile || devLoading) ? "not-allowed" : "pointer",
+                          transition: "all 0.2s",
+                          boxShadow: (!devMapFile || devLoading) ? "none" : "0 4px 16px rgba(99,102,241,0.3)",
+                          letterSpacing: "0.5px",
+                        }}
+                      >
+                        {devLoading ? "Loading..." : "▶ Play Selected Seed"}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
