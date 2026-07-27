@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd /Users/donggunlee/Desktop/bci_interface && node - <<'NODE'\nconst fs = require\\('fs'\\);\nconst manifest = JSON\\.parse\\(fs\\.readFileSync\\('analysis/dashboard/data/manifest\\.json', 'utf8'\\)\\);\nconst pilot = manifest\\.pilots\\.find\\(p => p\\.id === 'pilot5'\\);\nconst data = JSON\\.parse\\(fs\\.readFileSync\\(`analysis/dashboard/data/\\$\\{pilot\\.file\\}`, 'utf8'\\)\\);\nconst participants = Object\\.values\\(data\\);\nconst sessions = participants\\.flatMap\\(p => p\\.sessions \\|\\| \\[\\]\\);\nconst episodes = participants\\.flatMap\\(p => p\\.episodes \\|\\| \\[\\]\\);\nconst feedbackItems = episodes\\.flatMap\\(e => e\\.feedbackItems \\|\\| \\[\\]\\);\nconsole\\.log\\(`manifest pilot5: \\$\\{pilot\\.participantCount\\} participants, \\$\\{pilot\\.completedParticipantCount\\} completed`\\);\nconsole\\.log\\(`pilot5 file: \\$\\{participants\\.length\\} participants, \\$\\{sessions\\.length\\} sessions, \\$\\{episodes\\.length\\} episodes, \\$\\{feedbackItems\\.length\\} feedback items`\\);\nNODE\ngit status --short$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

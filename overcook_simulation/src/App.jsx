@@ -123,7 +123,7 @@ const ALL_MAPS = buildRandomizedMapSet(mapModules);
 
 const MIN_OFFSET = -20;
 const MAX_OFFSET = 20;
-const FRAME_DURATION = 0.50;
+const FRAME_DURATION = 0.42;
 
 // 시간 라벨 (필요하면 사용)
 function baseTimeLabel(frame) {
@@ -2527,10 +2527,10 @@ export default function App() {
                   transition: "all 0.2s"
                 }}
               >
-                <option value={0.5}>0.5x</option>
+                <option value={0.84}>0.5x</option>
                 <option value={1}>1.0x</option>
-                <option value={1.5}>1.5x</option>
-                <option value={2}>2.0x</option>
+                <option value={1.2}>1.5x</option>
+                <option value={1.4}>2.0x</option>
               </select>
             </div>
           </div>
