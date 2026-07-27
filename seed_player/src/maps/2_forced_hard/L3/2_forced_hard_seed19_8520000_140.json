@@ -2285,65 +2285,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 36,
-      "score": 0,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -2352,7 +2293,7 @@
       ]
     },
     {
-      "timestep": 37,
+      "timestep": 36,
       "score": 0,
       "orders": [
         {
@@ -2411,7 +2352,7 @@
       ]
     },
     {
-      "timestep": 38,
+      "timestep": 37,
       "score": 0,
       "orders": [
         {
@@ -2470,7 +2411,7 @@
       ]
     },
     {
-      "timestep": 39,
+      "timestep": 38,
       "score": 0,
       "orders": [
         {
@@ -2535,7 +2476,7 @@
       ]
     },
     {
-      "timestep": 40,
+      "timestep": 39,
       "score": 0,
       "orders": [
         {
@@ -2600,7 +2541,7 @@
       ]
     },
     {
-      "timestep": 41,
+      "timestep": 40,
       "score": 0,
       "orders": [
         {
@@ -2666,7 +2607,7 @@
       ]
     },
     {
-      "timestep": 42,
+      "timestep": 41,
       "score": 0,
       "orders": [
         {
@@ -2732,7 +2673,7 @@
       ]
     },
     {
-      "timestep": 43,
+      "timestep": 42,
       "score": 0,
       "orders": [
         {
@@ -2798,7 +2739,7 @@
       ]
     },
     {
-      "timestep": 44,
+      "timestep": 43,
       "score": 0,
       "orders": [
         {
@@ -2864,7 +2805,7 @@
       ]
     },
     {
-      "timestep": 45,
+      "timestep": 44,
       "score": 0,
       "orders": [
         {
@@ -2930,7 +2871,7 @@
       ]
     },
     {
-      "timestep": 46,
+      "timestep": 45,
       "score": 0,
       "orders": [
         {
@@ -2996,7 +2937,7 @@
       ]
     },
     {
-      "timestep": 47,
+      "timestep": 46,
       "score": 0,
       "orders": [
         {
@@ -3062,7 +3003,7 @@
       ]
     },
     {
-      "timestep": 48,
+      "timestep": 47,
       "score": 0,
       "orders": [
         {
@@ -3128,7 +3069,7 @@
       ]
     },
     {
-      "timestep": 49,
+      "timestep": 48,
       "score": 0,
       "orders": [
         {
@@ -3194,7 +3135,7 @@
       ]
     },
     {
-      "timestep": 50,
+      "timestep": 49,
       "score": 0,
       "orders": [
         {
@@ -3260,7 +3201,7 @@
       ]
     },
     {
-      "timestep": 51,
+      "timestep": 50,
       "score": 0,
       "orders": [
         {
@@ -3326,7 +3267,7 @@
       ]
     },
     {
-      "timestep": 52,
+      "timestep": 51,
       "score": 0,
       "orders": [
         {
@@ -3392,7 +3333,7 @@
       ]
     },
     {
-      "timestep": 53,
+      "timestep": 52,
       "score": 0,
       "orders": [
         {
@@ -3457,7 +3398,7 @@
       ]
     },
     {
-      "timestep": 54,
+      "timestep": 53,
       "score": 0,
       "orders": [
         {
@@ -3522,7 +3463,7 @@
       ]
     },
     {
-      "timestep": 55,
+      "timestep": 54,
       "score": 0,
       "orders": [
         {
@@ -3587,7 +3528,7 @@
       ]
     },
     {
-      "timestep": 56,
+      "timestep": 55,
       "score": 0,
       "orders": [
         {
@@ -3644,7 +3585,7 @@
       "objects": []
     },
     {
-      "timestep": 57,
+      "timestep": 56,
       "score": 0,
       "orders": [
         {
@@ -3701,7 +3642,7 @@
       "objects": []
     },
     {
-      "timestep": 58,
+      "timestep": 57,
       "score": 0,
       "orders": [
         {
@@ -3758,7 +3699,7 @@
       "objects": []
     },
     {
-      "timestep": 59,
+      "timestep": 58,
       "score": 0,
       "orders": [
         {
@@ -3815,7 +3756,7 @@
       "objects": []
     },
     {
-      "timestep": 60,
+      "timestep": 59,
       "score": 20,
       "orders": [
         {
@@ -3863,7 +3804,7 @@
       "objects": []
     },
     {
-      "timestep": 61,
+      "timestep": 60,
       "score": 20,
       "orders": [
         {
@@ -3911,7 +3852,7 @@
       "objects": []
     },
     {
-      "timestep": 62,
+      "timestep": 61,
       "score": 20,
       "orders": [
         {
@@ -3961,7 +3902,7 @@
       ]
     },
     {
-      "timestep": 63,
+      "timestep": 62,
       "score": 20,
       "orders": [
         {
@@ -4009,7 +3950,7 @@
       "objects": []
     },
     {
-      "timestep": 64,
+      "timestep": 63,
       "score": 20,
       "orders": [
         {
@@ -4059,7 +4000,7 @@
       ]
     },
     {
-      "timestep": 65,
+      "timestep": 64,
       "score": 20,
       "orders": [
         {
@@ -4107,7 +4048,7 @@
       "objects": []
     },
     {
-      "timestep": 66,
+      "timestep": 65,
       "score": 20,
       "orders": [
         {
@@ -4161,7 +4102,7 @@
       "objects": []
     },
     {
-      "timestep": 67,
+      "timestep": 66,
       "score": 20,
       "orders": [
         {
@@ -4215,7 +4156,7 @@
       "objects": []
     },
     {
-      "timestep": 68,
+      "timestep": 67,
       "score": 20,
       "orders": [
         {
@@ -4269,7 +4210,7 @@
       "objects": []
     },
     {
-      "timestep": 69,
+      "timestep": 68,
       "score": 20,
       "orders": [
         {
@@ -4323,7 +4264,7 @@
       "objects": []
     },
     {
-      "timestep": 70,
+      "timestep": 69,
       "score": 20,
       "orders": [
         {
@@ -4386,7 +4327,7 @@
       ]
     },
     {
-      "timestep": 71,
+      "timestep": 70,
       "score": 20,
       "orders": [
         {
@@ -4450,7 +4391,7 @@
       ]
     },
     {
-      "timestep": 72,
+      "timestep": 71,
       "score": 20,
       "orders": [
         {
@@ -4514,7 +4455,7 @@
       ]
     },
     {
-      "timestep": 73,
+      "timestep": 72,
       "score": 20,
       "orders": [
         {
@@ -4584,7 +4525,7 @@
       ]
     },
     {
-      "timestep": 74,
+      "timestep": 73,
       "score": 20,
       "orders": [
         {
@@ -4625,6 +4566,76 @@
           "heldObject": null,
           "action": {
             "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 74,
+      "score": 20,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
             "previous": "north"
           }
         }
@@ -4681,76 +4692,6 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "south"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "west",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 76,
-      "score": 20,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
             "current": "stay",
             "previous": "north"
           }
@@ -4793,7 +4734,7 @@
       ]
     },
     {
-      "timestep": 77,
+      "timestep": 76,
       "score": 20,
       "orders": [
         {
@@ -4862,7 +4803,7 @@
       ]
     },
     {
-      "timestep": 78,
+      "timestep": 77,
       "score": 20,
       "orders": [
         {
@@ -4931,7 +4872,7 @@
       ]
     },
     {
-      "timestep": 79,
+      "timestep": 78,
       "score": 20,
       "orders": [
         {
@@ -5000,7 +4941,7 @@
       ]
     },
     {
-      "timestep": 80,
+      "timestep": 79,
       "score": 20,
       "orders": [
         {
@@ -5070,7 +5011,7 @@
       ]
     },
     {
-      "timestep": 81,
+      "timestep": 80,
       "score": 20,
       "orders": [
         {
@@ -5134,7 +5075,7 @@
       ]
     },
     {
-      "timestep": 82,
+      "timestep": 81,
       "score": 20,
       "orders": [
         {
@@ -5199,7 +5140,7 @@
       ]
     },
     {
-      "timestep": 83,
+      "timestep": 82,
       "score": 20,
       "orders": [
         {
@@ -5263,7 +5204,7 @@
       ]
     },
     {
-      "timestep": 84,
+      "timestep": 83,
       "score": 20,
       "orders": [
         {
@@ -5328,7 +5269,7 @@
       ]
     },
     {
-      "timestep": 85,
+      "timestep": 84,
       "score": 20,
       "orders": [
         {
@@ -5393,7 +5334,7 @@
       ]
     },
     {
-      "timestep": 86,
+      "timestep": 85,
       "score": 20,
       "orders": [
         {
@@ -5458,7 +5399,7 @@
       ]
     },
     {
-      "timestep": 87,
+      "timestep": 86,
       "score": 20,
       "orders": [
         {
@@ -5522,7 +5463,7 @@
       ]
     },
     {
-      "timestep": 88,
+      "timestep": 87,
       "score": 20,
       "orders": [
         {
@@ -5586,7 +5527,7 @@
       ]
     },
     {
-      "timestep": 89,
+      "timestep": 88,
       "score": 20,
       "orders": [
         {
@@ -5650,7 +5591,7 @@
       ]
     },
     {
-      "timestep": 90,
+      "timestep": 89,
       "score": 20,
       "orders": [
         {
@@ -5714,7 +5655,7 @@
       ]
     },
     {
-      "timestep": 91,
+      "timestep": 90,
       "score": 20,
       "orders": [
         {
@@ -5778,7 +5719,7 @@
       ]
     },
     {
-      "timestep": 92,
+      "timestep": 91,
       "score": 20,
       "orders": [
         {
@@ -5829,65 +5770,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 93,
-      "score": 20,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -5896,7 +5778,7 @@
       ]
     },
     {
-      "timestep": 94,
+      "timestep": 92,
       "score": 20,
       "orders": [
         {
@@ -5955,7 +5837,7 @@
       ]
     },
     {
-      "timestep": 95,
+      "timestep": 93,
       "score": 20,
       "orders": [
         {
@@ -6014,7 +5896,7 @@
       ]
     },
     {
-      "timestep": 96,
+      "timestep": 94,
       "score": 20,
       "orders": [
         {
@@ -6079,7 +5961,7 @@
       ]
     },
     {
-      "timestep": 97,
+      "timestep": 95,
       "score": 20,
       "orders": [
         {
@@ -6144,7 +6026,7 @@
       ]
     },
     {
-      "timestep": 98,
+      "timestep": 96,
       "score": 20,
       "orders": [
         {
@@ -6210,7 +6092,7 @@
       ]
     },
     {
-      "timestep": 99,
+      "timestep": 97,
       "score": 20,
       "orders": [
         {
@@ -6276,7 +6158,7 @@
       ]
     },
     {
-      "timestep": 100,
+      "timestep": 98,
       "score": 20,
       "orders": [
         {
@@ -6342,7 +6224,7 @@
       ]
     },
     {
-      "timestep": 101,
+      "timestep": 99,
       "score": 20,
       "orders": [
         {
@@ -6408,7 +6290,7 @@
       ]
     },
     {
-      "timestep": 102,
+      "timestep": 100,
       "score": 20,
       "orders": [
         {
@@ -6474,7 +6356,7 @@
       ]
     },
     {
-      "timestep": 103,
+      "timestep": 101,
       "score": 20,
       "orders": [
         {
@@ -6540,7 +6422,7 @@
       ]
     },
     {
-      "timestep": 104,
+      "timestep": 102,
       "score": 20,
       "orders": [
         {
@@ -6606,7 +6488,7 @@
       ]
     },
     {
-      "timestep": 105,
+      "timestep": 103,
       "score": 20,
       "orders": [
         {
@@ -6672,7 +6554,7 @@
       ]
     },
     {
-      "timestep": 106,
+      "timestep": 104,
       "score": 20,
       "orders": [
         {
@@ -6738,7 +6620,7 @@
       ]
     },
     {
-      "timestep": 107,
+      "timestep": 105,
       "score": 20,
       "orders": [
         {
@@ -6804,7 +6686,7 @@
       ]
     },
     {
-      "timestep": 108,
+      "timestep": 106,
       "score": 20,
       "orders": [
         {
@@ -6870,7 +6752,7 @@
       ]
     },
     {
-      "timestep": 109,
+      "timestep": 107,
       "score": 20,
       "orders": [
         {
@@ -6936,7 +6818,7 @@
       ]
     },
     {
-      "timestep": 110,
+      "timestep": 108,
       "score": 20,
       "orders": [
         {
@@ -7001,7 +6883,7 @@
       ]
     },
     {
-      "timestep": 111,
+      "timestep": 109,
       "score": 20,
       "orders": [
         {
@@ -7066,7 +6948,7 @@
       ]
     },
     {
-      "timestep": 112,
+      "timestep": 110,
       "score": 20,
       "orders": [
         {
@@ -7131,7 +7013,7 @@
       ]
     },
     {
-      "timestep": 113,
+      "timestep": 111,
       "score": 20,
       "orders": [
         {
@@ -7188,7 +7070,7 @@
       "objects": []
     },
     {
-      "timestep": 114,
+      "timestep": 112,
       "score": 20,
       "orders": [
         {
@@ -7245,7 +7127,7 @@
       "objects": []
     },
     {
-      "timestep": 115,
+      "timestep": 113,
       "score": 20,
       "orders": [
         {
@@ -7302,7 +7184,7 @@
       "objects": []
     },
     {
-      "timestep": 116,
+      "timestep": 114,
       "score": 20,
       "orders": [
         {
@@ -7359,7 +7241,7 @@
       "objects": []
     },
     {
-      "timestep": 117,
+      "timestep": 115,
       "score": 40,
       "orders": [
         {
@@ -7407,7 +7289,7 @@
       "objects": []
     },
     {
-      "timestep": 118,
+      "timestep": 116,
       "score": 40,
       "orders": [
         {
@@ -7455,7 +7337,7 @@
       "objects": []
     },
     {
-      "timestep": 119,
+      "timestep": 117,
       "score": 40,
       "orders": [
         {
@@ -7505,7 +7387,7 @@
       ]
     },
     {
-      "timestep": 120,
+      "timestep": 118,
       "score": 40,
       "orders": [
         {
@@ -7553,7 +7435,7 @@
       "objects": []
     },
     {
-      "timestep": 121,
+      "timestep": 119,
       "score": 40,
       "orders": [
         {
@@ -7603,7 +7485,7 @@
       ]
     },
     {
-      "timestep": 122,
+      "timestep": 120,
       "score": 40,
       "orders": [
         {
@@ -7651,7 +7533,7 @@
       "objects": []
     },
     {
-      "timestep": 123,
+      "timestep": 121,
       "score": 40,
       "orders": [
         {
@@ -7705,7 +7587,7 @@
       "objects": []
     },
     {
-      "timestep": 124,
+      "timestep": 122,
       "score": 40,
       "orders": [
         {
@@ -7759,7 +7641,7 @@
       "objects": []
     },
     {
-      "timestep": 125,
+      "timestep": 123,
       "score": 40,
       "orders": [
         {
@@ -7813,7 +7695,7 @@
       "objects": []
     },
     {
-      "timestep": 126,
+      "timestep": 124,
       "score": 40,
       "orders": [
         {
@@ -7867,7 +7749,7 @@
       "objects": []
     },
     {
-      "timestep": 127,
+      "timestep": 125,
       "score": 40,
       "orders": [
         {
@@ -7930,7 +7812,7 @@
       ]
     },
     {
-      "timestep": 128,
+      "timestep": 126,
       "score": 40,
       "orders": [
         {
@@ -7994,7 +7876,7 @@
       ]
     },
     {
-      "timestep": 129,
+      "timestep": 127,
       "score": 40,
       "orders": [
         {
@@ -8024,6 +7906,146 @@
           "position": {
             "x": 7,
             "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 128,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 129,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
           },
           "orientation": "north",
           "heldObject": null,
@@ -8085,146 +8107,6 @@
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 2
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 131,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 2
-            }
-          },
-          "action": {
-            "current": "south",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 132,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
             "current": "north",
             "previous": "south"
           }
@@ -8268,7 +8150,7 @@
       ]
     },
     {
-      "timestep": 133,
+      "timestep": 131,
       "score": 40,
       "orders": [
         {
@@ -8337,7 +8219,7 @@
       ]
     },
     {
-      "timestep": 134,
+      "timestep": 132,
       "score": 40,
       "orders": [
         {
@@ -8406,7 +8288,7 @@
       ]
     },
     {
-      "timestep": 135,
+      "timestep": 133,
       "score": 40,
       "orders": [
         {
@@ -8475,7 +8357,7 @@
       ]
     },
     {
-      "timestep": 136,
+      "timestep": 134,
       "score": 40,
       "orders": [
         {
@@ -8544,7 +8426,7 @@
       ]
     },
     {
-      "timestep": 137,
+      "timestep": 135,
       "score": 40,
       "orders": [
         {
@@ -8614,7 +8496,7 @@
       ]
     },
     {
-      "timestep": 138,
+      "timestep": 136,
       "score": 40,
       "orders": [
         {
@@ -8656,6 +8538,135 @@
           "action": {
             "current": "interact",
             "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 137,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 138,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
@@ -8707,135 +8718,6 @@
           "id": 1,
           "position": {
             "x": 7,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 140,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 3
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 141,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
             "y": 2
           },
           "orientation": "north",
@@ -8872,7 +8754,7 @@
       ]
     },
     {
-      "timestep": 142,
+      "timestep": 140,
       "score": 40,
       "orders": [
         {
@@ -8937,7 +8819,7 @@
       ]
     },
     {
-      "timestep": 143,
+      "timestep": 141,
       "score": 40,
       "orders": [
         {
@@ -9002,7 +8884,7 @@
       ]
     },
     {
-      "timestep": 144,
+      "timestep": 142,
       "score": 40,
       "orders": [
         {
@@ -9066,7 +8948,7 @@
       ]
     },
     {
-      "timestep": 145,
+      "timestep": 143,
       "score": 40,
       "orders": [
         {
@@ -9130,7 +9012,7 @@
       ]
     },
     {
-      "timestep": 146,
+      "timestep": 144,
       "score": 40,
       "orders": [
         {
@@ -9167,6 +9049,134 @@
             "position": {
               "x": 7,
               "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 145,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 4
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 4
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 146,
+      "score": 40,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 4
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 5
             }
           },
           "action": {
@@ -9215,134 +9225,6 @@
           "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "north",
-            "previous": "west"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 4
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 4
-            }
-          },
-          "action": {
-            "current": "south",
-            "previous": "south"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 148,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
-          "action": {
-            "current": "south",
-            "previous": "south"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 149,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
             "current": "stay",
             "previous": "stay"
           }
@@ -9358,65 +9240,6 @@
           "action": {
             "current": "interact",
             "previous": "south"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 150,
-      "score": 40,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
           }
         }
       ],
@@ -9440,7 +9263,7 @@
       ]
     },
     {
-      "timestep": 151,
+      "timestep": 148,
       "score": 40,
       "orders": [
         {
@@ -9499,7 +9322,7 @@
       ]
     },
     {
-      "timestep": 152,
+      "timestep": 149,
       "score": 40,
       "orders": [
         {
@@ -9558,7 +9381,7 @@
       ]
     },
     {
-      "timestep": 153,
+      "timestep": 150,
       "score": 40,
       "orders": [
         {
@@ -9623,7 +9446,7 @@
       ]
     },
     {
-      "timestep": 154,
+      "timestep": 151,
       "score": 40,
       "orders": [
         {
@@ -9688,7 +9511,7 @@
       ]
     },
     {
-      "timestep": 155,
+      "timestep": 152,
       "score": 40,
       "orders": [
         {
@@ -9754,7 +9577,7 @@
       ]
     },
     {
-      "timestep": 156,
+      "timestep": 153,
       "score": 40,
       "orders": [
         {
@@ -9820,7 +9643,7 @@
       ]
     },
     {
-      "timestep": 157,
+      "timestep": 154,
       "score": 40,
       "orders": [
         {
@@ -9886,7 +9709,7 @@
       ]
     },
     {
-      "timestep": 158,
+      "timestep": 155,
       "score": 40,
       "orders": [
         {
@@ -9952,7 +9775,7 @@
       ]
     },
     {
-      "timestep": 159,
+      "timestep": 156,
       "score": 40,
       "orders": [
         {
@@ -10018,7 +9841,7 @@
       ]
     },
     {
-      "timestep": 160,
+      "timestep": 157,
       "score": 40,
       "orders": [
         {
@@ -10084,7 +9907,7 @@
       ]
     },
     {
-      "timestep": 161,
+      "timestep": 158,
       "score": 40,
       "orders": [
         {
@@ -10150,7 +9973,7 @@
       ]
     },
     {
-      "timestep": 162,
+      "timestep": 159,
       "score": 40,
       "orders": [
         {
@@ -10166,12 +9989,12 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 4
+            "y": 2
           },
-          "orientation": "south",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "south",
+            "current": "north",
             "previous": "north"
           }
         },
@@ -10216,7 +10039,7 @@
       ]
     },
     {
-      "timestep": 163,
+      "timestep": 160,
       "score": 40,
       "orders": [
         {
@@ -10232,13 +10055,13 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 3
+            "y": 1
           },
           "orientation": "north",
           "heldObject": null,
           "action": {
             "current": "north",
-            "previous": "south"
+            "previous": "north"
           }
         },
         {
@@ -10282,7 +10105,7 @@
       ]
     },
     {
-      "timestep": 164,
+      "timestep": 161,
       "score": 40,
       "orders": [
         {
@@ -10298,12 +10121,18 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 2
+            "y": 1
           },
           "orientation": "north",
-          "heldObject": null,
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
+            "current": "interact",
             "previous": "north"
           }
         },
@@ -10348,7 +10177,7 @@
       ]
     },
     {
-      "timestep": 165,
+      "timestep": 162,
       "score": 40,
       "orders": [
         {
@@ -10366,11 +10195,17 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
-          "heldObject": null,
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
-            "previous": "north"
+            "current": "east",
+            "previous": "interact"
           }
         },
         {
@@ -10414,7 +10249,7 @@
       ]
     },
     {
-      "timestep": 166,
+      "timestep": 163,
       "score": 40,
       "orders": [
         {
@@ -10432,11 +10267,11 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "stay",
-            "previous": "north"
+            "current": "interact",
+            "previous": "east"
           }
         },
         {
@@ -10454,6 +10289,13 @@
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "dish",
           "position": {
@@ -10480,7 +10322,7 @@
       ]
     },
     {
-      "timestep": 167,
+      "timestep": 164,
       "score": 40,
       "orders": [
         {
@@ -10496,13 +10338,13 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 2
+            "y": 1
           },
-          "orientation": "south",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "stay"
+            "current": "stay",
+            "previous": "interact"
           }
         },
         {
@@ -10527,6 +10369,13 @@
       ],
       "objects": [
         {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
           "name": "soup",
           "position": {
             "x": 7,
@@ -10545,7 +10394,7 @@
       ]
     },
     {
-      "timestep": 168,
+      "timestep": 165,
       "score": 40,
       "orders": [
         {
@@ -10561,13 +10410,13 @@
           "id": 0,
           "position": {
             "x": 4,
-            "y": 2
+            "y": 1
           },
           "orientation": "west",
           "heldObject": null,
           "action": {
             "current": "west",
-            "previous": "south"
+            "previous": "stay"
           }
         },
         {
@@ -10592,6 +10441,13 @@
       ],
       "objects": [
         {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
           "name": "soup",
           "position": {
             "x": 7,
@@ -10610,7 +10466,7 @@
       ]
     },
     {
-      "timestep": 169,
+      "timestep": 166,
       "score": 40,
       "orders": [
         {
@@ -10625,13 +10481,13 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 3,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "north",
+            "current": "west",
             "previous": "west"
           }
         },
@@ -10657,6 +10513,13 @@
       ],
       "objects": [
         {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
           "name": "soup",
           "position": {
             "x": 7,
@@ -10675,7 +10538,7 @@
       ]
     },
     {
-      "timestep": 170,
+      "timestep": 167,
       "score": 40,
       "orders": [
         {
@@ -10696,8 +10559,8 @@
           "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "west",
-            "previous": "north"
+            "current": "stay",
+            "previous": "west"
           }
         },
         {
@@ -10729,10 +10592,18 @@
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
-      "timestep": 171,
+      "timestep": 168,
       "score": 40,
       "orders": [
         {
@@ -10747,14 +10618,14 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 2,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "east",
-            "previous": "west"
+            "current": "west",
+            "previous": "stay"
           }
         },
         {
@@ -10786,10 +10657,18 @@
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
-      "timestep": 172,
+      "timestep": 169,
       "score": 40,
       "orders": [
         {
@@ -10804,14 +10683,14 @@
         {
           "id": 0,
           "position": {
-            "x": 5,
+            "x": 3,
             "y": 1
           },
           "orientation": "east",
           "heldObject": null,
           "action": {
             "current": "east",
-            "previous": "east"
+            "previous": "west"
           }
         },
         {
@@ -10843,10 +10722,18 @@
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
-      "timestep": 173,
+      "timestep": 170,
       "score": 40,
       "orders": [
         {
@@ -10861,13 +10748,13 @@
         {
           "id": 0,
           "position": {
-            "x": 5,
+            "x": 4,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "north",
+            "current": "east",
             "previous": "east"
           }
         },
@@ -10900,7 +10787,165 @@
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 171,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 172,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 173,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
       "timestep": 174,
@@ -10919,36 +10964,38 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "orientation": "east",
+          "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "north"
+            "current": "east",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 3
+            "y": 1
           },
           "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "west"
+            "current": "west",
+            "previous": "north"
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
       "timestep": 175,
@@ -10969,207 +11016,11 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "east",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 8,
-            "y": 3
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "east",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": []
-    },
-    {
-      "timestep": 176,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "east"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 8,
-            "y": 2
-          },
           "orientation": "north",
           "heldObject": null,
           "action": {
             "current": "north",
             "previous": "east"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        }
-      ]
-    },
-    {
-      "timestep": 177,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 8,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": []
-    },
-    {
-      "timestep": 178,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "west",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        }
-      ]
-    },
-    {
-      "timestep": 179,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
           }
         },
         {
@@ -11195,7 +11046,7 @@
       "objects": []
     },
     {
-      "timestep": 180,
+      "timestep": 176,
       "score": 60,
       "orders": [
         {
@@ -11249,7 +11100,7 @@
       "objects": []
     },
     {
-      "timestep": 181,
+      "timestep": 177,
       "score": 60,
       "orders": [
         {
@@ -11303,7 +11154,7 @@
       "objects": []
     },
     {
-      "timestep": 182,
+      "timestep": 178,
       "score": 60,
       "orders": [
         {
@@ -11357,7 +11208,7 @@
       "objects": []
     },
     {
-      "timestep": 183,
+      "timestep": 179,
       "score": 60,
       "orders": [
         {
@@ -11411,7 +11262,7 @@
       "objects": []
     },
     {
-      "timestep": 184,
+      "timestep": 180,
       "score": 60,
       "orders": [
         {
@@ -11474,7 +11325,7 @@
       ]
     },
     {
-      "timestep": 185,
+      "timestep": 181,
       "score": 60,
       "orders": [
         {
@@ -11510,6 +11361,280 @@
           "action": {
             "current": "north",
             "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 182,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 183,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 184,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 185,
+      "score": 60,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "north"
           }
         }
       ],
@@ -11557,280 +11682,6 @@
             "y": 1
           },
           "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 3
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 187,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 2
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 188,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 2
-            }
-          },
-          "action": {
-            "current": "south",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 189,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "north",
-            "previous": "south"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "west",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 190,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
           "heldObject": {
             "name": "onion",
             "position": {
@@ -11881,7 +11732,7 @@
       ]
     },
     {
-      "timestep": 191,
+      "timestep": 187,
       "score": 60,
       "orders": [
         {
@@ -11950,7 +11801,7 @@
       ]
     },
     {
-      "timestep": 192,
+      "timestep": 188,
       "score": 60,
       "orders": [
         {
@@ -12019,7 +11870,7 @@
       ]
     },
     {
-      "timestep": 193,
+      "timestep": 189,
       "score": 60,
       "orders": [
         {
@@ -12088,7 +11939,7 @@
       ]
     },
     {
-      "timestep": 194,
+      "timestep": 190,
       "score": 60,
       "orders": [
         {
@@ -12158,7 +12009,7 @@
       ]
     },
     {
-      "timestep": 195,
+      "timestep": 191,
       "score": 60,
       "orders": [
         {
@@ -12222,7 +12073,7 @@
       ]
     },
     {
-      "timestep": 196,
+      "timestep": 192,
       "score": 60,
       "orders": [
         {
@@ -12287,7 +12138,7 @@
       ]
     },
     {
-      "timestep": 197,
+      "timestep": 193,
       "score": 60,
       "orders": [
         {
@@ -12351,7 +12202,7 @@
       ]
     },
     {
-      "timestep": 198,
+      "timestep": 194,
       "score": 60,
       "orders": [
         {
@@ -12416,7 +12267,7 @@
       ]
     },
     {
-      "timestep": 199,
+      "timestep": 195,
       "score": 60,
       "orders": [
         {
@@ -12481,7 +12332,7 @@
       ]
     },
     {
-      "timestep": 200,
+      "timestep": 196,
       "score": 60,
       "orders": [
         {
@@ -12546,7 +12397,7 @@
       ]
     },
     {
-      "timestep": 201,
+      "timestep": 197,
       "score": 60,
       "orders": [
         {
@@ -12610,7 +12461,7 @@
       ]
     },
     {
-      "timestep": 202,
+      "timestep": 198,
       "score": 60,
       "orders": [
         {
@@ -12674,7 +12525,7 @@
       ]
     },
     {
-      "timestep": 203,
+      "timestep": 199,
       "score": 60,
       "orders": [
         {
@@ -12738,7 +12589,7 @@
       ]
     },
     {
-      "timestep": 204,
+      "timestep": 200,
       "score": 60,
       "orders": [
         {
@@ -12802,7 +12653,7 @@
       ]
     },
     {
-      "timestep": 205,
+      "timestep": 201,
       "score": 60,
       "orders": [
         {
@@ -12866,7 +12717,7 @@
       ]
     },
     {
-      "timestep": 206,
+      "timestep": 202,
       "score": 60,
       "orders": [
         {
@@ -12917,65 +12768,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 207,
-      "score": 60,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -12984,7 +12776,7 @@
       ]
     },
     {
-      "timestep": 208,
+      "timestep": 203,
       "score": 60,
       "orders": [
         {
@@ -13043,7 +12835,7 @@
       ]
     },
     {
-      "timestep": 209,
+      "timestep": 204,
       "score": 60,
       "orders": [
         {
@@ -13102,7 +12894,7 @@
       ]
     },
     {
-      "timestep": 210,
+      "timestep": 205,
       "score": 60,
       "orders": [
         {
@@ -13167,7 +12959,7 @@
       ]
     },
     {
-      "timestep": 211,
+      "timestep": 206,
       "score": 60,
       "orders": [
         {
@@ -13232,7 +13024,7 @@
       ]
     },
     {
-      "timestep": 212,
+      "timestep": 207,
       "score": 60,
       "orders": [
         {
@@ -13298,7 +13090,7 @@
       ]
     },
     {
-      "timestep": 213,
+      "timestep": 208,
       "score": 60,
       "orders": [
         {
@@ -13364,7 +13156,7 @@
       ]
     },
     {
-      "timestep": 214,
+      "timestep": 209,
       "score": 60,
       "orders": [
         {
@@ -13430,7 +13222,7 @@
       ]
     },
     {
-      "timestep": 215,
+      "timestep": 210,
       "score": 60,
       "orders": [
         {
@@ -13496,7 +13288,7 @@
       ]
     },
     {
-      "timestep": 216,
+      "timestep": 211,
       "score": 60,
       "orders": [
         {
@@ -13562,7 +13354,7 @@
       ]
     },
     {
-      "timestep": 217,
+      "timestep": 212,
       "score": 60,
       "orders": [
         {
@@ -13628,7 +13420,7 @@
       ]
     },
     {
-      "timestep": 218,
+      "timestep": 213,
       "score": 60,
       "orders": [
         {
@@ -13694,7 +13486,7 @@
       ]
     },
     {
-      "timestep": 219,
+      "timestep": 214,
       "score": 60,
       "orders": [
         {
@@ -13760,7 +13552,7 @@
       ]
     },
     {
-      "timestep": 220,
+      "timestep": 215,
       "score": 60,
       "orders": [
         {
@@ -13826,7 +13618,7 @@
       ]
     },
     {
-      "timestep": 221,
+      "timestep": 216,
       "score": 60,
       "orders": [
         {
@@ -13898,7 +13690,7 @@
       ]
     },
     {
-      "timestep": 222,
+      "timestep": 217,
       "score": 60,
       "orders": [
         {
@@ -13970,7 +13762,7 @@
       ]
     },
     {
-      "timestep": 223,
+      "timestep": 218,
       "score": 60,
       "orders": [
         {
@@ -14043,7 +13835,7 @@
       ]
     },
     {
-      "timestep": 224,
+      "timestep": 219,
       "score": 60,
       "orders": [
         {
@@ -14115,7 +13907,7 @@
       ]
     },
     {
-      "timestep": 225,
+      "timestep": 220,
       "score": 60,
       "orders": [
         {
@@ -14187,7 +13979,7 @@
       ]
     },
     {
-      "timestep": 226,
+      "timestep": 221,
       "score": 60,
       "orders": [
         {
@@ -14259,7 +14051,7 @@
       ]
     },
     {
-      "timestep": 227,
+      "timestep": 222,
       "score": 60,
       "orders": [
         {
@@ -14324,7 +14116,7 @@
       ]
     },
     {
-      "timestep": 228,
+      "timestep": 223,
       "score": 60,
       "orders": [
         {
@@ -14389,7 +14181,7 @@
       ]
     },
     {
-      "timestep": 229,
+      "timestep": 224,
       "score": 60,
       "orders": [
         {
@@ -14454,7 +14246,7 @@
       ]
     },
     {
-      "timestep": 230,
+      "timestep": 225,
       "score": 60,
       "orders": [
         {
@@ -14519,7 +14311,7 @@
       ]
     },
     {
-      "timestep": 231,
+      "timestep": 226,
       "score": 80,
       "orders": [
         {
@@ -14569,7 +14361,7 @@
       ]
     },
     {
-      "timestep": 232,
+      "timestep": 227,
       "score": 80,
       "orders": [
         {
@@ -14619,7 +14411,7 @@
       ]
     },
     {
-      "timestep": 233,
+      "timestep": 228,
       "score": 80,
       "orders": [
         {
@@ -14669,7 +14461,7 @@
       ]
     },
     {
-      "timestep": 234,
+      "timestep": 229,
       "score": 80,
       "orders": [
         {
@@ -14719,7 +14511,7 @@
       ]
     },
     {
-      "timestep": 235,
+      "timestep": 230,
       "score": 80,
       "orders": [
         {
@@ -14767,7 +14559,7 @@
       "objects": []
     },
     {
-      "timestep": 236,
+      "timestep": 231,
       "score": 80,
       "orders": [
         {
@@ -14821,7 +14613,7 @@
       "objects": []
     },
     {
-      "timestep": 237,
+      "timestep": 232,
       "score": 80,
       "orders": [
         {
@@ -14875,7 +14667,7 @@
       "objects": []
     },
     {
-      "timestep": 238,
+      "timestep": 233,
       "score": 80,
       "orders": [
         {
@@ -14929,7 +14721,7 @@
       "objects": []
     },
     {
-      "timestep": 239,
+      "timestep": 234,
       "score": 80,
       "orders": [
         {
@@ -14983,7 +14775,7 @@
       "objects": []
     },
     {
-      "timestep": 240,
+      "timestep": 235,
       "score": 80,
       "orders": [
         {
@@ -15046,7 +14838,7 @@
       ]
     },
     {
-      "timestep": 241,
+      "timestep": 236,
       "score": 80,
       "orders": [
         {
@@ -15110,7 +14902,7 @@
       ]
     },
     {
-      "timestep": 242,
+      "timestep": 237,
       "score": 80,
       "orders": [
         {
@@ -15174,7 +14966,7 @@
       ]
     },
     {
-      "timestep": 243,
+      "timestep": 238,
       "score": 80,
       "orders": [
         {
@@ -15244,7 +15036,7 @@
       ]
     },
     {
-      "timestep": 244,
+      "timestep": 239,
       "score": 80,
       "orders": [
         {
@@ -15314,7 +15106,7 @@
       ]
     },
     {
-      "timestep": 245,
+      "timestep": 240,
       "score": 80,
       "orders": [
         {
@@ -15356,6 +15148,352 @@
           "action": {
             "current": "west",
             "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 241,
+      "score": 80,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 242,
+      "score": 80,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 243,
+      "score": 80,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 244,
+      "score": 80,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 4
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 245,
+      "score": 80,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
           }
         }
       ],
@@ -15402,7 +15540,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "onion",
             "position": {
@@ -15411,27 +15549,21 @@
             }
           },
           "action": {
-            "current": "stay",
-            "previous": "north"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 1
+            "y": 5
           },
-          "orientation": "west",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 1
-            }
-          },
+          "orientation": "south",
+          "heldObject": null,
           "action": {
             "current": "interact",
-            "previous": "west"
+            "previous": "south"
           }
         }
       ],
@@ -15443,6 +15575,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -15468,43 +15601,38 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 1
           },
-          "orientation": "west",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 4,
-              "y": 1
-            }
-          },
+          "orientation": "east",
+          "heldObject": null,
           "action": {
-            "current": "west",
-            "previous": "stay"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 2
+            "y": 4
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 2
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
+            "current": "north",
             "previous": "interact"
           }
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "soup",
           "position": {
@@ -15512,6 +15640,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -15549,8 +15678,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "west"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
@@ -15559,17 +15688,11 @@
             "x": 7,
             "y": 3
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 3
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
@@ -15581,6 +15704,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -15610,39 +15734,34 @@
             "y": 1
           },
           "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "heldObject": null,
           "action": {
-            "current": "stay",
-            "previous": "east"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 4
+            "y": 2
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 4
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "soup",
           "position": {
@@ -15650,6 +15769,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -15676,32 +15796,26 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "stay"
+            "current": "south",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 5
+            "y": 1
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
@@ -15720,6 +15834,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -15731,329 +15846,6 @@
     },
     {
       "timestep": 251,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "south"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 252,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 253,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 3
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 254,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 2
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 255,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 256,
       "score": 80,
       "orders": [
         {
@@ -16118,7 +15910,7 @@
       ]
     },
     {
-      "timestep": 257,
+      "timestep": 252,
       "score": 80,
       "orders": [
         {
@@ -16182,7 +15974,7 @@
       ]
     },
     {
-      "timestep": 258,
+      "timestep": 253,
       "score": 80,
       "orders": [
         {
@@ -16246,7 +16038,7 @@
       ]
     },
     {
-      "timestep": 259,
+      "timestep": 254,
       "score": 80,
       "orders": [
         {
@@ -16310,7 +16102,7 @@
       ]
     },
     {
-      "timestep": 260,
+      "timestep": 255,
       "score": 80,
       "orders": [
         {
@@ -16374,7 +16166,7 @@
       ]
     },
     {
-      "timestep": 261,
+      "timestep": 256,
       "score": 80,
       "orders": [
         {
@@ -16438,7 +16230,7 @@
       ]
     },
     {
-      "timestep": 262,
+      "timestep": 257,
       "score": 80,
       "orders": [
         {
@@ -16489,65 +16281,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 263,
-      "score": 80,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -16556,7 +16289,7 @@
       ]
     },
     {
-      "timestep": 264,
+      "timestep": 258,
       "score": 80,
       "orders": [
         {
@@ -16615,7 +16348,7 @@
       ]
     },
     {
-      "timestep": 265,
+      "timestep": 259,
       "score": 80,
       "orders": [
         {
@@ -16674,7 +16407,7 @@
       ]
     },
     {
-      "timestep": 266,
+      "timestep": 260,
       "score": 80,
       "orders": [
         {
@@ -16739,7 +16472,7 @@
       ]
     },
     {
-      "timestep": 267,
+      "timestep": 261,
       "score": 80,
       "orders": [
         {
@@ -16804,7 +16537,7 @@
       ]
     },
     {
-      "timestep": 268,
+      "timestep": 262,
       "score": 80,
       "orders": [
         {
@@ -16870,7 +16603,7 @@
       ]
     },
     {
-      "timestep": 269,
+      "timestep": 263,
       "score": 80,
       "orders": [
         {
@@ -16936,7 +16669,7 @@
       ]
     },
     {
-      "timestep": 270,
+      "timestep": 264,
       "score": 80,
       "orders": [
         {
@@ -17002,7 +16735,7 @@
       ]
     },
     {
-      "timestep": 271,
+      "timestep": 265,
       "score": 80,
       "orders": [
         {
@@ -17068,7 +16801,7 @@
       ]
     },
     {
-      "timestep": 272,
+      "timestep": 266,
       "score": 80,
       "orders": [
         {
@@ -17134,7 +16867,7 @@
       ]
     },
     {
-      "timestep": 273,
+      "timestep": 267,
       "score": 80,
       "orders": [
         {
@@ -17200,7 +16933,7 @@
       ]
     },
     {
-      "timestep": 274,
+      "timestep": 268,
       "score": 80,
       "orders": [
         {
@@ -17266,7 +16999,7 @@
       ]
     },
     {
-      "timestep": 275,
+      "timestep": 269,
       "score": 80,
       "orders": [
         {
@@ -17332,7 +17065,7 @@
       ]
     },
     {
-      "timestep": 276,
+      "timestep": 270,
       "score": 80,
       "orders": [
         {
@@ -17398,7 +17131,7 @@
       ]
     },
     {
-      "timestep": 277,
+      "timestep": 271,
       "score": 80,
       "orders": [
         {
@@ -17470,7 +17203,7 @@
       ]
     },
     {
-      "timestep": 278,
+      "timestep": 272,
       "score": 80,
       "orders": [
         {
@@ -17542,7 +17275,7 @@
       ]
     },
     {
-      "timestep": 279,
+      "timestep": 273,
       "score": 80,
       "orders": [
         {
@@ -17615,7 +17348,7 @@
       ]
     },
     {
-      "timestep": 280,
+      "timestep": 274,
       "score": 80,
       "orders": [
         {
@@ -17687,7 +17420,7 @@
       ]
     },
     {
-      "timestep": 281,
+      "timestep": 275,
       "score": 80,
       "orders": [
         {
@@ -17759,7 +17492,7 @@
       ]
     },
     {
-      "timestep": 282,
+      "timestep": 276,
       "score": 80,
       "orders": [
         {
@@ -17831,7 +17564,7 @@
       ]
     },
     {
-      "timestep": 283,
+      "timestep": 277,
       "score": 80,
       "orders": [
         {
@@ -17896,7 +17629,7 @@
       ]
     },
     {
-      "timestep": 284,
+      "timestep": 278,
       "score": 80,
       "orders": [
         {
@@ -17961,7 +17694,7 @@
       ]
     },
     {
-      "timestep": 285,
+      "timestep": 279,
       "score": 80,
       "orders": [
         {
@@ -18026,7 +17759,7 @@
       ]
     },
     {
-      "timestep": 286,
+      "timestep": 280,
       "score": 80,
       "orders": [
         {
@@ -18091,7 +17824,7 @@
       ]
     },
     {
-      "timestep": 287,
+      "timestep": 281,
       "score": 100,
       "orders": [
         {
@@ -18141,7 +17874,7 @@
       ]
     },
     {
-      "timestep": 288,
+      "timestep": 282,
       "score": 100,
       "orders": [
         {
@@ -18191,7 +17924,7 @@
       ]
     },
     {
-      "timestep": 289,
+      "timestep": 283,
       "score": 100,
       "orders": [
         {
@@ -18241,7 +17974,7 @@
       ]
     },
     {
-      "timestep": 290,
+      "timestep": 284,
       "score": 100,
       "orders": [
         {
@@ -18291,7 +18024,7 @@
       ]
     },
     {
-      "timestep": 291,
+      "timestep": 285,
       "score": 100,
       "orders": [
         {
@@ -18339,7 +18072,7 @@
       "objects": []
     },
     {
-      "timestep": 292,
+      "timestep": 286,
       "score": 100,
       "orders": [
         {
@@ -18393,7 +18126,7 @@
       "objects": []
     },
     {
-      "timestep": 293,
+      "timestep": 287,
       "score": 100,
       "orders": [
         {
@@ -18447,7 +18180,7 @@
       "objects": []
     },
     {
-      "timestep": 294,
+      "timestep": 288,
       "score": 100,
       "orders": [
         {
@@ -18501,7 +18234,7 @@
       "objects": []
     },
     {
-      "timestep": 295,
+      "timestep": 289,
       "score": 100,
       "orders": [
         {
@@ -18555,7 +18288,7 @@
       "objects": []
     },
     {
-      "timestep": 296,
+      "timestep": 290,
       "score": 100,
       "orders": [
         {
@@ -18618,7 +18351,7 @@
       ]
     },
     {
-      "timestep": 297,
+      "timestep": 291,
       "score": 100,
       "orders": [
         {
@@ -18682,7 +18415,7 @@
       ]
     },
     {
-      "timestep": 298,
+      "timestep": 292,
       "score": 100,
       "orders": [
         {
@@ -18746,7 +18479,7 @@
       ]
     },
     {
-      "timestep": 299,
+      "timestep": 293,
       "score": 100,
       "orders": [
         {
@@ -18816,7 +18549,7 @@
       ]
     },
     {
-      "timestep": 300,
+      "timestep": 294,
       "score": 100,
       "orders": [
         {
@@ -18858,6 +18591,422 @@
           "action": {
             "current": "north",
             "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 295,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "north",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 296,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 297,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 298,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 299,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 4
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 300,
+      "score": 100,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
           }
         }
       ],
@@ -18904,7 +19053,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "onion",
             "position": {
@@ -18913,32 +19062,25 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "south"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 1
+            "y": 5
           },
-          "orientation": "west",
+          "orientation": "south",
           "heldObject": null,
           "action": {
-            "current": "west",
-            "previous": "north"
+            "current": "interact",
+            "previous": "south"
           }
         }
       ],
       "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -18946,6 +19088,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -18974,40 +19117,35 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "orientation": "east",
+          "heldObject": null,
           "action": {
-            "current": "stay",
-            "previous": "north"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 1
+            "y": 4
           },
-          "orientation": "west",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 1
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "west"
+            "current": "north",
+            "previous": "interact"
           }
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "soup",
           "position": {
@@ -19015,6 +19153,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -19040,39 +19179,33 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 1
           },
-          "orientation": "west",
+          "orientation": "east",
           "heldObject": {
             "name": "onion",
             "position": {
-              "x": 4,
+              "x": 5,
               "y": 1
             }
           },
           "action": {
-            "current": "west",
-            "previous": "stay"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 2
+            "y": 3
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 2
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "interact"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
@@ -19084,6 +19217,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -19113,39 +19247,34 @@
             "y": 1
           },
           "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "heldObject": null,
           "action": {
-            "current": "east",
-            "previous": "west"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 3
+            "y": 2
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 3
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "soup",
           "position": {
@@ -19153,6 +19282,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -19179,42 +19309,37 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "orientation": "south",
+          "heldObject": null,
           "action": {
-            "current": "stay",
-            "previous": "east"
+            "current": "south",
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 4
+            "y": 1
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 4
-            }
-          },
+          "orientation": "north",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
       "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
         {
           "name": "soup",
           "position": {
@@ -19222,6 +19347,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -19248,32 +19374,26 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 3
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "stay"
+            "current": "south",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 5
+            "y": 1
           },
-          "orientation": "south",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
+          "orientation": "west",
+          "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "south"
+            "current": "west",
+            "previous": "north"
           }
         }
       ],
@@ -19292,6 +19412,7 @@
             "y": 6
           },
           "ingredients": [
+            "onion",
             "onion"
           ],
           "isCooking": false,
@@ -19318,32 +19439,32 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 4
           },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
+          "orientation": "south",
+          "heldObject": null,
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 5
+            "y": 1
           },
-          "orientation": "south",
-          "heldObject": null,
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 1
+            }
+          },
           "action": {
             "current": "interact",
-            "previous": "south"
+            "previous": "west"
           }
         }
       ],
@@ -19382,394 +19503,6 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 309,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 3
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 310,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 2
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 311,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 312,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 3
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "south"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "west",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 313,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 4
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "south"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 7,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "west"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 314,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
             "y": 5
           },
           "orientation": "south",
@@ -19818,7 +19551,7 @@
       ]
     },
     {
-      "timestep": 315,
+      "timestep": 309,
       "score": 100,
       "orders": [
         {
@@ -19882,7 +19615,7 @@
       ]
     },
     {
-      "timestep": 316,
+      "timestep": 310,
       "score": 100,
       "orders": [
         {
@@ -19946,7 +19679,7 @@
       ]
     },
     {
-      "timestep": 317,
+      "timestep": 311,
       "score": 100,
       "orders": [
         {
@@ -20010,7 +19743,7 @@
       ]
     },
     {
-      "timestep": 318,
+      "timestep": 312,
       "score": 100,
       "orders": [
         {
@@ -20061,65 +19794,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 319,
-      "score": 100,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -20128,7 +19802,7 @@
       ]
     },
     {
-      "timestep": 320,
+      "timestep": 313,
       "score": 100,
       "orders": [
         {
@@ -20187,7 +19861,7 @@
       ]
     },
     {
-      "timestep": 321,
+      "timestep": 314,
       "score": 100,
       "orders": [
         {
@@ -20246,7 +19920,7 @@
       ]
     },
     {
-      "timestep": 322,
+      "timestep": 315,
       "score": 100,
       "orders": [
         {
@@ -20311,7 +19985,7 @@
       ]
     },
     {
-      "timestep": 323,
+      "timestep": 316,
       "score": 100,
       "orders": [
         {
@@ -20376,7 +20050,7 @@
       ]
     },
     {
-      "timestep": 324,
+      "timestep": 317,
       "score": 100,
       "orders": [
         {
@@ -20442,7 +20116,7 @@
       ]
     },
     {
-      "timestep": 325,
+      "timestep": 318,
       "score": 100,
       "orders": [
         {
@@ -20508,7 +20182,7 @@
       ]
     },
     {
-      "timestep": 326,
+      "timestep": 319,
       "score": 100,
       "orders": [
         {
@@ -20574,7 +20248,7 @@
       ]
     },
     {
-      "timestep": 327,
+      "timestep": 320,
       "score": 100,
       "orders": [
         {
@@ -20640,7 +20314,7 @@
       ]
     },
     {
-      "timestep": 328,
+      "timestep": 321,
       "score": 100,
       "orders": [
         {
@@ -20706,7 +20380,7 @@
       ]
     },
     {
-      "timestep": 329,
+      "timestep": 322,
       "score": 100,
       "orders": [
         {
@@ -20772,7 +20446,7 @@
       ]
     },
     {
-      "timestep": 330,
+      "timestep": 323,
       "score": 100,
       "orders": [
         {
@@ -20838,7 +20512,7 @@
       ]
     },
     {
-      "timestep": 331,
+      "timestep": 324,
       "score": 100,
       "orders": [
         {
@@ -20904,7 +20578,7 @@
       ]
     },
     {
-      "timestep": 332,
+      "timestep": 325,
       "score": 100,
       "orders": [
         {
@@ -20970,7 +20644,7 @@
       ]
     },
     {
-      "timestep": 333,
+      "timestep": 326,
       "score": 100,
       "orders": [
         {
@@ -21042,7 +20716,7 @@
       ]
     },
     {
-      "timestep": 334,
+      "timestep": 327,
       "score": 100,
       "orders": [
         {
@@ -21114,7 +20788,7 @@
       ]
     },
     {
-      "timestep": 335,
+      "timestep": 328,
       "score": 100,
       "orders": [
         {
@@ -21187,7 +20861,7 @@
       ]
     },
     {
-      "timestep": 336,
+      "timestep": 329,
       "score": 100,
       "orders": [
         {
@@ -21259,7 +20933,7 @@
       ]
     },
     {
-      "timestep": 337,
+      "timestep": 330,
       "score": 100,
       "orders": [
         {
@@ -21331,7 +21005,7 @@
       ]
     },
     {
-      "timestep": 338,
+      "timestep": 331,
       "score": 100,
       "orders": [
         {
@@ -21403,7 +21077,7 @@
       ]
     },
     {
-      "timestep": 339,
+      "timestep": 332,
       "score": 100,
       "orders": [
         {
@@ -21468,7 +21142,7 @@
       ]
     },
     {
-      "timestep": 340,
+      "timestep": 333,
       "score": 100,
       "orders": [
         {
@@ -21533,7 +21207,7 @@
       ]
     },
     {
-      "timestep": 341,
+      "timestep": 334,
       "score": 100,
       "orders": [
         {
@@ -21548,13 +21222,13 @@
         {
           "id": 0,
           "position": {
-            "x": 3,
+            "x": 2,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "east",
+            "current": "north",
             "previous": "west"
           }
         },
@@ -21598,7 +21272,7 @@
       ]
     },
     {
-      "timestep": 342,
+      "timestep": 335,
       "score": 100,
       "orders": [
         {
@@ -21613,14 +21287,14 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 3,
             "y": 1
           },
           "orientation": "east",
           "heldObject": null,
           "action": {
             "current": "east",
-            "previous": "east"
+            "previous": "north"
           }
         },
         {
@@ -21663,7 +21337,7 @@
       ]
     },
     {
-      "timestep": 343,
+      "timestep": 336,
       "score": 120,
       "orders": [
         {
@@ -21678,7 +21352,7 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 3,
             "y": 1
           },
           "orientation": "north",
@@ -21713,7 +21387,7 @@
       ]
     },
     {
-      "timestep": 344,
+      "timestep": 337,
       "score": 120,
       "orders": [
         {
@@ -21731,10 +21405,10 @@
             "x": 4,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "stay",
+            "current": "east",
             "previous": "north"
           }
         },
@@ -21763,7 +21437,7 @@
       ]
     },
     {
-      "timestep": 345,
+      "timestep": 338,
       "score": 120,
       "orders": [
         {
@@ -21779,13 +21453,13 @@
           "id": 0,
           "position": {
             "x": 4,
-            "y": 2
+            "y": 1
           },
-          "orientation": "south",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "south",
-            "previous": "stay"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21813,7 +21487,7 @@
       ]
     },
     {
-      "timestep": 346,
+      "timestep": 339,
       "score": 120,
       "orders": [
         {
@@ -21829,13 +21503,13 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 2
+            "y": 1
           },
           "orientation": "east",
           "heldObject": null,
           "action": {
             "current": "east",
-            "previous": "south"
+            "previous": "north"
           }
         },
         {
@@ -21863,7 +21537,7 @@
       ]
     },
     {
-      "timestep": 347,
+      "timestep": 340,
       "score": 120,
       "orders": [
         {
@@ -21911,7 +21585,7 @@
       "objects": []
     },
     {
-      "timestep": 348,
+      "timestep": 341,
       "score": 120,
       "orders": [
         {
@@ -21965,7 +21639,7 @@
       "objects": []
     },
     {
-      "timestep": 349,
+      "timestep": 342,
       "score": 120,
       "orders": [
         {
@@ -22019,7 +21693,7 @@
       "objects": []
     },
     {
-      "timestep": 350,
+      "timestep": 343,
       "score": 120,
       "orders": [
         {
@@ -22073,7 +21747,7 @@
       "objects": []
     },
     {
-      "timestep": 351,
+      "timestep": 344,
       "score": 120,
       "orders": [
         {
@@ -22127,7 +21801,7 @@
       "objects": []
     },
     {
-      "timestep": 352,
+      "timestep": 345,
       "score": 120,
       "orders": [
         {
@@ -22190,7 +21864,7 @@
       ]
     },
     {
-      "timestep": 353,
+      "timestep": 346,
       "score": 120,
       "orders": [
         {
@@ -22254,7 +21928,7 @@
       ]
     },
     {
-      "timestep": 354,
+      "timestep": 347,
       "score": 120,
       "orders": [
         {
@@ -22318,7 +21992,7 @@
       ]
     },
     {
-      "timestep": 355,
+      "timestep": 348,
       "score": 120,
       "orders": [
         {
@@ -22388,7 +22062,7 @@
       ]
     },
     {
-      "timestep": 356,
+      "timestep": 349,
       "score": 120,
       "orders": [
         {
@@ -22458,7 +22132,7 @@
       ]
     },
     {
-      "timestep": 357,
+      "timestep": 350,
       "score": 120,
       "orders": [
         {
@@ -22528,7 +22202,7 @@
       ]
     },
     {
-      "timestep": 358,
+      "timestep": 351,
       "score": 120,
       "orders": [
         {
@@ -22597,7 +22271,7 @@
       ]
     },
     {
-      "timestep": 359,
+      "timestep": 352,
       "score": 120,
       "orders": [
         {
@@ -22666,7 +22340,7 @@
       ]
     },
     {
-      "timestep": 360,
+      "timestep": 353,
       "score": 120,
       "orders": [
         {
@@ -22735,7 +22409,7 @@
       ]
     },
     {
-      "timestep": 361,
+      "timestep": 354,
       "score": 120,
       "orders": [
         {
@@ -22804,7 +22478,7 @@
       ]
     },
     {
-      "timestep": 362,
+      "timestep": 355,
       "score": 120,
       "orders": [
         {
@@ -22874,7 +22548,7 @@
       ]
     },
     {
-      "timestep": 363,
+      "timestep": 356,
       "score": 120,
       "orders": [
         {
@@ -22892,10 +22566,16 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
-          "heldObject": null,
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
+            "current": "interact",
             "previous": "interact"
           }
         },
@@ -22915,13 +22595,6 @@
       ],
       "objects": [
         {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
           "name": "soup",
           "position": {
             "x": 7,
@@ -22939,7 +22612,7 @@
       ]
     },
     {
-      "timestep": 364,
+      "timestep": 357,
       "score": 120,
       "orders": [
         {
@@ -22960,8 +22633,8 @@
           "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
@@ -23004,7 +22677,7 @@
       ]
     },
     {
-      "timestep": 365,
+      "timestep": 358,
       "score": 120,
       "orders": [
         {
@@ -23022,11 +22695,17 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
-          "heldObject": null,
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
@@ -23045,13 +22724,6 @@
       ],
       "objects": [
         {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
           "name": "soup",
           "position": {
             "x": 7,
@@ -23069,7 +22741,7 @@
       ]
     },
     {
-      "timestep": 366,
+      "timestep": 359,
       "score": 120,
       "orders": [
         {
@@ -23090,8 +22762,8 @@
           "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "interact",
+            "previous": "interact"
           }
         },
         {
@@ -23134,7 +22806,7 @@
       ]
     },
     {
-      "timestep": 367,
+      "timestep": 360,
       "score": 120,
       "orders": [
         {
@@ -23156,7 +22828,7 @@
           "heldObject": null,
           "action": {
             "current": "south",
-            "previous": "east"
+            "previous": "interact"
           }
         },
         {
@@ -23199,7 +22871,7 @@
       ]
     },
     {
-      "timestep": 368,
+      "timestep": 361,
       "score": 120,
       "orders": [
         {
@@ -23264,7 +22936,7 @@
       ]
     },
     {
-      "timestep": 369,
+      "timestep": 362,
       "score": 120,
       "orders": [
         {
@@ -23328,7 +23000,7 @@
       ]
     },
     {
-      "timestep": 370,
+      "timestep": 363,
       "score": 120,
       "orders": [
         {
@@ -23392,7 +23064,7 @@
       ]
     },
     {
-      "timestep": 371,
+      "timestep": 364,
       "score": 120,
       "orders": [
         {
@@ -23456,7 +23128,7 @@
       ]
     },
     {
-      "timestep": 372,
+      "timestep": 365,
       "score": 120,
       "orders": [
         {
@@ -23520,7 +23192,7 @@
       ]
     },
     {
-      "timestep": 373,
+      "timestep": 366,
       "score": 120,
       "orders": [
         {
@@ -23590,7 +23262,7 @@
       ]
     },
     {
-      "timestep": 374,
+      "timestep": 367,
       "score": 120,
       "orders": [
         {
@@ -23647,71 +23319,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 375,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 4
-          },
-          "orientation": "east",
-          "heldObject": {
-            "name": "dish",
-            "position": {
-              "x": 5,
-              "y": 4
-            }
-          },
-          "action": {
-            "current": "east",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -23720,7 +23327,7 @@
       ]
     },
     {
-      "timestep": 376,
+      "timestep": 368,
       "score": 120,
       "orders": [
         {
@@ -23735,20 +23342,20 @@
         {
           "id": 0,
           "position": {
-            "x": 5,
-            "y": 5
+            "x": 4,
+            "y": 4
           },
-          "orientation": "south",
+          "orientation": "west",
           "heldObject": {
             "name": "dish",
             "position": {
-              "x": 5,
-              "y": 5
+              "x": 4,
+              "y": 4
             }
           },
           "action": {
-            "current": "south",
-            "previous": "east"
+            "current": "west",
+            "previous": "north"
           }
         },
         {
@@ -23785,7 +23392,7 @@
       ]
     },
     {
-      "timestep": 377,
+      "timestep": 369,
       "score": 120,
       "orders": [
         {
@@ -23800,20 +23407,20 @@
         {
           "id": 0,
           "position": {
-            "x": 5,
+            "x": 4,
             "y": 5
           },
           "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
-              "x": 5,
+              "x": 4,
               "y": 5
             }
           },
           "action": {
-            "current": "stay",
-            "previous": "south"
+            "current": "south",
+            "previous": "west"
           }
         },
         {
@@ -23822,10 +23429,10 @@
             "x": 7,
             "y": 5
           },
-          "orientation": "south",
+          "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "south",
+            "current": "stay",
             "previous": "west"
           }
         }
@@ -23850,7 +23457,7 @@
       ]
     },
     {
-      "timestep": 378,
+      "timestep": 370,
       "score": 120,
       "orders": [
         {
@@ -23878,20 +23485,20 @@
           },
           "action": {
             "current": "east",
-            "previous": "stay"
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 8,
             "y": 5
           },
-          "orientation": "west",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "west",
-            "previous": "south"
+            "current": "east",
+            "previous": "stay"
           }
         }
       ],
@@ -23915,7 +23522,7 @@
       ]
     },
     {
-      "timestep": 379,
+      "timestep": 371,
       "score": 120,
       "orders": [
         {
@@ -23943,14 +23550,14 @@
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 8,
             "y": 5
           },
           "orientation": "south",
           "heldObject": null,
           "action": {
             "current": "south",
-            "previous": "west"
+            "previous": "east"
           }
         }
       ],
@@ -23981,7 +23588,7 @@
       ]
     },
     {
-      "timestep": 380,
+      "timestep": 372,
       "score": 120,
       "orders": [
         {
@@ -23996,20 +23603,20 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 5
           },
-          "orientation": "west",
+          "orientation": "south",
           "heldObject": null,
           "action": {
-            "current": "west",
+            "current": "south",
             "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 8,
             "y": 4
           },
           "orientation": "north",
@@ -24047,7 +23654,7 @@
       ]
     },
     {
-      "timestep": 381,
+      "timestep": 373,
       "score": 120,
       "orders": [
         {
@@ -24063,25 +23670,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 5
+            "y": 4
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "east",
-            "previous": "west"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 5
+            "y": 4
           },
-          "orientation": "south",
+          "orientation": "west",
           "heldObject": null,
           "action": {
-            "current": "south",
+            "current": "west",
             "previous": "north"
           }
         }
@@ -24113,7 +23720,205 @@
       ]
     },
     {
-      "timestep": 382,
+      "timestep": 374,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 4
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 8
+        }
+      ]
+    },
+    {
+      "timestep": 375,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "south",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 9
+        }
+      ]
+    },
+    {
+      "timestep": 376,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 5
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "east",
+            "previous": "south"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 10
+        }
+      ]
+    },
+    {
+      "timestep": 377,
       "score": 120,
       "orders": [
         {
@@ -24154,7 +23959,7 @@
           "heldObject": null,
           "action": {
             "current": "stay",
-            "previous": "south"
+            "previous": "stay"
           }
         }
       ],
@@ -24173,12 +23978,12 @@
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
-          "cookingTick": 8
+          "cookingTick": 11
         }
       ]
     },
     {
-      "timestep": 383,
+      "timestep": 378,
       "score": 120,
       "orders": [
         {
@@ -24239,209 +24044,12 @@
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
-          "cookingTick": 9
-        }
-      ]
-    },
-    {
-      "timestep": 384,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 5
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "west",
-            "previous": "interact"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "west"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 5
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": true,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 10
-        }
-      ]
-    },
-    {
-      "timestep": 385,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "west"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "west",
-          "heldObject": {
-            "name": "dish",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "stay"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": true,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 11
-        }
-      ]
-    },
-    {
-      "timestep": 386,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 5
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": true,
-          "isReady": false,
-          "cookTime": 20,
           "cookingTick": 12
         }
       ]
     },
     {
-      "timestep": 387,
+      "timestep": 379,
       "score": 120,
       "orders": [
         {
@@ -24456,14 +24064,14 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 4
           },
           "orientation": "north",
           "heldObject": null,
           "action": {
             "current": "north",
-            "previous": "south"
+            "previous": "interact"
           }
         },
         {
@@ -24482,7 +24090,7 @@
           },
           "action": {
             "current": "interact",
-            "previous": "interact"
+            "previous": "west"
           }
         }
       ],
@@ -24506,7 +24114,7 @@
       ]
     },
     {
-      "timestep": 388,
+      "timestep": 380,
       "score": 120,
       "orders": [
         {
@@ -24521,7 +24129,7 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 3
           },
           "orientation": "north",
@@ -24572,7 +24180,7 @@
       ]
     },
     {
-      "timestep": 389,
+      "timestep": 381,
       "score": 120,
       "orders": [
         {
@@ -24587,7 +24195,7 @@
         {
           "id": 0,
           "position": {
-            "x": 4,
+            "x": 5,
             "y": 2
           },
           "orientation": "north",
@@ -24637,7 +24245,7 @@
       ]
     },
     {
-      "timestep": 390,
+      "timestep": 382,
       "score": 120,
       "orders": [
         {
@@ -24653,12 +24261,12 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 2
+            "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "east",
+            "current": "north",
             "previous": "north"
           }
         },
@@ -24703,7 +24311,7 @@
       ]
     },
     {
-      "timestep": 391,
+      "timestep": 383,
       "score": 120,
       "orders": [
         {
@@ -24722,10 +24330,16 @@
             "y": 1
           },
           "orientation": "north",
-          "heldObject": null,
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "interact",
+            "previous": "north"
           }
         },
         {
@@ -24768,379 +24382,7 @@
       ]
     },
     {
-      "timestep": 392,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "south",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "dish",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
-          "action": {
-            "current": "south",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": true,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 18
-        }
-      ]
-    },
-    {
-      "timestep": 393,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "south"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "dish",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "south"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": true,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 19
-        }
-      ]
-    },
-    {
-      "timestep": 394,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "dish",
-            "position": {
-              "x": 7,
-              "y": 5
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
-          "isCooking": false,
-          "isReady": true,
-          "cookTime": 20,
-          "cookingTick": 20
-        }
-      ]
-    },
-    {
-      "timestep": 395,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": {
-            "name": "soup",
-            "position": {
-              "x": 7,
-              "y": 5
-            },
-            "ingredients": [
-              "onion",
-              "onion",
-              "onion"
-            ],
-            "isCooking": false,
-            "isReady": true,
-            "cookTime": 20,
-            "cookingTick": 20
-          },
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": []
-    },
-    {
-      "timestep": 396,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 4
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "soup",
-            "position": {
-              "x": 7,
-              "y": 4
-            },
-            "ingredients": [
-              "onion",
-              "onion",
-              "onion"
-            ],
-            "isCooking": false,
-            "isReady": true,
-            "cookTime": 20,
-            "cookingTick": 20
-          },
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": []
-    },
-    {
-      "timestep": 397,
-      "score": 120,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 1
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 5,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "interact",
-            "previous": "north"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 3
-          },
-          "orientation": "north",
-          "heldObject": {
-            "name": "soup",
-            "position": {
-              "x": 7,
-              "y": 3
-            },
-            "ingredients": [
-              "onion",
-              "onion",
-              "onion"
-            ],
-            "isCooking": false,
-            "isReady": true,
-            "cookTime": 20,
-            "cookingTick": 20
-          },
-          "action": {
-            "current": "north",
-            "previous": "north"
-          }
-        }
-      ],
-      "objects": []
-    },
-    {
-      "timestep": 398,
+      "timestep": 384,
       "score": 120,
       "orders": [
         {
@@ -25175,36 +24417,45 @@
           "id": 1,
           "position": {
             "x": 7,
-            "y": 3
+            "y": 5
           },
           "orientation": "west",
-          "heldObject": {
-            "name": "soup",
-            "position": {
-              "x": 7,
-              "y": 3
-            },
-            "ingredients": [
-              "onion",
-              "onion",
-              "onion"
-            ],
-            "isCooking": false,
-            "isReady": true,
-            "cookTime": 20,
-            "cookingTick": 20
-          },
+          "heldObject": null,
           "action": {
-            "current": "west",
-            "previous": "north"
+            "current": "interact",
+            "previous": "interact"
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 18
+        }
+      ]
     },
     {
-      "timestep": 399,
-      "score": 140,
+      "timestep": 385,
+      "score": 120,
       "orders": [
         {
           "ingredients": [
@@ -25238,6 +24489,404 @@
           "id": 1,
           "position": {
             "x": 7,
+            "y": 5
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": true,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 19
+        }
+      ]
+    },
+    {
+      "timestep": 386,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": true,
+          "cookTime": 20,
+          "cookingTick": 20
+        }
+      ]
+    },
+    {
+      "timestep": 387,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 5
+            },
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 20,
+            "cookingTick": 20
+          },
+          "action": {
+            "current": "interact",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 388,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 4
+            },
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 20,
+            "cookingTick": 20
+          },
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 389,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 3
+            },
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 20,
+            "cookingTick": 20
+          },
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 390,
+      "score": 120,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "soup",
+            "position": {
+              "x": 7,
+              "y": 3
+            },
+            "ingredients": [
+              "onion",
+              "onion",
+              "onion"
+            ],
+            "isCooking": false,
+            "isReady": true,
+            "cookTime": 20,
+            "cookingTick": 20
+          },
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 391,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
             "y": 3
           },
           "orientation": "west",
@@ -25248,7 +24897,465 @@
           }
         }
       ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 392,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 393,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 394,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "stay",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "west",
+            "previous": "north"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 395,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 4,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "west",
+            "previous": "stay"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 1
+          },
+          "orientation": "west",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "west"
+          }
+        }
+      ],
       "objects": []
+    },
+    {
+      "timestep": 396,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 2
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "interact"
+          }
+        }
+      ],
+      "objects": []
+    },
+    {
+      "timestep": 397,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": null,
+          "action": {
+            "current": "interact",
+            "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 3
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 398,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 4
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 399,
+      "score": 140,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "interact",
+            "previous": "north"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 5
+          },
+          "orientation": "south",
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "action": {
+            "current": "south",
+            "previous": "south"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        }
+      ]
     },
     {
       "timestep": 400,
@@ -25279,24 +25386,46 @@
           },
           "action": {
             "current": "east",
-            "previous": "north"
+            "previous": "interact"
           }
         },
         {
           "id": 1,
           "position": {
             "x": 7,
-            "y": 2
+            "y": 5
           },
-          "orientation": "north",
+          "orientation": "south",
           "heldObject": null,
           "action": {
-            "current": "north",
-            "previous": "interact"
+            "current": "interact",
+            "previous": "south"
           }
         }
       ],
-      "objects": []
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
     }
   ]
 }

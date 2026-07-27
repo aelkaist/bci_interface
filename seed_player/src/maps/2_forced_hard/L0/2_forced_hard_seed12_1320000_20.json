@@ -2880,72 +2880,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 43,
-      "score": 0,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 5,
-            "y": 2
-          },
-          "orientation": "east",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
-            "previous": "east"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 2
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -2954,7 +2888,7 @@
       ]
     },
     {
-      "timestep": 44,
+      "timestep": 43,
       "score": 0,
       "orders": [
         {
@@ -2976,7 +2910,7 @@
           "heldObject": null,
           "action": {
             "current": "south",
-            "previous": "stay"
+            "previous": "east"
           }
         },
         {
@@ -3020,7 +2954,7 @@
       ]
     },
     {
-      "timestep": 45,
+      "timestep": 44,
       "score": 0,
       "orders": [
         {
@@ -3086,7 +3020,7 @@
       ]
     },
     {
-      "timestep": 46,
+      "timestep": 45,
       "score": 0,
       "orders": [
         {
@@ -3152,7 +3086,7 @@
       ]
     },
     {
-      "timestep": 47,
+      "timestep": 46,
       "score": 0,
       "orders": [
         {
@@ -3218,7 +3152,7 @@
       ]
     },
     {
-      "timestep": 48,
+      "timestep": 47,
       "score": 0,
       "orders": [
         {
@@ -3284,7 +3218,7 @@
       ]
     },
     {
-      "timestep": 49,
+      "timestep": 48,
       "score": 0,
       "orders": [
         {
@@ -3350,7 +3284,7 @@
       ]
     },
     {
-      "timestep": 50,
+      "timestep": 49,
       "score": 0,
       "orders": [
         {
@@ -3416,7 +3350,7 @@
       ]
     },
     {
-      "timestep": 51,
+      "timestep": 50,
       "score": 0,
       "orders": [
         {
@@ -3482,7 +3416,7 @@
       ]
     },
     {
-      "timestep": 52,
+      "timestep": 51,
       "score": 0,
       "orders": [
         {
@@ -3554,7 +3488,7 @@
       ]
     },
     {
-      "timestep": 53,
+      "timestep": 52,
       "score": 0,
       "orders": [
         {
@@ -3626,7 +3560,7 @@
       ]
     },
     {
-      "timestep": 54,
+      "timestep": 53,
       "score": 0,
       "orders": [
         {
@@ -3698,7 +3632,7 @@
       ]
     },
     {
-      "timestep": 55,
+      "timestep": 54,
       "score": 0,
       "orders": [
         {
@@ -3770,7 +3704,7 @@
       ]
     },
     {
-      "timestep": 56,
+      "timestep": 55,
       "score": 0,
       "orders": [
         {
@@ -3842,7 +3776,7 @@
       ]
     },
     {
-      "timestep": 57,
+      "timestep": 56,
       "score": 0,
       "orders": [
         {
@@ -3914,7 +3848,7 @@
       ]
     },
     {
-      "timestep": 58,
+      "timestep": 57,
       "score": 0,
       "orders": [
         {
@@ -3986,7 +3920,7 @@
       ]
     },
     {
-      "timestep": 59,
+      "timestep": 58,
       "score": 0,
       "orders": [
         {
@@ -4058,7 +3992,7 @@
       ]
     },
     {
-      "timestep": 60,
+      "timestep": 59,
       "score": 0,
       "orders": [
         {
@@ -4130,7 +4064,7 @@
       ]
     },
     {
-      "timestep": 61,
+      "timestep": 60,
       "score": 0,
       "orders": [
         {
@@ -4202,7 +4136,7 @@
       ]
     },
     {
-      "timestep": 62,
+      "timestep": 61,
       "score": 0,
       "orders": [
         {
@@ -4274,7 +4208,7 @@
       ]
     },
     {
-      "timestep": 63,
+      "timestep": 62,
       "score": 0,
       "orders": [
         {
@@ -4347,7 +4281,7 @@
       ]
     },
     {
-      "timestep": 64,
+      "timestep": 63,
       "score": 0,
       "orders": [
         {
@@ -4420,7 +4354,7 @@
       ]
     },
     {
-      "timestep": 65,
+      "timestep": 64,
       "score": 0,
       "orders": [
         {
@@ -4499,7 +4433,7 @@
       ]
     },
     {
-      "timestep": 66,
+      "timestep": 65,
       "score": 0,
       "orders": [
         {
@@ -4577,7 +4511,7 @@
       ]
     },
     {
-      "timestep": 67,
+      "timestep": 66,
       "score": 0,
       "orders": [
         {
@@ -4655,7 +4589,7 @@
       ]
     },
     {
-      "timestep": 68,
+      "timestep": 67,
       "score": 0,
       "orders": [
         {
@@ -4733,7 +4667,7 @@
       ]
     },
     {
-      "timestep": 69,
+      "timestep": 68,
       "score": 0,
       "orders": [
         {
@@ -4804,7 +4738,7 @@
       ]
     },
     {
-      "timestep": 70,
+      "timestep": 69,
       "score": 0,
       "orders": [
         {
@@ -4875,7 +4809,7 @@
       ]
     },
     {
-      "timestep": 71,
+      "timestep": 70,
       "score": 0,
       "orders": [
         {
@@ -4946,7 +4880,7 @@
       ]
     },
     {
-      "timestep": 72,
+      "timestep": 71,
       "score": 0,
       "orders": [
         {
@@ -5017,7 +4951,7 @@
       ]
     },
     {
-      "timestep": 73,
+      "timestep": 72,
       "score": 0,
       "orders": [
         {
@@ -5088,7 +5022,7 @@
       ]
     },
     {
-      "timestep": 74,
+      "timestep": 73,
       "score": 20,
       "orders": [
         {
@@ -5144,7 +5078,7 @@
       ]
     },
     {
-      "timestep": 75,
+      "timestep": 74,
       "score": 20,
       "orders": [
         {
@@ -5200,7 +5134,7 @@
       ]
     },
     {
-      "timestep": 76,
+      "timestep": 75,
       "score": 20,
       "orders": [
         {
@@ -5256,7 +5190,7 @@
       ]
     },
     {
-      "timestep": 77,
+      "timestep": 76,
       "score": 20,
       "orders": [
         {
@@ -5310,7 +5244,7 @@
       "objects": []
     },
     {
-      "timestep": 78,
+      "timestep": 77,
       "score": 20,
       "orders": [
         {
@@ -5364,7 +5298,7 @@
       "objects": []
     },
     {
-      "timestep": 79,
+      "timestep": 78,
       "score": 20,
       "orders": [
         {
@@ -5418,7 +5352,7 @@
       "objects": []
     },
     {
-      "timestep": 80,
+      "timestep": 79,
       "score": 20,
       "orders": [
         {
@@ -5472,7 +5406,7 @@
       "objects": []
     },
     {
-      "timestep": 81,
+      "timestep": 80,
       "score": 20,
       "orders": [
         {
@@ -5526,7 +5460,7 @@
       "objects": []
     },
     {
-      "timestep": 82,
+      "timestep": 81,
       "score": 20,
       "orders": [
         {
@@ -5590,7 +5524,7 @@
       ]
     },
     {
-      "timestep": 83,
+      "timestep": 82,
       "score": 20,
       "orders": [
         {
@@ -5653,7 +5587,7 @@
       ]
     },
     {
-      "timestep": 84,
+      "timestep": 83,
       "score": 20,
       "orders": [
         {
@@ -5716,7 +5650,7 @@
       ]
     },
     {
-      "timestep": 85,
+      "timestep": 84,
       "score": 20,
       "orders": [
         {
@@ -5779,7 +5713,7 @@
       ]
     },
     {
-      "timestep": 86,
+      "timestep": 85,
       "score": 20,
       "orders": [
         {
@@ -5808,6 +5742,69 @@
           "action": {
             "current": "north",
             "previous": "east"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 4
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "stay"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 86,
+      "score": 20,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "east",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
+          "action": {
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -5860,7 +5857,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -5869,8 +5866,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -5923,7 +5920,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -5932,8 +5929,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -5986,7 +5983,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -5995,8 +5992,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6049,7 +6046,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6058,8 +6055,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6112,7 +6109,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6121,8 +6118,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6175,7 +6172,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6184,8 +6181,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6238,7 +6235,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6247,8 +6244,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6301,7 +6298,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6310,8 +6307,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6364,7 +6361,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6373,8 +6370,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6427,7 +6424,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6436,8 +6433,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6490,7 +6487,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6499,8 +6496,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6553,7 +6550,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6562,8 +6559,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6616,7 +6613,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6625,8 +6622,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6679,7 +6676,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6688,8 +6685,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6742,7 +6739,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6751,8 +6748,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6805,7 +6802,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6814,8 +6811,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6868,7 +6865,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6877,8 +6874,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -6931,7 +6928,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -6940,8 +6937,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -6994,7 +6991,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7003,8 +7000,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7057,7 +7054,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7066,8 +7063,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7120,7 +7117,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7129,8 +7126,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7183,7 +7180,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7192,8 +7189,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7246,7 +7243,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7255,8 +7252,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7309,7 +7306,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7318,8 +7315,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7372,7 +7369,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7381,8 +7378,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7435,7 +7432,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7444,8 +7441,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7498,7 +7495,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7507,8 +7504,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7561,7 +7558,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7570,8 +7567,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7624,7 +7621,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7633,8 +7630,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7687,7 +7684,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7696,8 +7693,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7750,7 +7747,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7759,8 +7756,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7813,7 +7810,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7822,8 +7819,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -7876,7 +7873,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7885,8 +7882,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -7939,7 +7936,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -7948,8 +7945,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8002,7 +7999,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8011,8 +8008,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8065,7 +8062,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8074,8 +8071,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8128,7 +8125,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8137,8 +8134,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8191,7 +8188,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8200,8 +8197,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8254,7 +8251,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8263,8 +8260,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8317,7 +8314,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8326,8 +8323,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8380,7 +8377,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8389,8 +8386,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8443,7 +8440,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8452,8 +8449,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8506,7 +8503,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8515,8 +8512,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8569,7 +8566,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8578,8 +8575,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8632,7 +8629,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8641,8 +8638,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8695,7 +8692,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8704,8 +8701,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8758,7 +8755,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8767,8 +8764,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8821,7 +8818,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8830,8 +8827,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -8884,7 +8881,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8893,8 +8890,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -8947,7 +8944,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -8956,8 +8953,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9010,7 +9007,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9019,8 +9016,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9073,7 +9070,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9082,8 +9079,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9136,7 +9133,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9145,8 +9142,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9199,7 +9196,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9208,8 +9205,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9262,7 +9259,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9271,8 +9268,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9325,7 +9322,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9334,8 +9331,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9388,7 +9385,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9397,8 +9394,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9451,7 +9448,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9460,8 +9457,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9514,7 +9511,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9523,8 +9520,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9577,7 +9574,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9586,8 +9583,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9640,7 +9637,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9649,8 +9646,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9703,7 +9700,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9712,8 +9709,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9766,7 +9763,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9775,8 +9772,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9829,7 +9826,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9838,8 +9835,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -9892,7 +9889,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9901,8 +9898,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -9955,7 +9952,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -9964,8 +9961,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10018,7 +10015,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10027,8 +10024,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10081,7 +10078,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10090,8 +10087,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10144,7 +10141,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10153,8 +10150,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10207,7 +10204,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10216,8 +10213,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10270,7 +10267,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10279,8 +10276,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10333,7 +10330,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10342,8 +10339,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10396,7 +10393,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10405,8 +10402,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10459,7 +10456,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10468,8 +10465,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10522,7 +10519,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10531,8 +10528,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10585,7 +10582,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10594,8 +10591,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10648,7 +10645,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10657,8 +10654,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10711,7 +10708,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10720,8 +10717,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10774,7 +10771,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10783,8 +10780,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10837,7 +10834,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10846,8 +10843,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -10900,7 +10897,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10909,8 +10906,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -10963,7 +10960,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -10972,8 +10969,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11026,7 +11023,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11035,8 +11032,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11089,7 +11086,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11098,8 +11095,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11152,7 +11149,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11161,8 +11158,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11215,7 +11212,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11224,8 +11221,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11278,7 +11275,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11287,8 +11284,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11341,7 +11338,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11350,8 +11347,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11404,7 +11401,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11413,8 +11410,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11467,7 +11464,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11476,8 +11473,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11530,7 +11527,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11539,8 +11536,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11593,7 +11590,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11602,8 +11599,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11656,7 +11653,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11665,8 +11662,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11719,7 +11716,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11728,8 +11725,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11782,7 +11779,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11791,8 +11788,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11845,7 +11842,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11854,8 +11851,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -11908,7 +11905,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11917,8 +11914,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -11971,7 +11968,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -11980,8 +11977,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12034,7 +12031,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12043,8 +12040,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12097,7 +12094,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12106,8 +12103,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12160,7 +12157,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12169,8 +12166,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12223,7 +12220,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12232,8 +12229,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12286,7 +12283,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12295,8 +12292,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12349,7 +12346,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12358,8 +12355,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12412,7 +12409,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12421,8 +12418,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12475,7 +12472,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12484,8 +12481,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12538,7 +12535,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12547,8 +12544,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12601,7 +12598,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12610,8 +12607,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12664,7 +12661,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12673,8 +12670,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12727,7 +12724,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12736,8 +12733,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12790,7 +12787,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12799,8 +12796,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12853,7 +12850,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12862,8 +12859,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -12916,7 +12913,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12925,8 +12922,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -12979,7 +12976,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -12988,8 +12985,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13042,7 +13039,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13051,8 +13048,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13105,7 +13102,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13114,8 +13111,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13168,7 +13165,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13177,8 +13174,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13231,7 +13228,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13240,8 +13237,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13294,7 +13291,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13303,8 +13300,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13357,7 +13354,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13366,8 +13363,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13420,7 +13417,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13429,8 +13426,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13483,7 +13480,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13492,8 +13489,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13546,7 +13543,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13555,8 +13552,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13609,7 +13606,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13618,8 +13615,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13672,7 +13669,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13681,8 +13678,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13735,7 +13732,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13744,8 +13741,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13798,7 +13795,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13807,8 +13804,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13861,7 +13858,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13870,8 +13867,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -13924,7 +13921,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13933,8 +13930,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -13987,7 +13984,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -13996,8 +13993,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14050,7 +14047,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14059,8 +14056,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14113,7 +14110,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14122,8 +14119,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14176,7 +14173,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14185,8 +14182,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14239,7 +14236,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14248,8 +14245,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14302,7 +14299,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14311,8 +14308,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14365,7 +14362,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14374,8 +14371,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14428,7 +14425,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14437,8 +14434,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14491,7 +14488,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14500,8 +14497,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14554,7 +14551,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14563,8 +14560,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14617,7 +14614,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14626,8 +14623,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14680,7 +14677,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14689,8 +14686,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14743,7 +14740,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14752,8 +14749,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14806,7 +14803,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14815,8 +14812,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14869,7 +14866,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14878,8 +14875,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -14932,7 +14929,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -14941,8 +14938,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -14995,7 +14992,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15004,8 +15001,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15058,7 +15055,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15067,8 +15064,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15121,7 +15118,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15130,8 +15127,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15184,7 +15181,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15193,8 +15190,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15247,7 +15244,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15256,8 +15253,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15310,7 +15307,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15319,8 +15316,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15373,7 +15370,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15382,8 +15379,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15436,7 +15433,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15445,8 +15442,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15499,7 +15496,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15508,8 +15505,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15562,7 +15559,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15571,8 +15568,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15625,7 +15622,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15634,8 +15631,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15688,7 +15685,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15697,8 +15694,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15751,7 +15748,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15760,8 +15757,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15814,7 +15811,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15823,8 +15820,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -15877,7 +15874,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15886,8 +15883,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -15940,7 +15937,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -15949,8 +15946,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16003,7 +16000,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16012,8 +16009,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16066,7 +16063,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16075,8 +16072,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16129,7 +16126,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16138,8 +16135,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16192,7 +16189,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16201,8 +16198,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16255,7 +16252,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16264,8 +16261,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16318,7 +16315,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16327,8 +16324,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16381,7 +16378,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16390,8 +16387,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16444,7 +16441,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16453,8 +16450,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16507,7 +16504,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16516,8 +16513,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16570,7 +16567,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16579,8 +16576,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16633,7 +16630,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16642,8 +16639,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16696,7 +16693,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16705,8 +16702,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16759,7 +16756,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16768,8 +16765,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16822,7 +16819,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16831,8 +16828,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -16885,7 +16882,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16894,8 +16891,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -16948,7 +16945,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -16957,8 +16954,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17011,7 +17008,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17020,8 +17017,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17074,7 +17071,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17083,8 +17080,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17137,7 +17134,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17146,8 +17143,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17200,7 +17197,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17209,8 +17206,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17263,7 +17260,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17272,8 +17269,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17326,7 +17323,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17335,8 +17332,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17389,7 +17386,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17398,8 +17395,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17452,7 +17449,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17461,8 +17458,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17515,7 +17512,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17524,8 +17521,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17578,7 +17575,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17587,8 +17584,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17641,7 +17638,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17650,8 +17647,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17704,7 +17701,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17713,8 +17710,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17767,7 +17764,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17776,8 +17773,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17830,7 +17827,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17839,8 +17836,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -17893,7 +17890,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17902,8 +17899,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -17956,7 +17953,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -17965,8 +17962,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18019,7 +18016,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18028,8 +18025,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18082,7 +18079,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18091,8 +18088,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18145,7 +18142,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18154,8 +18151,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18208,7 +18205,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18217,8 +18214,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18271,7 +18268,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18280,8 +18277,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18334,7 +18331,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18343,8 +18340,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18397,7 +18394,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18406,8 +18403,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18460,7 +18457,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18469,8 +18466,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18523,7 +18520,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18532,8 +18529,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18586,7 +18583,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18595,8 +18592,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18649,7 +18646,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18658,8 +18655,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18712,7 +18709,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18721,8 +18718,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18775,7 +18772,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18784,8 +18781,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18838,7 +18835,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18847,8 +18844,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -18901,7 +18898,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18910,8 +18907,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -18964,7 +18961,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -18973,8 +18970,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19027,7 +19024,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19036,8 +19033,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19090,7 +19087,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19099,8 +19096,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19153,7 +19150,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19162,8 +19159,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19216,7 +19213,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19225,8 +19222,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19279,7 +19276,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19288,8 +19285,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19342,7 +19339,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19351,8 +19348,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19405,7 +19402,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19414,8 +19411,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19468,7 +19465,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19477,8 +19474,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19531,7 +19528,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19540,8 +19537,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19594,7 +19591,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19603,8 +19600,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19657,7 +19654,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19666,8 +19663,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19720,7 +19717,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19729,8 +19726,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19783,7 +19780,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19792,8 +19789,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19846,7 +19843,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19855,8 +19852,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -19909,7 +19906,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19918,8 +19915,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -19972,7 +19969,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -19981,8 +19978,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20035,7 +20032,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20044,8 +20041,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20098,7 +20095,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20107,8 +20104,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20161,7 +20158,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20170,8 +20167,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20224,7 +20221,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20233,8 +20230,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20287,7 +20284,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20296,8 +20293,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20350,7 +20347,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20359,8 +20356,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20413,7 +20410,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20422,8 +20419,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20476,7 +20473,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20485,8 +20482,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20539,7 +20536,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20548,8 +20545,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20602,7 +20599,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20611,8 +20608,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20665,7 +20662,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20674,8 +20671,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20728,7 +20725,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20737,8 +20734,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20791,7 +20788,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20800,8 +20797,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20854,7 +20851,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20863,8 +20860,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -20917,7 +20914,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20926,8 +20923,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -20980,7 +20977,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -20989,8 +20986,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21043,7 +21040,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21052,8 +21049,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21106,7 +21103,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21115,8 +21112,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21169,7 +21166,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21178,8 +21175,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21232,7 +21229,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21241,8 +21238,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21295,7 +21292,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21304,8 +21301,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21358,7 +21355,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21367,8 +21364,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21421,7 +21418,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21430,8 +21427,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21484,7 +21481,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21493,8 +21490,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21547,7 +21544,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21556,8 +21553,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21610,7 +21607,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21619,8 +21616,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21673,7 +21670,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21682,8 +21679,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21736,7 +21733,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21745,8 +21742,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21799,7 +21796,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21808,8 +21805,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21862,7 +21859,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21871,8 +21868,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -21925,7 +21922,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21934,8 +21931,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -21988,7 +21985,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -21997,8 +21994,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22051,7 +22048,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22060,8 +22057,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22114,7 +22111,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22123,8 +22120,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22177,7 +22174,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22186,8 +22183,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22240,7 +22237,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22249,8 +22246,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22303,7 +22300,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22312,8 +22309,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22366,7 +22363,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22375,8 +22372,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22429,7 +22426,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22438,8 +22435,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22492,7 +22489,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22501,8 +22498,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22555,7 +22552,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22564,8 +22561,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22618,7 +22615,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22627,8 +22624,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22681,7 +22678,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22690,8 +22687,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22744,7 +22741,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22753,8 +22750,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22807,7 +22804,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22816,8 +22813,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22870,7 +22867,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22879,8 +22876,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -22933,7 +22930,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -22942,8 +22939,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -22996,7 +22993,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -23005,8 +23002,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -23059,7 +23056,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -23068,8 +23065,8 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
@@ -23122,7 +23119,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -23131,8 +23128,8 @@
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
@@ -23186,34 +23183,33 @@
             "y": 1
           },
           "orientation": "east",
-          "heldObject": null,
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "east"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
-            "y": 3
+            "x": 8,
+            "y": 4
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "north",
+            "current": "east",
             "previous": "stay"
           }
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -23249,7 +23245,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
+          "orientation": "north",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -23258,21 +23254,21 @@
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "east"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 8,
-            "y": 3
+            "x": 9,
+            "y": 4
           },
           "orientation": "east",
           "heldObject": null,
           "action": {
             "current": "east",
-            "previous": "north"
+            "previous": "east"
           }
         }
       ],
@@ -23312,7 +23308,7 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "north",
+          "orientation": "east",
           "heldObject": {
             "name": "dish",
             "position": {
@@ -23321,20 +23317,20 @@
             }
           },
           "action": {
-            "current": "north",
-            "previous": "interact"
+            "current": "east",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 8,
+            "x": 10,
             "y": 4
           },
-          "orientation": "south",
+          "orientation": "east",
           "heldObject": null,
           "action": {
-            "current": "south",
+            "current": "east",
             "previous": "east"
           }
         }
@@ -23373,32 +23369,32 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "east",
-            "previous": "north"
+            "current": "south",
+            "previous": "east"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 8,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
           "heldObject": null,
           "action": {
             "current": "south",
-            "previous": "south"
+            "previous": "east"
           }
         }
       ],
@@ -23438,35 +23434,34 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "east"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
-            "y": 5
+            "x": 10,
+            "y": 4
           },
-          "orientation": "west",
+          "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "west",
+            "current": "north",
             "previous": "south"
           }
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -23500,32 +23495,32 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
           "heldObject": null,
           "action": {
             "current": "south",
-            "previous": "west"
+            "previous": "north"
           }
         }
       ],
@@ -23565,17 +23560,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -23587,13 +23588,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -23627,25 +23621,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -23692,17 +23686,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -23714,13 +23714,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -23754,25 +23747,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -23819,17 +23812,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -23841,13 +23840,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -23881,25 +23873,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -23946,17 +23938,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -23968,13 +23966,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24008,25 +23999,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24073,17 +24064,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24095,13 +24092,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24135,25 +24125,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24200,17 +24190,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24222,13 +24218,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24262,25 +24251,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24327,17 +24316,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24349,13 +24344,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24389,25 +24377,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24454,17 +24442,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24476,13 +24470,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24516,25 +24503,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24581,17 +24568,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24603,13 +24596,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24643,25 +24629,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24708,17 +24694,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24730,13 +24722,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24770,25 +24755,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24835,17 +24820,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24857,13 +24848,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -24897,25 +24881,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -24962,17 +24946,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -24984,13 +24974,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -25024,25 +25007,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -25089,17 +25072,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -25111,13 +25100,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -25151,25 +25133,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -25216,17 +25198,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -25238,13 +25226,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -25278,25 +25259,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -25343,17 +25324,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -25365,13 +25352,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -25405,25 +25385,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -25470,17 +25450,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -25492,13 +25478,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
@@ -25532,25 +25511,25 @@
           "id": 0,
           "position": {
             "x": 5,
-            "y": 1
+            "y": 2
           },
-          "orientation": "east",
+          "orientation": "south",
           "heldObject": {
             "name": "dish",
             "position": {
               "x": 5,
-              "y": 1
+              "y": 2
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "south",
+            "previous": "north"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 5
           },
           "orientation": "south",
@@ -25597,17 +25576,23 @@
             "x": 5,
             "y": 1
           },
-          "orientation": "east",
-          "heldObject": null,
+          "orientation": "north",
+          "heldObject": {
+            "name": "dish",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "interact",
-            "previous": "interact"
+            "current": "north",
+            "previous": "south"
           }
         },
         {
           "id": 1,
           "position": {
-            "x": 7,
+            "x": 10,
             "y": 4
           },
           "orientation": "north",
@@ -25619,13 +25604,6 @@
         }
       ],
       "objects": [
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
         {
           "name": "soup",
           "position": {
