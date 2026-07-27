@@ -2885,78 +2885,6 @@
             "onion",
             "onion"
           ],
-          "isCooking": false,
-          "isReady": false,
-          "cookTime": 20,
-          "cookingTick": 0
-        }
-      ]
-    },
-    {
-      "timestep": 44,
-      "score": 0,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 1
-          },
-          "orientation": "west",
-          "heldObject": {
-            "name": "onion",
-            "position": {
-              "x": 4,
-              "y": 1
-            }
-          },
-          "action": {
-            "current": "stay",
-            "previous": "stay"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 5
-          },
-          "orientation": "south",
-          "heldObject": null,
-          "action": {
-            "current": "interact",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "soup",
-          "position": {
-            "x": 7,
-            "y": 6
-          },
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ],
           "isCooking": true,
           "isReady": false,
           "cookTime": 20,
@@ -2965,7 +2893,7 @@
       ]
     },
     {
-      "timestep": 45,
+      "timestep": 44,
       "score": 0,
       "orders": [
         {
@@ -3037,7 +2965,7 @@
       ]
     },
     {
-      "timestep": 46,
+      "timestep": 45,
       "score": 0,
       "orders": [
         {
@@ -3109,7 +3037,7 @@
       ]
     },
     {
-      "timestep": 47,
+      "timestep": 46,
       "score": 0,
       "orders": [
         {
@@ -3181,7 +3109,7 @@
       ]
     },
     {
-      "timestep": 48,
+      "timestep": 47,
       "score": 0,
       "orders": [
         {
@@ -3253,7 +3181,7 @@
       ]
     },
     {
-      "timestep": 49,
+      "timestep": 48,
       "score": 0,
       "orders": [
         {
@@ -3325,7 +3253,7 @@
       ]
     },
     {
-      "timestep": 50,
+      "timestep": 49,
       "score": 0,
       "orders": [
         {
@@ -3397,7 +3325,7 @@
       ]
     },
     {
-      "timestep": 51,
+      "timestep": 50,
       "score": 0,
       "orders": [
         {
@@ -3469,7 +3397,7 @@
       ]
     },
     {
-      "timestep": 52,
+      "timestep": 51,
       "score": 0,
       "orders": [
         {
@@ -3541,7 +3469,7 @@
       ]
     },
     {
-      "timestep": 53,
+      "timestep": 52,
       "score": 0,
       "orders": [
         {
@@ -3613,7 +3541,7 @@
       ]
     },
     {
-      "timestep": 54,
+      "timestep": 53,
       "score": 0,
       "orders": [
         {
@@ -3686,7 +3614,7 @@
       ]
     },
     {
-      "timestep": 55,
+      "timestep": 54,
       "score": 0,
       "orders": [
         {
@@ -3759,7 +3687,7 @@
       ]
     },
     {
-      "timestep": 56,
+      "timestep": 55,
       "score": 0,
       "orders": [
         {
@@ -3832,7 +3760,7 @@
       ]
     },
     {
-      "timestep": 57,
+      "timestep": 56,
       "score": 0,
       "orders": [
         {
@@ -3911,7 +3839,7 @@
       ]
     },
     {
-      "timestep": 58,
+      "timestep": 57,
       "score": 0,
       "orders": [
         {
@@ -3990,7 +3918,7 @@
       ]
     },
     {
-      "timestep": 59,
+      "timestep": 58,
       "score": 0,
       "orders": [
         {
@@ -4069,7 +3997,7 @@
       ]
     },
     {
-      "timestep": 60,
+      "timestep": 59,
       "score": 0,
       "orders": [
         {
@@ -4149,7 +4077,7 @@
       ]
     },
     {
-      "timestep": 61,
+      "timestep": 60,
       "score": 0,
       "orders": [
         {
@@ -4228,7 +4156,7 @@
       ]
     },
     {
-      "timestep": 62,
+      "timestep": 61,
       "score": 0,
       "orders": [
         {
@@ -4308,7 +4236,7 @@
       ]
     },
     {
-      "timestep": 63,
+      "timestep": 62,
       "score": 0,
       "orders": [
         {
@@ -4387,7 +4315,7 @@
       ]
     },
     {
-      "timestep": 64,
+      "timestep": 63,
       "score": 0,
       "orders": [
         {
@@ -4467,7 +4395,7 @@
       ]
     },
     {
-      "timestep": 65,
+      "timestep": 64,
       "score": 0,
       "orders": [
         {
@@ -4547,7 +4475,7 @@
       ]
     },
     {
-      "timestep": 66,
+      "timestep": 65,
       "score": 0,
       "orders": [
         {
@@ -4627,7 +4555,7 @@
       ]
     },
     {
-      "timestep": 67,
+      "timestep": 66,
       "score": 0,
       "orders": [
         {
@@ -4706,7 +4634,7 @@
       ]
     },
     {
-      "timestep": 68,
+      "timestep": 67,
       "score": 0,
       "orders": [
         {
@@ -4786,7 +4714,7 @@
       ]
     },
     {
-      "timestep": 69,
+      "timestep": 68,
       "score": 0,
       "orders": [
         {
@@ -4865,7 +4793,7 @@
       ]
     },
     {
-      "timestep": 70,
+      "timestep": 69,
       "score": 0,
       "orders": [
         {
@@ -4951,7 +4879,7 @@
       ]
     },
     {
-      "timestep": 71,
+      "timestep": 70,
       "score": 0,
       "orders": [
         {
@@ -5036,7 +4964,7 @@
       ]
     },
     {
-      "timestep": 72,
+      "timestep": 71,
       "score": 0,
       "orders": [
         {
@@ -5122,7 +5050,7 @@
       ]
     },
     {
-      "timestep": 73,
+      "timestep": 72,
       "score": 0,
       "orders": [
         {
@@ -5207,7 +5135,7 @@
       ]
     },
     {
-      "timestep": 74,
+      "timestep": 73,
       "score": 0,
       "orders": [
         {
@@ -5293,7 +5221,7 @@
       ]
     },
     {
-      "timestep": 75,
+      "timestep": 74,
       "score": 0,
       "orders": [
         {
@@ -5378,7 +5306,7 @@
       ]
     },
     {
-      "timestep": 76,
+      "timestep": 75,
       "score": 0,
       "orders": [
         {
@@ -5457,7 +5385,7 @@
       ]
     },
     {
-      "timestep": 77,
+      "timestep": 76,
       "score": 0,
       "orders": [
         {
@@ -5536,7 +5464,7 @@
       ]
     },
     {
-      "timestep": 78,
+      "timestep": 77,
       "score": 0,
       "orders": [
         {
@@ -5615,7 +5543,7 @@
       ]
     },
     {
-      "timestep": 79,
+      "timestep": 78,
       "score": 0,
       "orders": [
         {
@@ -5694,7 +5622,7 @@
       ]
     },
     {
-      "timestep": 80,
+      "timestep": 79,
       "score": 20,
       "orders": [
         {
@@ -5730,6 +5658,70 @@
           "action": {
             "current": "interact",
             "previous": "west"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "onion",
+          "position": {
+            "x": 4,
+            "y": 6
+          }
+        }
+      ]
+    },
+    {
+      "timestep": 80,
+      "score": 20,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "orientation": "west",
+          "heldObject": null,
+          "action": {
+            "current": "stay",
+            "previous": "west"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 2
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
           }
         }
       ],
@@ -5780,70 +5772,6 @@
           "heldObject": null,
           "action": {
             "current": "stay",
-            "previous": "west"
-          }
-        },
-        {
-          "id": 1,
-          "position": {
-            "x": 7,
-            "y": 2
-          },
-          "orientation": "north",
-          "heldObject": null,
-          "action": {
-            "current": "north",
-            "previous": "interact"
-          }
-        }
-      ],
-      "objects": [
-        {
-          "name": "onion",
-          "position": {
-            "x": 6,
-            "y": 1
-          }
-        },
-        {
-          "name": "dish",
-          "position": {
-            "x": 6,
-            "y": 5
-          }
-        },
-        {
-          "name": "onion",
-          "position": {
-            "x": 4,
-            "y": 6
-          }
-        }
-      ]
-    },
-    {
-      "timestep": 82,
-      "score": 20,
-      "orders": [
-        {
-          "ingredients": [
-            "onion",
-            "onion",
-            "onion"
-          ]
-        }
-      ],
-      "players": [
-        {
-          "id": 0,
-          "position": {
-            "x": 4,
-            "y": 3
-          },
-          "orientation": "west",
-          "heldObject": null,
-          "action": {
-            "current": "stay",
             "previous": "stay"
           }
         },
@@ -5886,7 +5814,7 @@
       ]
     },
     {
-      "timestep": 83,
+      "timestep": 82,
       "score": 20,
       "orders": [
         {
@@ -5950,7 +5878,7 @@
       ]
     },
     {
-      "timestep": 84,
+      "timestep": 83,
       "score": 20,
       "orders": [
         {
@@ -6013,7 +5941,7 @@
       ]
     },
     {
-      "timestep": 85,
+      "timestep": 84,
       "score": 20,
       "orders": [
         {
@@ -6076,7 +6004,7 @@
       ]
     },
     {
-      "timestep": 86,
+      "timestep": 85,
       "score": 20,
       "orders": [
         {
@@ -6139,7 +6067,7 @@
       ]
     },
     {
-      "timestep": 87,
+      "timestep": 86,
       "score": 20,
       "orders": [
         {
@@ -6202,7 +6130,7 @@
       ]
     },
     {
-      "timestep": 88,
+      "timestep": 87,
       "score": 20,
       "orders": [
         {
@@ -6265,7 +6193,7 @@
       ]
     },
     {
-      "timestep": 89,
+      "timestep": 88,
       "score": 20,
       "orders": [
         {
@@ -6328,7 +6256,7 @@
       ]
     },
     {
-      "timestep": 90,
+      "timestep": 89,
       "score": 20,
       "orders": [
         {
@@ -6391,7 +6319,7 @@
       ]
     },
     {
-      "timestep": 91,
+      "timestep": 90,
       "score": 20,
       "orders": [
         {
@@ -6454,7 +6382,7 @@
       ]
     },
     {
-      "timestep": 92,
+      "timestep": 91,
       "score": 20,
       "orders": [
         {
@@ -6523,7 +6451,7 @@
       ]
     },
     {
-      "timestep": 93,
+      "timestep": 92,
       "score": 20,
       "orders": [
         {
@@ -6592,7 +6520,7 @@
       ]
     },
     {
-      "timestep": 94,
+      "timestep": 93,
       "score": 20,
       "orders": [
         {
@@ -6669,7 +6597,7 @@
       ]
     },
     {
-      "timestep": 95,
+      "timestep": 94,
       "score": 20,
       "orders": [
         {
@@ -6705,6 +6633,84 @@
           "action": {
             "current": "north",
             "previous": "interact"
+          }
+        }
+      ],
+      "objects": [
+        {
+          "name": "onion",
+          "position": {
+            "x": 6,
+            "y": 1
+          }
+        },
+        {
+          "name": "dish",
+          "position": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "name": "onion",
+          "position": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "name": "soup",
+          "position": {
+            "x": 7,
+            "y": 6
+          },
+          "ingredients": [
+            "onion"
+          ],
+          "isCooking": false,
+          "isReady": false,
+          "cookTime": 20,
+          "cookingTick": 0
+        }
+      ]
+    },
+    {
+      "timestep": 95,
+      "score": 20,
+      "orders": [
+        {
+          "ingredients": [
+            "onion",
+            "onion",
+            "onion"
+          ]
+        }
+      ],
+      "players": [
+        {
+          "id": 0,
+          "position": {
+            "x": 5,
+            "y": 1
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "interact"
+          }
+        },
+        {
+          "id": 1,
+          "position": {
+            "x": 7,
+            "y": 3
+          },
+          "orientation": "north",
+          "heldObject": null,
+          "action": {
+            "current": "north",
+            "previous": "north"
           }
         }
       ],
@@ -6766,10 +6772,16 @@
             "y": 1
           },
           "orientation": "north",
-          "heldObject": null,
+          "heldObject": {
+            "name": "onion",
+            "position": {
+              "x": 5,
+              "y": 1
+            }
+          },
           "action": {
-            "current": "north",
-            "previous": "interact"
+            "current": "interact",
+            "previous": "north"
           }
         },
         {
@@ -6781,7 +6793,7 @@
           "orientation": "north",
           "heldObject": null,
           "action": {
-            "current": "north",
+            "current": "stay",
             "previous": "north"
           }
         }
@@ -6852,8 +6864,8 @@
             }
           },
           "action": {
-            "current": "interact",
-            "previous": "north"
+            "current": "stay",
+            "previous": "interact"
           }
         },
         {
@@ -6866,7 +6878,7 @@
           "heldObject": null,
           "action": {
             "current": "stay",
-            "previous": "north"
+            "previous": "stay"
           }
         }
       ],
@@ -6937,7 +6949,7 @@
           },
           "action": {
             "current": "stay",
-            "previous": "interact"
+            "previous": "stay"
           }
         },
         {
