@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignment Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #09090b;
+      color: #fafafa;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #18181b 0%, #1a1a2e 100%);
+      border-bottom: 1px solid #27272a;
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header h1 .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+    }
+
+    .last-update {
+      font-size: 12px;
+      color: #71717a;
+      font-weight: 500;
+    }
+
+    /* ── Stats Grid ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 24px 40px;
+    }
+
+    .stat-card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .stat-card:hover {
+      border-color: #3f3f46;
+      transform: translateY(-1px);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .stat-value.green { color: #22c55e; }
+    .stat-value.yellow { color: #eab308; }
+    .stat-value.blue { color: #3b82f6; }
+    .stat-value.red { color: #ef4444; }
+    .stat-value.purple { color: #a855f7; }
+    .stat-value.white { color: #fafafa; }
+
+    .stat-sub {
+      font-size: 11px;
+      color: #52525b;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ── Progress Section ── */
+    .progress-section {
+      padding: 0 40px 16px;
+    }
+
+    .progress-group {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .progress-count {
+      font-size: 13px;
+      color: #71717a;
+      font-weight: 500;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #27272a;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-bar-fill.green { background: linear-gradient(90deg, #16a34a, #22c55e); }
+    .progress-bar-fill.yellow { background: linear-gradient(90deg, #ca8a04, #eab308); }
+    .progress-bar-fill.blue { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 0 40px 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      background: #18181b;
+      color: #a1a1aa;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover { border-color: #3f3f46; color: #fafafa; }
+    .filter-btn.active { background: #fafafa; color: #09090b; border-color: #fafafa; }
+
+    .search-input {
+      padding: 7px 14px;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      background: #18181b;
+      color: #fafafa;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus { border-color: #3b82f6; }
+    .search-input::placeholder { color: #52525b; }
+
+    /* ── Table ── */
+    .table-container {
+      padding: 0 40px 40px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1130px;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13px;
+      table-layout: fixed;
+    }
+
+    /* Column widths */
+    col.col-id { width: 80px; }
+    col.col-group { width: 70px; }
+    col.col-mapgroup { width: 90px; }
+    col.col-status { width: 140px; }
+    col.col-boolean { width: 100px; }
+    col.col-assigned { width: 150px; }
+    col.col-time { width: 140px; }
+    col.col-maps { width: 120px; }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    thead th {
+      background: #18181b;
+      color: #71717a;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #27272a;
+      white-space: nowrap;
+    }
+
+    thead th:first-child { border-radius: 8px 0 0 0; }
+    thead th:last-child { border-radius: 0 8px 0 0; }
+
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #1a1a1e;
+      color: #d4d4d8;
+      transition: background 0.1s;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover td {
+      background: #1a1a2e;
+    }
+
+    /* ── Status Badges ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .badge-available {
+      background: rgba(34, 197, 94, 0.1);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .badge-in-progress {
+      background: rgba(234, 179, 8, 0.1);
+      color: #fbbf24;
+      border: 1px solid rgba(234, 179, 8, 0.2);
+    }
+
+    .badge-completed {
+      background: rgba(59, 130, 246, 0.1);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .badge-available .badge-dot { background: #4ade80; }
+    .badge-in-progress .badge-dot { background: #fbbf24; }
+    .badge-completed .badge-dot { background: #60a5fa; }
+
+    .group-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .group-Low { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+    .group-Mid { background: rgba(234, 179, 8, 0.15); color: #fbbf24; }
+    .group-High { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+    .map-cell {
+      font-size: 11px;
+      color: #71717a;
+      max-width: 200px;
+      overflow: visible;
+    }
+
+    .map-details {
+      position: relative;
+    }
+
+    .map-details summary {
+      color: #a1a1aa;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .map-details summary:hover { color: #fafafa; }
+
+    .map-list {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 20;
+      width: min(420px, 70vw);
+      padding: 10px 12px;
+      border: 1px solid #3f3f46;
+      border-radius: 8px;
+      background: #18181b;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      color: #d4d4d8;
+      line-height: 1.7;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .assigned-to {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      color: #a78bfa;
+    }
+
+    .time-cell {
+      font-size: 11px;
+      color: #52525b;
+    }
+
+    .boolean-value {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .boolean-value.true { color: #4ade80; }
+    .boolean-value.false { color: #71717a; }
+
+    /* ── Loading ── */
+    .loading-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #27272a;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-message {
+      text-align: center;
+      padding: 40px;
+      color: #52525b;
+      font-size: 14px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header, .stats-grid, .controls, .table-container, .progress-section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1><span class="dot"></span> Assignment Dashboard</h1>
+    <span class="last-update" id="lastUpdate">Connecting...</span>
+  </div>
+
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <div class="stat-label">Total</div>
+      <div class="stat-value white" id="statTotal">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Available</div>
+      <div class="stat-value green" id="statAvailable">—</div>
+      <div class="stat-sub" id="statAvailableSub"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">In Progress</div>
+      <div class="stat-value yellow" id="statInProgress">—</div>
+      <div class="stat-sub" id="statInProgressSub"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Completed</div>
+      <div class="stat-value blue" id="statCompleted">—</div>
+      <div class="stat-sub" id="statCompletedSub"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Completion Rate</div>
+      <div class="stat-value purple" id="statRate">—</div>
+    </div>
+  </div>
+
+  <div class="progress-section" id="progressSection"></div>
+
+  <div class="controls">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="available">Available</button>
+    <button class="filter-btn" data-filter="in-progress">In Progress</button>
+    <button class="filter-btn" data-filter="completed">Completed</button>
+    <span style="width:1px; height:24px; background:#27272a; margin:0 4px;"></span>
+    <button class="filter-btn" data-filter="Low">Low</button>
+    <button class="filter-btn" data-filter="Mid">Mid</button>
+    <button class="filter-btn" data-filter="High">High</button>
+    <div style="flex:1"></div>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search ID or participant..." />
+  </div>
+
+  <div class="table-container">
+    <div class="loading-container" id="loadingContainer">
+      <div class="spinner"></div>
+      <span style="color:#71717a; font-size:13px;">Loading assignments...</span>
+    </div>
+    <table style="display:none;" id="assignmentTable">
+      <colgroup>
+        <col class="col-id" />
+        <col class="col-group" />
+        <col class="col-mapgroup" />
+        <col class="col-status" />
+        <col class="col-boolean" />
+        <col class="col-boolean" />
+        <col class="col-assigned" />
+        <col class="col-time" />
+        <col class="col-time" />
+        <col class="col-maps" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Group</th>
+          <th>Map Group</th>
+          <th>Status</th>
+          <th>Has Started</th>
+          <th>Has Finished</th>
+          <th>Assigned To</th>
+          <th>Assigned At</th>
+          <th>Completed At</th>
+          <th>Maps</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div class="empty-message" style="display:none;" id="emptyMessage">No assignments match your filters.</div>
+  </div>
+
+  <!-- Firebase SDK (Compat for simplicity in standalone page) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      onSnapshot,
+      query,
+      orderBy,
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    // ── Firebase Config ──
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWJQ055-OqXA1fnTfIgWzmq5uWMZyFjnM",
+      authDomain: "overcookedpilot.firebaseapp.com",
+      projectId: "overcookedpilot",
+      storageBucket: "overcookedpilot.firebasestorage.app",
+      messagingSenderId: "109877491451",
+      appId: "1:109877491451:web:2b851027b1eabfbf18a25e",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // ── State ──
+    let allAssignments = [];
+    let activeFilter = "all";
+    let searchQuery = "";
+
+    // ── DOM refs ──
+    const $lastUpdate = document.getElementById("lastUpdate");
+    const $statTotal = document.getElementById("statTotal");
+    const $statAvailable = document.getElementById("statAvailable");
+    const $statAvailableSub = document.getElementById("statAvailableSub");
+    const $statInProgress = document.getElementById("statInProgress");
+    const $statInProgressSub = document.getElementById("statInProgressSub");
+    const $statCompleted = document.getElementById("statCompleted");
+    const $statCompletedSub = document.getElementById("statCompletedSub");
+    const $statRate = document.getElementById("statRate");
+    const $progressSection = document.getElementById("progressSection");
+    const $loading = document.getElementById("loadingContainer");
+    const $table = document.getElementById("assignmentTable");
+    const $tbody = document.getElementById("tableBody");
+    const $empty = document.getElementById("emptyMessage");
+
+    // ── Helpers ──
+    function getStatus(a) {
+      if (a.hasFinished) return "completed";
+      if (a.hasStarted) return "in-progress";
+      return "available";
+    }
+
+    function formatTime(isoStr) {
+      if (!isoStr) return "—";
+      const d = new Date(isoStr);
+      return d.toLocaleString("en-US", {
+        month: "short", day: "numeric",
+        hour: "2-digit", minute: "2-digit",
+        hour12: false,
+      });
+    }
+
+    function statusBadge(status) {
+      const labels = { available: "Available", "in-progress": "In Progress", completed: "Completed" };
+      return `<span class="badge badge-${status}"><span class="badge-dot"></span>${labels[status]}</span>`;
+    }
+
+    // ── Render ──
+    function render() {
+      const total = allAssignments.length;
+      const available = allAssignments.filter(a => getStatus(a) === "available").length;
+      const inProgress = allAssignments.filter(a => getStatus(a) === "in-progress").length;
+      const completed = allAssignments.filter(a => getStatus(a) === "completed").length;
+
+      $statTotal.textContent = total;
+      $statAvailable.textContent = available;
+      $statAvailableSub.textContent = `${((available / total) * 100).toFixed(0)}% of total`;
+      $statInProgress.textContent = inProgress;
+      $statInProgressSub.textContent = `${((inProgress / total) * 100).toFixed(0)}% of total`;
+      $statCompleted.textContent = completed;
+      $statCompletedSub.textContent = `${((completed / total) * 100).toFixed(0)}% of total`;
+      $statRate.textContent = `${((completed / total) * 100).toFixed(1)}%`;
+
+      // Progress bars by group
+      const groups = ["Low", "Mid", "High"];
+      const colors = { Low: "green", Mid: "yellow", High: "blue" };
+      let progressHTML = "";
+
+      for (const g of groups) {
+        const groupItems = allAssignments.filter(a => a.group === g);
+        const groupCompleted = groupItems.filter(a => a.hasFinished).length;
+        const pct = groupItems.length > 0 ? ((groupCompleted / groupItems.length) * 100).toFixed(1) : 0;
+
+        progressHTML += `
+          <div class="progress-group">
+            <div class="progress-header">
+              <span class="progress-title"><span class="group-tag group-${g}">${g}</span></span>
+              <span class="progress-count">${groupCompleted} / ${groupItems.length} completed (${pct}%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill ${colors[g]}" style="width:${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }
+      $progressSection.innerHTML = progressHTML;
+
+      // Filter assignments
+      let filtered = allAssignments;
+
+      if (activeFilter === "available" || activeFilter === "in-progress" || activeFilter === "completed") {
+        filtered = filtered.filter(a => getStatus(a) === activeFilter);
+      } else if (activeFilter === "Low" || activeFilter === "Mid" || activeFilter === "High") {
+        filtered = filtered.filter(a => a.group === activeFilter);
+      }
+
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(a =>
+          a.assignmentId?.toLowerCase().includes(q) ||
+          a.assignedTo?.toLowerCase().includes(q) ||
+          a.group?.toLowerCase().includes(q)
+        );
+      }
+
+      // Render table
+      if (filtered.length === 0) {
+        $tbody.innerHTML = "";
+        $empty.style.display = "block";
+      } else {
+        $empty.style.display = "none";
+        $tbody.innerHTML = filtered.map(a => {
+          const status = getStatus(a);
+          const mapsStr = (a.maps || []).map(m => {
+            if (!m) return "—";
+            const parts = m.split("/");
+            return parts[parts.length - 1]; // just filename
+          }).join(", ");
+
+          return `
+            <tr>
+              <td><strong>${a.assignmentId || "—"}</strong></td>
+              <td><span class="group-tag group-${a.group}">${a.group}</span></td>
+              <td>${a.mapGroup || "—"}</td>
+              <td>${statusBadge(status)}</td>
+              <td><span class="boolean-value ${a.hasStarted === true}">${a.hasStarted === true}</span></td>
+              <td><span class="boolean-value ${a.hasFinished === true}">${a.hasFinished === true}</span></td>
+              <td class="assigned-to">${a.assignedTo || "—"}</td>
+              <td class="time-cell">${formatTime(a.assignedAt)}</td>
+              <td class="time-cell">${formatTime(a.completedAt)}</td>
+              <td class="map-cell">
+                <details class="map-details">
+                  <summary>${(a.maps || []).length} maps</summary>
+                  <div class="map-list">${mapsStr}</div>
+                </details>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      $lastUpdate.textContent = `Last update: ${new Date().toLocaleTimeString()}`;
+    }
+
+    // ── Filter buttons ──
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    // ── Search ──
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    // ── Real-time Firestore Listener ──
+    const assignmentsQuery = query(
+      collection(db, "assignments"),
+      orderBy("order", "asc")
+    );
+
+    onSnapshot(assignmentsQuery, (snapshot) => {
+      $loading.style.display = "none";
+      $table.style.display = "table";
+
+      allAssignments = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      render();
+    }, (error) => {
+      console.error("Firestore listener error:", error);
+      $loading.innerHTML = `
+        <div style="color:#ef4444; font-size:14px; text-align:center;">
+          <p style="font-weight:600;">Connection Error</p>
+          <p style="color:#71717a; font-size:12px; margin-top:8px;">
+            ${error.message}<br/>
+            If this mentions an index, click the link in the browser console to create it.
+          </p>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

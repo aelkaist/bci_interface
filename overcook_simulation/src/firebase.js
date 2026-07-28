@@ -1,5 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, getDocs, setDoc, writeBatch } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  writeBatch,
+  runTransaction,
+  query,
+  where,
+  orderBy,
+  limit,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
 
 // .env 파일에 정의된 환경 변수 사용
 const firebaseConfig = {
@@ -106,4 +120,177 @@ export const upsertExperimentSessionToFirestore = async (prolificId, sessionId, 
     console.error("Error upserting experiment session: ", e);
     throw e;
   }
+};
+
+// ── 참가자 배정 시스템 ──
+
+/**
+ * Transaction으로 hasStarted=false인 첫 번째 assignment를 원자적으로 배정합니다.
+ * 모든 assignment가 hasStarted=true이면, hasFinished=false인 행들을 리셋 후 재시도합니다.
+ *
+ * @param {string} prolificId - 참가자 ID
+ * @returns {Promise<Object>} 배정된 assignment 데이터 (assignmentId, group, maps, mapGroup 포함)
+ */
+export const claimAssignment = async (prolificId) => {
+  if (!prolificId) throw new Error("prolificId is required");
+
+  const assignmentsCol = collection(db, "assignments");
+
+  // 1단계: hasStarted=false인 첫 번째 assignment 찾기
+  const availableQuery = query(
+    assignmentsCol,
+    where("hasStarted", "==", false),
+    orderBy("order", "asc"),
+    limit(1)
+  );
+
+  const availableSnap = await getDocs(availableQuery);
+
+  if (!availableSnap.empty) {
+    // 사용 가능한 assignment가 있으면 Transaction으로 배정
+    const targetDoc = availableSnap.docs[0];
+    const targetRef = doc(db, "assignments", targetDoc.id);
+
+    const result = await runTransaction(db, async (transaction) => {
+      const freshDoc = await transaction.get(targetRef);
+      if (!freshDoc.exists()) {
+        throw new Error("Assignment document not found");
+      }
+
+      const data = freshDoc.data();
+
+      // Transaction 시작 사이에 다른 참가자가 이미 가져갔으면 실패 → 자동 재시도
+      if (data.hasStarted === true) {
+        throw new Error("Assignment already claimed (will retry)");
+      }
+
+      transaction.update(targetRef, {
+        hasStarted: true,
+        assignedTo: prolificId,
+        assignedAt: new Date().toISOString(),
+      });
+
+      return {
+        assignmentId: freshDoc.id,
+        ...data,
+        hasStarted: true,
+        assignedTo: prolificId,
+      };
+    });
+
+    console.log(`✅ Assignment claimed: ${result.assignmentId} → ${prolificId}`);
+    return result;
+  }
+
+  // 2단계: 사용 가능한 assignment가 없으면 큐 리셋
+  console.log("⚠️ No available assignments. Resetting incomplete ones...");
+
+  const incompleteQuery = query(
+    assignmentsCol,
+    where("hasFinished", "==", false)
+  );
+  const incompleteSnap = await getDocs(incompleteQuery);
+
+  if (incompleteSnap.empty) {
+    throw new Error("All assignments have been completed. No more slots available.");
+  }
+
+  // hasFinished=false인 행들의 hasStarted를 false로 리셋
+  const resetBatch = writeBatch(db);
+  incompleteSnap.docs.forEach((docSnap) => {
+    resetBatch.update(docSnap.ref, {
+      hasStarted: false,
+      assignedTo: null,
+      assignedAt: null,
+    });
+  });
+  await resetBatch.commit();
+  console.log(`🔄 Reset ${incompleteSnap.size} assignments`);
+
+  // 리셋 후 다시 첫 번째 available assignment 배정
+  const retryQuery = query(
+    assignmentsCol,
+    where("hasStarted", "==", false),
+    orderBy("order", "asc"),
+    limit(1)
+  );
+  const retrySnap = await getDocs(retryQuery);
+
+  if (retrySnap.empty) {
+    throw new Error("Failed to find available assignment after reset");
+  }
+
+  const retryDoc = retrySnap.docs[0];
+  const retryRef = doc(db, "assignments", retryDoc.id);
+
+  const result = await runTransaction(db, async (transaction) => {
+    const freshDoc = await transaction.get(retryRef);
+    if (!freshDoc.exists()) {
+      throw new Error("Assignment document not found after reset");
+    }
+
+    const data = freshDoc.data();
+    if (data.hasStarted === true) {
+      throw new Error("Assignment already claimed after reset (will retry)");
+    }
+
+    transaction.update(retryRef, {
+      hasStarted: true,
+      assignedTo: prolificId,
+      assignedAt: new Date().toISOString(),
+    });
+
+    return {
+      assignmentId: freshDoc.id,
+      ...data,
+      hasStarted: true,
+      assignedTo: prolificId,
+    };
+  });
+
+  console.log(`✅ Assignment claimed after reset: ${result.assignmentId} → ${prolificId}`);
+  return result;
+};
+
+/**
+ * 실험 완료 시 해당 assignment의 hasFinished를 true로 변경합니다.
+ *
+ * @param {string} assignmentId - assignment document ID (예: "L001")
+ */
+export const completeAssignment = async (assignmentId) => {
+  if (!assignmentId) throw new Error("assignmentId is required");
+
+  const assignmentRef = doc(db, "assignments", assignmentId);
+  await updateDoc(assignmentRef, {
+    hasFinished: true,
+    completedAt: new Date().toISOString(),
+  });
+
+  console.log(`✅ Assignment completed: ${assignmentId}`);
+};
+
+/**
+ * 참가자 이탈 시 assignment를 다시 큐에 되돌립니다. (선택적 사용)
+ *
+ * @param {string} assignmentId - assignment document ID
+ */
+export const releaseAssignment = async (assignmentId) => {
+  if (!assignmentId) throw new Error("assignmentId is required");
+
+  const assignmentRef = doc(db, "assignments", assignmentId);
+  const snap = await getDoc(assignmentRef);
+
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+  // 이미 완료된 assignment는 릴리즈하지 않음
+  if (data.hasFinished) return;
+
+  await updateDoc(assignmentRef, {
+    hasStarted: false,
+    assignedTo: null,
+    assignedAt: null,
+  });
+
+  console.log(`🔄 Assignment released: ${assignmentId}`);
 };

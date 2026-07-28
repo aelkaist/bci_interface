@@ -11,7 +11,8 @@
     "dashboard:fetch": "node fetch_data.js",
     "dashboard:split": "node split_pilot_data.js",
     "dashboard:sync": "node fetch_data.js && node split_pilot_data.js",
-    "dashboard:sync-skin": "node sync_dashboard_skin.js"
+    "dashboard:sync-skin": "node sync_dashboard_skin.js",
+    "upload:assignments": "node upload_assignments.js"
   },
   "dependencies": {
     "firebase": "^12.11.0",

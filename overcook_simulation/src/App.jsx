@@ -8,6 +8,8 @@ import {
   saveFeedbackToFirestore,
   upsertExperimentSessionToFirestore,
   savePostSurveyToFirestore,
+  claimAssignment,
+  completeAssignment,
 } from "./firebase";
 
 const LAYOUT_NAMES = [
@@ -272,6 +274,11 @@ export default function App() {
   const [hasReadInstructions, setHasReadInstructions] = useState(false);
   const [testSliderValue, setTestSliderValue] = useState([0]);
 
+  // ── Assignment states ──
+  const [assignmentData, setAssignmentData] = useState(null); // Firestore에서 받은 배정 데이터
+  const [assignmentMaps, setAssignmentMaps] = useState(null); // 배정 기반 맵 객체 배열
+  const [isClaimingAssignment, setIsClaimingAssignment] = useState(false);
+
   // ── Dev Mode states ──
   const [devModeOpen, setDevModeOpen] = useState(false);
   const [devLayout, setDevLayout] = useState("");
@@ -341,12 +348,14 @@ export default function App() {
   const [isSaving, setIsSaving] = useState(false); // DB 저장 상태
   const fileInputRef = useRef(null);
 
-  const [mapOrder] = useState(() => ALL_MAPS.map((_, index) => index));
+  // assignmentMaps가 있으면 그것을 사용, 없으면 기존 ALL_MAPS fallback
+  const activeMaps = assignmentMaps || ALL_MAPS;
+  const [mapOrder, setMapOrder] = useState(() => ALL_MAPS.map((_, index) => index));
   const [currentMapIdx, setCurrentMapIdx] = useState(0);
   const [episodeDrafts, setEpisodeDrafts] = useState({});
 
   const loadMapByIndex = async (index, draft = episodeDrafts[index]) => {
-    const mapObj = ALL_MAPS[index];
+    const mapObj = activeMaps[index];
     if (!mapObj) return false;
 
     try {
@@ -493,12 +502,15 @@ export default function App() {
       mainEndedAt !== null
         ? getMainDurationSec(mainEndedAt)
         : getMainDurationSec(),
-    totalEpisodeCount: mapOrder.length || ALL_MAPS.length,
+    totalEpisodeCount: mapOrder.length || activeMaps.length,
     completedEpisodeCount,
     currentEpisodeIndex: hasEpisode ? currentMapIdx + 1 : null,
     currentEpisodeFileName: episode?.fileName || fileName || null,
     currentEpisodeLayoutName: episode?.layoutName || episode?.staticInfo?.layoutName || null,
-    mapOrder: mapOrder.map((index) => ALL_MAPS[index]?.name).filter(Boolean),
+    mapOrder: mapOrder.map((index) => activeMaps[index]?.name).filter(Boolean),
+    assignmentId: assignmentData?.assignmentId || null,
+    assignmentGroup: assignmentData?.group || null,
+    assignmentMapGroup: assignmentData?.mapGroup || null,
   });
 
   const maybeMarkMainStart = (overrideProlificId = null) => {
@@ -610,7 +622,7 @@ export default function App() {
         segmentEndFrameRef.current = null;
 
         if (hasEpisode) {
-          setEpisodeCount((c) => Math.min(c + 1, ALL_MAPS.length));
+          setEpisodeCount((c) => Math.min(c + 1, activeMaps.length));
         }
 
         setElapsed(0);
@@ -1047,11 +1059,20 @@ export default function App() {
           buildExperimentSessionPayload({
             status: "completed",
             mainEndedAt: finalMainEndedAt,
-            completedEpisodeCount: mapOrder.length || ALL_MAPS.length,
+            completedEpisodeCount: mapOrder.length || activeMaps.length,
           })
         );
       } catch (err) {
         console.error(err);
+      }
+
+      // 배정 완료 처리 (hasFinished = true)
+      if (assignmentData?.assignmentId) {
+        try {
+          await completeAssignment(assignmentData.assignmentId);
+        } catch (err) {
+          console.error("Failed to complete assignment:", err);
+        }
       }
     }
   };
@@ -1127,8 +1148,8 @@ export default function App() {
       const q3Correct = quiz3Order.join("") === "1234";
       isDisabled = !(q1Correct && q2Correct && q3Correct);
     } else if (instructionStep === 3) {
-      btnText = "Start Experiment";
-      isDisabled = !hasReadInstructions || mapOrder.length === 0;
+      btnText = isClaimingAssignment ? "Assigning..." : "Start Experiment";
+      isDisabled = !hasReadInstructions || isClaimingAssignment;
     }
 
     return (
@@ -1161,15 +1182,84 @@ export default function App() {
             <button
               disabled={isDisabled}
               onClick={async () => {
-                if (mapOrder.length === 0) return;
+                try {
+                  setIsClaimingAssignment(true);
 
-                const loaded = await loadMapByIndex(mapOrder[0]);
-                if (!loaded) return;
+                  // Firestore에서 assignment 배정
+                  const assignment = await claimAssignment(prolificId);
+                  setAssignmentData(assignment);
 
-                setCurrentMapIdx(0);
-                setEpisodeCount(1);
-                maybeMarkMainStart();
-                setInstructionStep(4);
+                  // assignment.maps 배열에서 맵 객체 구성
+                  // maps: ["2_forced_hard/Low/filename.json", ...]
+                  const assignedMapObjects = assignment.maps.map((mapPath, idx) => {
+                    const globPath = `./maps/${mapPath}`;
+                    const loadFn = allMapModules[globPath];
+                    if (!loadFn) {
+                      console.error(`Map file not found: ${globPath}`);
+                      return null;
+                    }
+                    // 파일명에서 layoutName 추출 (폴더 첫 부분)
+                    const parts = mapPath.split("/");
+                    const layoutName = parts[0]; // e.g. "2_forced_hard"
+                    return {
+                      name: mapPath,
+                      layoutName,
+                      sampleLevel: parts[1], // e.g. "Low"
+                      load: loadFn,
+                    };
+                  }).filter(Boolean);
+
+                  if (assignedMapObjects.length === 0) {
+                    alert("Failed to load assigned maps. Please contact the researcher.");
+                    setIsClaimingAssignment(false);
+                    return;
+                  }
+
+                  setAssignmentMaps(assignedMapObjects);
+                  const newMapOrder = assignedMapObjects.map((_, i) => i);
+                  setMapOrder(newMapOrder);
+
+                  // 첫 번째 맵 로드 (assignedMapObjects를 직접 사용)
+                  const firstMap = assignedMapObjects[0];
+                  try {
+                    const module = await firstMap.load();
+                    const rawMap = module.default ?? module;
+                    const adapted = adaptEpisode(rawMap, firstMap.name);
+
+                    cancelAnimationFrame(rafRef.current);
+                    setEpisode({ fileName: firstMap.name, layoutName: firstMap.layoutName, ...adapted });
+                    setFileName(firstMap.name);
+                    setIsPlaying(false);
+                    setPlayMode("full");
+                    segmentEndFrameRef.current = null;
+                    setElapsed(0);
+                    setFrameIndex(0);
+                    setRawMarkers([]);
+                    setIntervals([]);
+                    setSelectedInterval(null);
+                    accumulatedEpisodeDurationMsRef.current = 0;
+                    sessionStartRef.current = Date.now();
+                    pauseCountRef.current = 0;
+                    playbackSpeedChangesRef.current = [];
+                    setPlaybackRate(1);
+                    setEpisodeSurveyAnswers({ eq1: null, eq4: null, eq5: "" });
+                  } catch (loadErr) {
+                    console.error("Failed to load first map", loadErr);
+                    alert("Failed to load the first map. Please try again.");
+                    setIsClaimingAssignment(false);
+                    return;
+                  }
+
+                  setCurrentMapIdx(0);
+                  setEpisodeCount(1);
+                  maybeMarkMainStart();
+                  setInstructionStep(4);
+                } catch (err) {
+                  console.error("Assignment failed:", err);
+                  alert(`Failed to get assignment: ${err.message}\n\nPlease try again or contact the researcher.`);
+                } finally {
+                  setIsClaimingAssignment(false);
+                }
               }}
               style={{
                 padding: "14px 40px", fontSize: "16px", fontWeight: "700",
@@ -2076,9 +2166,9 @@ export default function App() {
                   ? "Complete survey below ↓"
                   : feedbackIncomplete
                     ? "Complete feedback to proceed ↓"
-                    : episodeCount >= ALL_MAPS.length
+                    : episodeCount >= activeMaps.length
                       ? "Finish"
-                      : `Next episode (${episodeCount}/${ALL_MAPS.length}) ▶`}
+                      : `Next episode (${episodeCount}/${activeMaps.length}) ▶`}
             </button>
           );
         })()}
