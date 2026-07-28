@@ -199,6 +199,31 @@
     .search-input:focus { border-color: #3b82f6; }
     .search-input::placeholder { color: #52525b; }
 
+    .action-btn {
+      padding: 7px 14px;
+      border: 1px solid #3f3f46;
+      border-radius: 8px;
+      background: #27272a;
+      color: #e4e4e7;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .action-btn:hover { background: #3f3f46; border-color: #52525b; color: #ffffff; }
+    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .action-btn.danger {
+      background: #7f1d1d;
+      border-color: #991b1b;
+      color: #fecaca;
+    }
+    .action-btn.danger:hover {
+      background: #991b1b;
+      border-color: #dc2626;
+      color: #ffffff;
+    }
+
     /* ── Table ── */
     .table-container {
       padding: 0 40px 40px;
@@ -454,6 +479,8 @@
     <button class="filter-btn" data-filter="High">High</button>
     <div style="flex:1"></div>
     <input type="text" class="search-input" id="searchInput" placeholder="Search ID or participant..." />
+    <button class="action-btn" id="btnResetInProgress" title="Reset only 'In Progress' assignments back to Available">🔄 Reset In-Progress</button>
+    <button class="action-btn danger" id="btnResetAll" title="Reset ALL assignments back to Available">⚠️ Reset All</button>
   </div>
 
   <div class="table-container">
@@ -502,6 +529,9 @@
       onSnapshot,
       query,
       orderBy,
+      getDocs,
+      writeBatch,
+      doc,
     } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
     // ── Firebase Config ──
@@ -672,6 +702,78 @@
       searchQuery = e.target.value;
       render();
     });
+
+    const ADMIN_PASSWORD = "ael12345!";
+
+    // ── Reset Handler ──
+    async function resetAssignments(onlyInProgress = false) {
+      const targetDesc = onlyInProgress
+        ? "진행 중(In Progress) 상태인 Assignment만"
+        : "전체 Assignment 항목";
+
+      const inputPw = prompt(`🔐 [${targetDesc}] 초기화 보안 인증\n\n초기화 비밀번호를 입력하세요:`);
+      if (inputPw === null) return;
+
+      if (inputPw !== ADMIN_PASSWORD) {
+        alert("❌ 비밀번호가 올바르지 않습니다.");
+        return;
+      }
+
+      const confirmed = confirm(`⚠️ 정말로 ${targetDesc}를 초기화(Reset)하시겠습니까?\n\n- hasStarted -> false\n- hasFinished -> false\n- assignedTo -> null`);
+      if (!confirmed) return;
+
+      const $btnInProg = document.getElementById("btnResetInProgress");
+      const $btnAll = document.getElementById("btnResetAll");
+      if ($btnInProg) $btnInProg.disabled = true;
+      if ($btnAll) $btnAll.disabled = true;
+
+      try {
+        const snap = await getDocs(collection(db, "assignments"));
+        let batch = writeBatch(db);
+        let count = 0;
+        let totalReset = 0;
+
+        for (const docSnap of snap.docs) {
+          const data = docSnap.data();
+          if (onlyInProgress) {
+            const isFinished = data.hasFinished === true;
+            const isStarted = data.hasStarted === true;
+            if (!isStarted || isFinished) continue;
+          }
+
+          batch.update(doc(db, "assignments", docSnap.id), {
+            hasStarted: false,
+            hasFinished: false,
+            assignedTo: null,
+            assignedAt: null,
+            completedAt: null,
+          });
+
+          count++;
+          totalReset++;
+          if (count === 400) {
+            await batch.commit();
+            batch = writeBatch(db);
+            count = 0;
+          }
+        }
+
+        if (count > 0) {
+          await batch.commit();
+        }
+
+        alert(`✅ 총 ${totalReset}개의 assignment가 성공적으로 초기화되었습니다.`);
+      } catch (err) {
+        console.error("Reset error:", err);
+        alert(`❌ 초기화 실패: ${err.message}`);
+      } finally {
+        if ($btnInProg) $btnInProg.disabled = false;
+        if ($btnAll) $btnAll.disabled = false;
+      }
+    }
+
+    document.getElementById("btnResetInProgress").addEventListener("click", () => resetAssignments(true));
+    document.getElementById("btnResetAll").addEventListener("click", () => resetAssignments(false));
 
     // ── Real-time Firestore Listener ──
     const assignmentsQuery = query(
