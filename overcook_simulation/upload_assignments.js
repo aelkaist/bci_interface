@@ -3,7 +3,7 @@
 // 사용법: node upload_assignments.js
 // CSV 수정 후 재실행하면 기존 데이터를 덮어씁니다.
 
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, writeBatch } from "firebase/firestore";
 
@@ -77,7 +77,9 @@ function extractLayoutName(filename) {
 
 // ── 메인 업로드 ──
 async function uploadAssignments() {
-  const csvPath = "public/Participant Assignment.csv";
+  const finalCsvPath = "public/Participant_final.csv";
+  const defaultCsvPath = "public/Participant Assignment.csv";
+  const csvPath = existsSync(finalCsvPath) ? finalCsvPath : defaultCsvPath;
   console.log(`📄 Reading CSV from: ${csvPath}`);
 
   const csvText = readFileSync(csvPath, "utf-8");
