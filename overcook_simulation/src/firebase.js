@@ -182,74 +182,11 @@ export const claimAssignment = async (prolificId) => {
     return result;
   }
 
-  // 2단계: 사용 가능한 assignment가 없으면 큐 리셋
-  console.log("⚠️ No available assignments. Resetting incomplete ones...");
-
-  const incompleteQuery = query(
-    assignmentsCol,
-    where("hasFinished", "==", false)
-  );
-  const incompleteSnap = await getDocs(incompleteQuery);
-
-  if (incompleteSnap.empty) {
-    throw new Error("All assignments have been completed. No more slots available.");
-  }
-
-  // hasFinished=false인 행들의 hasStarted를 false로 리셋
-  const resetBatch = writeBatch(db);
-  incompleteSnap.docs.forEach((docSnap) => {
-    resetBatch.update(docSnap.ref, {
-      hasStarted: false,
-      assignedTo: null,
-      assignedAt: null,
-    });
-  });
-  await resetBatch.commit();
-  console.log(`🔄 Reset ${incompleteSnap.size} assignments`);
-
-  // 리셋 후 다시 첫 번째 available assignment 배정
-  const retryQuery = query(
-    assignmentsCol,
-    where("hasStarted", "==", false),
-    orderBy("order", "asc"),
-    limit(1)
-  );
-  const retrySnap = await getDocs(retryQuery);
-
-  if (retrySnap.empty) {
-    throw new Error("Failed to find available assignment after reset");
-  }
-
-  const retryDoc = retrySnap.docs[0];
-  const retryRef = doc(db, "assignments", retryDoc.id);
-
-  const result = await runTransaction(db, async (transaction) => {
-    const freshDoc = await transaction.get(retryRef);
-    if (!freshDoc.exists()) {
-      throw new Error("Assignment document not found after reset");
-    }
-
-    const data = freshDoc.data();
-    if (data.hasStarted === true) {
-      throw new Error("Assignment already claimed after reset (will retry)");
-    }
-
-    transaction.update(retryRef, {
-      hasStarted: true,
-      assignedTo: prolificId,
-      assignedAt: new Date().toISOString(),
-    });
-
-    return {
-      assignmentId: freshDoc.id,
-      ...data,
-      hasStarted: true,
-      assignedTo: prolificId,
-    };
-  });
-
-  console.log(`✅ Assignment claimed after reset: ${result.assignmentId} → ${prolificId}`);
-  return result;
+  // 2단계: 사용 가능한 assignment가 없으면 그냥 실패 처리.
+  // (자동 큐 리셋은 실험 중인 활성 참가자까지 detach시키는 문제가 있어 제거함.
+  //  이탈자로 슬롯이 소진된 경우, 대시보드나 reset_db.js로 "수동" 회수만 합니다.)
+  console.log("⚠️ No available assignments. (auto-reset disabled)");
+  throw new Error("No available assignment slots at the moment. Please contact the researcher.");
 };
 
 /**

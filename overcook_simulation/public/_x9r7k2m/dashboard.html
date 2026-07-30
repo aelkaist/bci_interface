@@ -380,6 +380,29 @@
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 11px;
       color: #a78bfa;
+      white-space: normal;
+      word-break: break-all;
+    }
+    /* 중복 슬롯: 재-claim한 현재 완료자 아래에 orphan 완료자를 함께 표기 */
+    .assigned-to .dup-orphan {
+      display: block;
+      margin-top: 3px;
+      color: #f59e0b;
+    }
+    .assigned-to .dup-orphan::before {
+      content: "";
+    }
+    .assigned-to .dup-tag {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 1px 7px;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
     }
 
     .time-cell {
@@ -568,11 +591,48 @@
     const $tbody = document.getElementById("tableBody");
     const $empty = document.getElementById("emptyMessage");
 
+    // ── 중복 배정된 Low 17슬롯의 "미채택(중복) 완료자" 매핑 ──
+    // 07-28 in-progress 리셋으로 한 슬롯을 두 명이 완료한 케이스. 슬롯마다 피드백이 더 많은 쪽을
+    // 유효(assignedTo)로 채택했고, 여기 값은 "채택되지 않은 나머지 완료자"입니다.
+    // assignments 데이터와 별개로, 표시(render)에서 두 완료자를 함께 보여주기 위한 참고용 상수.
+    // (slot -> 미채택된 중복 완료자 ID)
+    const DUP_ORPHANS = {
+      // ORPHAN을 채택한 슬롯 → 미채택 = 기존 owner
+      L005: "A8BA28E3B0DD4E6FB6A0F290F91CC00A",
+      L007: "7ECF7E92126E4DA9B18FAFA3F2BE6F13",
+      L014: "9041338894C74BAB82930C976D75BB6B",
+      L018: "3A027EB458E1432AB5977770B373F0CB",
+      L028: "9210A7AD6AC949139CF33EA3027586AB",
+      L029: "F128F1DC62434567A0B98C0121B321E1",
+      L031: "A3225197A57D498187805738CB466F18",
+      // OWNER를 채택한 슬롯 → 미채택 = orphan
+      L020: "3EFE9A331E6B4EC2BA8AB84C72D42F12",
+      L024: "F50B7970FF2D41A0881B65DDA0215164",
+      L030: "46331EBA4F494FAD901E83106523FF12",
+      L032: "CC9E876ED84249A286B76B5DF1C5103A",
+      L033: "213A702001744340BE854119628D5960",
+      L034: "2CFF6B5E6C4A46609F232A5E999687CC",
+      L035: "3075290FB4A8452D87294D8C502BAD34",
+      L036: "9B55B16496F04787B72417D2E7356689",
+      L037: "D553C222F56E4D609959D36F65148024",
+      L038: "00C38CA2CFF448B1970DE01BB15E184D",
+    };
+
     // ── Helpers ──
     function getStatus(a) {
       if (a.hasFinished) return "completed";
       if (a.hasStarted) return "in-progress";
       return "available";
+    }
+
+    // assignedTo 셀 렌더: 중복 슬롯이면 "채택된 완료자 + 미채택 완료자"를 함께 표기
+    function renderAssignedTo(a) {
+      const owner = a.assignedTo || "—";
+      const other = DUP_ORPHANS[a.assignmentId || a.id];
+      if (!other) return owner;
+      return `<span title="채택됨(피드백 많은 쪽): ${owner}">${owner}</span>`
+        + `<span class="dup-orphan" title="미채택 중복 완료자: ${other}">＋ ${other}</span>`
+        + `<span class="dup-tag" title="이 슬롯은 두 명이 완료 — 피드백 많은 쪽을 채택">중복(미채택)</span>`;
     }
 
     function formatTime(isoStr) {
@@ -670,7 +730,7 @@
               <td>${statusBadge(status)}</td>
               <td><span class="boolean-value ${a.hasStarted === true}">${a.hasStarted === true}</span></td>
               <td><span class="boolean-value ${a.hasFinished === true}">${a.hasFinished === true}</span></td>
-              <td class="assigned-to">${a.assignedTo || "—"}</td>
+              <td class="assigned-to">${renderAssignedTo(a)}</td>
               <td class="time-cell">${formatTime(a.assignedAt)}</td>
               <td class="time-cell">${formatTime(a.completedAt)}</td>
               <td class="map-cell">
