@@ -1,7 +1,39 @@
 {
-  "generatedAt": "2026-07-24T04:12:50.036Z",
+  "generatedAt": "2026-07-30T07:43:04.237Z",
   "timeZone": "Asia/Seoul",
   "pilots": [
+    {
+      "id": "main-all",
+      "label": "▶ Main (All groups) (208)",
+      "date": "main",
+      "file": "main-all.json",
+      "participantCount": 208,
+      "completedParticipantCount": 208
+    },
+    {
+      "id": "main-low",
+      "label": "▶ Main — Low (70)",
+      "date": "main",
+      "file": "main-low.json",
+      "participantCount": 70,
+      "completedParticipantCount": 70
+    },
+    {
+      "id": "main-mid",
+      "label": "▶ Main — Mid (70)",
+      "date": "main",
+      "file": "main-mid.json",
+      "participantCount": 70,
+      "completedParticipantCount": 70
+    },
+    {
+      "id": "main-high",
+      "label": "▶ Main — High (68)",
+      "date": "main",
+      "file": "main-high.json",
+      "participantCount": 68,
+      "completedParticipantCount": 68
+    },
     {
       "id": "pilot1",
       "label": "Pilot 1 - 2026-05-24",
