@@ -1905,13 +1905,14 @@
     <div id="content" style="display:none">
       <div class="tabs">
         <button class="tb on" data-panel="p5">Participants</button>
-        <button class="tb" data-panel="p1">Time Overview</button>
-        <button class="tb" data-panel="p2">Episode Time</button>
-        <button class="tb" data-panel="p3">Feedback Items</button>
-        <button class="tb" data-panel="p4">Ratings</button>
-        <button class="tb" data-panel="p6">Surveys</button>
-        <button class="tb" data-panel="p7">Tone Analysis</button>
-        <button class="tb" data-panel="p8">Seed Heatmap</button>
+        <button class="tb" data-panel="p1">Total Time</button>
+        <button class="tb" data-panel="p2">Time by Map</button>
+        <button class="tb" data-panel="p3">Feedback Volume</button>
+        <button class="tb" data-panel="p7">Feedback Tone</button>
+        <button class="tb" data-panel="p4">Self-Ratings</button>
+        <button class="tb" data-panel="p6">Post-Survey</button>
+        <button class="tb" data-panel="p8">Seed Replay</button>
+        <button class="tb" data-panel="p9">Seed Analysis</button>
       </div>
 
       <!-- Tab 1: Time Overview -->
@@ -2107,8 +2108,8 @@
 
       <!-- Tab 5: Participants with episode drill-down & Dropout Summary -->
       <div class="pn on" id="p5">
-        <!-- Dropout & Completion Summary Header -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+        <!-- Dropout & Completion Summary Header (hidden per request) -->
+        <div style="display:none">
           <div
             style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
             <div>
@@ -2155,12 +2156,23 @@
               <button class="pfilter-btn active" id="pfilter-comp"
                 style="font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer">Completed
                 (<span id="pfilter-comp-count">0</span>)</button>
-              <button class="pfilter-btn" id="pfilter-drop"
-                style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Dropped
-                Out (<span id="pfilter-drop-count">0</span>)</button>
               <button class="pfilter-btn" id="pfilter-all"
                 style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">All
                 (<span id="pfilter-all-count">0</span>)</button>
+            </div>
+
+            <!-- Group (Low/Mid/High) Filter -->
+            <div
+              style="display:flex;align-items:center;gap:6px;background:var(--surface-2);padding:4px;border-radius:8px;border:1px solid var(--border)">
+              <span style="font-size:10px;font-weight:700;color:var(--muted,#6b7180);padding:0 4px 0 8px;letter-spacing:.5px">GROUP</span>
+              <button class="gfilter-btn active" data-group="all"
+                style="font-size:11px;font-weight:700;padding:5px 12px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer">All</button>
+              <button class="gfilter-btn" data-group="Low"
+                style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Low</button>
+              <button class="gfilter-btn" data-group="Mid"
+                style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Mid</button>
+              <button class="gfilter-btn" data-group="High"
+                style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">High</button>
             </div>
 
             <div class="psearch-box" style="margin-bottom:0">
@@ -2181,6 +2193,7 @@
                   <th>Use</th>
                   <th>#</th>
                   <th>Participant ID</th>
+                  <th>Group</th>
                   <th>Status</th>
                   <th>Total Items</th>
                   <th>Avg FB / Ep</th>
@@ -2267,6 +2280,38 @@
             </div>
           </div>
           <div class="tone-list" id="tone-list"></div>
+        </div>
+      </div>
+
+      <!-- Tab 9: Seed Summary (per-seed feedback totals & tone, split by group) -->
+      <div class="pn" id="p9">
+        <div class="cw">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:10px">
+            <div>
+              <div class="ct">Seed Feedback Summary</div>
+              <div class="cs" style="margin-bottom:0">시드별 전체 피드백 및 감정(부정 1–2 · 중립 3 · 긍정 4–5) 분포 · Low/Mid/High 구분 · 열 제목 클릭 정렬</div>
+            </div>
+            <input type="text" id="seed-summary-search" placeholder="Search seed / map..."
+              style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;padding:7px 12px;outline:none;min-width:220px" />
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:var(--surface-2);padding:4px;border-radius:8px;border:1px solid var(--border);width:max-content;margin-bottom:14px">
+            <span style="font-size:10px;font-weight:700;color:var(--text-2);padding:0 4px 0 8px;letter-spacing:.5px">GROUP</span>
+            <button class="sgfilter-btn active" data-group="all" style="font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer">All</button>
+            <button class="sgfilter-btn" data-group="Low" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Low</button>
+            <button class="sgfilter-btn" data-group="Mid" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">Mid</button>
+            <button class="sgfilter-btn" data-group="High" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--text-2);cursor:pointer">High</button>
+            <span style="font-size:10px;font-weight:700;color:var(--text-2);padding:0 4px 0 12px;letter-spacing:.5px;border-left:1px solid var(--border);margin-left:6px">MAP</span>
+            <select id="seed-summary-map" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:11px;padding:5px 10px;outline:none;cursor:pointer">
+              <option value="all">All maps</option>
+            </select>
+          </div>
+          <div id="seed-summary-groupstats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px"></div>
+          <div style="overflow-x:auto">
+            <table id="seed-summary-table" style="width:100%;border-collapse:collapse;font-size:12.5px;min-width:780px">
+              <thead><tr id="seed-summary-head"></tr></thead>
+              <tbody id="seed-summary-body"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -3261,6 +3306,7 @@
 
       // ── Tab 5: Participants table & Dropout Filter ──
       let currentPFilter = 'comp'; // 'comp', 'drop', 'all'
+      let currentGroupFilter = 'all'; // 'all','Low','Mid','High'
 
       function applyParticipantSearch() {
         const searchInput = document.getElementById('participant-search');
@@ -3291,6 +3337,8 @@
   else if (currentPFilter === 'drop') listToRender = sourceDropouts;
   else listToRender = [...sourceCompleted, ...sourceDropouts];
 
+        if (currentGroupFilter !== 'all') listToRender = listToRender.filter(p => (p.group || '') === currentGroupFilter);
+
         listToRender.forEach((p, idx) => {
           const s = p.sessions[0] || {};
           const isCompleted = p.sessions.some(ses => ses.status === 'completed');
@@ -3316,6 +3364,7 @@
           tr.innerHTML = `<td><input type="checkbox" class="participant-check" data-pid="${p.id}" ${checked} aria-label="Include ${p.id} in dashboard filter"></td>
         <td>${idx + 1}</td>
         <td class="pid-mono" style="font-weight:600">${p.id}</td>
+        <td>${p.group ? `<span style="font-weight:700;color:${p.group === 'Low' ? 'var(--amber)' : p.group === 'Mid' ? 'var(--accent)' : 'var(--pink)'}">${p.group}</span>` : '—'}</td>
         <td>${statusChip}</td>
         <td><strong style="color:var(--accent)">${totalItems}</strong></td>
         <td><strong style="color:var(--amber)">${r(avgFbPerEp, 1)}</strong> / ep</td>
@@ -3364,6 +3413,25 @@
             btn.style.color = '#fff';
             btn.style.fontWeight = '700';
             currentPFilter = type;
+            renderParticipantTable();
+          };
+        }
+      });
+
+      // Group (Low/Mid/High) filter handlers
+      ['all', 'Low', 'Mid', 'High'].forEach(g => {
+        const btn = document.querySelector('.gfilter-btn[data-group="' + g + '"]');
+        if (btn) {
+          btn.onclick = () => {
+            document.querySelectorAll('.gfilter-btn').forEach(b => {
+              b.style.background = 'transparent';
+              b.style.color = 'var(--text-2)';
+              b.style.fontWeight = '600';
+            });
+            btn.style.background = 'var(--accent)';
+            btn.style.color = '#fff';
+            btn.style.fontWeight = '700';
+            currentGroupFilter = g;
             renderParticipantTable();
           };
         }
@@ -3544,6 +3612,92 @@
         });
       });
 
+      // ── Seed Feedback Summary table (total / neg / neu / pos, split by group) ──
+      (function buildSeedSummary() {
+        const head = document.getElementById('seed-summary-head');
+        const body = document.getElementById('seed-summary-body');
+        const search = document.getElementById('seed-summary-search');
+        const statsBox = document.getElementById('seed-summary-groupstats');
+        if (!head || !body) return;
+        const tone = s => s <= 2 ? 'neg' : (s === 3 ? 'neu' : 'pos');
+        const groupOf = (entries) => {
+          const g = entries[0].p.group;
+          if (g) return g;
+          const parts = (entries[0].ep.fileName || '').split('/');
+          const folder = parts.length >= 3 ? parts[1] : '';
+          return folder === 'Middle' ? 'Mid' : (folder === 'Low' ? 'Low' : (folder === 'High' ? 'High' : '—'));
+        };
+        const gColor = g => g === 'Low' ? 'var(--amber)' : g === 'Mid' ? 'var(--accent)' : g === 'High' ? 'var(--pink)' : 'var(--text-2)';
+
+        const rows = Object.entries(seedParticipantsMap).map(([seed, entries]) => {
+          const map = getMapNameFromEp(entries[0].ep);
+          let total = 0, neg = 0, neu = 0, pos = 0;
+          entries.forEach(e => (e.items || []).forEach(it => {
+            if (it.sentiment == null) return;
+            total++; const t = tone(it.sentiment);
+            if (t === 'neg') neg++; else if (t === 'neu') neu++; else pos++;
+          }));
+          return { seed, map, group: groupOf(entries), participants: entries.length, total, neg, neu, pos, negPct: total ? Math.round(neg / total * 100) : 0 };
+        });
+
+        // Per-group summary cards
+        if (statsBox) {
+          statsBox.innerHTML = ['Low', 'Mid', 'High'].map(g => {
+            const gr = rows.filter(r => r.group === g);
+            const sum = k => gr.reduce((a, r) => a + r[k], 0);
+            const tot = sum('total'), neg = sum('neg');
+            return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px">
+              <div style="font-size:11px;font-weight:700;color:${gColor(g)};text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">${g}</div>
+              <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px">
+                <span><b style="font-size:18px">${gr.length}</b> <span style="color:var(--text-2);font-size:11px">seeds</span></span>
+                <span><b style="font-size:18px">${tot}</b> <span style="color:var(--text-2);font-size:11px">FB</span></span>
+                <span style="color:var(--pink)"><b style="font-size:18px">${tot ? Math.round(neg / tot * 100) : 0}%</b> <span style="font-size:11px">부정</span></span>
+              </div></div>`;
+          }).join('');
+        }
+
+        const cols = [
+          { k: 'seed', label: 'Seed', a: 'left' }, { k: 'map', label: 'Map', a: 'left' }, { k: 'group', label: 'Group', a: 'left' },
+          { k: 'participants', label: '참가자', a: 'right' }, { k: 'total', label: '전체', a: 'right' },
+          { k: 'neg', label: '부정', a: 'right' }, { k: 'neu', label: '중립', a: 'right' },
+          { k: 'pos', label: '긍정', a: 'right' }, { k: 'negPct', label: '부정%', a: 'right' },
+        ];
+        let sortKey = 'total', sortDir = -1, groupFilter = 'all', mapFilter = 'all';
+        const mapSel = document.getElementById('seed-summary-map');
+        if (mapSel) {
+          const maps = [...new Set(rows.map(r => r.map))].sort();
+          mapSel.innerHTML = '<option value="all">All maps</option>' + maps.map(m => `<option value="${m}">${m}</option>`).join('');
+          mapSel.onchange = () => { mapFilter = mapSel.value; draw(); };
+        }
+        const thStyle = a => `text-align:${a};padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-2);font-size:11px;text-transform:uppercase;letter-spacing:.4px;cursor:pointer;white-space:nowrap`;
+        head.innerHTML = cols.map(c => `<th data-k="${c.k}" style="${thStyle(c.a)}">${c.label}</th>`).join('');
+        const td = (v, extra = '') => `<td style="text-align:right;padding:7px 10px;border-bottom:1px solid var(--border);${extra}">${v}</td>`;
+
+        function draw() {
+          const q = (search ? search.value : '').toLowerCase().trim();
+          let f = rows.filter(r => !q || r.seed.toLowerCase().includes(q) || r.map.toLowerCase().includes(q));
+          if (groupFilter !== 'all') f = f.filter(r => r.group === groupFilter);
+          if (mapFilter !== 'all') f = f.filter(r => r.map === mapFilter);
+          f.sort((a, b) => { const av = a[sortKey], bv = b[sortKey]; return typeof av === 'string' ? sortDir * av.localeCompare(bv) : sortDir * (av - bv); });
+          body.innerHTML = f.map(r => `<tr>
+            <td style="text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono,monospace);font-size:11.5px">${r.seed}</td>
+            <td style="text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-2)">${r.map}</td>
+            <td style="text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);font-weight:700;color:${gColor(r.group)}">${r.group}</td>
+            ${td(r.participants)}${td(r.total, 'font-weight:700')}
+            ${td(r.neg, 'color:var(--pink)')}${td(r.neu, 'color:var(--amber)')}${td(r.pos, 'color:var(--green)')}
+            ${td(r.negPct + '%', 'color:var(--text-2)')}
+          </tr>`).join('') || `<tr><td colspan="9" style="padding:14px;text-align:center;color:var(--text-2)">no seeds</td></tr>`;
+        }
+        head.querySelectorAll('th').forEach(th => th.onclick = () => { const k = th.dataset.k; if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = (k === 'seed' || k === 'map' || k === 'group') ? 1 : -1; } draw(); });
+        if (search) search.oninput = draw;
+        document.querySelectorAll('.sgfilter-btn').forEach(btn => btn.onclick = () => {
+          document.querySelectorAll('.sgfilter-btn').forEach(b => { b.style.background = 'transparent'; b.style.color = 'var(--text-2)'; b.style.fontWeight = '600'; });
+          btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; btn.style.fontWeight = '700';
+          groupFilter = btn.dataset.group; draw();
+        });
+        draw();
+      })();
+
       let prStudioRenderer = null;
       let prStudioState = {
         targetSeed: '',
@@ -3692,7 +3846,7 @@
             if (it.startFrame != null && it.startFrame > maxFeedbackFrame) maxFeedbackFrame = it.startFrame;
           });
         });
-        let maxFrame = Math.min(120, Math.max(40, Math.ceil((maxFeedbackFrame + 15) / 10) * 10));
+        let maxFrame = 200;
 
         prStudioState.targetSeed = targetSeed;
         prStudioState.pList = pList;
@@ -3718,7 +3872,7 @@
             prStudioState.staticInfo = adapted.staticInfo;
             prStudioState.frames = adapted.frames;
 
-            const fitMaxFrame = Math.min(120, Math.min(adapted.frames.length - 1, Math.max(40, Math.ceil((maxFeedbackFrame + 15) / 10) * 10)));
+            const fitMaxFrame = Math.min(200, adapted.frames.length - 1);
             prStudioState.maxFrame = fitMaxFrame;
             maxFrame = fitMaxFrame;
 

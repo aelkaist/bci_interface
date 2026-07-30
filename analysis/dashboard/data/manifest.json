@@ -1,38 +1,38 @@
 {
-  "generatedAt": "2026-07-30T07:43:04.237Z",
+  "generatedAt": "2026-07-30T16:34:04.607Z",
   "timeZone": "Asia/Seoul",
   "pilots": [
     {
       "id": "main-all",
-      "label": "▶ Main (All groups) (208)",
+      "label": "▶ Main (All groups) (216)",
       "date": "main",
       "file": "main-all.json",
-      "participantCount": 208,
-      "completedParticipantCount": 208
+      "participantCount": 216,
+      "completedParticipantCount": 216
     },
     {
       "id": "main-low",
-      "label": "▶ Main — Low (70)",
+      "label": "▶ Main — Low (72)",
       "date": "main",
       "file": "main-low.json",
-      "participantCount": 70,
-      "completedParticipantCount": 70
+      "participantCount": 72,
+      "completedParticipantCount": 72
     },
     {
       "id": "main-mid",
-      "label": "▶ Main — Mid (70)",
+      "label": "▶ Main — Mid (72)",
       "date": "main",
       "file": "main-mid.json",
-      "participantCount": 70,
-      "completedParticipantCount": 70
+      "participantCount": 72,
+      "completedParticipantCount": 72
     },
     {
       "id": "main-high",
-      "label": "▶ Main — High (68)",
+      "label": "▶ Main — High (72)",
       "date": "main",
       "file": "main-high.json",
-      "participantCount": 68,
-      "completedParticipantCount": 68
+      "participantCount": 72,
+      "completedParticipantCount": 72
     },
     {
       "id": "pilot1",

@@ -49,7 +49,7 @@ const SKIN = {
   },
   itemOnCounter: {
     ingredient: "material.png",
-    dish: "box_new.png",
+    dish: "box only.png",
   },
   chef: {
     front: "agv2.png",
