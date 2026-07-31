@@ -1,0 +1,176 @@
+﻿participant_id,trajectory_name,feedback,group
+A39A2E9C8CA1472AB2A0772068C1107F,2_forced_hard_4_seed20_9020000_60.json,"Again the red robot leaves to try to get a box while the green robot beats him to getting the box. The red robot has done great thus far and the green robot should have helped with getting the parts, but here the red robot should have waited a second to see if the green robot would have gotten the box. 
+Then the yellow robot picks up and puts down the box over and over again and gives it to the machine. I don't think it mattered it was just weird. ",mid
+4E4A4FEAD8AF43529314225BF3625724,2_forced_hard_4_seed3_10000000_40.json,"With the amount of robots here, one of them should be laying out boxes ahead of time",low
+0F17E793552E423A9533C9BECE74921A,2_forced_hard_4_seed11_9020000_60.json,Blue robots walking aimlessly.  The one on the right should be waiting to pick up a material.  The one on the left should be picking up a material to deliver.,mid
+9AF60E800E2F44C3887844833086DD04,2_incentivized_hard_4_seed9_3020000_80.json,"Yellow actually helped grab materials and place in the finishing area but is now wandering, lost, again.",mid
+510F3B597F964C9995F5AAF6950977C2,2_incentivized_hard_4_seed6_9520000_100.json,"There are 4 robots and 2 machines, but every robot is taking parts to only one machine, causing a bottleneck and unnecessary waiting.",high
+6624AD9B1C9045258B912C9EA8A8FACC,2_incentivized_hard_seed3_1220000_60.json,these two worked well together,low
+0F0D9CC38A3E42058DC0FA76CDC0D801,2_forced_hard_seed17_2520000_40.json,The red and yellow bots aren't collaborating; yellow isn't taking the parts from red. It almost looks like they are malfunctioning or glitching. ,low
+0403619B5ED848A0A79ABA081779E95B,2_incentivized_hard_4_seed8_7020000_60.json,No robots contribute to the other machine,low
+818CC05305664555B4D1428BDA2A2067,2_incentivized_hard_4_seed7_9520000_100.json,blue continues to act confused and dart in different directions ,high
+0F17E793552E423A9533C9BECE74921A,2_incentivized_hard_4_seed6_4020000_80.json,Second machine not being worked on.,mid
+02EB1043755D41029164570FB47F88C4,2_forced_hard_seed2_3520000_40.json,"This section is weaker, alot of wasted movements by both, especially pink who becomes obsessed with dancing with a redundant part, uninterested in grabbing a box, the next needed action. ",low
+98672B3E43274F39BCEC0E8A956F4934,2_incentivized_hard_4_seed1_2020000_60.json,"Extremely inefficient movements, frequent collisions. This whole thing was an absolute efficiency nightmare.",low
+D837E86223B945B4BCD2231B1F45B46B,2_incentivized_hard_seed7_2020000_60.json,The yellow robot blocked the route for the red robot with the box and couldn't figure out to go back and get out of the way.,mid
+73DE64120BC64CAE8547ABCF5AA238D5,2_incentivized_hard_4_seed1_3520000_80.json,The red robot seems a bit clueless,mid
+616F852D5C134A20958DE7774655FB7B,2_forced_hard_4_seed3_9520000_40.json,Grey robot wandering aimlessly. Grey robot also picks up a box then puts it back where it's not needed.,low
+DA69570119B24065909EFD08179AB45A,2_forced_hard_4_seed7_10000000_80.json,"Only one agent on the left is moving parts, while the other is waiting.",high
+3C49C52656AC40C084B1A982A4D7E5C7,2_forced_hard_seed3_5520000_60.json,these 2 are working very efficiently together,mid
+A169F6E8A615410B94AB1834CFD997F9,2_incentivized_hard_4_seed3_9520000_100.json,4th machine seemed a bit confused,high
+F939C6E51B274F1E958D05AC42E78DC5,2_incentivized_hard_4_seed5_2020000_40.json,red and green are carrying items but are not heading anywhere with them.,low
+F72AAEAA755041F6AA79ECE84CD76F41,2_forced_hard_seed3_4520000_40.json,"There was a staged item waiting to be moved to the machine after the machine because available, but the yellow robot was wasting time and movement elsewhere rather than picking it up and putting it into the machine as soon as it was empty.",low
+83649B508CB3415591AB17C2012EEC75,2_incentivized_hard_seed5_3020000_60.json,They aren't using the other machine,mid
+2B21B7636CAD4FE3B5E616714E830F53,2_incentivized_hard_4_seed6_4020000_80.json,The gray robot should have taken the part it's holding to the unoccupied machine,mid
+F72AAEAA755041F6AA79ECE84CD76F41,2_incentivized_hard_4_seed5_1520000_40.json,"The yellow robot has tried to take the path that robots with items are trying to return with, blocking them and not getting out of the way.",low
+AED830E65B0946B2A6D9225DDCEEDB2B,2_incentivized_hard_seed6_2520000_60.json,The yellow agent seemed lost as it only put parts onto the bottom machine and is not going to the machine on the right side.,mid
+086CFAC51C8345A2B92AA875862AE375,2_forced_hard_seed15_10000000_80.json,"Much better than the other one, there's actual teamwork happening between the two robots.",high
+F10B5079F863411ABD85CF7C5BD46E53,2_forced_hard_seed4_3520000_40.json,Yellow moving around too much instead of waiting by the trade bay.,low
+AABBAA20233C463E998F86F6C5634190,2_incentivized_hard_seed4_1120000_60.json,I don't understand what the yellow one is doing with the product. Why doesn't it take it to the empty machine and get another machine going? ,low
+954227E3450D49339CDA0B57583E449A,2_incentivized_hard_seed5_3520000_60.json,"I understand the red robot was waiting for the parts to be processed before picking them up in the box, but I felt it was a bit strange that it just started moving back and forth like it was confused.",mid
+2A91EDFC1F9B448D9779F670756F5F49,2_forced_hard_seed8_10000000_80.json,The red robot did a good job of dropping off parts near the yellow robot's location.,high
+1A40B0BD6ACA480A93FDCD0C474DE120,2_forced_hard_seed15_10000000_80.json,it would be better if pink could leave product on the wall near machine,high
+4680491AF58148D7915636150F84281B,2_forced_hard_seed7_3520000_40.json,"Yellow you can follow a straight path from pickup to the machine, otherwise good job you two",low
+A39A2E9C8CA1472AB2A0772068C1107F,2_forced_hard_4_seed20_9020000_60.json,The green robot did not help with bring parts to the machine at first while the red robot was doing a good job quickly bringing parts to the other side. This led to the right side only being able to fill up one of the machines at a time. The green robot only started actually trying to help when the right side needed a box but the red robot got out of position then probably because it thought the green robot wasn't going to help. ,mid
+65FDC56138894B8E9917C6CF4FD65F39,2_incentivized_hard_seed6_2520000_60.json,It seems one of the bots glitched up for a second. ,mid
+18CC1BFE7F394834A45C280195CFA65C,2_forced_hard_seed17_2520000_40.json,"seem to work together pretty well, but not 100 percent coordinated together",low
+7DD0416DB65047FDAA5BCCEDBDF9B817,2_incentivized_hard_4_seed3_1820000_40.json,There's way too much dependence on a single machine rather than spreading the efforts across the two available machines.,low
+D66EA70CA4F64CC0B50F9A805D8F79D5,2_incentivized_hard_seed7_10000000_80.json,I like that both AI work on the same machine making sure that a product is getting created as fast as possible. The red robot also waits with a box by the machine that is in process so it will get the finished item right away.,high
+1991C4992E004C709925086751D2B5CB,2_forced_hard_seed2_10000000_80.json,They are working together to overcome the barrier.,high
+09BF60420B074B23AEBA62FFC0074D83,2_incentivized_hard_4_seed1_3520000_80.json,The blue robot here put in the last piece of the part into the machine and also waited and boxed up the finished product and delivered it all on its own.,mid
+377E5F34FBC9482490C18F70D5680C35,2_incentivized_hard_4_seed6_4020000_80.json,robots moving independently but not optimized,mid
+EF607A2D2E6A4B2EA66AA505975B3335,2_forced_hard_4_seed9_8520000_80.json,The other three are working so well together. It seems like one robot is always unsure of what to do when there are 4. ,high
+4E4A4FEAD8AF43529314225BF3625724,2_incentivized_hard_seed2_1220000_60.json,There is a delay in grabbing a box to pack up the parts - whichever AI robot is not occupied with loading the parts should be preparing the box,low
+355D5A2D1A374F15885AF7D49048F056,2_forced_hard_seed15_5520000_40.json,Seemed to be some motion not towards a goal,low
+D837E86223B945B4BCD2231B1F45B46B,2_incentivized_hard_4_seed7_3520000_80.json,The robots are working efficiently at this point.,mid
+16CB68DCBFF94F219C0B9F3A7027F315,2_incentivized_hard_4_seed8_2020000_40.json,"The green robot is doing nothing up until this point, which is inefficient.  It could have grabbed the parts on frame 6 but did not",low
+3765DE826DE6446F867FF77A69F2AB4D,2_forced_hard_seed17_10000000_80.json,"This would be much more effective if the orange robot stayed in between the drop zone and the machine, and the red robot just went back and forth dropping off the items. ",high
+171DEC1860E7498A962991D13A17DE21,2_incentivized_hard_seed7_980000_40.json,"There are 2 piles of parts, but only one is ever used. The yellow robot doesn't move as efficiently as the red robot.",low
+FE1E66E8C24343D0B9B0C013ECFBB4B9,2_forced_hard_4_seed1_10000000_80.json,"There are four AI Robot and they all work in a timely and organized manner, two are divided each side, one handles and gives part to the other side and the other handles boxes to the other side, on the right side, two robots picks up both the parts to machine, box it and drop it, no waiting arounf.",high
+1F9B6CA2DEC54F42A178AD327751A9BC,2_incentivized_hard_4_seed10_9520000_100.json,The blue agent is behaving erratically.,high
+5A4271B5E62442DF849626E815631C7D,2_incentivized_hard_4_seed10_9520000_100.json,i won't ask why the gray robot didn't just go straight to the drop zone with its box — as opposed to its acting indecisive,high
+07A0DC09B35E4F6E98673F7BA187E025,2_incentivized_hard_seed6_980000_60.json,Yellow is stuck at the drop zone,low
+0F0D9CC38A3E42058DC0FA76CDC0D801,2_forced_hard_seed17_2520000_40.json,"Yellow could have made their third drop zone drop-off, but they have wasted a lot of movements, resulting in a slowdown of the workflow ",low
+6CDE8C2FD7394F58A121AA476EEBE276,2_incentivized_hard_seed3_2520000_60.json,Robots obstructing each other,mid
+4E4A4FEAD8AF43529314225BF3625724,2_incentivized_hard_4_seed3_1820000_40.json,"There are 4 robots stuck on one simple task of grabbing a part. While this was happening, another bot couldve gone to the other parts section and starting putting parts in the machine.",low
+FF983506AF184F5B853F6300F50266F9,2_forced_hard_4_seed13_10000000_60.json,The robots returning immediately once the machine was ready for the next load.,mid
+0F17E793552E423A9533C9BECE74921A,2_incentivized_hard_4_seed6_4020000_80.json,"Great collaboration filling the first machine, once again.",mid
+352F50BB940746CDBA37845760C42016,2_forced_hard_4_seed13_9520000_40.json,Spend less time just spinning around.,low
+F472A4D8D3F34308ACE816AE17833397,2_incentivized_hard_4_seed4_9520000_100.json,"The four bots were one bot too many.  Three of the bots filled the machine efficiently, but then the fourth bot had nowhere to put his part.",high
+E0C738F22DFD4123B5CBA845211CC366,2_forced_hard_4_seed7_8520000_40.json,The green robot accomplishes nothing in this time frame. The red and the green should be constantly putting parts in the center since the yellow and blue have two machines to fill. As only the red robot is doing anything here either the yellow or blue robot on the other side has nothing to do.,low
+1F6D14219DB14F748F80AE9837CEEDF0,2_incentivized_hard_4_seed5_2020000_40.json,They are all blocking the blue guy in. He can't do anything. They are wasting time.,low
+0F17E793552E423A9533C9BECE74921A,2_incentivized_hard_seed6_2520000_60.json,Yellow robot still walking aimlessly with an unneeded box.,mid
+60F6E62AAA934061A35F7A914EBCED6D,2_incentivized_hard_seed8_10000000_80.json,The pink robot seems confused while waiting for the yellow robot to deliver a box and package parts.,high
+D0F65634B2BD443E93BA84AACA228012,2_incentivized_hard_seed1_1020000_60.json,These 2 seem to be working together a lot better than the last - maybe because there are only 2 this time.,low
+FF983506AF184F5B853F6300F50266F9,2_incentivized_hard_4_seed7_3520000_80.json,Three of the robots did a good job of getting parts and getting them to the machine. They had good collaberation. The poor blue robot looks lost with his part since the machine is full. He's not driving towards to be ready to load as soon as its ready.,mid
+64A9945FEFE94C8CBA37B81F1C9DFB6A,2_incentivized_hard_seed3_2520000_60.json,What's the pink one doing here?! Just moving around with the item and wasting time! At the start of the clip it could have been getting a box.,mid
+0140A7066983472CB1389045163E2062,2_incentivized_hard_4_seed6_2520000_40.json,inefficient movement,low
+C6262A850B1145F7A713CB503DB153BD,2_incentivized_hard_seed3_2520000_60.json,Yellow robot seems confused for a short while.,mid
+3B8CD7E6A73442A4AF9E166C40BFDCBC,2_forced_hard_seed7_4020000_60.json,They are working together very well,mid
+EA8EA155B0CB4BCE87111B539C8B1F4C,2_forced_hard_seed2_4520000_60.json,The yellow robot was moving toward the closest machine but briefly changed its direction.,mid
+55452323EBDE4536A24E063CC5A686B2,2_forced_hard_seed17_2520000_40.json,They are not transferring properly,low
+83649B508CB3415591AB17C2012EEC75,2_incentivized_hard_seed5_3020000_60.json,They should split the labor,mid
+30D1E4D41B204843978432535950611A,2_incentivized_hard_4_seed8_2020000_40.json,The yellow robot remains in the corner although there are tasks to complete. The red and green robots have parts and can load them into the eastern machine but continue to hold them and walk around near the machine.,low
+7DD0416DB65047FDAA5BCCEDBDF9B817,2_incentivized_hard_seed2_1220000_60.json,Great job staying out of the path of the red robot and working more in an effective manner by grabbing a part ahead of the red robot!,low
+79241E5C361843EDA97056607900E9C3,2_forced_hard_4_seed9_10000000_80.json,"Red robot on left seems to be stuck in a loop with one of the materials, constantly putting it on the shelf and picking it back up.",high
+720FA5F3EEB840C7832391BC05050906,2_incentivized_hard_4_seed5_2520000_80.json,"Each robot performs its job, but there could be a lot of improvement in the system.",mid
+046C3A524DE54997857BAF812149CBAD,2_forced_hard_4_seed11_9520000_80.json,There are times where 1 robot on the part-picking side is just wandering aimlessly. ,high
+6986EB5BF00644919726BA0F2294EAE1,2_forced_hard_4_seed13_10000000_60.json,The robot placed the bottle in an area that the other robots cannot pickup,mid
+1A40B0BD6ACA480A93FDCD0C474DE120,2_incentivized_hard_4_seed8_9520000_100.json,they could still do better by using two machines and two stations for product and boxes,high
+F8D886FED3774D0691C034440B86E483,2_incentivized_hard_seed2_10000000_80.json,"During this phase, the yellow robot should be where the pink robot is and the pink robot should be at the other part location.",high
+A38803A9795C439EAB69D019AA84EBE8,2_forced_hard_seed17_2020000_40.json,"Red and yellow robots cooperate. Red leaves product and later box for yellow to pick up instead of attempting to deliver them independently and both contribute to completing the drop, although there is a period then red robot appears to move around without purpose while yellow robot finishes the job ",low
+4A4F931CF9F941C4BD5C090C09FFC3D0,2_forced_hard_4_seed14_10000000_60.json,"The green AI agent didn't start picking up items until the end of the range of feedback, it was wandering around doing nothing for nearly the first half of the video. ",mid
+C6262A850B1145F7A713CB503DB153BD,2_incentivized_hard_4_seed2_2520000_80.json,Took AI robots a while to get a box.,mid
+4D8B047B038B451C9DB789869453842F,2_incentivized_hard_4_seed5_1520000_40.json,"There has been no collaboration in this segment, and a robot just tried to place a part in the machine that was just filled by another robot, wasting time. Also robots got in each other's way at least once during this segment.",low
+6CDE8C2FD7394F58A121AA476EEBE276,2_forced_hard_seed2_4520000_60.json,robot drifts off course,mid
+0F17E793552E423A9533C9BECE74921A,2_incentivized_hard_4_seed6_4020000_80.json,Second machine still forgotten about.,mid
+E5FDA063D4F742C29BE5A7046451FE73,2_forced_hard_4_seed20_9520000_80.json,Red robot on right didn't directly place a green part on the surface for the blue robot on the right to pick up.,high
+DB5BC51994ED421BB78D2130A1A5D986,2_incentivized_hard_seed9_2520000_60.json,The robots generally have a good process where they are working together using one machine to get the process done.  They would be more effective using both machines rather than having to maneuver around each other but overall they were getting boxes packed quickly.,mid
+18CC1BFE7F394834A45C280195CFA65C,2_forced_hard_4_seed20_8520000_40.json,They could coordinate a bit better,low
+6CD983A0FAF14BC9804E8A0320449DC7,2_incentivized_hard_4_seed8_9520000_100.json,Absolutely individual efforts. The far machine is not used. Everyone is in each others way.,high
+B4E74EC02CE04C02AFBF539FA303A0F2,2_forced_hard_4_seed20_8520000_40.json,"There were four agents on the floor, but the production was similar to that of two agents. One of the machines was partially filled and never fully used, even with four agents.",low
+F5FE80F15BF34DBC8A94422DDB5033D5,2_forced_hard_4_seed9_8020000_60.json,Mostly efficient thus far,mid
+C6262A850B1145F7A713CB503DB153BD,2_forced_hard_seed2_4520000_60.json,AI robots worked very quickly and well to get parts loaded.,mid
+8AA3A2F9DF504339A83EA2DE6E11CA91,2_forced_hard_seed8_3520000_60.json,over all it did the job however they seemed to be alittle irratice it movement should be more efficent o=and using straigh lines,mid
+AE5BB3054A9A46FABF7249C579A08B44,2_incentivized_hard_4_seed2_7520000_100.json,Everyone seems to be working well togetehr.,high
+60F6E62AAA934061A35F7A914EBCED6D,2_forced_hard_seed17_10000000_80.json,"Once again, the pink robot seems confused while waiting for packaging.",high
+F72AAEAA755041F6AA79ECE84CD76F41,2_incentivized_hard_4_seed5_1520000_40.json,"The blue, yellow, and green robots are all trying to get items from the same spot, blocking each other in the process, while none of them are going to the other location.",low
+60F6E62AAA934061A35F7A914EBCED6D,2_incentivized_hard_seed8_10000000_80.json,The two robots resume working well together. The yellow robot drops off a package at the drop zone while the pink robot delivers a part ot be packaged later.,high
+B6C338ADB8E14962A8A5BB40E2097D33,2_incentivized_hard_seed7_10000000_80.json,Yellow robot seems lost,high
+BB4425B8968743B58AB851EB0E2A9FA9,2_forced_hard_4_seed14_10000000_60.json,the green robot doesnt seem to be doing anythin,mid
+6CDE8C2FD7394F58A121AA476EEBE276,2_forced_hard_4_seed4_9520000_60.json,Grey robot isn't really doing anything here.,mid
+6F772AA7C4374587843E33A4E738E4B9,2_incentivized_hard_seed6_10000000_80.json,This is a more efficient segment for both agents. The pink and yellow are operating a bit better here.,high
+986C6248855A41DD9918866D40940CB4,2_incentivized_hard_seed2_10000000_80.json,They dont work together and also focus on only one machine,high
+9AF60E800E2F44C3887844833086DD04,2_forced_hard_4_seed20_9020000_60.json,"Material getter and box getter switched places, maybe this would be better.",mid
+6DF7B7B8FA6040C08B8730436A28ED7C,2_incentivized_hard_seed7_2020000_60.json,Great teamwork.,mid
+720FA5F3EEB840C7832391BC05050906,2_forced_hard_4_seed7_9020000_60.json,"Some of the robots seem to follow a specific role, but one in particular does not seem to be efficient.",mid
+114509284BB84217990EDD5F311E94D8,2_incentivized_hard_4_seed6_9520000_100.json,the blue bot is not working,high
+7DD0416DB65047FDAA5BCCEDBDF9B817,2_forced_hard_seed2_3520000_40.json,"The yellow robot needs to minimize the required steps of movement, it takes a lot of extra useless steps in various directions before committing to the machine for part drop off.",low
+965B0E4313264F5A9A5222E31D9C17F3,2_forced_hard_seed17_2020000_40.json,The pink or red robot is picking up and putting down the parts over and over again. It should have ignored this part once it was set on the center area.,low
+6F772AA7C4374587843E33A4E738E4B9,2_incentivized_hard_seed6_10000000_80.json,Both agents appear to have issues with handling the boxes once they're in beside the drop zone area. They both appear to go back and forth a few times before going to the machine. ,high
+211D1CCD28E5470891A636CDB3B801C7,2_forced_hard_seed9_3520000_60.json,"This was a much smoother setup for the robots, they each had their own space and worked harder this way",mid
+1A40B0BD6ACA480A93FDCD0C474DE120,2_incentivized_hard_seed9_10000000_80.json,they could fetch from both sites of product and boxes,high
+1991C4992E004C709925086751D2B5CB,2_forced_hard_seed2_10000000_80.json,The red robot makes unnecessary movements and could be a little more efficient and focused.,high
+1BB2F7BCFF204F869A86A204DC3BD58C,2_forced_hard_seed1_4520000_40.json,"The yellow agent doesn't appear to take the parts, although it was on the platform for it to be taken.",low
+7453964204644069B3049C13528561F8,2_forced_hard_4_seed7_9520000_80.json,The grey AI bot spends time idling and delays putting the box on the counter so the orange can grab and package the product.,high
+E2FC50F88EE84CACB478957B2772C1ED,2_forced_hard_seed2_10000000_80.json,"segregation of duty is noted here, but lack of machines",high
+EBC2E1ED2E0C430E9A8436F8DC72F64A,2_incentivized_hard_seed4_1120000_60.json,fairly efficient movement,low
+EA8EA155B0CB4BCE87111B539C8B1F4C,2_incentivized_hard_seed3_2520000_60.json,The robots grabbed boxes at the same time while waiting for the parts to be assembled.,mid
+0B839AC7A05A4D14AEAFC6C4B507DCF5,2_incentivized_hard_4_seed6_2520000_40.json,"All of the bots basically understand loading the bottom machine by now and seemingly understand boxing and using the drop zone, but still none use the right-hand machine.  ",low
+66E7788812C8484C96A0D55F6B632751,2_forced_hard_seed9_10000000_80.json,One robot spent time moving around without delivering to the other.,high
+1F9B6CA2DEC54F42A178AD327751A9BC,2_forced_hard_4_seed20_9520000_80.json,"The grey robot in the left hand screen doesn't seem to be working well. iIt's just driving around, not picking up anything.",high
+8BCB509032C148C7B1809382C5D2D30B,2_forced_hard_seed3_4520000_40.json,"The agents' actions were easy to see, and their movements were clear and well-coordinated, making it simple to understand what they were doing and how they interacted.",low
+E2FC50F88EE84CACB478957B2772C1ED,2_incentivized_hard_seed1_10000000_80.json,the machines were working inefficiently and blocking each other from dropping off parts in the machine,high
+07A0DC09B35E4F6E98673F7BA187E025,2_incentivized_hard_4_seed8_1820000_60.json,All bots fail to prioritize either the open machine or the box for the working machine. Gridlock ensues.,low
+A38803A9795C439EAB69D019AA84EBE8,2_incentivized_hard_4_seed8_2020000_40.json,Red robot takes a circuitous route to Drop Zone although there are no apparent obstacles.,low
+4E4A4FEAD8AF43529314225BF3625724,2_forced_hard_seed2_3520000_40.json,Yellow robot could've begun adding parts to the other machine to save time instead of waiting for the bottom machine to finish.,low
+8ABA35BE4FF24A6DAE895F3CDFE22BDA,2_forced_hard_seed9_10000000_80.json,The Pink robot makes a lot of unnessary moves instead of direct lines ,high
+976C3FF9847D451D8DCC9CDEB0218DCD,2_forced_hard_4_seed20_9020000_60.json,Not much was done here when there could've been progress,mid
+046C3A524DE54997857BAF812149CBAD,2_incentivized_hard_seed9_10000000_80.json,They're only using one machine and parts pile instead of both. ,high
+AABBAA20233C463E998F86F6C5634190,2_forced_hard_seed7_3520000_40.json,"I would like to delete this feedback but I don't see a way. I initially thought the robot was taking way too long to grab the box the other one left for it, but I see now it was waiting on the machine to process the parts before picking it up. I am going to change the time range to include the entire video because they did a pretty good job working together. ",low
+60552F5DE0CB46D5BC8A84CB193D56A9,2_forced_hard_4_seed3_9520000_40.json,grey and red getting in the way of each other working,low
+0403619B5ED848A0A79ABA081779E95B,2_incentivized_hard_seed7_1020000_60.json,Yellow is far too focused on the boxes,low
+3765DE826DE6446F867FF77A69F2AB4D,2_incentivized_hard_4_seed10_9520000_100.json,The robots seem to lack direction. They look confused and like they do not know where to go. ,high
+04DB125F868C4953A1FB34ADDD46F3AA,2_incentivized_hard_4_seed6_3020000_80.json,the two robots have a bit of confusion and bump into one another. ,mid
+F10B5079F863411ABD85CF7C5BD46E53,2_incentivized_hard_seed4_1020000_40.json,Yellow playing around with parts,low
+7453964204644069B3049C13528561F8,2_incentivized_hard_seed2_10000000_80.json,The when red agent grabs the box it spends time going back n forth before going to the machine.,high
+2B21B7636CAD4FE3B5E616714E830F53,2_incentivized_hard_4_seed6_4020000_80.json,The pink and red robots seem to get confused and don't know what to do during this timeframe.,mid
+6CD983A0FAF14BC9804E8A0320449DC7,2_forced_hard_seed15_10000000_80.json,The yellow one is wandering around instead of loading the box.,high
+70D42454E5604947AAE539864F090FEE,2_incentivized_hard_4_seed8_2020000_40.json,there was no colloboration at any point - one robot did no work at all and the others constantly impeded each other. having 4 robots and two machines did not help speed up the production,low
+7A50B2D5F081444F9D2236C66A2C39AF,2_forced_hard_seed4_10000000_80.json,The box should always be taken by the yellow robot after being dropped off.,high
+8F6D058CD2FB4D54B15C4E628AA78255,2_incentivized_hard_4_seed8_7020000_60.json,"good collab, but it was crowded",low
+2B21B7636CAD4FE3B5E616714E830F53,2_forced_hard_seed7_4020000_60.json,The pink robot could have placed parts on the middle table while it waited for the yellow robot to finish it's packing of the box to be more productive,mid
+114509284BB84217990EDD5F311E94D8,2_incentivized_hard_4_seed6_9520000_100.json,the bots have all begun to wander aimlessly,high
+C86A7434EB1543749A42D6EB4201BD8B,2_incentivized_hard_4_seed1_8520000_100.json,The robots seem to be working pretty efficiently.  ,high
+F195FB9A6E66495FBF1789FA639871B7,2_forced_hard_seed3_4520000_40.json,robots seem confused in this range,low
+616F852D5C134A20958DE7774655FB7B,2_incentivized_hard_seed1_1020000_60.json,The robots work together to successfully deliver a package to the drop zone with minimal wandering and wasted time.,low
+355D5A2D1A374F15885AF7D49048F056,2_incentivized_hard_4_seed8_1820000_60.json,Again seemed to be machines not doing much,low
+9FA3BFE6B96E40248E7499F0580672C7,2_incentivized_hard_seed4_2020000_60.json,Feedback about the bots poor decision making.,mid
+3BED4FD9D2D84AE89A9918F1CE5D0210,2_forced_hard_4_seed9_8020000_60.json,The yellow robot is at a standstill with the blue robot.,mid
+55452323EBDE4536A24E063CC5A686B2,2_incentivized_hard_4_seed8_7020000_60.json,positive,low
+673A0BFA648A4FFBBD17FACBF6D2C3B8,2_incentivized_hard_seed3_780000_40.json,The robots are mostly mirroring each other in the step to complete and working well,low
+16CB68DCBFF94F219C0B9F3A7027F315,2_forced_hard_seed17_2020000_40.json,The red bot using its free time to set out another piece is a good use of time,low
+7BE2DC2A8181474EA13E0B8AF47C39C6,2_forced_hard_seed1_5020000_60.json,"Each robot has specific roles, which helps the team complete the task easily. One focuses on grabbing the material and the other put it in the right place. One passes the box and the other puts it on the material and delivers it.",mid
+AC714C9F6F7745729F403CC2B3EBF408,2_incentivized_hard_4_seed4_3520000_80.json,it seemed like everyone was working well together on this project,mid
+9AF60E800E2F44C3887844833086DD04,2_forced_hard_seed10_6020000_60.json,I think yellow could try a little harder to walk a straight line to his destination.,mid
+377E5F34FBC9482490C18F70D5680C35,2_forced_hard_seed7_4020000_60.json,robot wasting time,mid
+EA88E2928CED4F1A8E11AE117204A597,2_forced_hard_seed3_5520000_60.json,"Clear paths, roles and cooperation.  No chaos",mid
+8ABA35BE4FF24A6DAE895F3CDFE22BDA,2_incentivized_hard_4_seed5_9520000_100.json,Again they have four robots and they are only using one machine!,high
+F72AAEAA755041F6AA79ECE84CD76F41,2_forced_hard_seed3_4520000_40.json,The red robot moved off to the left after dropping off the box and spent time going back and forth doing nothing rather than grabbing another item to have it staged for when the machine is empty.,low
+92689FA798BF4F66B9D1370DC20C2795,2_forced_hard_4_seed13_9520000_40.json,Remember that there is two machines not only one. One of the machines was completely ignored  for most of the time. Also move out of the way when there is another robot near you because it gets stuck. ,low
+3BED4FD9D2D84AE89A9918F1CE5D0210,2_incentivized_hard_4_seed6_3020000_80.json,"The green, yellow, and blue robots are all going to the materials at the top of the grid, when there is another spot of materials that they could go to. They need to split their area to sort the work instead of crowding an area and limiting movement.",mid
+33BBB026C0F34C2AA6440D51FB6B943A,2_forced_hard_4_seed7_10000000_80.json,The orange robot seems to get comfused. It is wandering in circles basically.,high
+4DE3707D8C36435F837DD8FFA30A5B66,2_forced_hard_seed3_5020000_40.json,The one on the left could be putting more product for the one on the right to use the second machine instead of just putting a box down for the machine that is full already. ,low
+510F3B597F964C9995F5AAF6950977C2,2_forced_hard_4_seed9_9520000_80.json,"There are 2 machines, but the robots are only using 1 to load parts.",high
+1A40B0BD6ACA480A93FDCD0C474DE120,2_incentivized_hard_4_seed8_9520000_100.json,they have a better routine going with three dropping into the machine and the fourth getting a box,high
+EF607A2D2E6A4B2EA66AA505975B3335,2_incentivized_hard_4_seed4_9520000_100.json,Every one is going for the same set of parts. ,high
+98672B3E43274F39BCEC0E8A956F4934,2_forced_hard_seed1_4520000_40.json,Collaboration here was great aside from a few wrong turns by the agents,low
+2A91EDFC1F9B448D9779F670756F5F49,2_incentivized_hard_seed4_10000000_80.json,"The yellow bot got confused about what it should do, which is obviously to pick up a part and bring it to a machine.",high
+70D42454E5604947AAE539864F090FEE,2_forced_hard_seed17_2020000_40.json,red robot is not making it easy for the yellow as its loading in the same area constantly,low
+7A50B2D5F081444F9D2236C66A2C39AF,2_incentivized_hard_4_seed2_7520000_100.json,"Green robot did a fantastic job recognizing the next thing that was needed was a box after filling the machine with parts, green is working hard.",high
+73DE64120BC64CAE8547ABCF5AA238D5,2_incentivized_hard_4_seed1_3520000_80.json,There seems like a bit of confusion here. It comes across as inefficient.,mid
+965B0E4313264F5A9A5222E31D9C17F3,2_incentivized_hard_seed7_980000_40.json,"Here, Red did a great job because they placed a part, and Yellow was about to place part 3. Instead of heading to a parts pile, Red went for a box. This shows coordination, and this is a great sign for these two.",low
+50CADAAE213840C0AA12F2236C9A187C,2_forced_hard_4_seed9_9020000_80.json,The yellow machine is driving around doing nothing,high
+0403619B5ED848A0A79ABA081779E95B,2_forced_hard_4_seed20_8520000_40.json,Red is not helpful,low
+64A9945FEFE94C8CBA37B81F1C9DFB6A,2_incentivized_hard_4_seed2_2520000_80.json,This was a good example of them working well. They all picked up an item and the machine was filled pretty quickly.,mid
+0F0D9CC38A3E42058DC0FA76CDC0D801,2_incentivized_hard_seed7_1020000_60.json,"Instead of picking up parts, the yellow bot is wandering around with a box just getting in the way; it's almost completely useless in terms of helping to complete the operation ",low

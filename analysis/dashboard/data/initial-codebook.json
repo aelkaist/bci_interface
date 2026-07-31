@@ -1,0 +1,4044 @@
+{
+  "schemaVersion": 1,
+  "title": "Initial Codebook",
+  "datasetId": "8316cc28f27a6bf439f972feefbff84acb5e81e3e9910350e34d01050b4befd3",
+  "source": {
+    "file": "feedback_sample_10pct.csv",
+    "sha256": "8316cc28f27a6bf439f972feefbff84acb5e81e3e9910350e34d01050b4befd3",
+    "encoding": "utf-8-sig",
+    "rowCount": 174,
+    "columns": [
+      "participant_id",
+      "trajectory_name",
+      "feedback",
+      "group"
+    ],
+    "sampling": {
+      "ratio": 0.1,
+      "seed": 42,
+      "groups": {
+        "low": {
+          "available": 641,
+          "sampled": 64
+        },
+        "mid": {
+          "available": 574,
+          "sampled": 57
+        },
+        "high": {
+          "available": 531,
+          "sampled": 53
+        }
+      }
+    }
+  },
+  "annotation": {
+    "annotator": "KY",
+    "column": "KY",
+    "draftStorage": "browser-localStorage"
+  },
+  "items": [
+    {
+      "sampleId": "72660cc6-5172-489b-8b0f-b95bd02895a2",
+      "csvRow": 0,
+      "csv": {
+        "participant_id": "A39A2E9C8CA1472AB2A0772068C1107F",
+        "trajectory_name": "2_forced_hard_4_seed20_9020000_60.json",
+        "feedback": "Again the red robot leaves to try to get a box while the green robot beats him to getting the box. The red robot has done great thus far and the green robot should have helped with getting the parts, but here the red robot should have waited a second to see if the green robot would have gotten the box. \nThen the yellow robot picks up and puts down the box over and over again and gives it to the machine. I don't think it mattered it was just weird. ",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed20_9020000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "72660cc6-5172-489b-8b0f-b95bd02895a2",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 82,
+        "startFrame": 80,
+        "endFrame": 98,
+        "sentiment": 2,
+        "reason": "I'm just noting patterns of behavior that are repeating and that while I like what the red robot has done thus far I think it should have just stuck to the parts. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c2f35f1f-f7cc-4f2d-8a8a-d827f45554ce",
+      "csvRow": 1,
+      "csv": {
+        "participant_id": "4E4A4FEAD8AF43529314225BF3625724",
+        "trajectory_name": "2_forced_hard_4_seed3_10000000_40.json",
+        "feedback": "With the amount of robots here, one of them should be laying out boxes ahead of time",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed3_10000000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "c2f35f1f-f7cc-4f2d-8a8a-d827f45554ce",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 151,
+        "startFrame": 143,
+        "endFrame": 153,
+        "sentiment": 3,
+        "reason": "This would be an effective use of all the robots and resources allotted."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "18138752-db2e-49dd-b557-355b90bfd8ec",
+      "csvRow": 2,
+      "csv": {
+        "participant_id": "0F17E793552E423A9533C9BECE74921A",
+        "trajectory_name": "2_forced_hard_4_seed11_9020000_60.json",
+        "feedback": "Blue robots walking aimlessly.  The one on the right should be waiting to pick up a material.  The one on the left should be picking up a material to deliver.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed11_9020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "18138752-db2e-49dd-b557-355b90bfd8ec",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 9,
+        "startFrame": 7,
+        "endFrame": 11,
+        "sentiment": 2,
+        "reason": "Blue robots walking aimlessly.  The one on the right should be waiting to pick up a material.  The one on the left should be picking up a material to deliver."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c97170a0-76f4-44ea-9ea7-e670d4e1a03d",
+      "csvRow": 3,
+      "csv": {
+        "participant_id": "9AF60E800E2F44C3887844833086DD04",
+        "trajectory_name": "2_incentivized_hard_4_seed9_3020000_80.json",
+        "feedback": "Yellow actually helped grab materials and place in the finishing area but is now wandering, lost, again.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed9_3020000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "c97170a0-76f4-44ea-9ea7-e670d4e1a03d",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 160,
+        "startFrame": 158,
+        "endFrame": 162,
+        "sentiment": 3,
+        "reason": "I think he needs a job, they should have specialized."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "26d63d89-1a1a-4751-b5d3-f7ef146d8aa1",
+      "csvRow": 4,
+      "csv": {
+        "participant_id": "510F3B597F964C9995F5AAF6950977C2",
+        "trajectory_name": "2_incentivized_hard_4_seed6_9520000_100.json",
+        "feedback": "There are 4 robots and 2 machines, but every robot is taking parts to only one machine, causing a bottleneck and unnecessary waiting.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed6_9520000_100.json",
+        "episodeId": "episode_4",
+        "feedbackId": "26d63d89-1a1a-4751-b5d3-f7ef146d8aa1",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 96,
+        "startFrame": 94,
+        "endFrame": 98,
+        "sentiment": 1,
+        "reason": "This is an ineffective use of time and not collaborative."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "0c64a9a8-a195-4b2a-bb9a-9092e7ece311",
+      "csvRow": 5,
+      "csv": {
+        "participant_id": "6624AD9B1C9045258B912C9EA8A8FACC",
+        "trajectory_name": "2_incentivized_hard_seed3_1220000_60.json",
+        "feedback": "these two worked well together",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed3_1220000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "0c64a9a8-a195-4b2a-bb9a-9092e7ece311",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 67,
+        "startFrame": 65,
+        "endFrame": 69,
+        "sentiment": 5,
+        "reason": "I like that both were able to put parts in the machine"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a4260682-2940-4f9b-b340-f6b28be231b2",
+      "csvRow": 6,
+      "csv": {
+        "participant_id": "0F0D9CC38A3E42058DC0FA76CDC0D801",
+        "trajectory_name": "2_forced_hard_seed17_2520000_40.json",
+        "feedback": "The red and yellow bots aren't collaborating; yellow isn't taking the parts from red. It almost looks like they are malfunctioning or glitching. ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "a4260682-2940-4f9b-b340-f6b28be231b2",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 20,
+        "startFrame": 18,
+        "endFrame": 22,
+        "sentiment": 1,
+        "reason": "The bots are malfunctioning "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8a33eb5d-e984-4633-8daf-bb3291b31106",
+      "csvRow": 7,
+      "csv": {
+        "participant_id": "0403619B5ED848A0A79ABA081779E95B",
+        "trajectory_name": "2_incentivized_hard_4_seed8_7020000_60.json",
+        "feedback": "No robots contribute to the other machine",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_7020000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "8a33eb5d-e984-4633-8daf-bb3291b31106",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 50,
+        "startFrame": 20,
+        "endFrame": 39,
+        "sentiment": 2,
+        "reason": "They are wasting production time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "7e6594cc-9aea-4694-9d61-2e2f4f718595",
+      "csvRow": 8,
+      "csv": {
+        "participant_id": "818CC05305664555B4D1428BDA2A2067",
+        "trajectory_name": "2_incentivized_hard_4_seed7_9520000_100.json",
+        "feedback": "blue continues to act confused and dart in different directions ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed7_9520000_100.json",
+        "episodeId": "episode_4",
+        "feedbackId": "7e6594cc-9aea-4694-9d61-2e2f4f718595",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 102,
+        "startFrame": 100,
+        "endFrame": 104,
+        "sentiment": 1,
+        "reason": "negative feedback for blue"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "27b5c603-8317-49fe-983f-f4775be9847c",
+      "csvRow": 9,
+      "csv": {
+        "participant_id": "0F17E793552E423A9533C9BECE74921A",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "Second machine not being worked on.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "27b5c603-8317-49fe-983f-f4775be9847c",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 52,
+        "startFrame": 50,
+        "endFrame": 54,
+        "sentiment": 1,
+        "reason": "Second machine not being worked on."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "34d571df-02ff-494b-9df3-61cb3d900ed7",
+      "csvRow": 10,
+      "csv": {
+        "participant_id": "02EB1043755D41029164570FB47F88C4",
+        "trajectory_name": "2_forced_hard_seed2_3520000_40.json",
+        "feedback": "This section is weaker, alot of wasted movements by both, especially pink who becomes obsessed with dancing with a redundant part, uninterested in grabbing a box, the next needed action. ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed2_3520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "34d571df-02ff-494b-9df3-61cb3d900ed7",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 3,
+        "baseFrame": 199,
+        "startFrame": 126,
+        "endFrame": 199,
+        "sentiment": 2,
+        "reason": "Collaboration evidence. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "364451ea-f8fa-4287-a605-bfc79a768dab",
+      "csvRow": 11,
+      "csv": {
+        "participant_id": "98672B3E43274F39BCEC0E8A956F4934",
+        "trajectory_name": "2_incentivized_hard_4_seed1_2020000_60.json",
+        "feedback": "Extremely inefficient movements, frequent collisions. This whole thing was an absolute efficiency nightmare.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed1_2020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "364451ea-f8fa-4287-a605-bfc79a768dab",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 166,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 1,
+        "reason": "nothing about this aside from a few completed packages was good."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3ac9a4f2-76f2-4123-a9e7-3bbf0a302ef6",
+      "csvRow": 12,
+      "csv": {
+        "participant_id": "D837E86223B945B4BCD2231B1F45B46B",
+        "trajectory_name": "2_incentivized_hard_seed7_2020000_60.json",
+        "feedback": "The yellow robot blocked the route for the red robot with the box and couldn't figure out to go back and get out of the way.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed7_2020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "3ac9a4f2-76f2-4123-a9e7-3bbf0a302ef6",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 61,
+        "startFrame": 81,
+        "endFrame": 105,
+        "sentiment": 1,
+        "reason": "The process was halted by the yellow robot and it couldn't figure out to move."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "50249557-a0be-4e28-af60-4ae37d3adec1",
+      "csvRow": 13,
+      "csv": {
+        "participant_id": "73DE64120BC64CAE8547ABCF5AA238D5",
+        "trajectory_name": "2_incentivized_hard_4_seed1_3520000_80.json",
+        "feedback": "The red robot seems a bit clueless",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed1_3520000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "50249557-a0be-4e28-af60-4ae37d3adec1",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 33,
+        "startFrame": 31,
+        "endFrame": 35,
+        "sentiment": 2,
+        "reason": "It is possible that the other robots are getting in the way."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a39882e2-ad55-4eab-8c6d-95f5afd653d1",
+      "csvRow": 14,
+      "csv": {
+        "participant_id": "616F852D5C134A20958DE7774655FB7B",
+        "trajectory_name": "2_forced_hard_4_seed3_9520000_40.json",
+        "feedback": "Grey robot wandering aimlessly. Grey robot also picks up a box then puts it back where it's not needed.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed3_9520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "a39882e2-ad55-4eab-8c6d-95f5afd653d1",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 25,
+        "startFrame": 23,
+        "endFrame": 91,
+        "sentiment": 1,
+        "reason": "inefficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "07498ea9-46a3-48d2-b4e5-2b3dde58b735",
+      "csvRow": 15,
+      "csv": {
+        "participant_id": "DA69570119B24065909EFD08179AB45A",
+        "trajectory_name": "2_forced_hard_4_seed7_10000000_80.json",
+        "feedback": "Only one agent on the left is moving parts, while the other is waiting.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed7_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "07498ea9-46a3-48d2-b4e5-2b3dde58b735",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": 0,
+        "endFrame": 30,
+        "sentiment": 1,
+        "reason": "Both agents could be moving parts to speed up the process."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "7950d1f6-7c22-4797-b207-259a5fb60952",
+      "csvRow": 16,
+      "csv": {
+        "participant_id": "3C49C52656AC40C084B1A982A4D7E5C7",
+        "trajectory_name": "2_forced_hard_seed3_5520000_60.json",
+        "feedback": "these 2 are working very efficiently together",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed3_5520000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "7950d1f6-7c22-4797-b207-259a5fb60952",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 53,
+        "startFrame": 51,
+        "endFrame": 55,
+        "sentiment": 5,
+        "reason": "there are less robots this video but they are still getting the work done"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d1e25f88-79f5-4512-9825-e17d74065fa4",
+      "csvRow": 17,
+      "csv": {
+        "participant_id": "A169F6E8A615410B94AB1834CFD997F9",
+        "trajectory_name": "2_incentivized_hard_4_seed3_9520000_100.json",
+        "feedback": "4th machine seemed a bit confused",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed3_9520000_100.json",
+        "episodeId": "episode_1",
+        "feedbackId": "d1e25f88-79f5-4512-9825-e17d74065fa4",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 49,
+        "startFrame": 47,
+        "endFrame": 51,
+        "sentiment": 3,
+        "reason": "he did not follow the other machines smoothly"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "fae1a0d1-efb2-4e55-b64d-7f8eb70e0b4d",
+      "csvRow": 18,
+      "csv": {
+        "participant_id": "F939C6E51B274F1E958D05AC42E78DC5",
+        "trajectory_name": "2_incentivized_hard_4_seed5_2020000_40.json",
+        "feedback": "red and green are carrying items but are not heading anywhere with them.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed5_2020000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "fae1a0d1-efb2-4e55-b64d-7f8eb70e0b4d",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 24,
+        "startFrame": 25,
+        "endFrame": 41,
+        "sentiment": 1,
+        "reason": "It is a waste of effort and time."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a2843a4f-9e8d-4e30-aac6-8df4f83be9b2",
+      "csvRow": 19,
+      "csv": {
+        "participant_id": "F72AAEAA755041F6AA79ECE84CD76F41",
+        "trajectory_name": "2_forced_hard_seed3_4520000_40.json",
+        "feedback": "There was a staged item waiting to be moved to the machine after the machine because available, but the yellow robot was wasting time and movement elsewhere rather than picking it up and putting it into the machine as soon as it was empty.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed3_4520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "a2843a4f-9e8d-4e30-aac6-8df4f83be9b2",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 3,
+        "baseFrame": 60,
+        "startFrame": 88,
+        "endFrame": 94,
+        "sentiment": 2,
+        "reason": "wasted movement and time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c9b89150-73d0-4a89-97c3-905d3ecafac2",
+      "csvRow": 20,
+      "csv": {
+        "participant_id": "83649B508CB3415591AB17C2012EEC75",
+        "trajectory_name": "2_incentivized_hard_seed5_3020000_60.json",
+        "feedback": "They aren't using the other machine",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed5_3020000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "c9b89150-73d0-4a89-97c3-905d3ecafac2",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 172,
+        "startFrame": 170,
+        "endFrame": 174,
+        "sentiment": 3,
+        "reason": "to increase productivity"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8f39d3ff-191d-4e0a-a93b-a5023b9abc41",
+      "csvRow": 21,
+      "csv": {
+        "participant_id": "2B21B7636CAD4FE3B5E616714E830F53",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "The gray robot should have taken the part it's holding to the unoccupied machine",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "8f39d3ff-191d-4e0a-a93b-a5023b9abc41",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 146,
+        "startFrame": 144,
+        "endFrame": 163,
+        "sentiment": 2,
+        "reason": "The gray robot does not take it's part to the unoccupied machine and instead goes back and forth, not knowing what to do while waiting for the finished piece to be boxed."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "15102059-5e04-4635-9207-b2a816e4a739",
+      "csvRow": 22,
+      "csv": {
+        "participant_id": "F72AAEAA755041F6AA79ECE84CD76F41",
+        "trajectory_name": "2_incentivized_hard_4_seed5_1520000_40.json",
+        "feedback": "The yellow robot has tried to take the path that robots with items are trying to return with, blocking them and not getting out of the way.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed5_1520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "15102059-5e04-4635-9207-b2a816e4a739",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 6,
+        "baseFrame": 159,
+        "startFrame": 157,
+        "endFrame": 161,
+        "sentiment": 3,
+        "reason": "Severely slowing progress."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "cd08e874-ac4d-4702-a4f3-6a83ec197407",
+      "csvRow": 23,
+      "csv": {
+        "participant_id": "AED830E65B0946B2A6D9225DDCEEDB2B",
+        "trajectory_name": "2_incentivized_hard_seed6_2520000_60.json",
+        "feedback": "The yellow agent seemed lost as it only put parts onto the bottom machine and is not going to the machine on the right side.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed6_2520000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "cd08e874-ac4d-4702-a4f3-6a83ec197407",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 36,
+        "startFrame": 34,
+        "endFrame": 38,
+        "sentiment": 2,
+        "reason": "The yellow agent is not being efficient enough."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "4f9e0d1d-6880-4cec-9baa-31b43685a523",
+      "csvRow": 24,
+      "csv": {
+        "participant_id": "086CFAC51C8345A2B92AA875862AE375",
+        "trajectory_name": "2_forced_hard_seed15_10000000_80.json",
+        "feedback": "Much better than the other one, there's actual teamwork happening between the two robots.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed15_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "4f9e0d1d-6880-4cec-9baa-31b43685a523",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 63,
+        "startFrame": 1,
+        "endFrame": 50,
+        "sentiment": 4,
+        "reason": "What struck me was the partition and the steps being dived between the two sides."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8b2e5485-aab0-4b08-921f-b0a7dbe34112",
+      "csvRow": 25,
+      "csv": {
+        "participant_id": "F10B5079F863411ABD85CF7C5BD46E53",
+        "trajectory_name": "2_forced_hard_seed4_3520000_40.json",
+        "feedback": "Yellow moving around too much instead of waiting by the trade bay.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed4_3520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "8b2e5485-aab0-4b08-921f-b0a7dbe34112",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 0,
+        "startFrame": 0,
+        "endFrame": 11,
+        "sentiment": 1,
+        "reason": "Extraneous movements waste resources and time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "df47ec2c-2b53-4d2b-854a-6100ded4d66d",
+      "csvRow": 26,
+      "csv": {
+        "participant_id": "AABBAA20233C463E998F86F6C5634190",
+        "trajectory_name": "2_incentivized_hard_seed4_1120000_60.json",
+        "feedback": "I don't understand what the yellow one is doing with the product. Why doesn't it take it to the empty machine and get another machine going? ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed4_1120000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "df47ec2c-2b53-4d2b-854a-6100ded4d66d",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 164,
+        "startFrame": 129,
+        "endFrame": 166,
+        "sentiment": 3,
+        "reason": "The yellow one is just doing something weird with the product instead of handing it to its partner or taking it to a machine. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "64046f5a-a632-4f75-81b5-1a360f8cc89e",
+      "csvRow": 27,
+      "csv": {
+        "participant_id": "954227E3450D49339CDA0B57583E449A",
+        "trajectory_name": "2_incentivized_hard_seed5_3520000_60.json",
+        "feedback": "I understand the red robot was waiting for the parts to be processed before picking them up in the box, but I felt it was a bit strange that it just started moving back and forth like it was confused.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed5_3520000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "64046f5a-a632-4f75-81b5-1a360f8cc89e",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 36,
+        "startFrame": 135,
+        "endFrame": 150,
+        "sentiment": 3,
+        "reason": "Presumably it would be more efficient if the red robot would stay still and wait for the parts to be processed.  This behavior did not lose them time, it just stood out to me as a bit strange and unnecessary."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "57e23ea7-d158-464b-8afd-6b1be7694286",
+      "csvRow": 28,
+      "csv": {
+        "participant_id": "2A91EDFC1F9B448D9779F670756F5F49",
+        "trajectory_name": "2_forced_hard_seed8_10000000_80.json",
+        "feedback": "The red robot did a good job of dropping off parts near the yellow robot's location.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed8_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "57e23ea7-d158-464b-8afd-6b1be7694286",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 101,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 5,
+        "reason": "Good work."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ee9baebb-7bf6-47dd-8232-f22452a5033a",
+      "csvRow": 29,
+      "csv": {
+        "participant_id": "1A40B0BD6ACA480A93FDCD0C474DE120",
+        "trajectory_name": "2_forced_hard_seed15_10000000_80.json",
+        "feedback": "it would be better if pink could leave product on the wall near machine",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed15_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "ee9baebb-7bf6-47dd-8232-f22452a5033a",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 149,
+        "startFrame": 149,
+        "endFrame": 151,
+        "sentiment": 2,
+        "reason": "yellow could pick it up and put it in the machine, saving time later"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8eff0645-53c0-4186-99a9-6215635029ed",
+      "csvRow": 30,
+      "csv": {
+        "participant_id": "4680491AF58148D7915636150F84281B",
+        "trajectory_name": "2_forced_hard_seed7_3520000_40.json",
+        "feedback": "Yellow you can follow a straight path from pickup to the machine, otherwise good job you two",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed7_3520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "8eff0645-53c0-4186-99a9-6215635029ed",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 36,
+        "startFrame": 31,
+        "endFrame": 38,
+        "sentiment": 3,
+        "reason": "They are working together, and yellow is mostly on task if slightly inefficient due to path tracking."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a87086fe-3ad2-4dea-bfc0-46145884ee87",
+      "csvRow": 31,
+      "csv": {
+        "participant_id": "A39A2E9C8CA1472AB2A0772068C1107F",
+        "trajectory_name": "2_forced_hard_4_seed20_9020000_60.json",
+        "feedback": "The green robot did not help with bring parts to the machine at first while the red robot was doing a good job quickly bringing parts to the other side. This led to the right side only being able to fill up one of the machines at a time. The green robot only started actually trying to help when the right side needed a box but the red robot got out of position then probably because it thought the green robot wasn't going to help. ",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed20_9020000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "a87086fe-3ad2-4dea-bfc0-46145884ee87",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 6,
+        "startFrame": 4,
+        "endFrame": 35,
+        "sentiment": 2,
+        "reason": "I just though it was interesting to document this incoordination. . "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "e933f656-a413-490e-87b7-b5178e607819",
+      "csvRow": 32,
+      "csv": {
+        "participant_id": "65FDC56138894B8E9917C6CF4FD65F39",
+        "trajectory_name": "2_incentivized_hard_seed6_2520000_60.json",
+        "feedback": "It seems one of the bots glitched up for a second. ",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed6_2520000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "e933f656-a413-490e-87b7-b5178e607819",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 124,
+        "startFrame": 122,
+        "endFrame": 126,
+        "sentiment": 2,
+        "reason": "They kept trying to put material in a box."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "39815e30-da93-4b93-8b22-96901e6217ef",
+      "csvRow": 33,
+      "csv": {
+        "participant_id": "18CC1BFE7F394834A45C280195CFA65C",
+        "trajectory_name": "2_forced_hard_seed17_2520000_40.json",
+        "feedback": "seem to work together pretty well, but not 100 percent coordinated together",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "39815e30-da93-4b93-8b22-96901e6217ef",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 149,
+        "startFrame": 147,
+        "endFrame": 151,
+        "sentiment": 3,
+        "reason": "to note what I am seeing, they could coordinate better to accomplish this quicker"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "5f8fd81c-ced1-4b02-bf10-1b0ecdefac09",
+      "csvRow": 34,
+      "csv": {
+        "participant_id": "7DD0416DB65047FDAA5BCCEDBDF9B817",
+        "trajectory_name": "2_incentivized_hard_4_seed3_1820000_40.json",
+        "feedback": "There's way too much dependence on a single machine rather than spreading the efforts across the two available machines.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed3_1820000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "5f8fd81c-ced1-4b02-bf10-1b0ecdefac09",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 68,
+        "startFrame": 112,
+        "endFrame": 133,
+        "sentiment": 1,
+        "reason": "There's a lot of standing around from these robots as they others are confusingly blocking each other from working. It doesn't make sense to have 2 of everything and having 4 robots relying on the same stations to accomplish this job."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c31a8fce-34b0-4ee1-911d-2ca68471ba71",
+      "csvRow": 35,
+      "csv": {
+        "participant_id": "D66EA70CA4F64CC0B50F9A805D8F79D5",
+        "trajectory_name": "2_incentivized_hard_seed7_10000000_80.json",
+        "feedback": "I like that both AI work on the same machine making sure that a product is getting created as fast as possible. The red robot also waits with a box by the machine that is in process so it will get the finished item right away.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed7_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "c31a8fce-34b0-4ee1-911d-2ca68471ba71",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 38,
+        "startFrame": 5,
+        "endFrame": 40,
+        "sentiment": 5,
+        "reason": "I wanted to highlight the positive teamwork aspects."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d69b77ba-ac32-4010-b9b7-27d443422bd0",
+      "csvRow": 36,
+      "csv": {
+        "participant_id": "1991C4992E004C709925086751D2B5CB",
+        "trajectory_name": "2_forced_hard_seed2_10000000_80.json",
+        "feedback": "They are working together to overcome the barrier.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed2_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "d69b77ba-ac32-4010-b9b7-27d443422bd0",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 25,
+        "startFrame": 23,
+        "endFrame": 27,
+        "sentiment": 5,
+        "reason": ""
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d905863e-1a2b-4df8-90ac-a0a884b5b989",
+      "csvRow": 37,
+      "csv": {
+        "participant_id": "09BF60420B074B23AEBA62FFC0074D83",
+        "trajectory_name": "2_incentivized_hard_4_seed1_3520000_80.json",
+        "feedback": "The blue robot here put in the last piece of the part into the machine and also waited and boxed up the finished product and delivered it all on its own.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed1_3520000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "d905863e-1a2b-4df8-90ac-a0a884b5b989",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 190,
+        "startFrame": 163,
+        "endFrame": 192,
+        "sentiment": 5,
+        "reason": "Because the blue robot was able to do it all on its own and didn't waste time getting stuck elsewhere."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "188ecc10-9a74-4f21-9729-1eea2bbc294f",
+      "csvRow": 38,
+      "csv": {
+        "participant_id": "377E5F34FBC9482490C18F70D5680C35",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "robots moving independently but not optimized",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "188ecc10-9a74-4f21-9729-1eea2bbc294f",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 153,
+        "startFrame": 123,
+        "endFrame": 155,
+        "sentiment": 2,
+        "reason": "robot that fills the machines also gets the box, but others are still waiting for machine A when machine B could be used"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a7fa0ac1-236d-4aaf-99a3-f009c3fadda3",
+      "csvRow": 39,
+      "csv": {
+        "participant_id": "EF607A2D2E6A4B2EA66AA505975B3335",
+        "trajectory_name": "2_forced_hard_4_seed9_8520000_80.json",
+        "feedback": "The other three are working so well together. It seems like one robot is always unsure of what to do when there are 4. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed9_8520000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "a7fa0ac1-236d-4aaf-99a3-f009c3fadda3",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 53,
+        "startFrame": 51,
+        "endFrame": 132,
+        "sentiment": 3,
+        "reason": "There is always a 4th one who is lost. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "1fa24625-f9df-4bfd-a8d9-356aa95ff8a8",
+      "csvRow": 40,
+      "csv": {
+        "participant_id": "4E4A4FEAD8AF43529314225BF3625724",
+        "trajectory_name": "2_incentivized_hard_seed2_1220000_60.json",
+        "feedback": "There is a delay in grabbing a box to pack up the parts - whichever AI robot is not occupied with loading the parts should be preparing the box",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed2_1220000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "1fa24625-f9df-4bfd-a8d9-356aa95ff8a8",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 100,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 3,
+        "reason": "This is in order to improve efficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a5883368-e9a9-4cc8-8321-a17b36930d40",
+      "csvRow": 41,
+      "csv": {
+        "participant_id": "355D5A2D1A374F15885AF7D49048F056",
+        "trajectory_name": "2_forced_hard_seed15_5520000_40.json",
+        "feedback": "Seemed to be some motion not towards a goal",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed15_5520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "a5883368-e9a9-4cc8-8321-a17b36930d40",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 3,
+        "startFrame": 1,
+        "endFrame": 4,
+        "sentiment": 2,
+        "reason": "Time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "9fa30998-e673-4bed-a5e9-9555bfdf16b9",
+      "csvRow": 42,
+      "csv": {
+        "participant_id": "D837E86223B945B4BCD2231B1F45B46B",
+        "trajectory_name": "2_incentivized_hard_4_seed7_3520000_80.json",
+        "feedback": "The robots are working efficiently at this point.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed7_3520000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "9fa30998-e673-4bed-a5e9-9555bfdf16b9",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 51,
+        "startFrame": 49,
+        "endFrame": 53,
+        "sentiment": 5,
+        "reason": "I want to point out the good as well as the bad."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "9e3f1d8e-bf03-4e22-b640-70ab3a766963",
+      "csvRow": 43,
+      "csv": {
+        "participant_id": "16CB68DCBFF94F219C0B9F3A7027F315",
+        "trajectory_name": "2_incentivized_hard_4_seed8_2020000_40.json",
+        "feedback": "The green robot is doing nothing up until this point, which is inefficient.  It could have grabbed the parts on frame 6 but did not",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_2020000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "9e3f1d8e-bf03-4e22-b640-70ab3a766963",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 14,
+        "startFrame": 0,
+        "endFrame": 15,
+        "sentiment": 1,
+        "reason": "Inefficiency "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "59024d18-f500-418f-86a1-13789eadcf7d",
+      "csvRow": 44,
+      "csv": {
+        "participant_id": "3765DE826DE6446F867FF77A69F2AB4D",
+        "trajectory_name": "2_forced_hard_seed17_10000000_80.json",
+        "feedback": "This would be much more effective if the orange robot stayed in between the drop zone and the machine, and the red robot just went back and forth dropping off the items. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed17_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "59024d18-f500-418f-86a1-13789eadcf7d",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 3,
+        "baseFrame": 167,
+        "startFrame": 157,
+        "endFrame": 174,
+        "sentiment": 3,
+        "reason": "It would save a lot of time and be quicker. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "29ffde6e-f4fe-4bae-a992-4da9dcf36a2b",
+      "csvRow": 45,
+      "csv": {
+        "participant_id": "171DEC1860E7498A962991D13A17DE21",
+        "trajectory_name": "2_incentivized_hard_seed7_980000_40.json",
+        "feedback": "There are 2 piles of parts, but only one is ever used. The yellow robot doesn't move as efficiently as the red robot.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed7_980000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "29ffde6e-f4fe-4bae-a992-4da9dcf36a2b",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 68,
+        "startFrame": 66,
+        "endFrame": 70,
+        "sentiment": 2,
+        "reason": "The production efficiency could be better."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ec38f118-a49a-4062-b3f7-b85703085dc4",
+      "csvRow": 46,
+      "csv": {
+        "participant_id": "FE1E66E8C24343D0B9B0C013ECFBB4B9",
+        "trajectory_name": "2_forced_hard_4_seed1_10000000_80.json",
+        "feedback": "There are four AI Robot and they all work in a timely and organized manner, two are divided each side, one handles and gives part to the other side and the other handles boxes to the other side, on the right side, two robots picks up both the parts to machine, box it and drop it, no waiting arounf.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed1_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "ec38f118-a49a-4062-b3f7-b85703085dc4",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 5,
+        "reason": "They behaved as they should and I am really impressed."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "07dcbf51-f816-4954-a31a-fef57671c486",
+      "csvRow": 47,
+      "csv": {
+        "participant_id": "1F9B6CA2DEC54F42A178AD327751A9BC",
+        "trajectory_name": "2_incentivized_hard_4_seed10_9520000_100.json",
+        "feedback": "The blue agent is behaving erratically.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed10_9520000_100.json",
+        "episodeId": "episode_3",
+        "feedbackId": "07dcbf51-f816-4954-a31a-fef57671c486",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 29,
+        "startFrame": 27,
+        "endFrame": 31,
+        "sentiment": 1,
+        "reason": "It has collected a part but is moving up and down with it instead of taking it to a machine."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "2d4f420b-306e-49e6-b527-ff3f65ca95c0",
+      "csvRow": 48,
+      "csv": {
+        "participant_id": "5A4271B5E62442DF849626E815631C7D",
+        "trajectory_name": "2_incentivized_hard_4_seed10_9520000_100.json",
+        "feedback": "i won't ask why the gray robot didn't just go straight to the drop zone with its box — as opposed to its acting indecisive",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed10_9520000_100.json",
+        "episodeId": "episode_2",
+        "feedbackId": "2d4f420b-306e-49e6-b527-ff3f65ca95c0",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 87,
+        "startFrame": 85,
+        "endFrame": 89,
+        "sentiment": 2,
+        "reason": "as described; now, to be fair:\n\ni can assess *some* fault to the designer of this work space, for their not thinking to, both, put more Parcel, *and* another Drop Zone, on the right side \n\nmaybe re-design the current drop zone, so that there can, still, be the \"two\" that i suggested..\n..but, instead, cut the middle square out, so no Bottlenecking occurs"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ca603cf1-0b78-4032-8603-5e0ebbf2e92c",
+      "csvRow": 49,
+      "csv": {
+        "participant_id": "07A0DC09B35E4F6E98673F7BA187E025",
+        "trajectory_name": "2_incentivized_hard_seed6_980000_60.json",
+        "feedback": "Yellow is stuck at the drop zone",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed6_980000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "ca603cf1-0b78-4032-8603-5e0ebbf2e92c",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 90,
+        "startFrame": 88,
+        "endFrame": 120,
+        "sentiment": 2,
+        "reason": "Yellow fails to take the workpiece to a machine, instead leaving one at the drop zone and then returning with another."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a98556e5-434f-4833-8dd7-0683470a2266",
+      "csvRow": 50,
+      "csv": {
+        "participant_id": "0F0D9CC38A3E42058DC0FA76CDC0D801",
+        "trajectory_name": "2_forced_hard_seed17_2520000_40.json",
+        "feedback": "Yellow could have made their third drop zone drop-off, but they have wasted a lot of movements, resulting in a slowdown of the workflow ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "a98556e5-434f-4833-8dd7-0683470a2266",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 4,
+        "baseFrame": 199,
+        "startFrame": 197,
+        "endFrame": 199,
+        "sentiment": 1,
+        "reason": "To note how poor the workflow movements are from both red and yellow bots. They shuffle back and forth without picking up a part or the box first time, it's slowing down the work process. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "291317e2-7eac-45de-9368-dd86c11f54fe",
+      "csvRow": 51,
+      "csv": {
+        "participant_id": "6CDE8C2FD7394F58A121AA476EEBE276",
+        "trajectory_name": "2_incentivized_hard_seed3_2520000_60.json",
+        "feedback": "Robots obstructing each other",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed3_2520000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "291317e2-7eac-45de-9368-dd86c11f54fe",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 70,
+        "startFrame": 68,
+        "endFrame": 72,
+        "sentiment": 1,
+        "reason": "Slows completion time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "285f3a7f-c14c-445b-8c13-6fec6d321965",
+      "csvRow": 52,
+      "csv": {
+        "participant_id": "4E4A4FEAD8AF43529314225BF3625724",
+        "trajectory_name": "2_incentivized_hard_4_seed3_1820000_40.json",
+        "feedback": "There are 4 robots stuck on one simple task of grabbing a part. While this was happening, another bot couldve gone to the other parts section and starting putting parts in the machine.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed3_1820000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "285f3a7f-c14c-445b-8c13-6fec6d321965",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 12,
+        "startFrame": 7,
+        "endFrame": 33,
+        "sentiment": 1,
+        "reason": "This does not indicate effective collaboration and doesnt show a need for having 4 bots"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "6791d65c-7d92-4852-9591-49f7825a20b7",
+      "csvRow": 53,
+      "csv": {
+        "participant_id": "FF983506AF184F5B853F6300F50266F9",
+        "trajectory_name": "2_forced_hard_4_seed13_10000000_60.json",
+        "feedback": "The robots returning immediately once the machine was ready for the next load.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed13_10000000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "6791d65c-7d92-4852-9591-49f7825a20b7",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 62,
+        "startFrame": 60,
+        "endFrame": 64,
+        "sentiment": 4,
+        "reason": "This pattern of the robots knowing when the machine is ready for a new batch of parts and then retrieving them shows efficiency, which is important in manufacturing. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3596ce4a-6bc3-4565-8c9c-a9e227870f5f",
+      "csvRow": 54,
+      "csv": {
+        "participant_id": "0F17E793552E423A9533C9BECE74921A",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "Great collaboration filling the first machine, once again.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "3596ce4a-6bc3-4565-8c9c-a9e227870f5f",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 12,
+        "baseFrame": 183,
+        "startFrame": 181,
+        "endFrame": 185,
+        "sentiment": 5,
+        "reason": "Great collaboration filling the first machine, once again."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a44096b2-61e5-46b5-b352-5f1574ac9544",
+      "csvRow": 55,
+      "csv": {
+        "participant_id": "352F50BB940746CDBA37845760C42016",
+        "trajectory_name": "2_forced_hard_4_seed13_9520000_40.json",
+        "feedback": "Spend less time just spinning around.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed13_9520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "a44096b2-61e5-46b5-b352-5f1574ac9544",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 23,
+        "startFrame": 13,
+        "endFrame": 25,
+        "sentiment": 3,
+        "reason": "Not moving toward a machine or part or box isn't productive to the task at hand."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a4647425-76b2-4ce9-90eb-7365c0c78275",
+      "csvRow": 56,
+      "csv": {
+        "participant_id": "F472A4D8D3F34308ACE816AE17833397",
+        "trajectory_name": "2_incentivized_hard_4_seed4_9520000_100.json",
+        "feedback": "The four bots were one bot too many.  Three of the bots filled the machine efficiently, but then the fourth bot had nowhere to put his part.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed4_9520000_100.json",
+        "episodeId": "episode_3",
+        "feedbackId": "a4647425-76b2-4ce9-90eb-7365c0c78275",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 32,
+        "startFrame": 30,
+        "endFrame": 34,
+        "sentiment": 1,
+        "reason": "Bot four was very inefficient."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "df936186-de21-47dc-95e5-282f6f899238",
+      "csvRow": 57,
+      "csv": {
+        "participant_id": "E0C738F22DFD4123B5CBA845211CC366",
+        "trajectory_name": "2_forced_hard_4_seed7_8520000_40.json",
+        "feedback": "The green robot accomplishes nothing in this time frame. The red and the green should be constantly putting parts in the center since the yellow and blue have two machines to fill. As only the red robot is doing anything here either the yellow or blue robot on the other side has nothing to do.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed7_8520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "df936186-de21-47dc-95e5-282f6f899238",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 93,
+        "startFrame": 92,
+        "endFrame": 143,
+        "sentiment": 1,
+        "reason": "This is creating a huge bottleneck."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "0ff27c50-2340-488e-bd9e-9afa56483cb3",
+      "csvRow": 58,
+      "csv": {
+        "participant_id": "1F6D14219DB14F748F80AE9837CEEDF0",
+        "trajectory_name": "2_incentivized_hard_4_seed5_2020000_40.json",
+        "feedback": "They are all blocking the blue guy in. He can't do anything. They are wasting time.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed5_2020000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "0ff27c50-2340-488e-bd9e-9afa56483cb3",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 16,
+        "startFrame": 11,
+        "endFrame": 19,
+        "sentiment": 1,
+        "reason": "Wasting time. Unproductive."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "64ed6d0d-6cee-4efd-913b-f3731a57995f",
+      "csvRow": 59,
+      "csv": {
+        "participant_id": "0F17E793552E423A9533C9BECE74921A",
+        "trajectory_name": "2_incentivized_hard_seed6_2520000_60.json",
+        "feedback": "Yellow robot still walking aimlessly with an unneeded box.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed6_2520000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "64ed6d0d-6cee-4efd-913b-f3731a57995f",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 6,
+        "baseFrame": 104,
+        "startFrame": 102,
+        "endFrame": 106,
+        "sentiment": 1,
+        "reason": "Yellow robot still walking aimlessly with an unneeded box."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d0b6e94d-3518-456d-b217-66eea949235c",
+      "csvRow": 60,
+      "csv": {
+        "participant_id": "60F6E62AAA934061A35F7A914EBCED6D",
+        "trajectory_name": "2_incentivized_hard_seed8_10000000_80.json",
+        "feedback": "The pink robot seems confused while waiting for the yellow robot to deliver a box and package parts.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed8_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "d0b6e94d-3518-456d-b217-66eea949235c",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 7,
+        "baseFrame": 160,
+        "startFrame": 158,
+        "endFrame": 162,
+        "sentiment": 2,
+        "reason": "The pink robot is confused."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "b11e348c-4c4c-4f1c-82d2-3e87c08074a5",
+      "csvRow": 61,
+      "csv": {
+        "participant_id": "D0F65634B2BD443E93BA84AACA228012",
+        "trajectory_name": "2_incentivized_hard_seed1_1020000_60.json",
+        "feedback": "These 2 seem to be working together a lot better than the last - maybe because there are only 2 this time.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed1_1020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "b11e348c-4c4c-4f1c-82d2-3e87c08074a5",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 61,
+        "startFrame": 59,
+        "endFrame": 63,
+        "sentiment": 4,
+        "reason": ""
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "2ee9d591-783f-47d9-b7ca-d62ea26a70e2",
+      "csvRow": 62,
+      "csv": {
+        "participant_id": "FF983506AF184F5B853F6300F50266F9",
+        "trajectory_name": "2_incentivized_hard_4_seed7_3520000_80.json",
+        "feedback": "Three of the robots did a good job of getting parts and getting them to the machine. They had good collaberation. The poor blue robot looks lost with his part since the machine is full. He's not driving towards to be ready to load as soon as its ready.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed7_3520000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "2ee9d591-783f-47d9-b7ca-d62ea26a70e2",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 37,
+        "startFrame": 35,
+        "endFrame": 39,
+        "sentiment": 3,
+        "reason": "Thre three robots overall did good getting parts and loading the machine. The blue robot was just driving around with his part and not going to the other machine or waiting next to the machine for it to be ready. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d93bb7e0-4515-482a-8966-b35a6f067c9b",
+      "csvRow": 63,
+      "csv": {
+        "participant_id": "64A9945FEFE94C8CBA37B81F1C9DFB6A",
+        "trajectory_name": "2_incentivized_hard_seed3_2520000_60.json",
+        "feedback": "What's the pink one doing here?! Just moving around with the item and wasting time! At the start of the clip it could have been getting a box.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed3_2520000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "d93bb7e0-4515-482a-8966-b35a6f067c9b",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 4,
+        "baseFrame": 199,
+        "startFrame": 179,
+        "endFrame": 199,
+        "sentiment": 1,
+        "reason": "The pink one was wasting time here."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c89d6989-21a1-4364-a207-cf2763649dae",
+      "csvRow": 64,
+      "csv": {
+        "participant_id": "0140A7066983472CB1389045163E2062",
+        "trajectory_name": "2_incentivized_hard_4_seed6_2520000_40.json",
+        "feedback": "inefficient movement",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed6_2520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "c89d6989-21a1-4364-a207-cf2763649dae",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 47,
+        "startFrame": 45,
+        "endFrame": 49,
+        "sentiment": 2,
+        "reason": "bot stopped in middle for no apparent reason"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "0e355d9f-19a4-42ca-97da-46ccceed5969",
+      "csvRow": 65,
+      "csv": {
+        "participant_id": "C6262A850B1145F7A713CB503DB153BD",
+        "trajectory_name": "2_incentivized_hard_seed3_2520000_60.json",
+        "feedback": "Yellow robot seems confused for a short while.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed3_2520000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "0e355d9f-19a4-42ca-97da-46ccceed5969",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 23,
+        "startFrame": 22,
+        "endFrame": 27,
+        "sentiment": 2,
+        "reason": "It wanders back and fourth instead of grabbing anything."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c1d21193-004b-4250-8206-ae9f06a40986",
+      "csvRow": 66,
+      "csv": {
+        "participant_id": "3B8CD7E6A73442A4AF9E166C40BFDCBC",
+        "trajectory_name": "2_forced_hard_seed7_4020000_60.json",
+        "feedback": "They are working together very well",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed7_4020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "c1d21193-004b-4250-8206-ae9f06a40986",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 18,
+        "startFrame": 16,
+        "endFrame": 20,
+        "sentiment": 5,
+        "reason": "the red AI is actively helping the Orange one"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "228fbf8d-cdc5-4993-ae8b-c472672eac9d",
+      "csvRow": 67,
+      "csv": {
+        "participant_id": "EA8EA155B0CB4BCE87111B539C8B1F4C",
+        "trajectory_name": "2_forced_hard_seed2_4520000_60.json",
+        "feedback": "The yellow robot was moving toward the closest machine but briefly changed its direction.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed2_4520000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "228fbf8d-cdc5-4993-ae8b-c472672eac9d",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 10,
+        "startFrame": 8,
+        "endFrame": 12,
+        "sentiment": 3,
+        "reason": "I wonder what makes the robot move, and what made it \"change its mind.\""
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3c1c8f8a-9291-4a96-a93e-2028cddcb8f1",
+      "csvRow": 68,
+      "csv": {
+        "participant_id": "55452323EBDE4536A24E063CC5A686B2",
+        "trajectory_name": "2_forced_hard_seed17_2520000_40.json",
+        "feedback": "They are not transferring properly",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "3c1c8f8a-9291-4a96-a93e-2028cddcb8f1",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 18,
+        "startFrame": 16,
+        "endFrame": 20,
+        "sentiment": 2,
+        "reason": "Inefficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "fab87e8f-0b62-45dc-a2c0-95f88eb55403",
+      "csvRow": 69,
+      "csv": {
+        "participant_id": "83649B508CB3415591AB17C2012EEC75",
+        "trajectory_name": "2_incentivized_hard_seed5_3020000_60.json",
+        "feedback": "They should split the labor",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed5_3020000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "fab87e8f-0b62-45dc-a2c0-95f88eb55403",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 49,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 2,
+        "reason": "Each robot is doing the same jobs and that is inefficient"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ee884391-d694-4c16-a702-9fb5f9c057be",
+      "csvRow": 70,
+      "csv": {
+        "participant_id": "30D1E4D41B204843978432535950611A",
+        "trajectory_name": "2_incentivized_hard_4_seed8_2020000_40.json",
+        "feedback": "The yellow robot remains in the corner although there are tasks to complete. The red and green robots have parts and can load them into the eastern machine but continue to hold them and walk around near the machine.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_2020000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "ee884391-d694-4c16-a702-9fb5f9c057be",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 172,
+        "startFrame": 170,
+        "endFrame": 198,
+        "sentiment": 2,
+        "reason": "The robots are not starting and/or completing their tasks."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "0192a357-9ed9-4b4b-8ccf-a7f46dfa4640",
+      "csvRow": 71,
+      "csv": {
+        "participant_id": "7DD0416DB65047FDAA5BCCEDBDF9B817",
+        "trajectory_name": "2_incentivized_hard_seed2_1220000_60.json",
+        "feedback": "Great job staying out of the path of the red robot and working more in an effective manner by grabbing a part ahead of the red robot!",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed2_1220000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "0192a357-9ed9-4b4b-8ccf-a7f46dfa4640",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 82,
+        "startFrame": 69,
+        "endFrame": 75,
+        "sentiment": 5,
+        "reason": "This is ideal behavior for this portion of the work that could be exemplified for other robots."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "fd8c68d0-cce0-4919-b4aa-dbd685ed3283",
+      "csvRow": 72,
+      "csv": {
+        "participant_id": "79241E5C361843EDA97056607900E9C3",
+        "trajectory_name": "2_forced_hard_4_seed9_10000000_80.json",
+        "feedback": "Red robot on left seems to be stuck in a loop with one of the materials, constantly putting it on the shelf and picking it back up.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed9_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "fd8c68d0-cce0-4919-b4aa-dbd685ed3283",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 169,
+        "startFrame": 152,
+        "endFrame": 173,
+        "sentiment": 2,
+        "reason": "Loss of productive efficiency "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "e6db6bac-7aff-402a-b2c9-6a14b63b47a0",
+      "csvRow": 73,
+      "csv": {
+        "participant_id": "720FA5F3EEB840C7832391BC05050906",
+        "trajectory_name": "2_incentivized_hard_4_seed5_2520000_80.json",
+        "feedback": "Each robot performs its job, but there could be a lot of improvement in the system.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed5_2520000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "e6db6bac-7aff-402a-b2c9-6a14b63b47a0",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 82,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 4,
+        "reason": "All of the robots are working properly, but it does not mean that they are working efficiently because there seems to be a lack in the system and one of the machines is not being utilized."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "1b152eb6-0b0d-4371-a3ca-567117040774",
+      "csvRow": 74,
+      "csv": {
+        "participant_id": "046C3A524DE54997857BAF812149CBAD",
+        "trajectory_name": "2_forced_hard_4_seed11_9520000_80.json",
+        "feedback": "There are times where 1 robot on the part-picking side is just wandering aimlessly. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed11_9520000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "1b152eb6-0b0d-4371-a3ca-567117040774",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 25,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 2,
+        "reason": "It isn't very efficient for it to be just doing nothing. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "675bb894-7b60-4108-bd6f-b9708e710958",
+      "csvRow": 75,
+      "csv": {
+        "participant_id": "6986EB5BF00644919726BA0F2294EAE1",
+        "trajectory_name": "2_forced_hard_4_seed13_10000000_60.json",
+        "feedback": "The robot placed the bottle in an area that the other robots cannot pickup",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed13_10000000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "675bb894-7b60-4108-bd6f-b9708e710958",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 143,
+        "startFrame": 141,
+        "endFrame": 147,
+        "sentiment": 1,
+        "reason": "This action does not seem helpful."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "403823f8-3ca5-4c70-8274-42ad4c502662",
+      "csvRow": 76,
+      "csv": {
+        "participant_id": "1A40B0BD6ACA480A93FDCD0C474DE120",
+        "trajectory_name": "2_incentivized_hard_4_seed8_9520000_100.json",
+        "feedback": "they could still do better by using two machines and two stations for product and boxes",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed8_9520000_100.json",
+        "episodeId": "episode_2",
+        "feedbackId": "403823f8-3ca5-4c70-8274-42ad4c502662",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 178,
+        "startFrame": 178,
+        "endFrame": 180,
+        "sentiment": 1,
+        "reason": "no one goes to the other machine or stations."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3554159a-693d-418b-8e64-88ec62db40b7",
+      "csvRow": 77,
+      "csv": {
+        "participant_id": "F8D886FED3774D0691C034440B86E483",
+        "trajectory_name": "2_incentivized_hard_seed2_10000000_80.json",
+        "feedback": "During this phase, the yellow robot should be where the pink robot is and the pink robot should be at the other part location.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed2_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "3554159a-693d-418b-8e64-88ec62db40b7",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 10,
+        "startFrame": 8,
+        "endFrame": 12,
+        "sentiment": 3,
+        "reason": "It would be more efficient in the way that I described."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f7de4ea4-7194-4156-90cd-90c5ec72a7eb",
+      "csvRow": 78,
+      "csv": {
+        "participant_id": "A38803A9795C439EAB69D019AA84EBE8",
+        "trajectory_name": "2_forced_hard_seed17_2020000_40.json",
+        "feedback": "Red and yellow robots cooperate. Red leaves product and later box for yellow to pick up instead of attempting to deliver them independently and both contribute to completing the drop, although there is a period then red robot appears to move around without purpose while yellow robot finishes the job ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2020000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "f7de4ea4-7194-4156-90cd-90c5ec72a7eb",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 71,
+        "startFrame": 19,
+        "endFrame": 70,
+        "sentiment": 4,
+        "reason": "Collaboration appears logical and yellow robot appears to improve efficiency by working together, but red robot also wastes time that could be used to begin building another package. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "39e7ef8c-b9b9-4edc-9f61-9dea3ccac465",
+      "csvRow": 79,
+      "csv": {
+        "participant_id": "4A4F931CF9F941C4BD5C090C09FFC3D0",
+        "trajectory_name": "2_forced_hard_4_seed14_10000000_60.json",
+        "feedback": "The green AI agent didn't start picking up items until the end of the range of feedback, it was wandering around doing nothing for nearly the first half of the video. ",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed14_10000000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "39e7ef8c-b9b9-4edc-9f61-9dea3ccac465",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 82,
+        "startFrame": 0,
+        "endFrame": 84,
+        "sentiment": 1,
+        "reason": "I'm highlighting this because the fact that the green agent doesn't do anything until nearly halfway through the video greatly decreases productivity for the team, as the red agent had to pick up the items on its own without help from the green up until this point. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "59bbc1d0-6804-49ca-a7a8-7ef177f80936",
+      "csvRow": 80,
+      "csv": {
+        "participant_id": "C6262A850B1145F7A713CB503DB153BD",
+        "trajectory_name": "2_incentivized_hard_4_seed2_2520000_80.json",
+        "feedback": "Took AI robots a while to get a box.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed2_2520000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "59bbc1d0-6804-49ca-a7a8-7ef177f80936",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 18,
+        "startFrame": 27,
+        "endFrame": 49,
+        "sentiment": 1,
+        "reason": "Seemed to take longer than expected."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d2d09d0f-c8c2-43c4-b7c1-c51d570ad135",
+      "csvRow": 81,
+      "csv": {
+        "participant_id": "4D8B047B038B451C9DB789869453842F",
+        "trajectory_name": "2_incentivized_hard_4_seed5_1520000_40.json",
+        "feedback": "There has been no collaboration in this segment, and a robot just tried to place a part in the machine that was just filled by another robot, wasting time. Also robots got in each other's way at least once during this segment.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed5_1520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "d2d09d0f-c8c2-43c4-b7c1-c51d570ad135",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 98,
+        "startFrame": 98,
+        "endFrame": 199,
+        "sentiment": 1,
+        "reason": "I have seen no collaboration and some disorganization."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "044ad0c1-1564-4627-996b-f865cb38321e",
+      "csvRow": 82,
+      "csv": {
+        "participant_id": "6CDE8C2FD7394F58A121AA476EEBE276",
+        "trajectory_name": "2_forced_hard_seed2_4520000_60.json",
+        "feedback": "robot drifts off course",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed2_4520000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "044ad0c1-1564-4627-996b-f865cb38321e",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 11,
+        "startFrame": 9,
+        "endFrame": 13,
+        "sentiment": 2,
+        "reason": "noted inefficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8af23c14-6cfa-40fa-bdfb-2a45bfa4db7f",
+      "csvRow": 83,
+      "csv": {
+        "participant_id": "0F17E793552E423A9533C9BECE74921A",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "Second machine still forgotten about.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "8af23c14-6cfa-40fa-bdfb-2a45bfa4db7f",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 8,
+        "baseFrame": 108,
+        "startFrame": 106,
+        "endFrame": 110,
+        "sentiment": 1,
+        "reason": "Second machine still forgotten about."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8f7c74b1-04c3-4918-863b-4c1e5ba6245c",
+      "csvRow": 84,
+      "csv": {
+        "participant_id": "E5FDA063D4F742C29BE5A7046451FE73",
+        "trajectory_name": "2_forced_hard_4_seed20_9520000_80.json",
+        "feedback": "Red robot on right didn't directly place a green part on the surface for the blue robot on the right to pick up.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed20_9520000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "8f7c74b1-04c3-4918-863b-4c1e5ba6245c",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 128,
+        "startFrame": 126,
+        "endFrame": 141,
+        "sentiment": 1,
+        "reason": "The red robot picked up a part and instead of pivoting to place it on the surface for the blue robot to pick up instead moved around inefficiently and slowing down the blue robot in it's job of picking the art up and putting it into the machine. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "498827db-48c3-43b0-9107-e258562b4886",
+      "csvRow": 85,
+      "csv": {
+        "participant_id": "DB5BC51994ED421BB78D2130A1A5D986",
+        "trajectory_name": "2_incentivized_hard_seed9_2520000_60.json",
+        "feedback": "The robots generally have a good process where they are working together using one machine to get the process done.  They would be more effective using both machines rather than having to maneuver around each other but overall they were getting boxes packed quickly.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed9_2520000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "498827db-48c3-43b0-9107-e258562b4886",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 180,
+        "startFrame": 0,
+        "endFrame": 182,
+        "sentiment": 3,
+        "reason": "Seeing the first two complete boxes built shows they are effective in building the boxes even if there's room for improvement"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "cc109e30-1ec7-4772-a798-b7eea9f65c4f",
+      "csvRow": 86,
+      "csv": {
+        "participant_id": "18CC1BFE7F394834A45C280195CFA65C",
+        "trajectory_name": "2_forced_hard_4_seed20_8520000_40.json",
+        "feedback": "They could coordinate a bit better",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed20_8520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "cc109e30-1ec7-4772-a798-b7eea9f65c4f",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": 197,
+        "endFrame": 199,
+        "sentiment": 3,
+        "reason": "there are 4 this time and they seem to accomplish this task, but sometimes seem to get in each other's path or wander around aimless"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "65199982-5d93-4f7a-a89d-d1ff0bd08480",
+      "csvRow": 87,
+      "csv": {
+        "participant_id": "6CD983A0FAF14BC9804E8A0320449DC7",
+        "trajectory_name": "2_incentivized_hard_4_seed8_9520000_100.json",
+        "feedback": "Absolutely individual efforts. The far machine is not used. Everyone is in each others way.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed8_9520000_100.json",
+        "episodeId": "episode_4",
+        "feedbackId": "65199982-5d93-4f7a-a89d-d1ff0bd08480",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 18,
+        "startFrame": 16,
+        "endFrame": 119,
+        "sentiment": 1,
+        "reason": "Nothing is done efficiently."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "97ad7a22-c358-4630-9305-7d2295f44262",
+      "csvRow": 88,
+      "csv": {
+        "participant_id": "B4E74EC02CE04C02AFBF539FA303A0F2",
+        "trajectory_name": "2_forced_hard_4_seed20_8520000_40.json",
+        "feedback": "There were four agents on the floor, but the production was similar to that of two agents. One of the machines was partially filled and never fully used, even with four agents.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed20_8520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "97ad7a22-c358-4630-9305-7d2295f44262",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 101,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 2,
+        "reason": "Inefficient use of agents."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3c91eb06-a5b8-4d2b-831d-e499afa1f7e4",
+      "csvRow": 89,
+      "csv": {
+        "participant_id": "F5FE80F15BF34DBC8A94422DDB5033D5",
+        "trajectory_name": "2_forced_hard_4_seed9_8020000_60.json",
+        "feedback": "Mostly efficient thus far",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed9_8020000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "3c91eb06-a5b8-4d2b-831d-e499afa1f7e4",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 11,
+        "startFrame": 9,
+        "endFrame": 24,
+        "sentiment": 5,
+        "reason": "They all work together and quickly get the parts to the machine"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a8b3c9aa-69d5-4d76-80e5-d9579b958766",
+      "csvRow": 90,
+      "csv": {
+        "participant_id": "C6262A850B1145F7A713CB503DB153BD",
+        "trajectory_name": "2_forced_hard_seed2_4520000_60.json",
+        "feedback": "AI robots worked very quickly and well to get parts loaded.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed2_4520000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "a8b3c9aa-69d5-4d76-80e5-d9579b958766",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 4,
+        "startFrame": 2,
+        "endFrame": 29,
+        "sentiment": 5,
+        "reason": "The red robot focused on parts and the yellow robot focused on loading. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "5e13962f-fa8a-4291-9f57-51bdeb62627d",
+      "csvRow": 91,
+      "csv": {
+        "participant_id": "8AA3A2F9DF504339A83EA2DE6E11CA91",
+        "trajectory_name": "2_forced_hard_seed8_3520000_60.json",
+        "feedback": "over all it did the job however they seemed to be alittle irratice it movement should be more efficent o=and using straigh lines",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed8_3520000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "5e13962f-fa8a-4291-9f57-51bdeb62627d",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 82,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 3,
+        "reason": "they were not as efficent as they could be"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "670bbad4-2eb1-442f-998b-3f014144fb87",
+      "csvRow": 92,
+      "csv": {
+        "participant_id": "AE5BB3054A9A46FABF7249C579A08B44",
+        "trajectory_name": "2_incentivized_hard_4_seed2_7520000_100.json",
+        "feedback": "Everyone seems to be working well togetehr.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed2_7520000_100.json",
+        "episodeId": "episode_3",
+        "feedbackId": "670bbad4-2eb1-442f-998b-3f014144fb87",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 155,
+        "startFrame": 153,
+        "endFrame": 157,
+        "sentiment": 4,
+        "reason": "All robots seem to know what to do."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "416db385-0278-49e3-be07-5a5dc509b41d",
+      "csvRow": 93,
+      "csv": {
+        "participant_id": "60F6E62AAA934061A35F7A914EBCED6D",
+        "trajectory_name": "2_forced_hard_seed17_10000000_80.json",
+        "feedback": "Once again, the pink robot seems confused while waiting for packaging.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed17_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "416db385-0278-49e3-be07-5a5dc509b41d",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 6,
+        "baseFrame": 133,
+        "startFrame": 131,
+        "endFrame": 135,
+        "sentiment": 2,
+        "reason": "The pink robot seems confused."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "4f457454-5e49-4cef-9bad-e7c9b53177ff",
+      "csvRow": 94,
+      "csv": {
+        "participant_id": "F72AAEAA755041F6AA79ECE84CD76F41",
+        "trajectory_name": "2_incentivized_hard_4_seed5_1520000_40.json",
+        "feedback": "The blue, yellow, and green robots are all trying to get items from the same spot, blocking each other in the process, while none of them are going to the other location.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed5_1520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "4f457454-5e49-4cef-9bad-e7c9b53177ff",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 69,
+        "startFrame": 67,
+        "endFrame": 71,
+        "sentiment": 3,
+        "reason": "Unnecessary slow down in productivity."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f389442c-b977-4fd3-aa9a-e67ed86e0297",
+      "csvRow": 95,
+      "csv": {
+        "participant_id": "60F6E62AAA934061A35F7A914EBCED6D",
+        "trajectory_name": "2_incentivized_hard_seed8_10000000_80.json",
+        "feedback": "The two robots resume working well together. The yellow robot drops off a package at the drop zone while the pink robot delivers a part ot be packaged later.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed8_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "f389442c-b977-4fd3-aa9a-e67ed86e0297",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 8,
+        "baseFrame": 175,
+        "startFrame": 173,
+        "endFrame": 177,
+        "sentiment": 5,
+        "reason": "They resume working together."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c13196ea-2d46-4796-a719-7fc670dc6044",
+      "csvRow": 96,
+      "csv": {
+        "participant_id": "B6C338ADB8E14962A8A5BB40E2097D33",
+        "trajectory_name": "2_incentivized_hard_seed7_10000000_80.json",
+        "feedback": "Yellow robot seems lost",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed7_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "c13196ea-2d46-4796-a719-7fc670dc6044",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 49,
+        "startFrame": 38,
+        "endFrame": 51,
+        "sentiment": 1,
+        "reason": "Noting inefficiencny"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "e63a48f6-7ad2-46e6-8bc0-e16701c4b742",
+      "csvRow": 97,
+      "csv": {
+        "participant_id": "BB4425B8968743B58AB851EB0E2A9FA9",
+        "trajectory_name": "2_forced_hard_4_seed14_10000000_60.json",
+        "feedback": "the green robot doesnt seem to be doing anythin",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed14_10000000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "e63a48f6-7ad2-46e6-8bc0-e16701c4b742",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 20,
+        "startFrame": 3,
+        "endFrame": 78,
+        "sentiment": 2,
+        "reason": "a robot isnt doing anything"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "07581fe1-c071-4a14-a682-6424466e9319",
+      "csvRow": 98,
+      "csv": {
+        "participant_id": "6CDE8C2FD7394F58A121AA476EEBE276",
+        "trajectory_name": "2_forced_hard_4_seed4_9520000_60.json",
+        "feedback": "Grey robot isn't really doing anything here.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed4_9520000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "07581fe1-c071-4a14-a682-6424466e9319",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 20,
+        "startFrame": 18,
+        "endFrame": 27,
+        "sentiment": 1,
+        "reason": "It's clear the grey robot isn't working with the other three at this point."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "30c5774d-d932-4547-a8aa-df834d28ccf8",
+      "csvRow": 99,
+      "csv": {
+        "participant_id": "6F772AA7C4374587843E33A4E738E4B9",
+        "trajectory_name": "2_incentivized_hard_seed6_10000000_80.json",
+        "feedback": "This is a more efficient segment for both agents. The pink and yellow are operating a bit better here.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed6_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "30c5774d-d932-4547-a8aa-df834d28ccf8",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 93,
+        "startFrame": 41,
+        "endFrame": 95,
+        "sentiment": 4,
+        "reason": "Both the pink and yellow agents are more efficiently putting parts together in boxes and delivering them to the drop zone."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d89df81e-e089-477d-8955-b535fd19ef57",
+      "csvRow": 100,
+      "csv": {
+        "participant_id": "986C6248855A41DD9918866D40940CB4",
+        "trajectory_name": "2_incentivized_hard_seed2_10000000_80.json",
+        "feedback": "They dont work together and also focus on only one machine",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed2_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "d89df81e-e089-477d-8955-b535fd19ef57",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 64,
+        "startFrame": 42,
+        "endFrame": 79,
+        "sentiment": 3,
+        "reason": "teamwork could make it faster"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "6f070ce6-9658-4702-929f-4891558b3ddb",
+      "csvRow": 101,
+      "csv": {
+        "participant_id": "9AF60E800E2F44C3887844833086DD04",
+        "trajectory_name": "2_forced_hard_4_seed20_9020000_60.json",
+        "feedback": "Material getter and box getter switched places, maybe this would be better.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed20_9020000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "6f070ce6-9658-4702-929f-4891558b3ddb",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 104,
+        "startFrame": 102,
+        "endFrame": 106,
+        "sentiment": 4,
+        "reason": "The white one was pretty bored only getting a box every once in a while I think."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c48f3ec3-ade3-4d3e-b259-0eb06df334ef",
+      "csvRow": 102,
+      "csv": {
+        "participant_id": "6DF7B7B8FA6040C08B8730436A28ED7C",
+        "trajectory_name": "2_incentivized_hard_seed7_2020000_60.json",
+        "feedback": "Great teamwork.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed7_2020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "c48f3ec3-ade3-4d3e-b259-0eb06df334ef",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 21,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 5,
+        "reason": "Both the red and yellow are working to bring the green parts to the machine!"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "251082a4-902e-4550-9621-426632d7194d",
+      "csvRow": 103,
+      "csv": {
+        "participant_id": "720FA5F3EEB840C7832391BC05050906",
+        "trajectory_name": "2_forced_hard_4_seed7_9020000_60.json",
+        "feedback": "Some of the robots seem to follow a specific role, but one in particular does not seem to be efficient.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed7_9020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "251082a4-902e-4550-9621-426632d7194d",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 71,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 4,
+        "reason": "One of the robots do not serve a functional role. Instead, it just goes around and picks up items randomly without any purpose at all."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f89cfd91-a5d5-474a-b3d5-220f398d6196",
+      "csvRow": 104,
+      "csv": {
+        "participant_id": "114509284BB84217990EDD5F311E94D8",
+        "trajectory_name": "2_incentivized_hard_4_seed6_9520000_100.json",
+        "feedback": "the blue bot is not working",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed6_9520000_100.json",
+        "episodeId": "episode_1",
+        "feedbackId": "f89cfd91-a5d5-474a-b3d5-220f398d6196",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 23,
+        "startFrame": 1,
+        "endFrame": 21,
+        "sentiment": 3,
+        "reason": "the blue bot is moving round but not picking up parts"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "caacbacd-8b73-4606-95e4-d60446d99050",
+      "csvRow": 105,
+      "csv": {
+        "participant_id": "7DD0416DB65047FDAA5BCCEDBDF9B817",
+        "trajectory_name": "2_forced_hard_seed2_3520000_40.json",
+        "feedback": "The yellow robot needs to minimize the required steps of movement, it takes a lot of extra useless steps in various directions before committing to the machine for part drop off.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed2_3520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "caacbacd-8b73-4606-95e4-d60446d99050",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 41,
+        "startFrame": 13,
+        "endFrame": 45,
+        "sentiment": 2,
+        "reason": "This movement tweak would speed up the cooperative process. Currently the red robot is working faster since it's not making needless inputs and strictly operating on accomplishing the task compared to meandering behavior of the yellow robot"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "776ef6b6-60ad-4b33-b031-d5c495e8eb95",
+      "csvRow": 106,
+      "csv": {
+        "participant_id": "965B0E4313264F5A9A5222E31D9C17F3",
+        "trajectory_name": "2_forced_hard_seed17_2020000_40.json",
+        "feedback": "The pink or red robot is picking up and putting down the parts over and over again. It should have ignored this part once it was set on the center area.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2020000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "776ef6b6-60ad-4b33-b031-d5c495e8eb95",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 16,
+        "startFrame": 14,
+        "endFrame": 18,
+        "sentiment": 2,
+        "reason": "The red robot was making inefficient movements that wasted time."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "e7645274-4635-4712-9b72-5352f428075a",
+      "csvRow": 107,
+      "csv": {
+        "participant_id": "6F772AA7C4374587843E33A4E738E4B9",
+        "trajectory_name": "2_incentivized_hard_seed6_10000000_80.json",
+        "feedback": "Both agents appear to have issues with handling the boxes once they're in beside the drop zone area. They both appear to go back and forth a few times before going to the machine. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed6_10000000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "e7645274-4635-4712-9b72-5352f428075a",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 168,
+        "startFrame": 94,
+        "endFrame": 195,
+        "sentiment": 2,
+        "reason": "I observed both pink and yellow agents going back and forth several times before they moved forward to collect the item from the machine. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8ce0780a-d286-43e1-a45d-2dc5ed739d18",
+      "csvRow": 108,
+      "csv": {
+        "participant_id": "211D1CCD28E5470891A636CDB3B801C7",
+        "trajectory_name": "2_forced_hard_seed9_3520000_60.json",
+        "feedback": "This was a much smoother setup for the robots, they each had their own space and worked harder this way",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed9_3520000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "8ce0780a-d286-43e1-a45d-2dc5ed739d18",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 23,
+        "startFrame": 21,
+        "endFrame": 25,
+        "sentiment": 5,
+        "reason": "To note the great teamwork and ease in this episode"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ae369d21-9915-4732-940e-5d60cbcb8ae7",
+      "csvRow": 109,
+      "csv": {
+        "participant_id": "1A40B0BD6ACA480A93FDCD0C474DE120",
+        "trajectory_name": "2_incentivized_hard_seed9_10000000_80.json",
+        "feedback": "they could fetch from both sites of product and boxes",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed9_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "ae369d21-9915-4732-940e-5d60cbcb8ae7",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 196,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 1,
+        "reason": "they're using half the possible capacity and not using the wait time at the machines"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a0fdf233-31a9-402c-b3bc-c220e5201e0a",
+      "csvRow": 110,
+      "csv": {
+        "participant_id": "1991C4992E004C709925086751D2B5CB",
+        "trajectory_name": "2_forced_hard_seed2_10000000_80.json",
+        "feedback": "The red robot makes unnecessary movements and could be a little more efficient and focused.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed2_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "a0fdf233-31a9-402c-b3bc-c220e5201e0a",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 129,
+        "startFrame": 127,
+        "endFrame": 131,
+        "sentiment": 2,
+        "reason": ""
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "23bca230-b88a-415f-a01e-0d2d0ecf2f93",
+      "csvRow": 111,
+      "csv": {
+        "participant_id": "1BB2F7BCFF204F869A86A204DC3BD58C",
+        "trajectory_name": "2_forced_hard_seed1_4520000_40.json",
+        "feedback": "The yellow agent doesn't appear to take the parts, although it was on the platform for it to be taken.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed1_4520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "23bca230-b88a-415f-a01e-0d2d0ecf2f93",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 111,
+        "startFrame": 109,
+        "endFrame": 121,
+        "sentiment": 3,
+        "reason": "I'm not sure if the yellow agent had a different set of commands or programming to follow, however, it looked like the yellow agent had waited a certain amount of seconds before checking the condition of the parts being present on the platform."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "6cc95305-1ffe-4769-ac3b-f9bcf95c5333",
+      "csvRow": 112,
+      "csv": {
+        "participant_id": "7453964204644069B3049C13528561F8",
+        "trajectory_name": "2_forced_hard_4_seed7_9520000_80.json",
+        "feedback": "The grey AI bot spends time idling and delays putting the box on the counter so the orange can grab and package the product.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed7_9520000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "6cc95305-1ffe-4769-ac3b-f9bcf95c5333",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 28,
+        "startFrame": 26,
+        "endFrame": 43,
+        "sentiment": 4,
+        "reason": "The time the grey bot took up due to confusion delayed the production process."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ed67c8b1-7fc0-4ec9-9de7-625319b5685c",
+      "csvRow": 113,
+      "csv": {
+        "participant_id": "E2FC50F88EE84CACB478957B2772C1ED",
+        "trajectory_name": "2_forced_hard_seed2_10000000_80.json",
+        "feedback": "segregation of duty is noted here, but lack of machines",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed2_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "ed67c8b1-7fc0-4ec9-9de7-625319b5685c",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 168,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 4,
+        "reason": "one machine is picking up parts, whereas the other one is putting the parts in the machine for processing. Once processed, machine 1 picks up a box to machine 2 for packing then deliver to the drop zone. However, there were times when machine 1 was confused about whether it should grab the part or the box."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "6bc41964-86c0-4363-9c4d-1df9d43642b3",
+      "csvRow": 114,
+      "csv": {
+        "participant_id": "EBC2E1ED2E0C430E9A8436F8DC72F64A",
+        "trajectory_name": "2_incentivized_hard_seed4_1120000_60.json",
+        "feedback": "fairly efficient movement",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed4_1120000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "6bc41964-86c0-4363-9c4d-1df9d43642b3",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 67,
+        "startFrame": 48,
+        "endFrame": 76,
+        "sentiment": 5,
+        "reason": "appreiaction for the efficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "768cf3c7-bff1-4683-be92-aa3ec86ae8e5",
+      "csvRow": 115,
+      "csv": {
+        "participant_id": "EA8EA155B0CB4BCE87111B539C8B1F4C",
+        "trajectory_name": "2_incentivized_hard_seed3_2520000_60.json",
+        "feedback": "The robots grabbed boxes at the same time while waiting for the parts to be assembled.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed3_2520000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "768cf3c7-bff1-4683-be92-aa3ec86ae8e5",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 36,
+        "startFrame": 31,
+        "endFrame": 43,
+        "sentiment": 2,
+        "reason": " I don't think they are collaborating well. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c379578d-384c-489c-a43e-0e43c33d37e9",
+      "csvRow": 116,
+      "csv": {
+        "participant_id": "0B839AC7A05A4D14AEAFC6C4B507DCF5",
+        "trajectory_name": "2_incentivized_hard_4_seed6_2520000_40.json",
+        "feedback": "All of the bots basically understand loading the bottom machine by now and seemingly understand boxing and using the drop zone, but still none use the right-hand machine.  ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed6_2520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "c379578d-384c-489c-a43e-0e43c33d37e9",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 78,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 1,
+        "reason": "Right-hand machine remains unused, bots wandering around randomly while waiting for processing of bottom machine."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "09510f68-87c7-41e4-91e8-35d23b93dd96",
+      "csvRow": 117,
+      "csv": {
+        "participant_id": "66E7788812C8484C96A0D55F6B632751",
+        "trajectory_name": "2_forced_hard_seed9_10000000_80.json",
+        "feedback": "One robot spent time moving around without delivering to the other.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed9_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "09510f68-87c7-41e4-91e8-35d23b93dd96",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": 45,
+        "endFrame": 60,
+        "sentiment": 4,
+        "reason": "In the beginning of the episode, a robot was just moving around and not delivering the parts."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3cee1e53-af33-4655-abc9-95f9157bb0f9",
+      "csvRow": 118,
+      "csv": {
+        "participant_id": "1F9B6CA2DEC54F42A178AD327751A9BC",
+        "trajectory_name": "2_forced_hard_4_seed20_9520000_80.json",
+        "feedback": "The grey robot in the left hand screen doesn't seem to be working well. iIt's just driving around, not picking up anything.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed20_9520000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "3cee1e53-af33-4655-abc9-95f9157bb0f9",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 33,
+        "startFrame": 31,
+        "endFrame": 35,
+        "sentiment": 1,
+        "reason": "i can see it happening on the screen."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "302e34d7-9b87-4c16-abe2-b7d575b1de1b",
+      "csvRow": 119,
+      "csv": {
+        "participant_id": "8BCB509032C148C7B1809382C5D2D30B",
+        "trajectory_name": "2_forced_hard_seed3_4520000_40.json",
+        "feedback": "The agents' actions were easy to see, and their movements were clear and well-coordinated, making it simple to understand what they were doing and how they interacted.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed3_4520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "302e34d7-9b87-4c16-abe2-b7d575b1de1b",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 104,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 4,
+        "reason": "The agents carried out their tasks in a clear and orderly way, moving smoothly and precisely. This made it easy to understand what they were doing and allowed for simple monitoring of their teamwork. Better coordination could make them even more efficient."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "db16c58c-7694-4d71-9bc9-de6d3cc7cddf",
+      "csvRow": 120,
+      "csv": {
+        "participant_id": "E2FC50F88EE84CACB478957B2772C1ED",
+        "trajectory_name": "2_incentivized_hard_seed1_10000000_80.json",
+        "feedback": "the machines were working inefficiently and blocking each other from dropping off parts in the machine",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed1_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "db16c58c-7694-4d71-9bc9-de6d3cc7cddf",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 54,
+        "startFrame": 52,
+        "endFrame": 68,
+        "sentiment": 2,
+        "reason": "the machines were moving clumsily "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f59b3527-1b67-408d-8c65-fe96fc0327bf",
+      "csvRow": 121,
+      "csv": {
+        "participant_id": "07A0DC09B35E4F6E98673F7BA187E025",
+        "trajectory_name": "2_incentivized_hard_4_seed8_1820000_60.json",
+        "feedback": "All bots fail to prioritize either the open machine or the box for the working machine. Gridlock ensues.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_1820000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "f59b3527-1b67-408d-8c65-fe96fc0327bf",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 33,
+        "startFrame": 31,
+        "endFrame": 70,
+        "sentiment": 2,
+        "reason": "The bots stack up at the working machine, but neglect to retrieve a box, and the bots with easy access to workpieces fail to deliver them to the idle machine."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d22d124e-19c8-40de-9418-96c45d789819",
+      "csvRow": 122,
+      "csv": {
+        "participant_id": "A38803A9795C439EAB69D019AA84EBE8",
+        "trajectory_name": "2_incentivized_hard_4_seed8_2020000_40.json",
+        "feedback": "Red robot takes a circuitous route to Drop Zone although there are no apparent obstacles.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_2020000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "d22d124e-19c8-40de-9418-96c45d789819",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 32,
+        "startFrame": 65,
+        "endFrame": 71,
+        "sentiment": 2,
+        "reason": "Inefficient use of time, no clear purpose for extra movements."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d57adbdd-9c20-4ff9-af36-12f4b5076a5c",
+      "csvRow": 123,
+      "csv": {
+        "participant_id": "4E4A4FEAD8AF43529314225BF3625724",
+        "trajectory_name": "2_forced_hard_seed2_3520000_40.json",
+        "feedback": "Yellow robot could've begun adding parts to the other machine to save time instead of waiting for the bottom machine to finish.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed2_3520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "d57adbdd-9c20-4ff9-af36-12f4b5076a5c",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 55,
+        "startFrame": 53,
+        "endFrame": 57,
+        "sentiment": 3,
+        "reason": "This solution could save time."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "9df7f8de-6283-429a-a365-c263c05016fa",
+      "csvRow": 124,
+      "csv": {
+        "participant_id": "8ABA35BE4FF24A6DAE895F3CDFE22BDA",
+        "trajectory_name": "2_forced_hard_seed9_10000000_80.json",
+        "feedback": "The Pink robot makes a lot of unnessary moves instead of direct lines ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed9_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "9df7f8de-6283-429a-a365-c263c05016fa",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 46,
+        "startFrame": 38,
+        "endFrame": 55,
+        "sentiment": 3,
+        "reason": "Unsure if has to do this turn??"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "1b553233-0294-4624-80f2-eafea3cdb534",
+      "csvRow": 125,
+      "csv": {
+        "participant_id": "976C3FF9847D451D8DCC9CDEB0218DCD",
+        "trajectory_name": "2_forced_hard_4_seed20_9020000_60.json",
+        "feedback": "Not much was done here when there could've been progress",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed20_9020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "1b553233-0294-4624-80f2-eafea3cdb534",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 5,
+        "baseFrame": 151,
+        "startFrame": 143,
+        "endFrame": 150,
+        "sentiment": 1,
+        "reason": "Very obvious waste of time to get things done"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "152ea8a0-62f5-431b-afbc-8196a7d8fc1b",
+      "csvRow": 126,
+      "csv": {
+        "participant_id": "046C3A524DE54997857BAF812149CBAD",
+        "trajectory_name": "2_incentivized_hard_seed9_10000000_80.json",
+        "feedback": "They're only using one machine and parts pile instead of both. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed9_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "152ea8a0-62f5-431b-afbc-8196a7d8fc1b",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 102,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 3,
+        "reason": "It would probably be more efficient to use both. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f4fa3a3d-ac3b-4821-9cc1-f0a89605640a",
+      "csvRow": 127,
+      "csv": {
+        "participant_id": "AABBAA20233C463E998F86F6C5634190",
+        "trajectory_name": "2_forced_hard_seed7_3520000_40.json",
+        "feedback": "I would like to delete this feedback but I don't see a way. I initially thought the robot was taking way too long to grab the box the other one left for it, but I see now it was waiting on the machine to process the parts before picking it up. I am going to change the time range to include the entire video because they did a pretty good job working together. ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed7_3520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "f4fa3a3d-ac3b-4821-9cc1-f0a89605640a",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 74,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 4,
+        "reason": "I want to delete the feedback I was going to leave for this one. They did a pretty good job at completing their job in this one! "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "c4411536-97b3-4c26-86ae-7fb871e0e467",
+      "csvRow": 128,
+      "csv": {
+        "participant_id": "60552F5DE0CB46D5BC8A84CB193D56A9",
+        "trajectory_name": "2_forced_hard_4_seed3_9520000_40.json",
+        "feedback": "grey and red getting in the way of each other working",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed3_9520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "c4411536-97b3-4c26-86ae-7fb871e0e467",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 181,
+        "startFrame": 179,
+        "endFrame": 183,
+        "sentiment": 1,
+        "reason": "they are not collaborating well."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "fa6bfac2-ae4d-4941-8454-1b143a6ff15a",
+      "csvRow": 129,
+      "csv": {
+        "participant_id": "0403619B5ED848A0A79ABA081779E95B",
+        "trajectory_name": "2_incentivized_hard_seed7_1020000_60.json",
+        "feedback": "Yellow is far too focused on the boxes",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed7_1020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "fa6bfac2-ae4d-4941-8454-1b143a6ff15a",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 3,
+        "baseFrame": 133,
+        "startFrame": 131,
+        "endFrame": 199,
+        "sentiment": 2,
+        "reason": "Red grabs a box and uses it and keeps working all while yellow picks up and puts down the same box over and over."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "4800eed3-5504-4ef1-8506-5698cd44607e",
+      "csvRow": 130,
+      "csv": {
+        "participant_id": "3765DE826DE6446F867FF77A69F2AB4D",
+        "trajectory_name": "2_incentivized_hard_4_seed10_9520000_100.json",
+        "feedback": "The robots seem to lack direction. They look confused and like they do not know where to go. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed10_9520000_100.json",
+        "episodeId": "episode_2",
+        "feedbackId": "4800eed3-5504-4ef1-8506-5698cd44607e",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 20,
+        "startFrame": 0,
+        "endFrame": 22,
+        "sentiment": 1,
+        "reason": "All 4 are headed towards the same pile of products and some of them seem like they aren't sure where they should be or what they should be doing. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "3fbd4dda-72e4-4e50-b552-3bd7e5da8636",
+      "csvRow": 131,
+      "csv": {
+        "participant_id": "04DB125F868C4953A1FB34ADDD46F3AA",
+        "trajectory_name": "2_incentivized_hard_4_seed6_3020000_80.json",
+        "feedback": "the two robots have a bit of confusion and bump into one another. ",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_3020000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "3fbd4dda-72e4-4e50-b552-3bd7e5da8636",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 36,
+        "startFrame": 34,
+        "endFrame": 38,
+        "sentiment": 3,
+        "reason": "There is a bit of confusion on the location that each robot should be in for better accuracy and processing. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "10369417-f7d2-4c7e-b447-f145829b6163",
+      "csvRow": 132,
+      "csv": {
+        "participant_id": "F10B5079F863411ABD85CF7C5BD46E53",
+        "trajectory_name": "2_incentivized_hard_seed4_1020000_40.json",
+        "feedback": "Yellow playing around with parts",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed4_1020000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "10369417-f7d2-4c7e-b447-f145829b6163",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 30,
+        "startFrame": 28,
+        "endFrame": 42,
+        "sentiment": 1,
+        "reason": "Wasting time and movements"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8020a785-4573-4a0f-b1da-8162b4343d7c",
+      "csvRow": 133,
+      "csv": {
+        "participant_id": "7453964204644069B3049C13528561F8",
+        "trajectory_name": "2_incentivized_hard_seed2_10000000_80.json",
+        "feedback": "The when red agent grabs the box it spends time going back n forth before going to the machine.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed2_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "8020a785-4573-4a0f-b1da-8162b4343d7c",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 49,
+        "startFrame": 47,
+        "endFrame": 51,
+        "sentiment": 4,
+        "reason": "I think it would easier to follow if the red box didn't behave this way. Although this minor movement does not effect the production time."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "be158f9a-2d2e-465d-a827-d51a047f1617",
+      "csvRow": 134,
+      "csv": {
+        "participant_id": "2B21B7636CAD4FE3B5E616714E830F53",
+        "trajectory_name": "2_incentivized_hard_4_seed6_4020000_80.json",
+        "feedback": "The pink and red robots seem to get confused and don't know what to do during this timeframe.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_4020000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "be158f9a-2d2e-465d-a827-d51a047f1617",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 22,
+        "startFrame": 20,
+        "endFrame": 41,
+        "sentiment": 1,
+        "reason": "The yellow and red robots start moving randomly when they should be moving to parts to pick them up and move them toward a machine."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "5121dcda-febb-43ed-8f6a-4195791ef7a9",
+      "csvRow": 135,
+      "csv": {
+        "participant_id": "6CD983A0FAF14BC9804E8A0320449DC7",
+        "trajectory_name": "2_forced_hard_seed15_10000000_80.json",
+        "feedback": "The yellow one is wandering around instead of loading the box.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed15_10000000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "5121dcda-febb-43ed-8f6a-4195791ef7a9",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 7,
+        "startFrame": 81,
+        "endFrame": 135,
+        "sentiment": 2,
+        "reason": "It is not being efficient as the other is providing everything."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f06479ae-3a20-451c-b58b-5327cfce4688",
+      "csvRow": 136,
+      "csv": {
+        "participant_id": "70D42454E5604947AAE539864F090FEE",
+        "trajectory_name": "2_incentivized_hard_4_seed8_2020000_40.json",
+        "feedback": "there was no colloboration at any point - one robot did no work at all and the others constantly impeded each other. having 4 robots and two machines did not help speed up the production",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_2020000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "f06479ae-3a20-451c-b58b-5327cfce4688",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 40,
+        "startFrame": 0,
+        "endFrame": 199,
+        "sentiment": 1,
+        "reason": "the lack of flow and cooperation of all participants"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "474f4594-7960-4ea9-9508-1b467d0c7c29",
+      "csvRow": 137,
+      "csv": {
+        "participant_id": "7A50B2D5F081444F9D2236C66A2C39AF",
+        "trajectory_name": "2_forced_hard_seed4_10000000_80.json",
+        "feedback": "The box should always be taken by the yellow robot after being dropped off.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/High/2_forced_hard_seed4_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "474f4594-7960-4ea9-9508-1b467d0c7c29",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 4,
+        "baseFrame": 134,
+        "startFrame": 128,
+        "endFrame": 136,
+        "sentiment": 2,
+        "reason": "The robots seem confused and kept passing the box back and forth."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "13886d75-9fed-44fb-b52c-f2114c969b0c",
+      "csvRow": 138,
+      "csv": {
+        "participant_id": "8F6D058CD2FB4D54B15C4E628AA78255",
+        "trajectory_name": "2_incentivized_hard_4_seed8_7020000_60.json",
+        "feedback": "good collab, but it was crowded",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_7020000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "13886d75-9fed-44fb-b52c-f2114c969b0c",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 87,
+        "startFrame": 46,
+        "endFrame": 98,
+        "sentiment": 3,
+        "reason": "they bumped into each other alot but overall got the work done"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "a04ec0dd-0a11-4220-bebc-d601725e4090",
+      "csvRow": 139,
+      "csv": {
+        "participant_id": "2B21B7636CAD4FE3B5E616714E830F53",
+        "trajectory_name": "2_forced_hard_seed7_4020000_60.json",
+        "feedback": "The pink robot could have placed parts on the middle table while it waited for the yellow robot to finish it's packing of the box to be more productive",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed7_4020000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "a04ec0dd-0a11-4220-bebc-d601725e4090",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 40,
+        "startFrame": 38,
+        "endFrame": 68,
+        "sentiment": 3,
+        "reason": "the pink robot was just waiting and doing nothing during this timeframe"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "24d890d0-3a82-4032-81ac-21a5728af208",
+      "csvRow": 140,
+      "csv": {
+        "participant_id": "114509284BB84217990EDD5F311E94D8",
+        "trajectory_name": "2_incentivized_hard_4_seed6_9520000_100.json",
+        "feedback": "the bots have all begun to wander aimlessly",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed6_9520000_100.json",
+        "episodeId": "episode_1",
+        "feedbackId": "24d890d0-3a82-4032-81ac-21a5728af208",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 159,
+        "startFrame": 91,
+        "endFrame": 161,
+        "sentiment": 3,
+        "reason": "the bots are moving around and not picking up parts or boxes"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f41c5646-b5a9-45ce-98d1-7aed87f967e4",
+      "csvRow": 141,
+      "csv": {
+        "participant_id": "C86A7434EB1543749A42D6EB4201BD8B",
+        "trajectory_name": "2_incentivized_hard_4_seed1_8520000_100.json",
+        "feedback": "The robots seem to be working pretty efficiently.  ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed1_8520000_100.json",
+        "episodeId": "episode_3",
+        "feedbackId": "f41c5646-b5a9-45ce-98d1-7aed87f967e4",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 75,
+        "startFrame": 1,
+        "endFrame": 77,
+        "sentiment": 5,
+        "reason": "They are adjusting their jobs from fetching parts to fetching boxes as needed."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "41ced73e-57c7-4a30-b1d5-31eafac29799",
+      "csvRow": 142,
+      "csv": {
+        "participant_id": "F195FB9A6E66495FBF1789FA639871B7",
+        "trajectory_name": "2_forced_hard_seed3_4520000_40.json",
+        "feedback": "robots seem confused in this range",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed3_4520000_40.json",
+        "episodeId": "episode_4",
+        "feedbackId": "41ced73e-57c7-4a30-b1d5-31eafac29799",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 45,
+        "startFrame": 43,
+        "endFrame": 67,
+        "sentiment": 1,
+        "reason": "The robots circle and do not do meaningful work while the machine is processing the parts"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "5ff48f94-0eaf-4e00-86fc-d7ea85a0e33c",
+      "csvRow": 143,
+      "csv": {
+        "participant_id": "616F852D5C134A20958DE7774655FB7B",
+        "trajectory_name": "2_incentivized_hard_seed1_1020000_60.json",
+        "feedback": "The robots work together to successfully deliver a package to the drop zone with minimal wandering and wasted time.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed1_1020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "5ff48f94-0eaf-4e00-86fc-d7ea85a0e33c",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 0,
+        "startFrame": 0,
+        "endFrame": 57,
+        "sentiment": 4,
+        "reason": "Efficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ac087457-11f6-41e2-a7b7-ab790dc0955d",
+      "csvRow": 144,
+      "csv": {
+        "participant_id": "355D5A2D1A374F15885AF7D49048F056",
+        "trajectory_name": "2_incentivized_hard_4_seed8_1820000_60.json",
+        "feedback": "Again seemed to be machines not doing much",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_1820000_60.json",
+        "episodeId": "episode_1",
+        "feedbackId": "ac087457-11f6-41e2-a7b7-ab790dc0955d",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 73,
+        "startFrame": 69,
+        "endFrame": 73,
+        "sentiment": 3,
+        "reason": "Time"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "b0ecc650-096b-40b7-9024-e9f71da75a98",
+      "csvRow": 145,
+      "csv": {
+        "participant_id": "9FA3BFE6B96E40248E7499F0580672C7",
+        "trajectory_name": "2_incentivized_hard_seed4_2020000_60.json",
+        "feedback": "Feedback about the bots poor decision making.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Middle/2_incentivized_hard_seed4_2020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "b0ecc650-096b-40b7-9024-e9f71da75a98",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": 36,
+        "endFrame": 61,
+        "sentiment": 3,
+        "reason": "Instead of placing the item it was carrying in the empty container, it moved back and forth and dropped the item on the counter instead."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "fb34f7d1-24bb-41b4-a607-3ed5bb48b2a0",
+      "csvRow": 146,
+      "csv": {
+        "participant_id": "3BED4FD9D2D84AE89A9918F1CE5D0210",
+        "trajectory_name": "2_forced_hard_4_seed9_8020000_60.json",
+        "feedback": "The yellow robot is at a standstill with the blue robot.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Middle/2_forced_hard_4_seed9_8020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "fb34f7d1-24bb-41b4-a607-3ed5bb48b2a0",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 124,
+        "startFrame": 122,
+        "endFrame": 126,
+        "sentiment": 1,
+        "reason": "There is an unjustified pause that greatly slows down the production time."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "9c4ad359-a1da-435e-a757-07af5348b253",
+      "csvRow": 147,
+      "csv": {
+        "participant_id": "55452323EBDE4536A24E063CC5A686B2",
+        "trajectory_name": "2_incentivized_hard_4_seed8_7020000_60.json",
+        "feedback": "positive",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Low/2_incentivized_hard_4_seed8_7020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "9c4ad359-a1da-435e-a757-07af5348b253",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 77,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 5,
+        "reason": "All four robots are doing their tasks correctly"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "93b1f761-e757-4c56-8324-9c98e08b52d8",
+      "csvRow": 148,
+      "csv": {
+        "participant_id": "673A0BFA648A4FFBBD17FACBF6D2C3B8",
+        "trajectory_name": "2_incentivized_hard_seed3_780000_40.json",
+        "feedback": "The robots are mostly mirroring each other in the step to complete and working well",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed3_780000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "93b1f761-e757-4c56-8324-9c98e08b52d8",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 1,
+        "baseFrame": 40,
+        "startFrame": 8,
+        "endFrame": 40,
+        "sentiment": 4,
+        "reason": "They are working a lot better than the previous group"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "b93abadc-c9e0-46e2-b73b-2245d0e37c1c",
+      "csvRow": 149,
+      "csv": {
+        "participant_id": "16CB68DCBFF94F219C0B9F3A7027F315",
+        "trajectory_name": "2_forced_hard_seed17_2020000_40.json",
+        "feedback": "The red bot using its free time to set out another piece is a good use of time",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2020000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "b93abadc-c9e0-46e2-b73b-2245d0e37c1c",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 35,
+        "startFrame": 29,
+        "endFrame": 37,
+        "sentiment": 5,
+        "reason": "Good behavior"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "ae3dc5f6-cca1-42e0-a2af-2d2acf18a2f5",
+      "csvRow": 150,
+      "csv": {
+        "participant_id": "7BE2DC2A8181474EA13E0B8AF47C39C6",
+        "trajectory_name": "2_forced_hard_seed1_5020000_60.json",
+        "feedback": "Each robot has specific roles, which helps the team complete the task easily. One focuses on grabbing the material and the other put it in the right place. One passes the box and the other puts it on the material and delivers it.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed1_5020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "ae3dc5f6-cca1-42e0-a2af-2d2acf18a2f5",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 19,
+        "startFrame": 17,
+        "endFrame": 92,
+        "sentiment": 5,
+        "reason": "I think the team does not have any real flaws, and I wanted to highlight their great teamwork."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "67a46532-4efa-4eec-b149-c240167116c7",
+      "csvRow": 151,
+      "csv": {
+        "participant_id": "AC714C9F6F7745729F403CC2B3EBF408",
+        "trajectory_name": "2_incentivized_hard_4_seed4_3520000_80.json",
+        "feedback": "it seemed like everyone was working well together on this project",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed4_3520000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "67a46532-4efa-4eec-b149-c240167116c7",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 199,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 4,
+        "reason": "each bot did their own job quickly and almost efficiently "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "df9c8f83-b9b5-493d-98c7-7696a87f3f4b",
+      "csvRow": 152,
+      "csv": {
+        "participant_id": "9AF60E800E2F44C3887844833086DD04",
+        "trajectory_name": "2_forced_hard_seed10_6020000_60.json",
+        "feedback": "I think yellow could try a little harder to walk a straight line to his destination.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed10_6020000_60.json",
+        "episodeId": "episode_2",
+        "feedbackId": "df9c8f83-b9b5-493d-98c7-7696a87f3f4b",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 114,
+        "startFrame": 112,
+        "endFrame": 116,
+        "sentiment": 4,
+        "reason": "He keeps making loopdyloops instead of walking straight, but they are getting boxes out, I think it would go faster if he didn't do that."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "4db8ce6f-5360-4d57-abd7-4282bca1bea0",
+      "csvRow": 153,
+      "csv": {
+        "participant_id": "377E5F34FBC9482490C18F70D5680C35",
+        "trajectory_name": "2_forced_hard_seed7_4020000_60.json",
+        "feedback": "robot wasting time",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed7_4020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "4db8ce6f-5360-4d57-abd7-4282bca1bea0",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 57,
+        "startFrame": 47,
+        "endFrame": 62,
+        "sentiment": 2,
+        "reason": "moving back and forth instead of doing a job"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "1829d3e5-b817-4f8d-abba-adfa4e5be442",
+      "csvRow": 154,
+      "csv": {
+        "participant_id": "EA88E2928CED4F1A8E11AE117204A597",
+        "trajectory_name": "2_forced_hard_seed3_5520000_60.json",
+        "feedback": "Clear paths, roles and cooperation.  No chaos",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Middle/2_forced_hard_seed3_5520000_60.json",
+        "episodeId": "episode_3",
+        "feedbackId": "1829d3e5-b817-4f8d-abba-adfa4e5be442",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 44,
+        "startFrame": 42,
+        "endFrame": 75,
+        "sentiment": 4,
+        "reason": "The robots are cooperating and completing tasks in a smooth, efficient, timely manner"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "32c01971-901c-4608-9555-110933e57789",
+      "csvRow": 155,
+      "csv": {
+        "participant_id": "8ABA35BE4FF24A6DAE895F3CDFE22BDA",
+        "trajectory_name": "2_incentivized_hard_4_seed5_9520000_100.json",
+        "feedback": "Again they have four robots and they are only using one machine!",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed5_9520000_100.json",
+        "episodeId": "episode_4",
+        "feedbackId": "32c01971-901c-4608-9555-110933e57789",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 77,
+        "startFrame": null,
+        "endFrame": null,
+        "sentiment": 1,
+        "reason": "Using both machines would increase production. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "716543de-1aab-4d52-aebf-2cf7e3b0e942",
+      "csvRow": 156,
+      "csv": {
+        "participant_id": "F72AAEAA755041F6AA79ECE84CD76F41",
+        "trajectory_name": "2_forced_hard_seed3_4520000_40.json",
+        "feedback": "The red robot moved off to the left after dropping off the box and spent time going back and forth doing nothing rather than grabbing another item to have it staged for when the machine is empty.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed3_4520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "716543de-1aab-4d52-aebf-2cf7e3b0e942",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 58,
+        "startFrame": 57,
+        "endFrame": 60,
+        "sentiment": 2,
+        "reason": "It's an inefficient waste of motion, and could delay the next item making it to the machine."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "32b24cd2-9099-474b-b7f5-a3a748127e04",
+      "csvRow": 157,
+      "csv": {
+        "participant_id": "92689FA798BF4F66B9D1370DC20C2795",
+        "trajectory_name": "2_forced_hard_4_seed13_9520000_40.json",
+        "feedback": "Remember that there is two machines not only one. One of the machines was completely ignored  for most of the time. Also move out of the way when there is another robot near you because it gets stuck. ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed13_9520000_40.json",
+        "episodeId": "episode_2",
+        "feedbackId": "32b24cd2-9099-474b-b7f5-a3a748127e04",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 35,
+        "startFrame": 131,
+        "endFrame": 169,
+        "sentiment": 2,
+        "reason": "they aren't collaborating as well as they could be. "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "85955ba6-f73d-4759-8a89-749e2d4263ed",
+      "csvRow": 158,
+      "csv": {
+        "participant_id": "3BED4FD9D2D84AE89A9918F1CE5D0210",
+        "trajectory_name": "2_incentivized_hard_4_seed6_3020000_80.json",
+        "feedback": "The green, yellow, and blue robots are all going to the materials at the top of the grid, when there is another spot of materials that they could go to. They need to split their area to sort the work instead of crowding an area and limiting movement.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed6_3020000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "85955ba6-f73d-4759-8a89-749e2d4263ed",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 8,
+        "startFrame": 6,
+        "endFrame": 10,
+        "sentiment": 1,
+        "reason": "The production speed is slower because they are having trouble moving and grabbing materials."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "110a623d-9a38-431b-9237-fe19b286e412",
+      "csvRow": 159,
+      "csv": {
+        "participant_id": "33BBB026C0F34C2AA6440D51FB6B943A",
+        "trajectory_name": "2_forced_hard_4_seed7_10000000_80.json",
+        "feedback": "The orange robot seems to get comfused. It is wandering in circles basically.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed7_10000000_80.json",
+        "episodeId": "episode_3",
+        "feedbackId": "110a623d-9a38-431b-9237-fe19b286e412",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 56,
+        "startFrame": 54,
+        "endFrame": 58,
+        "sentiment": 3,
+        "reason": "The orange robot blocked in another robot at the machine and it also seemed to wander not knowing where to go."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "1dda3d7d-1735-4fd1-a3b0-c36be92ba934",
+      "csvRow": 160,
+      "csv": {
+        "participant_id": "4DE3707D8C36435F837DD8FFA30A5B66",
+        "trajectory_name": "2_forced_hard_seed3_5020000_40.json",
+        "feedback": "The one on the left could be putting more product for the one on the right to use the second machine instead of just putting a box down for the machine that is full already. ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed3_5020000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "1dda3d7d-1735-4fd1-a3b0-c36be92ba934",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 2,
+        "baseFrame": 60,
+        "startFrame": 38,
+        "endFrame": 62,
+        "sentiment": 2,
+        "reason": "Inefficiency"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "8497bbab-f07e-4755-a24c-629efdb2bf97",
+      "csvRow": 161,
+      "csv": {
+        "participant_id": "510F3B597F964C9995F5AAF6950977C2",
+        "trajectory_name": "2_forced_hard_4_seed9_9520000_80.json",
+        "feedback": "There are 2 machines, but the robots are only using 1 to load parts.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed9_9520000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "8497bbab-f07e-4755-a24c-629efdb2bf97",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 186,
+        "startFrame": 184,
+        "endFrame": 188,
+        "sentiment": 2,
+        "reason": "This is a poor use of time and resources."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "b313a5e3-cbe4-4c36-ad0c-96575f143db2",
+      "csvRow": 162,
+      "csv": {
+        "participant_id": "1A40B0BD6ACA480A93FDCD0C474DE120",
+        "trajectory_name": "2_incentivized_hard_4_seed8_9520000_100.json",
+        "feedback": "they have a better routine going with three dropping into the machine and the fourth getting a box",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed8_9520000_100.json",
+        "episodeId": "episode_2",
+        "feedbackId": "b313a5e3-cbe4-4c36-ad0c-96575f143db2",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 104,
+        "startFrame": 103,
+        "endFrame": 106,
+        "sentiment": 5,
+        "reason": "teamwork!"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "d2a636af-3c67-40e7-af1a-1fd36678e210",
+      "csvRow": 163,
+      "csv": {
+        "participant_id": "EF607A2D2E6A4B2EA66AA505975B3335",
+        "trajectory_name": "2_incentivized_hard_4_seed4_9520000_100.json",
+        "feedback": "Every one is going for the same set of parts. ",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed4_9520000_100.json",
+        "episodeId": "episode_1",
+        "feedbackId": "d2a636af-3c67-40e7-af1a-1fd36678e210",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 8,
+        "startFrame": 18,
+        "endFrame": 55,
+        "sentiment": 1,
+        "reason": "Go for the other parts! "
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "926890a6-69b5-4f98-8af8-2823e1d05dc1",
+      "csvRow": 164,
+      "csv": {
+        "participant_id": "98672B3E43274F39BCEC0E8A956F4934",
+        "trajectory_name": "2_forced_hard_seed1_4520000_40.json",
+        "feedback": "Collaboration here was great aside from a few wrong turns by the agents",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed1_4520000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "926890a6-69b5-4f98-8af8-2823e1d05dc1",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 72,
+        "startFrame": 0,
+        "endFrame": 62,
+        "sentiment": 5,
+        "reason": "positive review"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "bd033d3d-b654-4043-8f07-f88c66421b2a",
+      "csvRow": 165,
+      "csv": {
+        "participant_id": "2A91EDFC1F9B448D9779F670756F5F49",
+        "trajectory_name": "2_incentivized_hard_seed4_10000000_80.json",
+        "feedback": "The yellow bot got confused about what it should do, which is obviously to pick up a part and bring it to a machine.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/High/2_incentivized_hard_seed4_10000000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "bd033d3d-b654-4043-8f07-f88c66421b2a",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 199,
+        "startFrame": 0,
+        "endFrame": 15,
+        "sentiment": 1,
+        "reason": "Confusion with a simple task"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "717fd324-4573-445d-813f-9592804842f8",
+      "csvRow": 166,
+      "csv": {
+        "participant_id": "70D42454E5604947AAE539864F090FEE",
+        "trajectory_name": "2_forced_hard_seed17_2020000_40.json",
+        "feedback": "red robot is not making it easy for the yellow as its loading in the same area constantly",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard/Low/2_forced_hard_seed17_2020000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "717fd324-4573-445d-813f-9592804842f8",
+        "layoutName": "2_forced_hard",
+        "itemIndex": 1,
+        "baseFrame": 39,
+        "startFrame": 1,
+        "endFrame": 71,
+        "sentiment": 2,
+        "reason": "it could be more effecient"
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "b63a1656-ed09-42f6-a9e2-551f2fdefe52",
+      "csvRow": 167,
+      "csv": {
+        "participant_id": "7A50B2D5F081444F9D2236C66A2C39AF",
+        "trajectory_name": "2_incentivized_hard_4_seed2_7520000_100.json",
+        "feedback": "Green robot did a fantastic job recognizing the next thing that was needed was a box after filling the machine with parts, green is working hard.",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/High/2_incentivized_hard_4_seed2_7520000_100.json",
+        "episodeId": "episode_2",
+        "feedbackId": "b63a1656-ed09-42f6-a9e2-551f2fdefe52",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 127,
+        "startFrame": 113,
+        "endFrame": 129,
+        "sentiment": 3,
+        "reason": "They did not hesitate to grab a box and bring it to the machine to load."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "96b0c88a-9feb-4425-8e15-ef4e8db1954f",
+      "csvRow": 168,
+      "csv": {
+        "participant_id": "73DE64120BC64CAE8547ABCF5AA238D5",
+        "trajectory_name": "2_incentivized_hard_4_seed1_3520000_80.json",
+        "feedback": "There seems like a bit of confusion here. It comes across as inefficient.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed1_3520000_80.json",
+        "episodeId": "episode_1",
+        "feedbackId": "96b0c88a-9feb-4425-8e15-ef4e8db1954f",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 3,
+        "baseFrame": 189,
+        "startFrame": 67,
+        "endFrame": 84,
+        "sentiment": 2,
+        "reason": " Possibly it is down to each one not knowing what to do next compared to the others."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "0f808d92-7f5a-40cc-9674-45f864b6563e",
+      "csvRow": 169,
+      "csv": {
+        "participant_id": "965B0E4313264F5A9A5222E31D9C17F3",
+        "trajectory_name": "2_incentivized_hard_seed7_980000_40.json",
+        "feedback": "Here, Red did a great job because they placed a part, and Yellow was about to place part 3. Instead of heading to a parts pile, Red went for a box. This shows coordination, and this is a great sign for these two.",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed7_980000_40.json",
+        "episodeId": "episode_3",
+        "feedbackId": "0f808d92-7f5a-40cc-9674-45f864b6563e",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 2,
+        "baseFrame": 79,
+        "startFrame": 67,
+        "endFrame": 81,
+        "sentiment": 5,
+        "reason": "Red and Yellow are working together wonderfully."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "f1ec492c-0dd6-49d8-877e-c02bc34f4c65",
+      "csvRow": 170,
+      "csv": {
+        "participant_id": "50CADAAE213840C0AA12F2236C9A187C",
+        "trajectory_name": "2_forced_hard_4_seed9_9020000_80.json",
+        "feedback": "The yellow machine is driving around doing nothing",
+        "group": "high"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/High/2_forced_hard_4_seed9_9020000_80.json",
+        "episodeId": "episode_4",
+        "feedbackId": "f1ec492c-0dd6-49d8-877e-c02bc34f4c65",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 4,
+        "baseFrame": 84,
+        "startFrame": 102,
+        "endFrame": 149,
+        "sentiment": 1,
+        "reason": "Because of the inefficient process, the robot had to wait for parts to be delivered the the machine to finish processing."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "e0171b13-6a0d-4ba6-9fbb-c6aef96341d8",
+      "csvRow": 171,
+      "csv": {
+        "participant_id": "0403619B5ED848A0A79ABA081779E95B",
+        "trajectory_name": "2_forced_hard_4_seed20_8520000_40.json",
+        "feedback": "Red is not helpful",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_forced_hard_4/Low/2_forced_hard_4_seed20_8520000_40.json",
+        "episodeId": "episode_1",
+        "feedbackId": "e0171b13-6a0d-4ba6-9fbb-c6aef96341d8",
+        "layoutName": "2_forced_hard_4",
+        "itemIndex": 2,
+        "baseFrame": 31,
+        "startFrame": 29,
+        "endFrame": 168,
+        "sentiment": 1,
+        "reason": "It does not pick up or move anything."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "2db40a77-cda7-4ad9-aff5-d34496f08822",
+      "csvRow": 172,
+      "csv": {
+        "participant_id": "64A9945FEFE94C8CBA37B81F1C9DFB6A",
+        "trajectory_name": "2_incentivized_hard_4_seed2_2520000_80.json",
+        "feedback": "This was a good example of them working well. They all picked up an item and the machine was filled pretty quickly.",
+        "group": "mid"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard_4/Middle/2_incentivized_hard_4_seed2_2520000_80.json",
+        "episodeId": "episode_2",
+        "feedbackId": "2db40a77-cda7-4ad9-aff5-d34496f08822",
+        "layoutName": "2_incentivized_hard_4",
+        "itemIndex": 1,
+        "baseFrame": 27,
+        "startFrame": 3,
+        "endFrame": 29,
+        "sentiment": 5,
+        "reason": "It was a good example."
+      },
+      "KY": ""
+    },
+    {
+      "sampleId": "dae85516-231c-44c0-bebe-5acf131feb86",
+      "csvRow": 173,
+      "csv": {
+        "participant_id": "0F0D9CC38A3E42058DC0FA76CDC0D801",
+        "trajectory_name": "2_incentivized_hard_seed7_1020000_60.json",
+        "feedback": "Instead of picking up parts, the yellow bot is wandering around with a box just getting in the way; it's almost completely useless in terms of helping to complete the operation ",
+        "group": "low"
+      },
+      "replay": {
+        "trajectoryPath": "2_incentivized_hard/Low/2_incentivized_hard_seed7_1020000_60.json",
+        "episodeId": "episode_4",
+        "feedbackId": "dae85516-231c-44c0-bebe-5acf131feb86",
+        "layoutName": "2_incentivized_hard",
+        "itemIndex": 4,
+        "baseFrame": 195,
+        "startFrame": 193,
+        "endFrame": 197,
+        "sentiment": 1,
+        "reason": "The yellow bot is malfunctioning "
+      },
+      "KY": ""
+    }
+  ]
+}

@@ -1760,6 +1760,204 @@
       color: var(--pink)
     }
 
+    /* Sample feedback annotation workspace */
+    #pr-annotation-inspector {
+      max-height: 860px
+    }
+
+    .annotation-progress {
+      height: 3px;
+      background: rgba(255, 255, 255, .06);
+      overflow: hidden
+    }
+
+    .annotation-progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      transition: width .2s ease
+    }
+
+    .annotation-workspace {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(99, 102, 241, .06), transparent 80px)
+    }
+
+    .annotation-loading,
+    .annotation-error {
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.6
+    }
+
+    .annotation-error {
+      color: #fda4af
+    }
+
+    .annotation-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      font: 600 9px var(--mono);
+      color: var(--text-2)
+    }
+
+    .annotation-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 21px;
+      padding: 3px 7px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--text-2);
+      text-transform: uppercase
+    }
+
+    .annotation-feedback {
+      max-height: 126px;
+      overflow-y: auto;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      background: rgba(8, 9, 13, .72);
+      color: var(--text-1);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.55;
+      white-space: pre-wrap
+    }
+
+    .annotation-reason {
+      max-height: 68px;
+      overflow-y: auto;
+      margin-top: 7px;
+      color: var(--text-2);
+      font-size: 10px;
+      line-height: 1.45;
+      white-space: pre-wrap
+    }
+
+    .annotation-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin: 13px 0 6px;
+      color: var(--text-2);
+      font: 800 9px var(--mono);
+      letter-spacing: .6px;
+      text-transform: uppercase
+    }
+
+    .annotation-textarea {
+      width: 100%;
+      min-height: 108px;
+      resize: vertical;
+      border: 1px solid var(--border-hover);
+      border-radius: 6px;
+      background: #08090d;
+      color: var(--text-1);
+      padding: 10px 11px;
+      font: 500 12px/1.5 var(--font);
+      outline: none;
+      transition: border-color .15s, box-shadow .15s
+    }
+
+    .annotation-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow)
+    }
+
+    .annotation-textarea::placeholder {
+      color: var(--text-3)
+    }
+
+    .annotation-replay-row,
+    .annotation-nav,
+    .annotation-export-row {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .annotation-replay-row {
+      justify-content: space-between;
+      margin-top: 8px
+    }
+
+    .annotation-replay-status,
+    .annotation-save-status {
+      color: var(--text-3);
+      font: 500 9px/1.4 var(--mono)
+    }
+
+    .annotation-controls {
+      padding: 10px 12px 12px;
+      border-bottom: 1px solid var(--border);
+      background: #11121a
+    }
+
+    .annotation-nav {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr 1fr
+    }
+
+    .annotation-btn {
+      min-height: 31px;
+      padding: 6px 9px;
+      border: 1px solid var(--border-hover);
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: var(--text-1);
+      font: 700 9px var(--mono);
+      cursor: pointer
+    }
+
+    .annotation-btn:hover:not(:disabled) {
+      border-color: var(--accent-light);
+      background: var(--surface-3)
+    }
+
+    .annotation-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed
+    }
+
+    .annotation-btn.primary {
+      border-color: rgba(16, 185, 129, .45);
+      background: rgba(16, 185, 129, .13);
+      color: #6ee7b7
+    }
+
+    .annotation-export-row {
+      margin-top: 8px
+    }
+
+    .annotation-export-row .annotation-btn:last-child {
+      flex: 1
+    }
+
+    .annotation-save-status {
+      min-height: 14px;
+      margin-top: 7px;
+      text-align: center
+    }
+
+    .annotation-comments {
+      min-height: 110px;
+      max-height: 180px
+    }
+
     @media(max-width:900px) {
       .nav {
         height: auto;
@@ -1869,6 +2067,18 @@
       .pr-inspector-card {
         min-height: 300px;
         max-height: 520px
+      }
+
+      #pr-annotation-inspector {
+        max-height: none
+      }
+
+      .annotation-comments {
+        max-height: 220px
+      }
+
+      .annotation-feedback {
+        max-height: 180px
       }
 
       .pr-timecode {
@@ -2389,13 +2599,38 @@
               </div>
             </div>
 
-            <div class="pr-inspector-card">
+            <div class="pr-inspector-card" id="pr-annotation-inspector">
+              <div class="pr-card-header">
+                <span class="pr-card-kicker" style="color:var(--green)">KY Annotation</span>
+                <span id="annotation-progress-label"
+                  style="font-size:10px;color:var(--text-2);font-family:var(--mono)">Loading codebook…</span>
+              </div>
+              <div class="annotation-progress" aria-hidden="true">
+                <div class="annotation-progress-fill" id="annotation-progress-fill"></div>
+              </div>
+              <div class="annotation-workspace" id="annotation-workspace">
+                <div class="annotation-loading">Loading Initial Codebook…</div>
+              </div>
+              <div class="annotation-controls">
+                <div class="annotation-nav">
+                  <button type="button" class="annotation-btn" id="annotation-prev">← Previous</button>
+                  <button type="button" class="annotation-btn" id="annotation-next-empty">Next unfinished</button>
+                  <button type="button" class="annotation-btn" id="annotation-next">Next →</button>
+                </div>
+                <div class="annotation-export-row">
+                  <button type="button" class="annotation-btn" id="annotation-backup">JSON backup</button>
+                  <button type="button" class="annotation-btn primary" id="annotation-export">Save all &amp; export KY CSV</button>
+                </div>
+                <div class="annotation-save-status" id="annotation-save-status">
+                  Drafts stay in this browser until the final export.
+                </div>
+              </div>
               <div class="pr-card-header">
                 <span class="pr-card-kicker" style="color:var(--pink)">Comments at playhead</span>
                 <span id="pr-active-count" style="font-size:11px;color:var(--text-2);font-family:var(--mono)">0
                   active</span>
               </div>
-              <div id="pr-active-comments"
+              <div id="pr-active-comments" class="annotation-comments"
                 style="padding:14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px">
                 <div style="font-size:12px;color:var(--text-3);text-align:center;margin:auto">Scrub timeline or play
                   video to inspect active feedback items at current frame.</div>
@@ -2440,8 +2675,15 @@
 
   <script type="module">
     import { SceneRenderer } from './scene-renderer.js';
+    import { AnnotationWorkspace } from './annotation-workspace.mjs';
 
     let sceneRenderer = null;
+    let annotationReplayHandler = null;
+    let annotationWorkspace = null;
+    let prStudioRequestId = 0;
+    const replayAssetCache = new Map();
+    const REPLAY_ASSET_CACHE_LIMIT = 4;
+
     let replayState = {
       frames: [],
       staticInfo: null,
@@ -3792,11 +4034,11 @@
               return `
             <button class="pr-active-comment" style="--comment-color:${sColor}" data-feedback-id="${item.feedbackId}" data-base-frame="${item.baseFrame}" title="Go to Frame ${item.baseFrame}">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span style="font-weight:700;color:var(--text-1);font-family:var(--mono)">${item.pTag} (${shortId(item.pid)})</span>
+                <span style="font-weight:700;color:var(--text-1);font-family:var(--mono)">${escapeHtml(item.pTag)} (${escapeHtml(shortId(item.pid))})</span>
                 <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.06);color:${sColor};font-weight:700;font-family:var(--mono)">${sTag} (${s}/5)</span>
               </div>
-              <div style="color:var(--text-1);margin-bottom:4px;line-height:1.4;font-weight:500">${item.text || '(No comment)'}</div>
-              ${item.reason ? `<div style="color:var(--text-2);font-size:11px;line-height:1.3">Reason: ${item.reason}</div>` : ''}
+              <div style="color:var(--text-1);margin-bottom:4px;line-height:1.4;font-weight:500">${escapeHtml(item.text || '(No comment)')}</div>
+              ${item.reason ? `<div style="color:var(--text-2);font-size:11px;line-height:1.3">Reason: ${escapeHtml(item.reason)}</div>` : ''}
               <div style="font-size:10px;color:var(--text-3);margin-top:6px;font-family:var(--mono)">Go to Frame ${item.baseFrame} | Range ${item.startFrame}–${item.endFrame}</div>
             </button>
           `;
@@ -3827,16 +4069,19 @@
         }
       }
 
-      const drawHeatmap = async (targetSeed) => {
-        if (!targetSeed || !seedParticipantsMap[targetSeed]) {
+      const drawHeatmap = async (targetSeed, entriesOverride = null, focus = {}) => {
+        const requestId = ++prStudioRequestId;
+        const pList = entriesOverride || seedParticipantsMap[targetSeed];
+        if (!targetSeed || !pList?.length) {
           if (heatmapBody) heatmapBody.innerHTML = '<div class="no-items">Please select an episode seed above to render the timeline heatmap.</div>';
           return;
         }
 
+        const requestedFrame = focus.frame != null && Number.isFinite(Number(focus.frame))
+          ? Number(focus.frame)
+          : 0;
         prStudioState.playing = false;
         if (prStudioState.animationId) cancelAnimationFrame(prStudioState.animationId);
-
-        const pList = seedParticipantsMap[targetSeed];
 
         let maxFeedbackFrame = 20;
         pList.forEach(entry => {
@@ -3851,8 +4096,8 @@
         prStudioState.targetSeed = targetSeed;
         prStudioState.pList = pList;
         prStudioState.maxFrame = maxFrame;
-        prStudioState.currentFrame = 0;
-        prStudioState.selectedFeedbackId = null;
+        prStudioState.currentFrame = requestedFrame;
+        prStudioState.selectedFeedbackId = focus.feedbackId || null;
         setStudioPlaying(false);
 
         const totalSeedItems = pList.reduce((sum, entry) => sum + (entry.items?.length || 0), 0);
@@ -3869,21 +4114,28 @@
           try {
             const raw = await fetchReplayAsset(firstEntry.ep.fileName);
             const adapted = await adaptEpisode(raw, firstEntry.ep.fileName);
+            if (requestId !== prStudioRequestId) return;
             prStudioState.staticInfo = adapted.staticInfo;
             prStudioState.frames = adapted.frames;
 
             const fitMaxFrame = Math.min(200, adapted.frames.length - 1);
             prStudioState.maxFrame = fitMaxFrame;
             maxFrame = fitMaxFrame;
+            prStudioState.currentFrame = Math.min(
+              fitMaxFrame,
+              Math.max(0, requestedFrame)
+            );
 
             sceneElem.innerHTML = '';
             prStudioRenderer = new SceneRenderer(sceneElem);
             await prStudioRenderer.loadSprites();
           } catch (err) {
+            if (requestId !== prStudioRequestId) return;
             console.error("Failed to load trajectory for studio monitor", err);
             sceneElem.innerHTML = '<div style="color:#ef4444;font-size:12px">Trajectory replay unavailable</div>';
           }
         }
+        if (requestId !== prStudioRequestId) return;
 
         const numTicks = 6;
         const ticksHtml = Array.from({ length: numTicks }, (_, i) => {
@@ -3940,8 +4192,8 @@
             const widthPct = Math.max(1.8, endPct - startPct);
             const basePinPct = Math.min(100, Math.max(0, ((baseF - startF) / (endF - startF || 1)) * 100));
 
-            const text = (it.feedback || it.reason || '(no comment)').replace(/'/g, "&apos;");
-            const reason = (it.reason || '').replace(/'/g, "&apos;");
+            const text = it.feedback || it.reason || '(no comment)';
+            const reason = it.reason || '';
 
             const infoObj = {
               pTag: pLabel,
@@ -3957,11 +4209,12 @@
             };
             const dataInfo = encodeURIComponent(JSON.stringify(infoObj)).replace(/'/g, "%27");
             const tooltipStr = `[${pLabel}] Participant: ${p.id}\nExact Click Point: Frame ${baseF}\nRange: Frame ${startF} ~ ${endF}\nSentiment: ${sLabel} (${s}/5)\nFeedback: ${text}\nReason: ${reason}`;
+            const safeTooltip = escapeHtml(tooltipStr);
 
             return `
           <div class="pr-clip ${sClass}"
             style="left:${r(startPct, 2)}%;width:${r(widthPct, 2)}%;top:${5 + lane * 20}px"
-               title="${tooltipStr}"
+               title="${safeTooltip}"
                data-start="${startF}"
                data-end="${endF}"
                data-base="${baseF}"
@@ -3976,7 +4229,7 @@
           return `
         <div class="pr-track-row" style="height:${trackHeight}px">
           <div class="pr-track-head">
-            <span class="pr-track-title" title="${p.id}">${pLabel}</span>
+            <span class="pr-track-title" title="${escapeHtml(p.id)}">${pLabel}</span>
           </div>
           <div class="pr-track-lane" data-maxframe="${maxFrame}">
             ${clipsHtml}
@@ -3994,7 +4247,7 @@
 
         if (scrubber) {
           scrubber.max = maxFrame;
-          scrubber.value = 0;
+          scrubber.value = prStudioState.currentFrame;
           scrubber.oninput = (e) => {
             setStudioPlaying(false);
             prStudioState.currentFrame = parseFloat(e.target.value);
@@ -4117,7 +4370,50 @@
         };
       }
 
+      annotationReplayHandler = async item => {
+        const csv = item.csv;
+        const replay = item.replay;
+        const targetSeed = (csv.trajectory_name || replay.trajectoryPath)
+          .split('/')
+          .pop()
+          .replace(/\.json$/i, '');
+        const feedbackItem = {
+          docId: replay.feedbackId,
+          index: replay.itemIndex,
+          baseFrame: replay.baseFrame,
+          startFrame: replay.startFrame,
+          endFrame: replay.endFrame,
+          sentiment: replay.sentiment,
+          feedback: csv.feedback,
+          reason: replay.reason
+        };
+        const sampledEntry = {
+          p: { id: csv.participant_id },
+          ep: {
+            docId: replay.episodeId,
+            fileName: replay.trajectoryPath,
+            feedbackItems: [feedbackItem]
+          },
+          items: [feedbackItem]
+        };
+
+        prStudioState.sentimentFilter = 'all';
+        document.querySelectorAll('[data-sentiment-filter]').forEach(control => {
+          control.classList.toggle('active', control.dataset.sentimentFilter === 'all');
+        });
+        if (heatmapMapSelect) heatmapMapSelect.value = 'all';
+        if (heatmapSeedSelect) heatmapSeedSelect.value = '';
+
+        await drawHeatmap(targetSeed, [sampledEntry], {
+          feedbackId: replay.feedbackId,
+          frame: replay.startFrame ?? replay.baseFrame ?? 0
+        });
+      };
+
       updateSeedDropdown('all');
+      if (annotationWorkspace?.codebook) {
+        annotationWorkspace.replayCurrent();
+      }
     }
 
     function renderParticipantEpisodes(p) {
@@ -4208,15 +4504,35 @@
     }
 
     async function fetchReplayAsset(fileName) {
-      let lastError = null;
-
-      for (const url of getReplayAssetUrls(fileName)) {
-        const response = await fetch(url);
-        if (response.ok) return await response.json();
-        lastError = new Error(`Replay asset request failed (${response.status}): ${url}`);
+      const cacheKey = String(fileName || '');
+      if (replayAssetCache.has(cacheKey)) {
+        const cached = replayAssetCache.get(cacheKey);
+        replayAssetCache.delete(cacheKey);
+        replayAssetCache.set(cacheKey, cached);
+        return await cached;
       }
 
-      throw lastError;
+      const request = (async () => {
+        let lastError = null;
+        for (const url of getReplayAssetUrls(fileName)) {
+          const response = await fetch(url);
+          if (response.ok) return await response.json();
+          lastError = new Error(`Replay asset request failed (${response.status}): ${url}`);
+        }
+        throw lastError;
+      })();
+
+      replayAssetCache.set(cacheKey, request);
+      while (replayAssetCache.size > REPLAY_ASSET_CACHE_LIMIT) {
+        const oldestKey = replayAssetCache.keys().next().value;
+        replayAssetCache.delete(oldestKey);
+      }
+      try {
+        return await request;
+      } catch (error) {
+        replayAssetCache.delete(cacheKey);
+        throw error;
+      }
     }
 
     function renderReplayFrame() {
@@ -4301,9 +4617,9 @@
       document.getElementById('replay-feedback-box').innerHTML = `
     <div style="font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px">
       <span class="fb-s" style="background:${fbSt.bg};color:${fbSt.fc}">${data.score ?? '?'}</span>
-      ${data.text || '(empty)'}
+      ${escapeHtml(data.text || '(empty)')}
     </div>
-    <div style="font-size:12px;color:var(--text-2)">Reason: ${data.reason || '(empty)'}</div>
+    <div style="font-size:12px;color:var(--text-2)">Reason: ${escapeHtml(data.reason || '(empty)')}</div>
   `;
 
       try {
@@ -4388,6 +4704,21 @@
 
         if (!pilotManifest.pilots.length) throw new Error('No Pilot datasets are configured.');
         await loadPilot(pilotManifest.pilots[0].id);
+
+        annotationWorkspace = new AnnotationWorkspace({
+          codebookUrl: './data/initial-codebook.json',
+          onReplay: item => {
+            if (typeof annotationReplayHandler !== 'function') {
+              throw new Error('Seed Replay is not ready yet.');
+            }
+            return annotationReplayHandler(item);
+          }
+        });
+        try {
+          await annotationWorkspace.init();
+        } catch (annotationError) {
+          console.error('Initial Codebook annotation workspace failed to initialize.', annotationError);
+        }
       } catch (err) {
         console.error(err);
         document.getElementById('loading').innerHTML = `<div style="color:#f472b6;font-size:15px;font-weight:700">Failed to load</div><div style="color:#8888a0;font-size:12px;margin-top:8px">${err.message}</div>`;
