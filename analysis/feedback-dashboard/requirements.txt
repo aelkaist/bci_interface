@@ -1,0 +1,10 @@
+pandas>=1.5
+numpy>=1.23
+openpyxl>=3.1
+pyarrow>=12
+scikit-learn>=1.1
+umap-learn>=0.5.5
+hdbscan>=0.8.38
+plotly>=6.0
+dash>=3.0
+openai>=1.30

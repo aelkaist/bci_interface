@@ -1,0 +1,6 @@
+# data/ is committed on purpose: the parquet + embedding cache let the app run
+# without re-calling the OpenAI API.
+.env
+*.key
+__pycache__/
+*.pyc

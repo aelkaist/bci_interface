@@ -1,0 +1,6 @@
+{
+  "model": "text-embedding-3-large",
+  "n": 1746,
+  "dim": 3072,
+  "fingerprint": "58d9312dc45f90bc8e9784b4ddc54d7445bdcbc7c17aed58475eddfc40f473de"
+}
