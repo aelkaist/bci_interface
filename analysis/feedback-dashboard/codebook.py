@@ -156,6 +156,15 @@ GROUP_SYMBOL = {"low": "circle", "mid": "square", "high": "diamond"}
 BUCKET_ORDER = [40, 60, 80, 100]
 BUCKET_COLOR = {40: "#7FB2D6", 60: "#4A8FBF", 80: "#2470A5", 100: "#0C4A75"}
 
+# Divergence band is ordered (low < mid < high) -> sequential single hue, built
+# by the same rule as the two ramps above: one hue, monotone lightness, dL well
+# clear of the .06 floor (measured L* 87.0 / 66.1 / 38.4 -> dL .21, .28). The
+# hue is warm rather than blue so a divergence band can never be misread as the
+# blue agent-competence or perf-bucket encoding sitting next to it.
+BAND_ORDER = ["low", "mid", "high"]
+BAND_COLOR = {"low": "#F6D5A8", "mid": "#DE8F3C", "high": "#8A4A0C"}
+BAND_SYMBOL = {"low": "circle", "mid": "square", "high": "diamond"}
+
 # Perceived valence is polarity -> diverging: two poles, neutral grey midpoint.
 NEG_POLE, POS_POLE = "#B2182B", "#14568A"
 VALENCE_ORDER = ["negative", "neutral", "positive"]
@@ -198,4 +207,6 @@ def color_for(kind: str, value) -> str:
         return CONF_COLOR.get(value, GREY)
     if kind == "code":
         return CODE_COLOR.get(value, GREY)
+    if kind == "band":
+        return BAND_COLOR.get(value, GREY)
     return GREY

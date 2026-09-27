@@ -1,0 +1,185 @@
+{
+  "config": {
+    "json": "/home/juliecandoit98/bci_interface/analysis/dashboard/data/main-all.json",
+    "xlsx": "/home/juliecandoit98/bci_interface/analysis/data/feedback_100%_labeled.xlsx",
+    "seeds_dir": "/home/juliecandoit98/bci_interface/analysis/dashboard/seeds",
+    "frame_duration_sec": 0.42,
+    "frame_duration_source": "overcook_simulation/src/App.jsx:128 (FRAME_DURATION = 0.42)",
+    "fps_implied": 2.381,
+    "sensitivity_half_width_sec": 2.0,
+    "sensitivity_half_width_frames": 5,
+    "long_interval_fraction": 0.25,
+    "n_assigned_observers": 8,
+    "trajectory_frame_counts": {
+      "201": 108
+    },
+    "trajectories_missing_seed_file": []
+  },
+  "json_source": {
+    "participants": 216,
+    "episode_observations": 864,
+    "trajectories": 108,
+    "feedback_items": 1746,
+    "participant_level_feedback_items_ignored": 1746,
+    "ranged_items": 1595,
+    "range_free_items": 151,
+    "duplicate_key_occurrences": 3,
+    "observers_per_trajectory": {
+      "min": 8,
+      "max": 8
+    }
+  },
+  "excel_source": {
+    "wide_sheet_rows": 1746,
+    "wide_code_columns": 27,
+    "reasons_sheet_rows": 8730,
+    "duplicate_key_occurrences": 3,
+    "wide_vs_reasons_code_disagreements": {},
+    "code_counts": {
+      "1.1.1": 693,
+      "1.1.2": 675,
+      "1.1.3": 637,
+      "1.2": 324,
+      "1.3": 76,
+      "2.1.1": 566,
+      "2.2.1": 274,
+      "2.2.2": 488,
+      "2.3.1": 840,
+      "2.4.1": 744,
+      "2.4.2": 290,
+      "2.5": 116,
+      "3.1": 920,
+      "3.2": 1396,
+      "3.3": 356,
+      "3.4": 120,
+      "3.5": 91,
+      "4.1": 835,
+      "4.2": 493,
+      "4.3": 356,
+      "4.4": 481,
+      "5.1": 603,
+      "5.2": 393,
+      "5.3": 598,
+      "5.4": 291,
+      "5.5": 217,
+      "5.6": 34
+    }
+  },
+  "join": {
+    "join_key": "participant_id + basename(fileName) + normalized_text + sentiment/feedback_score + occurrence_index",
+    "json_rows": 1746,
+    "excel_rows": 1746,
+    "joined_rows": 1746,
+    "unmatched_json_rows": 0,
+    "unmatched_excel_rows": 0,
+    "unmatched_rows": 0,
+    "duplicate_key_groups": 3,
+    "duplicate_key_extra_occurrences": 3,
+    "group_mismatches_json_vs_excel": 0,
+    "unmatched_json_sample": [],
+    "unmatched_excel_sample": []
+  },
+  "coverage": {
+    "episode_observations_without_feedback": 5,
+    "note": "Those observers were assigned the map and keep a lane; the roster comes from episodes[], never from submitted feedback."
+  },
+  "design_grid": {
+    "cells": 12,
+    "maps_per_cell": {
+      "high|forced|2": 9,
+      "high|forced|4": 9,
+      "high|incentivized|2": 9,
+      "high|incentivized|4": 9,
+      "low|forced|2": 9,
+      "low|forced|4": 9,
+      "low|incentivized|2": 9,
+      "low|incentivized|4": 9,
+      "mid|forced|2": 9,
+      "mid|forced|4": 9,
+      "mid|incentivized|2": 9,
+      "mid|incentivized|4": 9
+    }
+  },
+  "expected": {
+    "participants": 216,
+    "episode_observations": 864,
+    "trajectories": 108,
+    "observers_per_trajectory": 8,
+    "feedback_items": 1746,
+    "ranged_items": 1595,
+    "range_free_items": 151,
+    "labeled_rows_joined": 1746,
+    "unmatched_rows": 0,
+    "cells": 12,
+    "maps_per_cell": 9
+  },
+  "score_guard": {
+    "cotc": {
+      "n_missing": 0,
+      "min": 0.32678571428571446,
+      "max": 0.9603174603174603,
+      "out_of_unit_range": 0
+    },
+    "tjac": {
+      "n_missing": 0,
+      "min": 0.6155314390026048,
+      "max": 0.9819958847736625,
+      "out_of_unit_range": 0
+    },
+    "smid": {
+      "n_missing": 0,
+      "min": 0.44218750000000007,
+      "max": 0.8232060185185185,
+      "out_of_unit_range": 0
+    },
+    "jsd": {
+      "n_missing": 0,
+      "min": 0.3394226250212933,
+      "max": 0.7139807029612625,
+      "out_of_unit_range": 0
+    }
+  },
+  "band_thresholds": {
+    "cotc": {
+      "primary": [
+        0.6750188964474678,
+        0.755187074829932
+      ],
+      "sensitivity": [
+        0.6666666666666667,
+        0.7529761904761905
+      ]
+    },
+    "tjac": {
+      "primary": [
+        0.8753214784620236,
+        0.9177607366411528
+      ],
+      "sensitivity": [
+        0.8704624832425186,
+        0.9055691007953895
+      ]
+    },
+    "smid": {
+      "primary": [
+        0.6459920634920635,
+        0.7059270282186949
+      ],
+      "sensitivity": [
+        0.6418180665784833,
+        0.705514274691358
+      ]
+    },
+    "jsd": {
+      "primary": [
+        0.4917266785227853,
+        0.5490087167492522
+      ],
+      "sensitivity": [
+        0.4941176986688608,
+        0.5551458850403798
+      ]
+    }
+  },
+  "band_rule": "score < q33 -> low, q33 <= score < q67 -> mid, score >= q67 -> high; quantiles over all 108 maps per (metric, mode), frozen and never refit to a filter"
+}

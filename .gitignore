@@ -6,3 +6,24 @@ dist/
 .DS_Store
 .vite/
 *.zip
+
+# Local caches, credentials and training checkpoints
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.env
+.env.*
+!.env.example
+.dash_credentials
+.git-credentials
+.netrc
+*.pem
+*.key
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+.claude/settings.local.json

@@ -1,0 +1,51 @@
+label_set,dimension,dimension_label,code,code_name,n_pos,prevalence,AUROC,AP,AP_lift,tfidf_AUROC,auroc_gain_over_tfidf
+as-coded,1,Focus of Observation,1.1.1,Individual Agent,693,0.3969,0.9615,0.9368,2.36,0.8989,0.0626
+as-coded,1,Focus of Observation,1.1.2,Multiple Agents,675,0.3866,0.949,0.9282,2.401,0.7717,0.1773
+as-coded,1,Focus of Observation,1.1.3,Team as a Whole,637,0.3648,0.9407,0.9043,2.479,0.863,0.0777
+as-coded,1,Focus of Observation,1.2,Task Resources / Environment,324,0.1856,0.9475,0.8438,4.547,0.8925,0.0551
+as-coded,1,Focus of Observation,1.3,Other,76,0.0435,0.9935,0.893,20.515,0.9089,0.0846
+as-coded,2,Observed Behavior,2.3.1,Agent Interaction w/ Environment,840,0.4811,0.9454,0.9205,1.913,0.9027,0.0427
+as-coded,2,Observed Behavior,2.4.1,Task Progress and Performance,744,0.4261,0.9283,0.9123,2.141,0.8062,0.1221
+as-coded,2,Observed Behavior,2.1.1,Agent Movement and Navigation,566,0.3242,0.9297,0.871,2.687,0.8503,0.0794
+as-coded,2,Observed Behavior,2.2.2,Role and Work Distribution,488,0.2795,0.9074,0.8184,2.928,0.7917,0.1157
+as-coded,2,Observed Behavior,2.4.2,Time Use and Delay,290,0.1661,0.9548,0.8388,5.05,0.9015,0.0533
+as-coded,2,Observed Behavior,2.2.1,Physical Coordination,274,0.1569,0.9518,0.8598,5.479,0.8343,0.1175
+as-coded,2,Observed Behavior,2.5,Other,116,0.0664,0.92,0.5437,8.183,0.8368,0.0831
+as-coded,3,Monitoring Strategy,3.2,Overall Process Monitoring,1396,0.7995,0.922,0.979,1.224,0.7793,0.1427
+as-coded,3,Monitoring Strategy,3.1,Fixed-Agent Tracking,920,0.5269,0.9807,0.9844,1.868,0.9655,0.0152
+as-coded,3,Monitoring Strategy,3.3,Event-Triggered Monitoring,356,0.2039,0.9174,0.7369,3.614,0.7885,0.129
+as-coded,3,Monitoring Strategy,3.4,Behavior Change Monitoring,120,0.0687,0.9397,0.6606,9.612,0.7234,0.2163
+as-coded,3,Monitoring Strategy,3.5,Other,91,0.0521,0.9668,0.7083,13.589,0.8124,0.1543
+as-coded,4,Interpreting Behavior,4.1,Evaluative Judgment,835,0.4782,0.9337,0.933,1.951,0.817,0.1168
+as-coded,4,Interpreting Behavior,4.2,Underlying State Inference,493,0.2824,0.9155,0.8471,3.0,0.8309,0.0846
+as-coded,4,Interpreting Behavior,4.4,Other,481,0.2755,0.8952,0.7827,2.841,0.7787,0.1166
+as-coded,4,Interpreting Behavior,4.3,Causal Explanation,356,0.2039,0.89,0.6863,3.366,0.7546,0.1354
+as-coded,5,Feedback Type,5.1,Descriptive,603,0.3454,0.911,0.8463,2.451,0.777,0.134
+as-coded,5,Feedback Type,5.3,Criticism,598,0.3425,0.9289,0.8811,2.573,0.7468,0.1821
+as-coded,5,Feedback Type,5.2,Praise,393,0.2251,0.9869,0.9646,4.286,0.8849,0.102
+as-coded,5,Feedback Type,5.4,Suggestion,291,0.1667,0.9583,0.8494,5.096,0.7742,0.1842
+as-coded,5,Feedback Type,5.5,Counterfactual,217,0.1243,0.9107,0.637,5.125,0.82,0.0906
+as-coded,5,Feedback Type,5.6,Other,34,0.0195,0.8881,0.4456,22.882,0.6318,0.2563
+parent,1,Focus of Observation,1.1,Agent (parent),1577,0.9032,0.9814,0.9979,1.105,0.8821,0.0993
+parent,1,Focus of Observation,1.2,Task Resources / Environment,324,0.1856,0.9475,0.8438,4.547,0.8925,0.0551
+parent,1,Focus of Observation,1.3,Other,76,0.0435,0.9935,0.893,20.515,0.9089,0.0846
+parent,2,Observed Behavior,2.4,Performance (parent),885,0.5069,0.9183,0.9215,1.818,0.8014,0.117
+parent,2,Observed Behavior,2.3,Environment Interaction (parent),840,0.4811,0.9454,0.9205,1.913,0.9027,0.0427
+parent,2,Observed Behavior,2.2,Agent Coordination (parent),691,0.3958,0.9135,0.8829,2.231,0.777,0.1365
+parent,2,Observed Behavior,2.1,Movement (parent),566,0.3242,0.9297,0.871,2.687,0.8503,0.0794
+parent,2,Observed Behavior,2.5,Other,116,0.0664,0.92,0.5437,8.183,0.8368,0.0831
+parent,3,Monitoring Strategy,3.2,Overall Process Monitoring,1396,0.7995,0.922,0.979,1.224,0.7793,0.1427
+parent,3,Monitoring Strategy,3.1,Fixed-Agent Tracking,920,0.5269,0.9807,0.9844,1.868,0.9655,0.0152
+parent,3,Monitoring Strategy,3.3,Event-Triggered Monitoring,356,0.2039,0.9174,0.7369,3.614,0.7885,0.129
+parent,3,Monitoring Strategy,3.4,Behavior Change Monitoring,120,0.0687,0.9397,0.6606,9.612,0.7234,0.2163
+parent,3,Monitoring Strategy,3.5,Other,91,0.0521,0.9668,0.7083,13.589,0.8124,0.1543
+parent,4,Interpreting Behavior,4.1,Evaluative Judgment,835,0.4782,0.9337,0.933,1.951,0.817,0.1168
+parent,4,Interpreting Behavior,4.2,Underlying State Inference,493,0.2824,0.9155,0.8471,3.0,0.8309,0.0846
+parent,4,Interpreting Behavior,4.4,Other,481,0.2755,0.8952,0.7827,2.841,0.7787,0.1166
+parent,4,Interpreting Behavior,4.3,Causal Explanation,356,0.2039,0.89,0.6863,3.366,0.7546,0.1354
+parent,5,Feedback Type,5.1,Descriptive,603,0.3454,0.911,0.8463,2.451,0.777,0.134
+parent,5,Feedback Type,5.3,Criticism,598,0.3425,0.9289,0.8811,2.573,0.7468,0.1821
+parent,5,Feedback Type,5.2,Praise,393,0.2251,0.9869,0.9646,4.286,0.8849,0.102
+parent,5,Feedback Type,5.4,Suggestion,291,0.1667,0.9583,0.8494,5.096,0.7742,0.1842
+parent,5,Feedback Type,5.5,Counterfactual,217,0.1243,0.9107,0.637,5.125,0.82,0.0906
+parent,5,Feedback Type,5.6,Other,34,0.0195,0.8881,0.4456,22.882,0.6318,0.2563

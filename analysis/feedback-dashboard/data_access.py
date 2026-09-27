@@ -7,10 +7,11 @@ of numpy boolean ops.
 
 from __future__ import annotations
 
+import gzip
 import json
 import os
 import textwrap
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import numpy as np
 import pandas as pd
@@ -19,6 +20,7 @@ from codebook import DIMS, expand, leaf_codes
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
+RESULTS = os.path.join(HERE, "results")
 
 
 class Store(object):
@@ -29,6 +31,12 @@ class Store(object):
 
         df["perf_bucket"] = df["perf_bucket"].astype("Int64")
         df["perf_raw"] = df["perf_raw"].astype("Int64")
+        # Agent count is the layout suffix, not "does the filename contain a 4":
+        # 01_preprocess.py already captured that suffix as `variant` (the
+        # optional _4 between the difficulty and the seed), so "4" -> 4 agents
+        # and "base" -> 2. 05_divergence.py derives the same value straight from
+        # layoutName.endswith("_4") and the build report cross-checks the two.
+        df["n_agents"] = np.where(df["variant"].astype(str) == "4", 4, 2)
         df["conf_any"] = np.where(df["any_partial"], "partial fit", "confident")
         df["text_wrapped"] = [self._wrap(t) for t in df["text"].astype(str)]
         df["short"] = [self._short(t) for t in df["text"].astype(str)]
@@ -61,6 +69,105 @@ class Store(object):
         self.groups = [g for g in ["low", "mid", "high"] if g in set(df["group"])]
         self.regimes = sorted(df["regime"].dropna().unique().tolist())
         self.buckets = sorted(int(b) for b in df["perf_bucket"].dropna().unique())
+        self.agent_counts = sorted(int(a) for a in df["n_agents"].unique())
+
+        self._load_separability()
+        self._load_divergence()
+
+    # ------------------------------------------------------- separability --
+    def _load_separability(self) -> None:
+        """Optional outputs of 04_separability.py. Absent until it is run, so
+        every consumer must tolerate None."""
+        def maybe(path, reader):
+            return reader(path) if os.path.exists(path) else None
+
+        self.sep_dim = maybe(os.path.join(RESULTS, "separability_by_dimension.csv"),
+                             pd.read_csv)
+        self.sep_code = maybe(os.path.join(RESULTS, "separability_by_code.csv"),
+                              pd.read_csv)
+        self.umap_stab = maybe(os.path.join(RESULTS, "umap_stability",
+                                            "coords.parquet"), pd.read_parquet)
+        self.has_sep = self.sep_dim is not None and len(self.sep_dim) > 0
+        self.label_sets = (sorted(self.sep_dim["label_set"].unique().tolist())
+                           if self.has_sep else [])
+
+    def sep_dim_row(self, d: int, label_set: str = "as-coded"):
+        if not self.has_sep:
+            return None
+        m = self.sep_dim[(self.sep_dim["dimension"] == d)
+                         & (self.sep_dim["label_set"] == label_set)]
+        return m.iloc[0].to_dict() if len(m) else None
+
+    def sep_code_auroc(self, code: str, label_set: str = "as-coded"):
+        if self.sep_code is None:
+            return None
+        m = self.sep_code[(self.sep_code["code"] == code)
+                          & (self.sep_code["label_set"] == label_set)]
+        return float(m.iloc[0]["AUROC"]) if len(m) else None
+
+    def stability_runs(self):
+        """[(seed, n_neighbors), ...] present in the stability re-projections."""
+        if self.umap_stab is None:
+            return []
+        u = self.umap_stab[["seed", "n_neighbors"]].drop_duplicates()
+        return sorted((int(r.seed), int(r.n_neighbors)) for r in u.itertuples())
+
+    # -------------------------------------------------------- divergence ----
+    def _load_divergence(self) -> None:
+        """Optional outputs of 05_divergence.py, same contract as separability:
+        absent until the script is run, so every consumer tolerates None.
+
+        Map scores, bands and diagnostics are read, never recomputed. The panel
+        selects *which* maps to draw; it does not re-derive what they score.
+        """
+        maps = os.path.join(DATA, "divergence_maps.parquet")
+        detail = os.path.join(DATA, "divergence_detail.json.gz")
+        report = os.path.join(DATA, "divergence_report.json")
+
+        self.div_maps = pd.read_parquet(maps) if os.path.exists(maps) else None
+        self.div_detail = {}
+        if os.path.exists(detail):
+            with gzip.open(detail, "rt", encoding="utf-8") as fh:
+                self.div_detail = json.load(fh)
+        self.div_report = {}
+        if os.path.exists(report):
+            with open(report) as fh:
+                self.div_report = json.load(fh)
+
+        self.has_divergence = (self.div_maps is not None
+                               and len(self.div_maps) > 0
+                               and bool(self.div_detail))
+        # basename (the id every other panel uses) <-> full episode.fileName
+        # (the trajectory id the divergence build keys on).
+        self.traj_id_of = {}
+        if self.has_divergence:
+            self.traj_id_of = dict(zip(self.div_maps["traj"],
+                                       self.div_maps["traj_id"]))
+
+    def divergence_view(self, ids, mode: str) -> pd.DataFrame:
+        """Map rows for one analysis mode, restricted to the current selection.
+
+        The single selector both the distribution and the detail drawer go
+        through, so the two can never disagree about which trajectories are in
+        scope. A map is in scope when at least one of its feedback rows survived
+        the rail filters.
+        """
+        if not self.has_divergence:
+            return pd.DataFrame()
+        sub = self.div_maps[self.div_maps["mode"] == mode]
+        keep = set(self.df.loc[self.df["id"].isin(list(ids or [])), "traj"])
+        return (sub[sub["traj"].isin(keep)]
+                .sort_values("traj_id").reset_index(drop=True))
+
+    def divergence_detail(self, traj_id: str, mode: str) -> Optional[dict]:
+        """Per-map observer lanes, items and metric inspectors, or None."""
+        return (self.div_detail.get(str(traj_id)) or {}).get(mode)
+
+    def divergence_thresholds(self, metric: str, mode: str):
+        """Frozen global (q33, q67) for one (metric, mode), or None."""
+        t = ((self.div_report.get("band_thresholds") or {})
+             .get(metric, {}).get(mode))
+        return (float(t[0]), float(t[1])) if t else None
 
     # ------------------------------------------------------------- helpers --
     @staticmethod
@@ -88,7 +195,7 @@ class Store(object):
     # -------------------------------------------------------------- filter --
     def filter_mask(self, sel_codes: Dict[int, List[str]], groups, score_range,
                     valences, regimes, trajs, buckets, confident_only,
-                    keyword, within_dim_and: bool) -> np.ndarray:
+                    keyword, within_dim_and: bool, agents=()) -> np.ndarray:
         m = np.ones(self.n, dtype=bool)
 
         # dimensions: OR inside a dimension (default), AND between dimensions
@@ -118,6 +225,8 @@ class Store(object):
             m &= self.df["traj"].isin(trajs).to_numpy()
         if buckets:
             m &= self.df["perf_bucket"].isin([int(b) for b in buckets]).to_numpy()
+        if agents:
+            m &= self.df["n_agents"].isin([int(a) for a in agents]).to_numpy()
         if confident_only:
             m &= (~self.df["any_partial"]).to_numpy()
         if keyword and keyword.strip():
